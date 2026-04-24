@@ -45,7 +45,7 @@ const Tick = () => (
 
 const PortfolioSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: false, margin: "-15% 0px -15% 0px" });
 
   return (
     <section id="pricing" className="relative py-24 sm:py-32 md:py-40 overflow-hidden bg-background border-t border-border/40">
@@ -54,7 +54,7 @@ const PortfolioSection = () => {
           <motion.span
             className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-primary font-heading font-medium"
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.8 }}
           >
             Pricing
@@ -62,7 +62,7 @@ const PortfolioSection = () => {
           <motion.h2
             className="mt-4 text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold text-foreground tracking-tight leading-[1.05]"
             initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
             transition={{ duration: 0.9, delay: 0.1 }}
           >
             Wholesale pricing built for <span className="text-primary">agency margins.</span>
@@ -70,7 +70,7 @@ const PortfolioSection = () => {
           <motion.p
             className="mt-5 text-sm sm:text-base text-muted-foreground max-w-2xl font-body leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             No rigid retainers. You only pay for the volume you need to test this month.
@@ -87,7 +87,7 @@ const PortfolioSection = () => {
                   : "border-border bg-card/50 hover:border-primary/30"
               }`}
               initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
               transition={{ duration: 0.8, delay: 0.25 + i * 0.12, ease: [0.25, 0.4, 0, 1] }}
               data-cursor-hover
             >
@@ -143,7 +143,7 @@ const PortfolioSection = () => {
         <motion.div
           className="mt-14 sm:mt-20 p-6 sm:p-8 rounded-2xl border border-border bg-card/40 max-w-3xl mx-auto text-center"
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
           <div className="text-[10px] tracking-[0.3em] uppercase text-primary font-heading mb-3">

@@ -25,7 +25,7 @@ const proofs = [
 
 const PhilosophySection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: false, margin: "-20% 0px -20% 0px" });
 
   return (
     <section id="proof" className="relative py-24 sm:py-32 md:py-40 overflow-hidden bg-background">
@@ -34,7 +34,7 @@ const PhilosophySection = () => {
           <motion.span
             className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-primary font-heading font-medium"
             initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
-            animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+            animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 16, filter: "blur(6px)" }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             The Proof
@@ -42,7 +42,7 @@ const PhilosophySection = () => {
           <motion.h2
             className="mt-4 text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold text-foreground tracking-tight leading-[1.05]"
             initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
-            animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+            animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 24, filter: "blur(10px)" }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
             Built for rapid <span className="text-primary">A/B testing.</span>
@@ -57,7 +57,7 @@ const PhilosophySection = () => {
                 key={p.num}
                 className="group relative p-7 sm:p-8 md:p-10 rounded-2xl border border-border bg-card hover:border-primary/40 transition-all duration-500 smooth-hover"
                 initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-                animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+                animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 28, filter: "blur(12px)" }}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
                 data-cursor-hover
               >
@@ -89,7 +89,7 @@ const PhilosophySection = () => {
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               transition={{ delay: 0.8 + i * 0.1, duration: 0.7 }}
               className="text-center md:text-left"
             >

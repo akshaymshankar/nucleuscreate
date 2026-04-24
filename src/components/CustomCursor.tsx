@@ -1,157 +1,127 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const haloRef = useRef<HTMLDivElement>(null);
+  const pos = useRef({ x: -200, y: -200 });
+  const halo = useRef({ x: -200, y: -200 });
+  const hovering = useRef(false);
+  const frameId = useRef<number>(0);
 
   useEffect(() => {
-    const move = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+    const onMove = (e: MouseEvent) => {
+      pos.current = { x: e.clientX, y: e.clientY };
     };
 
-    const handleOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest("a, button, [data-cursor-hover]")) {
-        setIsHovering(true);
+    const onOver = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).closest("a, button, [data-cursor-hover]")) {
+        hovering.current = true;
+      }
+    };
+    const onOut = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).closest("a, button, [data-cursor-hover]")) {
+        hovering.current = false;
       }
     };
 
-    const handleOut = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest("a, button, [data-cursor-hover]")) {
-        setIsHovering(false);
+    window.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseover", onOver, { passive: true });
+    document.addEventListener("mouseout", onOut, { passive: true });
+
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+    const tick = () => {
+      const svg = svgRef.current;
+      const haloEl = haloRef.current;
+
+      if (svg) {
+        svg.style.transform = `translate3d(${pos.current.x - 2}px, ${pos.current.y - 2}px, 0)`;
+        svg.style.scale = hovering.current ? "1.06" : "1";
       }
+
+      if (haloEl) {
+        halo.current.x = lerp(halo.current.x, pos.current.x, 0.16);
+        halo.current.y = lerp(halo.current.y, pos.current.y, 0.16);
+        haloEl.style.transform = `translate3d(${halo.current.x - 16}px, ${halo.current.y - 16}px, 0)`;
+        haloEl.style.scale = hovering.current ? "1.4" : "1";
+        haloEl.style.opacity = hovering.current ? "0.5" : "0.25";
+      }
+
+      frameId.current = requestAnimationFrame(tick);
     };
 
-    window.addEventListener("mousemove", move);
-    document.addEventListener("mouseover", handleOver);
-    document.addEventListener("mouseout", handleOut);
+    frameId.current = requestAnimationFrame(tick);
+
     return () => {
-      window.removeEventListener("mousemove", move);
-      document.removeEventListener("mouseover", handleOver);
-      document.removeEventListener("mouseout", handleOut);
+      cancelAnimationFrame(frameId.current);
+      window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
     };
   }, []);
 
   return (
     <>
-      {/* DNA Helix Cursor Core */}
+      {/* Minimal green arrow cursor with nucleus core */}
       <svg
-        className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999] mix-blend-lighten"
-        style={{
-          transform: `translate(${position.x - 16}px, ${position.y - 16}px)`,
-          transition: "all 0.08s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-        }}
-        viewBox="0 0 32 32"
+        ref={svgRef}
+        className="custom-cursor fixed top-0 left-0 pointer-events-none z-[9999] will-change-transform"
+        style={{ width: 28, height: 28, filter: "drop-shadow(0 0 8px rgba(110, 240, 143, 0.4))" }}
+        viewBox="0 0 28 28"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          <radialGradient id="nucleusGrad" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="hsl(134, 68%, 45%)" stopOpacity="1" />
-            <stop offset="100%" stopColor="hsl(134, 68%, 45%)" stopOpacity="0.3" />
+          <radialGradient id="arrowNucleus" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#6EF08F" stopOpacity="1" />
+            <stop offset="100%" stopColor="#3cba5f" stopOpacity="1" />
           </radialGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation={isHovering ? "3" : "1.5"} result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
         </defs>
 
-        {/* Outer rotating rings */}
-        <motion.g
-          animate={{ rotate: 360 }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-        >
-          <circle
-            cx="16"
-            cy="16"
-            r={isHovering ? "14" : "10"}
-            fill="none"
-            stroke="hsl(134, 68%, 45%)"
-            strokeWidth="0.5"
-            opacity="0.4"
-          />
-        </motion.g>
-
-        {/* Counter-rotating inner ring */}
-        <motion.g
-          animate={{ rotate: -360 }}
-          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-        >
-          <circle
-            cx="16"
-            cy="16"
-            r={isHovering ? "9" : "6"}
-            fill="none"
-            stroke="hsl(134, 68%, 45%)"
-            strokeWidth="0.5"
-            opacity="0.6"
-          />
-        </motion.g>
-
-        {/* DNA helix strands */}
-        <motion.path
-          d="M 16 6 Q 20 11, 16 16 Q 12 21, 16 26"
-          fill="none"
-          stroke="hsl(134, 68%, 45%)"
-          strokeWidth="0.8"
-          opacity="0.5"
-          animate={{ pathLength: [0, 1] }}
-          transition={{ duration: 2, repeat: Infinity }}
+        <path
+          d="M3.5 2.8L20.8 11.1L12.2 13.5L9.8 22.1L3.5 2.8Z"
+          fill="rgba(110, 240, 143, 0.2)"
+          stroke="#6EF08F"
+          strokeWidth="1.4"
+          strokeLinejoin="round"
         />
-        <motion.path
-          d="M 16 6 Q 12 11, 16 16 Q 20 21, 16 26"
+        <ellipse
+          cx="11.6"
+          cy="11.4"
+          rx="2.7"
+          ry="2.1"
           fill="none"
-          stroke="hsl(134, 68%, 45%)"
-          strokeWidth="0.8"
-          opacity="0.5"
-          animate={{ pathLength: [0, 1] }}
-          transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+          stroke="#6EF08F"
+          strokeWidth="0.6"
+          opacity="0.9"
+          transform="rotate(-26 11.6 11.4)"
         />
-
-        {/* Central nucleus core */}
         <circle
-          cx="16"
-          cy="16"
-          r={isHovering ? "5" : "3.5"}
-          fill="url(#nucleusGrad)"
-          filter="url(#glow)"
-          style={{
-            transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-          }}
-        />
-
-        {/* Pulsing glow */}
-        <motion.circle
-          cx="16"
-          cy="16"
-          r={isHovering ? "7" : "5"}
-          fill="none"
-          stroke="hsl(134, 68%, 45%)"
-          strokeWidth="0.3"
-          opacity={isHovering ? 0.6 : 0.3}
-          animate={{ r: isHovering ? [7, 10] : [5, 7] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          style={{
-            transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-          }}
+          cx="11.6"
+          cy="11.4"
+          r="1.25"
+          fill="url(#arrowNucleus)"
+          style={{ animation: "nucleus-pulse 1.2s ease-in-out infinite" }}
         />
       </svg>
 
-      {/* Outer ring glow effect */}
-      <motion.div
-        className="fixed top-0 left-0 rounded-full border border-primary/40 pointer-events-none z-[9998]"
-        animate={{
-          x: position.x - 24,
-          y: position.y - 24,
-          width: isHovering ? 56 : 40,
-          height: isHovering ? 56 : 40,
-          opacity: isHovering ? 0.8 : 0.4,
+      {/* Subtle trailing halo */}
+      <div
+        ref={haloRef}
+        className="custom-cursor fixed top-0 left-0 rounded-full pointer-events-none z-[9998] will-change-transform"
+        style={{
+          width: "32px",
+          height: "32px",
+          border: "1px solid rgba(110, 240, 143, 0.45)",
+          transition: "scale 0.25s ease, opacity 0.25s ease",
         }}
-        transition={{ type: "spring", stiffness: 200, damping: 20, mass: 0.8 }}
       />
+
+      <style>{`
+        @keyframes nucleus-pulse {
+          0%, 100% { opacity: 0.95; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.18); }
+        }
+      `}</style>
     </>
   );
 };

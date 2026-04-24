@@ -71,3 +71,50 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+## Pilot Lead Automation
+
+The pilot form supports:
+
+- Writing leads to Google Sheets through a Google Apps Script webhook
+- Showing a Calendly scheduling CTA after successful submission
+
+### 1) Configure environment variables
+
+Create `.env` from `.env.example` and set:
+
+- `VITE_LEAD_WEBHOOK_URL`
+- `VITE_CALENDLY_URL`
+
+### 2) Google Apps Script webhook
+
+Create an Apps Script from your Google Sheet and deploy it as a **Web app** with access set to "Anyone with the link".
+
+Use this script:
+
+```javascript
+function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet1");
+  var body = JSON.parse(e.postData.contents || "{}");
+
+  sheet.appendRow([
+    new Date(),
+    body.name || "",
+    body.email || "",
+    body.phone || "",
+    body.agency || "",
+    body.clients || "",
+    body.videos || "",
+    body.budget || "",
+    body.meeting || "",
+    body.source || "",
+    body.requestedAt || ""
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ ok: true }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+After deployment, copy the web app URL into `VITE_LEAD_WEBHOOK_URL`.

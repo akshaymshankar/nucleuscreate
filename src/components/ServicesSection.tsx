@@ -62,7 +62,7 @@ const CheckMark = () => (
 
 const ServicesSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: false, margin: "-15% 0px -15% 0px" });
 
   return (
     <section id="services" className="relative py-24 sm:py-32 md:py-40 overflow-hidden bg-background border-t border-border/40">
@@ -71,7 +71,7 @@ const ServicesSection = () => {
           <motion.span
             className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-primary font-heading font-medium"
             initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
             transition={{ duration: 0.8 }}
           >
             The Difference
@@ -79,7 +79,7 @@ const ServicesSection = () => {
           <motion.h2
             className="mt-4 text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold text-foreground tracking-tight leading-[1.05]"
             initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
             transition={{ duration: 0.9, delay: 0.1 }}
           >
             Stop relying on unreliable <span className="text-primary">editing options.</span>
@@ -91,7 +91,7 @@ const ServicesSection = () => {
           <motion.div
             className="relative p-6 sm:p-8 md:p-10 rounded-2xl border border-border bg-card/40"
             initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -24 }}
             transition={{ duration: 0.9, delay: 0.2 }}
           >
             <div className="flex items-center gap-3 pb-5 sm:pb-6 border-b border-border">
@@ -103,7 +103,7 @@ const ServicesSection = () => {
                   key={item.title}
                   className="flex items-start gap-4"
                   initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
                   transition={{ delay: 0.3 + i * 0.08, duration: 0.6 }}
                 >
                   <CrossMark />
@@ -124,7 +124,7 @@ const ServicesSection = () => {
           <motion.div
             className="relative p-6 sm:p-8 md:p-10 rounded-2xl border border-primary/30 bg-card overflow-hidden"
             initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 24 }}
             transition={{ duration: 0.9, delay: 0.3 }}
           >
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
@@ -137,7 +137,7 @@ const ServicesSection = () => {
                   key={item.title}
                   className="flex items-start gap-4"
                   initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
                   transition={{ delay: 0.4 + i * 0.08, duration: 0.6 }}
                 >
                   <CheckMark />

@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import nucleusGif from "@/assets/nucleus-wiggle.gif";
-import nucleusLoop from "@/assets/nucleus-loop.gif";
 
 // Fast-paced text reveal — words snap in like a jump cut
 const SnapText = ({
@@ -178,7 +177,7 @@ const HeroSection = () => {
               {/* Video — object-contain so the full frame fits */}
               <img
                 ref={imgRef}
-                src={nucleusLoop}
+                src={nucleusGif}
                 alt="Nucleus core looping animation"
                 onLoad={handleLoaded}
                 className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ${

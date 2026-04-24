@@ -4,27 +4,22 @@ import Lenis from "lenis";
 const useSmoothScroll = () => {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.0,
-      easing: (t: number) => {
-        // Smooth easing curve that feels buttery
-        if (t === 0) return 0;
-        if (t === 1) return 1;
-        // Cubic-bezier-like easing: cubic-bezier(0.25, 0.46, 0.45, 0.94)
-        return t < 0.5
-          ? 2 * t * t * (3 - 2 * t)
-          : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      },
-      touchMultiplier: 1.8,
+      duration: 0.75,
+      easing: (t: number) => 1 - Math.pow(1 - t, 4),
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.3,
       infinite: false,
       syncTouch: true,
     });
 
+    let rafId = 0;
+
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     // Handle anchor clicks
     const handleAnchorClick = (e: MouseEvent) => {
@@ -45,6 +40,7 @@ const useSmoothScroll = () => {
     document.addEventListener("click", handleAnchorClick);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
       document.removeEventListener("click", handleAnchorClick);
     };
