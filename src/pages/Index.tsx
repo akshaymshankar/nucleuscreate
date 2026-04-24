@@ -3,6 +3,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import PhilosophySection from "@/components/PhilosophySection";
+import ProcessSection from "@/components/ProcessSection";
 import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import ApplyFormSection from "@/components/ApplyFormSection";
@@ -19,6 +20,7 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <PhilosophySection />
+      <ProcessSection />
       <ServicesSection />
       <PortfolioSection />
       <ApplyFormSection />

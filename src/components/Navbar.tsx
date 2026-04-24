@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import nucleusPremiumLogo from "@/assets/nucleus-premium-logo.png";
 
 const navLinks = [
   { label: "Proof", href: "#proof" },
@@ -7,66 +8,6 @@ const navLinks = [
   { label: "Pricing", href: "#pricing" },
   { label: "Apply", href: "#apply" },
 ];
-
-// Mini Nucleus Logo for Navbar
-const MiniNucleusLogo = () => (
-  <svg
-    className="w-6 h-6 sm:w-7 sm:h-7"
-    viewBox="0 0 32 32"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <defs>
-      <radialGradient id="miniCorGrad">
-        <stop offset="0%" stopColor="hsl(134 68% 45%)" />
-        <stop offset="100%" stopColor="hsl(134 68% 35%)" />
-      </radialGradient>
-      <filter id="miniGlow">
-        <feGaussianBlur stdDeviation="1.5" result="blur" />
-        <feMerge>
-          <feMergeNode in="blur" />
-          <feMergeNode in="SourceGraphic" />
-        </feMerge>
-      </filter>
-    </defs>
-
-    {/* Orbit ring 1 */}
-    <motion.circle
-      cx="16"
-      cy="16"
-      r="10"
-      fill="none"
-      stroke="hsl(134 68% 45%)"
-      strokeWidth="0.4"
-      opacity="0.3"
-      animate={{ rotate: 360 }}
-      transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-      transformOrigin="16px 16px"
-    />
-
-    {/* Orbit ring 2 */}
-    <motion.circle
-      cx="16"
-      cy="16"
-      r="7"
-      fill="none"
-      stroke="hsl(134 68% 45%)"
-      strokeWidth="0.4"
-      opacity="0.4"
-      animate={{ rotate: -360 }}
-      transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-      transformOrigin="16px 16px"
-    />
-
-    {/* Central core */}
-    <circle
-      cx="16"
-      cy="16"
-      r="4"
-      fill="url(#miniCorGrad)"
-      filter="url(#miniGlow)"
-    />
-  </svg>
-);
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,7 +34,13 @@ const Navbar = () => {
           className="flex items-center gap-2 sm:gap-3 font-heading text-base sm:text-lg font-bold tracking-wide text-foreground hover:text-primary transition-colors duration-300"
           data-cursor-hover
         >
-          <MiniNucleusLogo />
+          <motion.img
+            src={nucleusPremiumLogo}
+            alt="Nucleus logo"
+            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-primary/25"
+            animate={{ rotate: [0, 2, -2, 0], scale: [1, 1.03, 1] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          />
           <span className="hidden sm:inline">NUCLEUS</span>
         </a>
 
