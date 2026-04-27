@@ -210,6 +210,10 @@ const HeroSection = () => {
                 playsInline
                 muted={isMuted}
                 onLoadedData={handleLoaded}
+                onError={(e) => {
+                  console.error("Video failed to load", e);
+                  handleLoaded(); // dismiss loader even on error
+                }}
                 className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ${
                   videoLoaded ? "opacity-100" : "opacity-0"
                 }`}
