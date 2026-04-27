@@ -368,14 +368,24 @@ const ProcessSection = () => {
                 className="p-4 rounded-2xl bg-card/80 backdrop-blur-md border border-white/5 shadow-2xl max-w-[180px]"
               >
                 <div className="text-[10px] text-primary font-mono font-bold mb-2 tracking-widest uppercase">A/B ANGLE GENERATOR</div>
-                <div className="flex gap-1.5 flex-wrap">
-                  {[1, 2, 3, 4, 5, 6].map(i => (
+                <div className="flex gap-2 flex-wrap mt-2">
+                  {[
+                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=100", // Nike
+                    "https://images.unsplash.com/photo-1511746315387-c4a76990fdce?auto=format&fit=crop&q=80&w=100", // Adidas
+                    "https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&q=80&w=100", // Puma
+                    "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?auto=format&fit=crop&q=80&w=100", // Google
+                    "https://images.unsplash.com/photo-1627384113743-6bd5a479fffd?auto=format&fit=crop&q=80&w=100", // Aesthetic Brand
+                    "https://images.unsplash.com/photo-1555529771-835f59fc5efe?auto=format&fit=crop&q=80&w=100"  // Aesthetic Brand
+                  ].map((url, i) => (
                     <motion.div 
                       key={i} 
-                      className="w-8 h-8 rounded bg-primary/5 border border-primary/20"
-                      animate={{ borderColor: ["rgba(34,197,94,0.2)", "rgba(34,197,94,0.5)", "rgba(34,197,94,0.2)"] }}
-                      transition={{ duration: 2, delay: i*0.2, repeat: Infinity }}
-                    />
+                      className="w-10 h-10 rounded bg-white/5 border border-primary/20 overflow-hidden relative"
+                      animate={{ borderColor: ["rgba(34,197,94,0.2)", "rgba(34,197,94,0.6)", "rgba(34,197,94,0.2)"] }}
+                      transition={{ duration: 3, delay: i*0.2, repeat: Infinity }}
+                    >
+                      <img src={url} className="w-full h-full object-cover grayscale opacity-60" alt="" />
+                      <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
@@ -383,8 +393,8 @@ const ProcessSection = () => {
           </div>
 
           {/* Process Labels / Stepper */}
-          <div className="mt-8 max-w-4xl mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="mt-16 max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 lg:gap-20">
               {steps.map((step, i) => (
                 <motion.div 
                   key={i}
