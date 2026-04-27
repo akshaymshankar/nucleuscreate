@@ -120,7 +120,7 @@ const HeroSection = () => {
               For Performance Marketing Agencies
             </motion.span>
 
-            <h1 className="mt-5 sm:mt-6 font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.05]">
+            <h1 className="mt-4 sm:mt-5 font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.05]">
               <SnapText
                 text="Scale your client ad accounts"
                 className="block"
@@ -138,13 +138,13 @@ const HeroSection = () => {
             <SnapText
               as="p"
               text="We are the white-label editing engine powering India's top performance marketing campaigns. Get 40 to 100+ proven, scroll-stopping video ad variations delivered every month. 48-hour delivery. Zero freelancer headaches."
-              className="mt-5 sm:mt-6 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed font-body max-w-xl"
+              className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed font-body max-w-xl"
               delay={0.85}
               stagger={0.018}
             />
 
             <motion.div
-              className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start"
+              className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start"
               initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.5, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
@@ -166,7 +166,7 @@ const HeroSection = () => {
 
             {/* Trust strip */}
             <motion.div
-              className="mt-10 sm:mt-12 flex flex-wrap gap-x-8 gap-y-3 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground/60 font-heading"
+              className="mt-8 sm:mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground/60 font-heading"
               initial="hidden"
               animate="visible"
               variants={{
