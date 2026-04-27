@@ -120,7 +120,7 @@ const HeroSection = () => {
               For Performance Marketing Agencies
             </motion.span>
 
-            <h1 className="mt-4 sm:mt-5 font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.05]">
+            <h1 className="mt-4 sm:mt-5 font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.12]">
               <SnapText
                 text="Scale your client ad accounts"
                 className="block"
@@ -195,13 +195,13 @@ const HeroSection = () => {
 
           {/* Right: Video card with creative loader */}
           <motion.div
-            className="relative flex items-center justify-center"
+            className="relative flex items-center justify-center self-center -mt-8 lg:-mt-10"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="relative w-full aspect-square max-w-[480px] rounded-3xl border border-border bg-card overflow-hidden">
-              {/* Video — object-contain to fit 16:9 inside the square without cropping */}
+            <div className="relative w-full aspect-video max-w-[380px] sm:max-w-[420px] lg:max-w-[460px] rounded-3xl border border-border bg-card overflow-hidden">
+              {/* Video — fit 16:9 and align top for better visual balance */}
               <video
                 ref={videoRef}
                 autoPlay
@@ -213,7 +213,7 @@ const HeroSection = () => {
                   console.error("Video failed to load", e);
                   handleLoaded(); // dismiss loader even on error
                 }}
-                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ${
+                className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
                   videoLoaded ? "opacity-100" : "opacity-0"
                 }`}
               >
