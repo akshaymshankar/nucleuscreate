@@ -80,14 +80,11 @@ const ApplyFormSection = () => {
 
     try {
       if (leadWebhookUrl) {
-        const res = await fetch(leadWebhookUrl, {
+        await fetch(leadWebhookUrl, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          mode: "no-cors",
           body: JSON.stringify(payload),
         });
-        if (!res.ok) {
-          throw new Error(`Lead webhook failed with ${res.status}`);
-        }
       } else {
         console.warn("VITE_LEAD_WEBHOOK_URL is not configured. Lead was not sent to Google Sheets.");
       }
@@ -120,12 +117,12 @@ const ApplyFormSection = () => {
             Pilot Application
           </motion.span>
           <motion.h2
-            className="mt-4 text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold text-foreground tracking-tight leading-[1.05]"
+            className="mt-4 text-3xl sm:text-4xl md:text-6xl font-heading font-extrabold text-foreground tracking-tight leading-[1.15]"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 }}
             transition={{ duration: 0.9, delay: 0.1 }}
           >
-            Apply for a completely <span className="text-primary">FREE Pilot Video.</span>
+            Apply for a completely <br /> <span className="text-primary">FREE Pilot Video.</span>
           </motion.h2>
           <motion.p
             className="mt-5 text-sm sm:text-base text-muted-foreground max-w-2xl font-body leading-relaxed"

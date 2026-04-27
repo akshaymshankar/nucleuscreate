@@ -21,7 +21,7 @@ const SnapText = ({
   return (
     <MotionTag className={className} initial="hidden" animate="visible">
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden align-bottom mr-[0.25em]">
+        <span key={i} className="inline-block overflow-hidden align-bottom mr-[0.25em] pb-[0.15em] -mb-[0.15em]">
           <motion.span
             className="inline-block"
             variants={{
@@ -195,7 +195,7 @@ const HeroSection = () => {
 
           {/* Right: Video card with creative loader */}
           <motion.div
-            className="relative flex items-center justify-center self-center -mt-8 lg:-mt-10"
+            className="relative flex items-center justify-center py-10 lg:py-16"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
