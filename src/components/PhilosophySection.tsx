@@ -87,7 +87,7 @@ const PhilosophySection = () => {
         </div>
 
         {/* Stat strip */}
-        <div className="mt-16 sm:mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10">
+        <div className="mt-16 sm:mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 justify-items-center">
           {[
             { num: "48hr", label: "Turnaround" },
             { num: "100+", label: "Videos / month" },
@@ -99,7 +99,7 @@ const PhilosophySection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               transition={{ delay: 0.8 + i * 0.1, duration: 0.7 }}
-              className="text-center md:text-left"
+              className="text-center"
             >
               <div className="text-3xl sm:text-4xl md:text-5xl font-heading font-extrabold text-primary tracking-tight">
                 {stat.num}

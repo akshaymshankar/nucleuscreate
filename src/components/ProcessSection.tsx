@@ -45,10 +45,10 @@ const ProcessSection = () => {
   }, [smoothProgress]);
 
   const steps = [
-    { title: "Initialize Engine", desc: "Setting up creative parameters" },
-    { title: "Assemble Sequence", desc: "Pacing & hook optimization" },
-    { title: "Parallel Rendering", desc: "40-100+ variations in sync" },
-    { title: "Final QC & Push", desc: "Ready for scale" }
+    { title: "PROTOCOL BRIEFING", desc: "Setting up strategic creative parameters." },
+    { title: "ANGLE ARCHITECTURE", desc: "Mapping high-retention hooks and pacing." },
+    { title: "BATCH VARIABLE EXPORT", desc: "Rendering 40–100+ variations in sync." },
+    { title: "ZERO-ERROR DELIVERY", desc: "Final QC & automated push to folders." }
   ];
 
   return (
@@ -140,7 +140,7 @@ const ProcessSection = () => {
                           <div className="w-2 h-2 rounded-full bg-yellow-500/80" />
                           <div className="w-2 h-2 rounded-full bg-green-500/80" />
                         </div>
-                        <div className="text-[7px] uppercase tracking-widest text-white/40 font-medium">Nucleus Creative Engine</div>
+                        <div className="text-[7px] uppercase tracking-widest text-white/40 font-mono font-bold">NUCLEUS // PERFORMANCE_ENGINE</div>
                         <div className="flex gap-2">
                           <div className="w-3 h-3 rounded-sm bg-white/10" />
                         </div>
@@ -152,11 +152,20 @@ const ProcessSection = () => {
                         <div className="w-1/4 bg-[#0a0a0a] rounded border border-white/5 p-2 flex flex-col gap-2">
                           <div className="text-[6px] text-white/30 uppercase tracking-wider mb-1">Project Media</div>
                           <div className="grid grid-cols-2 gap-1.5">
-                            {[1,2,3,4,5,6].map(i => (
+                            {[
+                              "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150",
+                              "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=150",
+                              "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150",
+                              "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=150",
+                              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150",
+                              "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=150"
+                            ].map((url, i) => (
                               <div key={i} className="aspect-video bg-white/5 rounded-sm border border-white/10 overflow-hidden relative">
+                                <img src={url} className="w-full h-full object-cover opacity-70 grayscale" alt="" />
+                                <div className="absolute inset-0 bg-primary/20 mix-blend-overlay" />
                                 <motion.div 
-                                  className="absolute inset-0 bg-primary/20"
-                                  animate={{ opacity: [0.1, 0.4, 0.1] }}
+                                  className="absolute inset-0 border border-primary/20"
+                                  animate={{ opacity: [0.2, 0.5, 0.2] }}
                                   transition={{ duration: 2 + i*0.5, repeat: Infinity }}
                                 />
                               </div>
@@ -165,60 +174,78 @@ const ProcessSection = () => {
                         </div>
 
                         {/* Preview Player */}
-                        <div className="flex-1 bg-black rounded border border-white/10 relative overflow-hidden flex items-center justify-center">
-                          <div className="absolute top-2 left-2 px-1.5 py-0.5 bg-primary/20 border border-primary/50 text-primary text-[5px] font-bold rounded-sm uppercase tracking-wider flex items-center gap-1 z-10">
+                         <div className="flex-1 bg-black rounded border border-white/10 relative overflow-hidden flex items-center justify-center">
+                          {/* Top Labels */}
+                          <div className="absolute top-2 left-2 px-1.5 py-0.5 bg-primary/20 border border-primary/50 text-primary text-[5px] font-mono font-bold rounded-sm uppercase tracking-wider flex items-center gap-1 z-10">
                             <span className="w-1 h-1 rounded-full bg-primary animate-pulse" />
-                            Rendering Node
+                            SYNCING PROTOCOL (48H)
                           </div>
+                          <div className="absolute top-2 right-2 px-1.5 py-0.5 text-white/40 text-[6px] font-mono tracking-widest z-10">
+                            47:59:58
+                          </div>
+
                           <motion.div 
                             className="w-4/5 aspect-video rounded-md border border-white/10 relative overflow-hidden shadow-2xl"
                             style={{
-                              background: "linear-gradient(135deg, rgba(34,197,94,0.15), rgba(0,0,0,1))"
+                              background: "linear-gradient(135deg, rgba(34,197,94,0.1), rgba(0,0,0,1))"
                             }}
                           >
                             <motion.div 
-                              className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent"
+                              className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
                               animate={{ x: ["-100%", "200%"] }}
-                              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                             />
-                            {/* Abstract Video Element */}
+                            {/* Central Player Interface */}
                             <div className="absolute inset-0 flex items-center justify-center">
-                              <motion.div 
-                                className="w-16 h-16 rounded-full border border-primary/30 flex items-center justify-center relative"
-                                animate={{ rotate: 360, scale: [1, 1.05, 1] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                              >
-                                <motion.div 
-                                  className="w-full h-full rounded-full border-t-2 border-primary absolute"
-                                  animate={{ rotate: -720 }}
-                                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                                />
-                                <div className="w-0 h-0 border-l-[8px] border-l-primary border-y-[5px] border-y-transparent ml-1" />
-                              </motion.div>
+                              <div className="relative">
+                                {/* Progress Ring */}
+                                <svg className="w-16 h-16 -rotate-90">
+                                  <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" strokeWidth="1" className="text-white/5" />
+                                  <motion.circle 
+                                    cx="32" cy="32" r="30" fill="none" stroke="currentColor" strokeWidth="1.5" 
+                                    className="text-primary"
+                                    strokeDasharray="188.4"
+                                    animate={{ strokeDashoffset: [188.4, 40, 188.4] }}
+                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                                    style={{ filter: "drop-shadow(0 0 4px hsl(134 68% 45%))" }}
+                                  />
+                                </svg>
+                                {/* Play Icon */}
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                  <motion.div 
+                                    className="w-8 h-8 rounded-full bg-primary/10 border border-primary/40 flex items-center justify-center"
+                                    animate={{ scale: [1, 1.1, 1] }}
+                                    transition={{ duration: 2, repeat: Infinity }}
+                                  >
+                                    <div className="w-0 h-0 border-l-[8px] border-l-primary border-y-[5px] border-y-transparent ml-1" />
+                                  </motion.div>
+                                </div>
+                              </div>
                             </div>
                           </motion.div>
                         </div>
 
                         {/* Settings / Inspector */}
                         <div className="w-1/4 bg-[#0a0a0a] rounded border border-white/5 p-2 flex flex-col">
-                           <div className="text-[6px] text-white/30 uppercase tracking-wider mb-2">Hook Optimization</div>
+                           <div className="text-[6px] text-white/30 uppercase tracking-wider mb-2 font-mono">Performance_Metrics</div>
                            <div className="space-y-3">
                              {[
-                               { label: "Pacing Speed", val: "85%" },
-                               { label: "Visual Retention", val: "92%" },
-                               { label: "Audio Dynamics", val: "78%" }
+                               { label: "Retention Mapping", val: "94%" },
+                               { label: "A/B Angle Test", val: "88%" },
+                               { label: "Sync Protocol", val: "100%" }
                              ].map((setting, i) => (
                                <div key={i}>
-                                 <div className="flex justify-between text-[5px] text-white/50 mb-1">
+                                 <div className="flex justify-between text-[5px] text-white/50 mb-1 font-mono">
                                    <span>{setting.label}</span>
-                                   <span className="text-primary">{setting.val}</span>
+                                   <span className="text-primary font-bold">{setting.val}</span>
                                  </div>
-                                 <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                                 <div className="h-0.5 bg-white/5 rounded-full overflow-hidden">
                                    <motion.div 
                                      className="h-full bg-primary" 
                                      initial={{ width: "0%" }}
                                      animate={{ width: setting.val }}
                                      transition={{ duration: 1.5, delay: i * 0.2 }}
+                                     style={{ boxShadow: "0 0 4px hsl(134 68% 45%)" }}
                                    />
                                  </div>
                                </div>
@@ -226,13 +253,14 @@ const ProcessSection = () => {
                            </div>
                            
                            <div className="mt-auto">
-                             <div className="h-12 rounded bg-primary/10 border border-primary/20 flex items-center justify-center relative overflow-hidden">
+                             <div className="h-10 rounded bg-primary/5 border border-primary/20 flex flex-col items-center justify-center relative overflow-hidden">
                                <motion.div 
-                                 className="absolute left-0 top-0 bottom-0 w-1 bg-primary"
-                                 animate={{ opacity: [0.5, 1, 0.5] }}
-                                 transition={{ duration: 1, repeat: Infinity }}
-                               />
-                               <span className="text-[7px] text-primary font-bold tracking-widest uppercase">Exporting Batch</span>
+                                 className="absolute inset-0 bg-primary/5"
+                                 animate={{ opacity: [0, 0.2, 0] }}
+                                 transition={{ duration: 2, repeat: Infinity }}
+                                />
+                               <span className="text-[6px] text-primary font-mono font-bold tracking-widest uppercase">SYCNING_BATCH</span>
+                               <span className="text-[5px] text-white/40 font-mono mt-0.5">READY_TO_DEPLOY</span>
                              </div>
                            </div>
                         </div>
@@ -249,12 +277,12 @@ const ProcessSection = () => {
                           <div className="w-1.5 h-1.5 rounded-sm bg-red-500 -ml-[2px] top-0 absolute" />
                         </motion.div>
 
-                        <div className="h-3 flex border-b border-white/5 text-[5px] text-white/30 px-2 gap-8 items-center">
-                          <span>00:00:00</span>
-                          <span>00:00:01</span>
-                          <span>00:00:02</span>
-                          <span>00:00:03</span>
-                        </div>
+                        <div className="h-3 flex border-b border-white/5 text-[5px] text-white/30 px-2 gap-8 items-center font-mono">
+                           <span>00:00:00</span>
+                           <span>00:00:15</span>
+                           <span>00:00:30</span>
+                           <span>00:00:45</span>
+                         </div>
                         
                         <div className="flex-1 flex flex-col gap-1 py-1">
                           {/* Video Track */}
@@ -322,12 +350,14 @@ const ProcessSection = () => {
                 style={{ y: floatY1, rotate: floatRotate, opacity: laptopOpacity }}
                 className="p-4 rounded-2xl bg-card/80 backdrop-blur-md border border-white/5 shadow-2xl max-w-[180px]"
               >
-                <div className="text-[10px] text-primary font-heading font-bold mb-2 tracking-widest uppercase">Pacing Logic</div>
+                <div className="text-[10px] text-primary font-mono font-bold mb-2 tracking-widest uppercase">
+                  <motion.span animate={{ opacity: [1, 0.5, 1] }} transition={{ duration: 2, repeat: Infinity }}>RETENTION MAPPING</motion.span>
+                </div>
                 <div className="space-y-1.5">
                   <div className="h-1 w-full bg-primary/20 rounded-full overflow-hidden">
-                    <motion.div className="h-full bg-primary" animate={{ width: ["10%", "90%", "40%"] }} transition={{ duration: 3, repeat: Infinity }} />
+                    <motion.div className="h-full bg-primary" animate={{ width: ["20%", "95%", "60%"] }} transition={{ duration: 4, repeat: Infinity }} style={{ boxShadow: "0 0 8px hsl(134 68% 45%)" }} />
                   </div>
-                  <div className="h-1 w-3/4 bg-primary/20 rounded-full" />
+                  <div className="h-1 w-3/4 bg-primary/10 rounded-full" />
                 </div>
               </motion.div>
             </div>
@@ -337,10 +367,15 @@ const ProcessSection = () => {
                 style={{ y: floatY2, rotate: useTransform(smoothProgress, [0.2, 0.8], [0, -10]), opacity: laptopOpacity }}
                 className="p-4 rounded-2xl bg-card/80 backdrop-blur-md border border-white/5 shadow-2xl max-w-[180px]"
               >
-                <div className="text-[10px] text-primary font-heading font-bold mb-2 tracking-widest uppercase">Variation Stack</div>
-                <div className="flex gap-1 flex-wrap">
+                <div className="text-[10px] text-primary font-mono font-bold mb-2 tracking-widest uppercase">A/B ANGLE GENERATOR</div>
+                <div className="flex gap-1.5 flex-wrap">
                   {[1, 2, 3, 4, 5, 6].map(i => (
-                    <div key={i} className="w-8 h-8 rounded-lg bg-white/5 border border-white/10" />
+                    <motion.div 
+                      key={i} 
+                      className="w-8 h-8 rounded bg-primary/5 border border-primary/20"
+                      animate={{ borderColor: ["rgba(34,197,94,0.2)", "rgba(34,197,94,0.5)", "rgba(34,197,94,0.2)"] }}
+                      transition={{ duration: 2, delay: i*0.2, repeat: Infinity }}
+                    />
                   ))}
                 </div>
               </motion.div>

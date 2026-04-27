@@ -102,7 +102,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden pt-28 sm:pt-32 pb-16 px-4 sm:px-6"
+      className="relative min-h-screen flex items-center overflow-hidden pt-28 sm:pt-32 pb-24 sm:pb-32 px-4 sm:px-6"
     >
       {/* Gradient background instead of logo */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-background pointer-events-none opacity-50" />
@@ -135,13 +135,16 @@ const HeroSection = () => {
               />
             </h1>
 
-            <SnapText
-              as="p"
-              text="We are the white-label editing engine powering India's top performance marketing campaigns. Get 40 to 100+ proven, scroll-stopping video ad variations delivered every month. 48-hour delivery. Zero freelancer headaches."
+            <motion.p
               className="mt-4 sm:mt-5 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed font-body max-w-xl"
-              delay={0.85}
-              stagger={0.018}
-            />
+              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.7, delay: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            >
+              We are the white-label editing engine powering India's top performance marketing campaigns. Get 40 to 100+ proven, scroll-stopping video ad variations delivered every month.
+              <br />
+              Zero freelancer headaches.
+            </motion.p>
 
             <motion.div
               className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start"
@@ -195,14 +198,14 @@ const HeroSection = () => {
 
           {/* Right: Video card with creative loader */}
           <motion.div
-            className="relative flex items-center justify-center py-10 lg:py-16"
+            className="relative flex items-center justify-center -mt-12 lg:-mt-24"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="relative w-full max-w-[380px] sm:max-w-[420px] lg:max-w-[480px] rounded-3xl border border-border bg-card overflow-hidden flex flex-col shadow-2xl">
               {/* Header Bar */}
-              <div className="px-5 py-3 border-b border-border/50 flex justify-between items-center bg-white/[0.02]">
+              <div className="px-5 py-4 border-b border-border/50 flex justify-between items-center bg-white/[0.03]">
                 <div className="text-[9px] tracking-[0.3em] uppercase text-muted-foreground font-heading">
                   Nucleus / Core
                 </div>
@@ -231,6 +234,7 @@ const HeroSection = () => {
                   className={`w-full h-full object-cover transition-opacity duration-700 ${
                     videoLoaded ? "opacity-100" : "opacity-0"
                   }`}
+                style={{ objectPosition: "center 30%" }}
                 >
                   <source src="/video.mp4" type="video/mp4" />
                 </video>
@@ -286,7 +290,7 @@ const HeroSection = () => {
               </div>
 
               {/* Footer Bar */}
-              <div className="px-5 py-3 border-t border-border/50 flex justify-end items-center bg-white/[0.01]">
+              <div className="px-5 py-4 border-t border-border/50 flex justify-end items-center bg-white/[0.03]">
                 <div className="flex items-center gap-2 text-[9px] tracking-[0.3em] uppercase text-primary font-heading">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                   {videoLoaded ? "Live Feed" : "Connecting"}

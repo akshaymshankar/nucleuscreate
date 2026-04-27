@@ -12,13 +12,13 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <div className="font-heading text-xl font-extrabold tracking-wider text-foreground">NUCLEUS</div>
+            <img src="/logo.png" alt="Nucleus logo" className="h-10 w-auto" />
             <a
-              href="mailto:nucleuscreate@unemplyd.com"
+              href="mailto:hello@nucleuscreate.in"
               className="mt-2 inline-block text-sm text-muted-foreground hover:text-primary transition-colors font-body"
               data-cursor-hover
             >
-              nucleuscreate@unemplyd.com
+              hello@nucleuscreate.in
             </a>
           </div>
 
