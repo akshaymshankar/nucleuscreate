@@ -200,252 +200,97 @@ const HeroSection = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="relative w-full aspect-video max-w-[380px] sm:max-w-[420px] lg:max-w-[460px] rounded-3xl border border-border bg-card overflow-hidden">
-              {/* Video — fit 16:9 and align top for better visual balance */}
-              <video
-                ref={videoRef}
-                autoPlay
-                loop
-                playsInline
-                muted={isMuted}
-                onLoadedData={handleLoaded}
-                onError={(e) => {
-                  console.error("Video failed to load", e);
-                  handleLoaded(); // dismiss loader even on error
-                }}
-                className={`absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-700 ${
-                  videoLoaded ? "opacity-100" : "opacity-0"
-                }`}
-              >
-                <source src="/video.mp4" type="video/mp4" />
-              </video>
-
-              {/* Creative loader overlay */}
-              <AnimatePresence>
-                {!videoLoaded && (
-                  <motion.div
-                    className="absolute inset-0 flex flex-col items-center justify-center bg-card backdrop-blur-sm"
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0, scale: 1.04 }}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  >
-                    {/* Animated Nucleus Loading Core SVG */}
-                    <svg
-                      className="w-32 h-32 sm:w-40 sm:h-40"
-                      viewBox="0 0 120 120"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <defs>
-                        <radialGradient id="loadingCoreGrad">
-                          <stop offset="0%" stopColor="hsl(134 68% 55%)" />
-                          <stop offset="100%" stopColor="hsl(134 68% 35%)" />
-                        </radialGradient>
-                        <filter id="loadingGlow">
-                          <feGaussianBlur stdDeviation="2" result="blur" />
-                          <feMerge>
-                            <feMergeNode in="blur" />
-                            <feMergeNode in="SourceGraphic" />
-                          </feMerge>
-                        </filter>
-                      </defs>
-
-                      {/* Rotating orbit ring 1 */}
-                      <motion.circle
-                        cx="60"
-                        cy="60"
-                        r="35"
-                        fill="none"
-                        stroke="hsl(134 68% 45%)"
-                        strokeWidth="0.8"
-                        opacity="0.3"
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 6,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                        transformOrigin="60px 60px"
-                      />
-
-                      {/* Counter-rotating orbit ring 2 */}
-                      <motion.circle
-                        cx="60"
-                        cy="60"
-                        r="25"
-                        fill="none"
-                        stroke="hsl(134 68% 45%)"
-                        strokeWidth="0.8"
-                        opacity="0.4"
-                        animate={{ rotate: -360 }}
-                        transition={{
-                          duration: 8,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                        transformOrigin="60px 60px"
-                      />
-
-                      {/* Fast rotating orbit ring 3 */}
-                      <motion.circle
-                        cx="60"
-                        cy="60"
-                        r="45"
-                        fill="none"
-                        stroke="hsl(134 68% 45%)"
-                        strokeWidth="0.6"
-                        opacity="0.2"
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                        transformOrigin="60px 60px"
-                      />
-
-                      {/* Orbiting particles */}
-                      <motion.circle
-                        cx="60"
-                        cy="20"
-                        r="2.5"
-                        fill="hsl(134 68% 45%)"
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 6,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                        transformOrigin="60px 60px"
-                        filter="url(#loadingGlow)"
-                      />
-
-                      <motion.circle
-                        cx="85"
-                        cy="60"
-                        r="2.5"
-                        fill="hsl(134 68% 45%)"
-                        animate={{ rotate: -360 }}
-                        transition={{
-                          duration: 8,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                        transformOrigin="60px 60px"
-                        filter="url(#loadingGlow)"
-                      />
-
-                      <motion.circle
-                        cx="35"
-                        cy="60"
-                        r="2"
-                        fill="hsl(134 68% 45%)"
-                        animate={{ rotate: 360 }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                        transformOrigin="60px 60px"
-                        filter="url(#loadingGlow)"
-                      />
-
-                      {/* Central pulsing nucleus core */}
-                      <motion.circle
-                        cx="60"
-                        cy="60"
-                        r="12"
-                        fill="url(#loadingCoreGrad)"
-                        filter="url(#loadingGlow)"
-                        animate={{
-                          r: [12, 14, 12],
-                          opacity: [1, 0.8, 1],
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      />
-
-                      {/* Inner core glow */}
-                      <motion.circle
-                        cx="60"
-                        cy="60"
-                        r="18"
-                        fill="none"
-                        stroke="hsl(134 68% 45%)"
-                        strokeWidth="0.5"
-                        opacity="0.3"
-                        animate={{
-                          r: [18, 22, 18],
-                          opacity: [0.3, 0.1, 0.3],
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      />
-                    </svg>
-
-                    {/* Animated progress bar */}
-                    <div className="mt-8 w-3/5 max-w-[240px] h-1 bg-border/30 overflow-hidden rounded-full backdrop-blur-sm border border-border/20">
-                      <motion.div
-                        className="h-full bg-gradient-to-r from-primary/50 via-primary to-primary/50 rounded-full"
-                        animate={{
-                          width: `${Math.min(progress, 100)}%`,
-                          opacity: [0.8, 1, 0.8],
-                        }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        style={{
-                          boxShadow: "0 0 12px hsl(134 68% 45% / 0.5)",
-                        }}
-                      />
-                    </div>
-
-                    {/* Cycling status text with smooth transitions */}
-                    <motion.div
-                      className="mt-6 text-[11px] tracking-[0.25em] uppercase text-primary font-heading h-5 font-semibold"
-                      key={Math.floor(progress / 25)}
-                      initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
-                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                      exit={{ opacity: 0, y: -6, filter: "blur(4px)" }}
-                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      {progress < 25 && "🧬 Initializing Core"}
-                      {progress >= 25 && progress < 55 && "🌀 Rendering Orbit"}
-                      {progress >= 55 && progress < 85 && "⚡ Stabilizing Energy"}
-                      {progress >= 85 && "🚀 Almost Live"}
-                    </motion.div>
-
-                    {/* Progress percentage */}
-                    <motion.div
-                      className="mt-4 text-[10px] text-muted-foreground/50 font-body tracking-wide"
-                      animate={{ opacity: [0.5, 0.8, 0.5] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      {Math.floor(Math.min(progress, 100))}%
-                    </motion.div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Corner labels */}
-              <div className="absolute top-4 left-4 text-[10px] tracking-[0.3em] uppercase text-muted-foreground/70 font-heading z-10">
-                Nucleus / Core
-              </div>
-              <div className="absolute top-4 right-4 z-20">
+            <div className="relative w-full max-w-[380px] sm:max-w-[420px] lg:max-w-[480px] rounded-3xl border border-border bg-card overflow-hidden flex flex-col shadow-2xl">
+              {/* Header Bar */}
+              <div className="px-5 py-3 border-b border-border/50 flex justify-between items-center bg-white/[0.02]">
+                <div className="text-[9px] tracking-[0.3em] uppercase text-muted-foreground font-heading">
+                  Nucleus / Core
+                </div>
                 <button 
                   onClick={() => setIsMuted(!isMuted)}
-                  className="w-8 h-8 rounded-full bg-background/50 border border-border flex items-center justify-center hover:bg-background/80 transition-colors backdrop-blur-md"
+                  className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
                   aria-label={isMuted ? "Unmute video" : "Mute video"}
                 >
-                  {isMuted ? <VolumeX className="w-4 h-4 text-muted-foreground" /> : <Volume2 className="w-4 h-4 text-foreground" />}
+                  {isMuted ? <VolumeX className="w-3.5 h-3.5 text-muted-foreground" /> : <Volume2 className="w-3.5 h-3.5 text-foreground" />}
                 </button>
               </div>
-              <div className="absolute bottom-4 right-4 flex items-center gap-2 text-[10px] tracking-[0.3em] uppercase text-primary font-heading z-10">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                {videoLoaded ? "Live" : "Loading"}
+
+              {/* Video Area */}
+              <div className="relative aspect-video bg-black overflow-hidden">
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  loop
+                  playsInline
+                  muted={isMuted}
+                  onLoadedData={handleLoaded}
+                  onError={(e) => {
+                    console.error("Video failed to load", e);
+                    handleLoaded(); // dismiss loader even on error
+                  }}
+                  className={`w-full h-full object-cover transition-opacity duration-700 ${
+                    videoLoaded ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  <source src="/video.mp4" type="video/mp4" />
+                </video>
+
+                {/* Creative loader overlay (restricted to video area) */}
+                <AnimatePresence>
+                  {!videoLoaded && (
+                    <motion.div
+                      className="absolute inset-0 flex flex-col items-center justify-center bg-card backdrop-blur-sm"
+                      initial={{ opacity: 1 }}
+                      exit={{ opacity: 0, scale: 1.04 }}
+                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      {/* Animated Nucleus Loading Core SVG */}
+                      <svg
+                        className="w-24 h-24 sm:w-28 sm:h-28"
+                        viewBox="0 0 120 120"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <defs>
+                          <radialGradient id="loadingCoreGrad">
+                            <stop offset="0%" stopColor="hsl(134 68% 55%)" />
+                            <stop offset="100%" stopColor="hsl(134 68% 35%)" />
+                          </radialGradient>
+                          <filter id="loadingGlow">
+                            <feGaussianBlur stdDeviation="2" result="blur" />
+                            <feMerge>
+                              <feMergeNode in="blur" />
+                              <feMergeNode in="SourceGraphic" />
+                            </feMerge>
+                          </filter>
+                        </defs>
+                        <motion.circle cx="60" cy="60" r="35" fill="none" stroke="hsl(134 68% 45%)" strokeWidth="0.8" opacity="0.3" animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} transformOrigin="60px 60px" />
+                        <motion.circle cx="60" cy="60" r="25" fill="none" stroke="hsl(134 68% 45%)" strokeWidth="0.8" opacity="0.4" animate={{ rotate: -360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} transformOrigin="60px 60px" />
+                        <motion.circle cx="60" cy="20" r="2.5" fill="hsl(134 68% 45%)" animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} transformOrigin="60px 60px" filter="url(#loadingGlow)" />
+                        <motion.circle cx="60" cy="60" r="12" fill="url(#loadingCoreGrad)" filter="url(#loadingGlow)" animate={{ r: [12, 14, 12], opacity: [1, 0.8, 1] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} />
+                      </svg>
+
+                      {/* Animated progress bar */}
+                      <div className="mt-4 w-1/2 h-0.5 bg-border/30 overflow-hidden rounded-full">
+                        <motion.div
+                          className="h-full bg-primary"
+                          animate={{ width: `${Math.min(progress, 100)}%` }}
+                          transition={{ duration: 0.4, ease: "easeOut" }}
+                        />
+                      </div>
+                      <div className="mt-3 text-[8px] tracking-[0.2em] uppercase text-primary font-heading font-semibold">
+                        {Math.floor(Math.min(progress, 100))}%
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Footer Bar */}
+              <div className="px-5 py-3 border-t border-border/50 flex justify-end items-center bg-white/[0.01]">
+                <div className="flex items-center gap-2 text-[9px] tracking-[0.3em] uppercase text-primary font-heading">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                  {videoLoaded ? "Live Feed" : "Connecting"}
+                </div>
               </div>
             </div>
           </motion.div>
