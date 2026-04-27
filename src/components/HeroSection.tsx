@@ -45,7 +45,7 @@ const SnapText = ({
 const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Simulated load progress for the creative loader
@@ -204,7 +204,6 @@ const HeroSection = () => {
               {/* Video — object-contain to fit 16:9 inside the square without cropping */}
               <video
                 ref={videoRef}
-                src="/video.mp4"
                 autoPlay
                 loop
                 playsInline
@@ -217,7 +216,9 @@ const HeroSection = () => {
                 className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ${
                   videoLoaded ? "opacity-100" : "opacity-0"
                 }`}
-              />
+              >
+                <source src="/video.mp4" type="video/mp4" />
+              </video>
 
               {/* Creative loader overlay */}
               <AnimatePresence>

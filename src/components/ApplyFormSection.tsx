@@ -35,8 +35,8 @@ const Field = ({ label, children, error }: { label: string; children: React.Reac
 const inputCls =
   "w-full px-4 py-3.5 rounded-xl bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground/50 font-body focus:outline-none focus:border-primary/60 transition-colors";
 
-const leadWebhookUrl = import.meta.env.VITE_LEAD_WEBHOOK_URL as string | undefined;
-const calendlyUrl = (import.meta.env.VITE_CALENDLY_URL as string | undefined) || "https://calendly.com";
+const leadWebhookUrl = "https://script.google.com/macros/s/AKfycbxuK2sYvzoEJf3PBCIylLHp989OHeGhrdwgMu1Oshp5dJiQ8Xzn0jwyyERyZt00hLA3Sg/exec";
+const calendlyUrl = "https://calendly.com/anushkarthik666/consultation";
 
 const ApplyFormSection = () => {
   const ref = useRef(null);
