@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import nucleusGif from "@/assets/nucleus-wiggle.gif";
+import { Volume2, VolumeX } from "lucide-react";
 
 // Fast-paced text reveal — words snap in like a jump cut
 const SnapText = ({
@@ -45,7 +45,8 @@ const SnapText = ({
 const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [progress, setProgress] = useState(0);
-  const imgRef = useRef<HTMLImageElement>(null);
+  const [isMuted, setIsMuted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Simulated load progress for the creative loader
   useEffect(() => {
@@ -59,9 +60,35 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, [videoLoaded]);
 
-  // Check if image already cached
+  // Handle video playback and autoplay policy
   useEffect(() => {
-    if (imgRef.current?.complete) {
+    if (videoLoaded && videoRef.current) {
+      // Apply current mute state
+      videoRef.current.muted = isMuted;
+      
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.warn("Autoplay unmuted blocked by browser. Muting and retrying.", err);
+          setIsMuted(true);
+        });
+      }
+    }
+  }, [videoLoaded]);
+
+  // Re-sync video mute state when user toggles
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+      if (videoLoaded) {
+        videoRef.current.play().catch(e => console.log("Play failed", e));
+      }
+    }
+  }, [isMuted, videoLoaded]);
+
+  // Check if video already cached
+  useEffect(() => {
+    if (videoRef.current && videoRef.current.readyState >= 2) {
       setProgress(100);
       setTimeout(() => setVideoLoaded(true), 300);
     }
@@ -95,7 +122,7 @@ const HeroSection = () => {
 
             <h1 className="mt-5 sm:mt-6 font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.05]">
               <SnapText
-                text="Scale your coaching clients"
+                text="Scale your client ad accounts"
                 className="block"
                 delay={0.15}
                 stagger={0.05}
@@ -110,7 +137,7 @@ const HeroSection = () => {
 
             <SnapText
               as="p"
-              text="We are the white-label editing engine powering India's top coaching and ed-tech campaigns. Get 40 to 100+ proven, scroll-stopping video ad variations delivered every month. 48-hour delivery. Zero freelancer headaches."
+              text="We are the white-label editing engine powering India's top performance marketing campaigns. Get 40 to 100+ proven, scroll-stopping video ad variations delivered every month. 48-hour delivery. Zero freelancer headaches."
               className="mt-5 sm:mt-6 text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed font-body max-w-xl"
               delay={0.85}
               stagger={0.018}
@@ -174,12 +201,15 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="relative w-full aspect-square max-w-[480px] rounded-3xl border border-border bg-card overflow-hidden">
-              {/* Video — object-contain so the full frame fits */}
-              <img
-                ref={imgRef}
-                src={nucleusGif}
-                alt="Nucleus core looping animation"
-                onLoad={handleLoaded}
+              {/* Video — object-contain to fit 16:9 inside the square without cropping */}
+              <video
+                ref={videoRef}
+                src="/video.mp4"
+                autoPlay
+                loop
+                playsInline
+                muted={isMuted}
+                onLoadedData={handleLoaded}
                 className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-700 ${
                   videoLoaded ? "opacity-100" : "opacity-0"
                 }`}
@@ -398,6 +428,15 @@ const HeroSection = () => {
               {/* Corner labels */}
               <div className="absolute top-4 left-4 text-[10px] tracking-[0.3em] uppercase text-muted-foreground/70 font-heading z-10">
                 Nucleus / Core
+              </div>
+              <div className="absolute top-4 right-4 z-20">
+                <button 
+                  onClick={() => setIsMuted(!isMuted)}
+                  className="w-8 h-8 rounded-full bg-background/50 border border-border flex items-center justify-center hover:bg-background/80 transition-colors backdrop-blur-md"
+                  aria-label={isMuted ? "Unmute video" : "Mute video"}
+                >
+                  {isMuted ? <VolumeX className="w-4 h-4 text-muted-foreground" /> : <Volume2 className="w-4 h-4 text-foreground" />}
+                </button>
               </div>
               <div className="absolute bottom-4 right-4 flex items-center gap-2 text-[10px] tracking-[0.3em] uppercase text-primary font-heading z-10">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />

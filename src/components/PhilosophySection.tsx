@@ -18,7 +18,7 @@ const proofs = [
   {
     icon: Target,
     title: "We Understand Hooks.",
-    text: "We don't just \"cut clips.\" We optimize for the first 3 seconds, pacing, and coaching psychology.",
+    text: "We don't just \"cut clips.\" We optimize for the first 3 seconds, pacing, and buyer psychology across Info-Products, E-com, and Lead Gen.",
     num: "03",
   },
 ];
@@ -47,6 +47,14 @@ const PhilosophySection = () => {
           >
             Built for rapid <span className="text-primary">A/B testing.</span>
           </motion.h2>
+          <motion.p
+            className="mt-5 text-sm sm:text-base text-muted-foreground max-w-2xl font-body leading-relaxed"
+            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+            animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 16, filter: "blur(6px)" }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            We deliver the massive editing volume your media buyers need to run continuous A/B tests for E-com, Info, and Lead Gen brands.
+          </motion.p>
         </div>
 
         <div className="mt-14 sm:mt-20 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">

@@ -166,7 +166,7 @@ const ApplyFormSection = () => {
                   <Field label="Agency Name / Website" error={errors.agency}>
                     <input className={inputCls} value={data.agency} onChange={(e) => update("agency", e.target.value)} placeholder="agency.com" maxLength={200} />
                   </Field>
-                  <Field label="Coaching / Ed-tech clients managed" error={errors.clients}>
+                  <Field label="Active performance marketing clients managed" error={errors.clients}>
                     <select className={inputCls} value={data.clients} onChange={(e) => update("clients", e.target.value as FormData["clients"])}>
                       <option value="">Select…</option>
                       <option value="1-3">1 – 3</option>
@@ -184,7 +184,7 @@ const ApplyFormSection = () => {
                     </select>
                   </Field>
                   <div className="sm:col-span-2">
-                    <Field label="Avg. monthly creative budget per coaching client" error={errors.budget}>
+                    <Field label="Avg. monthly creative budget per client" error={errors.budget}>
                       <select className={inputCls} value={data.budget} onChange={(e) => update("budget", e.target.value as FormData["budget"])}>
                         <option value="">Select…</option>
                         <option value="under-10k">Under ₹10k</option>

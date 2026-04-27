@@ -4,7 +4,7 @@ import { useRef } from "react";
 const oldWay = [
   { title: "Freelancers ghosting you", text: "They miss deadlines right when client CPAs are spiking." },
   { title: "Slow big studios", text: "Taking 14 days to deliver a single ad makes rapid testing impossible." },
-  { title: "No performance knowledge", text: "They make \"pretty videos\" but don't understand hook rates or CTA pacing." },
+  { title: "No performance knowledge", text: "They make \"pretty videos\" but don't understand how to lower CPA across different vertical hooks." },
   { title: "Unpredictable margins", text: "Per-project pricing makes your agency quotes complicated." },
 ];
 
