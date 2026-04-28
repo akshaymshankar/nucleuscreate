@@ -44,7 +44,8 @@ const AssemblyVisuals = () => {
   return (
     <section 
       ref={containerRef} 
-      className="relative h-[200vh] bg-background overflow-visible border-y border-white/5"
+      id="synthesis"
+      className="relative h-[150vh] bg-background overflow-visible border-y border-white/5"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center pointer-events-none">
         {/* Background Grid */}
@@ -129,8 +130,14 @@ const AssemblyVisuals = () => {
                 />
               </div>
             </div>
+            <motion.span 
+              className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-primary font-heading font-semibold mb-4"
+              style={{ opacity: useTransform(mergeProgress, [0.6, 0.8], [0, 1]) }}
+            >
+              The Assembly Structure
+            </motion.span>
             <motion.h3 
-              className="mt-8 text-4xl sm:text-5xl font-heading font-black text-foreground tracking-tight"
+              className="text-4xl sm:text-5xl font-heading font-black text-foreground tracking-tight"
             >
               NUCLEUS <span className="text-primary italic">SYNTHESIS</span>
             </motion.h3>

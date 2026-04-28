@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Compare", href: "#services" },
   { label: "Pricing", href: "#pricing" },
   { label: "Apply", href: "#apply" },
+  { label: "Structure", href: "#synthesis" },
 ];
 
 const Navbar = () => {

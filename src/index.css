@@ -48,7 +48,6 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
-    cursor: none;
   }
 
   @media (hover: none), (pointer: coarse) {

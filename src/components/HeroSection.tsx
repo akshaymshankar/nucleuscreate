@@ -43,7 +43,15 @@ const SnapText = memo(({
 });
 SnapText.displayName = "SnapText";
 
-const VideoProgressControl = ({ videoRef }: { videoRef: React.RefObject<HTMLVideoElement> }) => {
+const VideoProgressControl = ({ 
+  videoRef, 
+  isPlaying, 
+  setIsPlaying 
+}: { 
+  videoRef: React.RefObject<HTMLVideoElement>,
+  isPlaying: boolean,
+  setIsPlaying: (playing: boolean) => void
+}) => {
   const [progress, setProgress] = useState(0);
   const barRef = useRef<HTMLDivElement>(null);
 
@@ -71,17 +79,29 @@ const VideoProgressControl = ({ videoRef }: { videoRef: React.RefObject<HTMLVide
   };
 
   return (
-    <div 
-      ref={barRef}
-      className="absolute bottom-0 left-0 w-full h-1.5 bg-white/10 z-20 cursor-pointer group hover:h-2 transition-all"
-      onClick={handleSeek}
-    >
-      <motion.div 
-        className="h-full bg-primary relative"
-        style={{ width: `${progress}%`, filter: "drop-shadow(0 0 4px hsl(134 68% 45%))" }}
-      >
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full scale-0 group-hover:scale-100 transition-transform shadow-[0_0_10px_hsl(134_68%_45%)]" />
-      </motion.div>
+    <div className="absolute bottom-0 left-0 w-full p-3 flex flex-col gap-2 z-20 bg-gradient-to-t from-black/60 to-transparent translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+      <div className="flex items-center gap-3">
+        <button 
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsPlaying(!isPlaying);
+          }}
+          className="text-white hover:text-primary transition-colors pointer-events-auto"
+        >
+          {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current" />}
+        </button>
+        
+        <div 
+          ref={barRef}
+          className="flex-1 h-1.5 bg-white/20 cursor-pointer relative rounded-full overflow-hidden pointer-events-auto"
+          onClick={handleSeek}
+        >
+          <motion.div 
+            className="h-full bg-primary"
+            style={{ width: `${progress}%`, filter: "drop-shadow(0 0 4px hsl(134 68% 45%))" }}
+          />
+        </div>
+      </div>
     </div>
   );
 };
@@ -271,13 +291,6 @@ const HeroSection = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <button 
-                    onClick={() => setIsPlaying(!isPlaying)}
-                    className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
-                    aria-label={isPlaying ? "Pause video" : "Play video"}
-                  >
-                    {isPlaying ? <Pause className="w-3 h-3 text-foreground" /> : <Play className="w-3 h-3 text-foreground fill-foreground ml-0.5" />}
-                  </button>
-                  <button 
                     onClick={() => setIsMuted(!isMuted)}
                     className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
                     aria-label={isMuted ? "Unmute video" : "Mute video"}
@@ -288,7 +301,7 @@ const HeroSection = () => {
               </div>
 
               {/* Video Area */}
-              <div className="relative aspect-video bg-black overflow-hidden">
+              <div className="relative aspect-video bg-black overflow-hidden group">
                 <video
                   ref={videoRef}
                   autoPlay
@@ -357,7 +370,11 @@ const HeroSection = () => {
                   )}
                 </AnimatePresence>
 
-                <VideoProgressControl videoRef={videoRef} />
+                <VideoProgressControl 
+                  videoRef={videoRef} 
+                  isPlaying={isPlaying} 
+                  setIsPlaying={setIsPlaying} 
+                />
               </div>
 
               {/* Footer Bar */}

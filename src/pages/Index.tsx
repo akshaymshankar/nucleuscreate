@@ -1,4 +1,3 @@
-import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -16,16 +15,15 @@ const Index = () => {
 
   return (
     <div className="bg-background min-h-screen">
-      <CustomCursor />
       <ScrollProgress />
       <Navbar />
       <HeroSection />
       <PhilosophySection />
-      <AssemblyVisuals />
       <ProcessSection />
       <ServicesSection />
       <PortfolioSection />
       <ApplyFormSection />
+      <AssemblyVisuals />
       <Footer />
     </div>
   );
