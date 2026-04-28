@@ -53,6 +53,9 @@ const VideoProgressControl = ({
   setIsPlaying: (playing: boolean) => void
 }) => {
   const [progress, setProgress] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -60,46 +63,94 @@ const VideoProgressControl = ({
     if (!video) return;
 
     const update = () => {
-      setProgress((video.currentTime / video.duration) * 100);
+      if (!isDragging && video.duration) {
+        setProgress((video.currentTime / video.duration) * 100);
+        setCurrentTime(video.currentTime);
+      }
+      setDuration(video.duration || 0);
     };
 
     video.addEventListener("timeupdate", update);
-    return () => video.removeEventListener("timeupdate", update);
-  }, [videoRef]);
+    video.addEventListener("loadedmetadata", update);
+    return () => {
+      video.removeEventListener("timeupdate", update);
+      video.removeEventListener("loadedmetadata", update);
+    };
+  }, [videoRef, isDragging]);
 
-  const handleSeek = (e: React.MouseEvent) => {
+  const handleSeek = (e: React.MouseEvent | MouseEvent) => {
     const video = videoRef.current;
     const bar = barRef.current;
-    if (!video || !bar) return;
+    if (!video || !bar || !video.duration) return;
 
     const rect = bar.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const pct = Math.max(0, Math.min(1, x / rect.width));
     video.currentTime = pct * video.duration;
+    setProgress(pct * 100);
+    setCurrentTime(pct * video.duration);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    handleSeek(e);
+  };
+
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const onMouseMove = (e: MouseEvent) => {
+      handleSeek(e);
+    };
+
+    const onMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+  }, [isDragging]);
+
+  const formatTime = (time: number) => {
+    if (isNaN(time)) return "0:00";
+    const min = Math.floor(time / 60);
+    const sec = Math.floor(time % 60);
+    return `${min}:${sec.toString().padStart(2, "0")}`;
   };
 
   return (
-    <div className="absolute bottom-0 left-0 w-full p-3 flex flex-col gap-2 z-20 bg-gradient-to-t from-black/60 to-transparent translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-      <div className="flex items-center gap-3">
-        <button 
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsPlaying(!isPlaying);
-          }}
-          className="text-white hover:text-primary transition-colors pointer-events-auto"
+    <div className="absolute bottom-0 left-0 w-full p-4 flex flex-col gap-2.5 z-20 bg-gradient-to-t from-black/90 via-black/40 to-transparent translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+      <div 
+        ref={barRef}
+        className="h-1 w-full bg-white/20 cursor-pointer relative rounded-full overflow-visible pointer-events-auto group/bar"
+        onMouseDown={handleMouseDown}
+      >
+        <motion.div 
+          className="h-full bg-primary relative rounded-full"
+          style={{ width: `${progress}%`, filter: "drop-shadow(0 0 4px hsl(134 68% 45%))" }}
         >
-          {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current" />}
-        </button>
-        
-        <div 
-          ref={barRef}
-          className="flex-1 h-1.5 bg-white/20 cursor-pointer relative rounded-full overflow-hidden pointer-events-auto"
-          onClick={handleSeek}
-        >
-          <motion.div 
-            className="h-full bg-primary"
-            style={{ width: `${progress}%`, filter: "drop-shadow(0 0 4px hsl(134 68% 45%))" }}
-          />
+          <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg scale-0 group-hover/bar:scale-100 transition-transform" />
+        </motion.div>
+      </div>
+      
+      <div className="flex items-center justify-between pointer-events-none">
+        <div className="flex items-center gap-3">
+          <button 
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsPlaying(!isPlaying);
+            }}
+            className="text-white hover:text-primary transition-colors pointer-events-auto"
+          >
+            {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
+          </button>
+          <span className="text-[9px] text-white/90 font-mono tracking-tight select-none">
+            {formatTime(currentTime)} <span className="text-white/30 mx-0.5">/</span> {formatTime(duration)}
+          </span>
         </div>
       </div>
     </div>
@@ -208,9 +259,15 @@ const HeroSection = () => {
                 stagger={0.05}
               />
               <SnapText
-                text="without hiring more video editors."
+                text="without hiring"
                 className="block text-primary"
                 delay={0.45}
+                stagger={0.045}
+              />
+              <SnapText
+                text="more video editors."
+                className="block text-primary whitespace-nowrap"
+                delay={0.6}
                 stagger={0.045}
               />
             </h1>
