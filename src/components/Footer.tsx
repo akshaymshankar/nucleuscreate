@@ -38,7 +38,7 @@ const Footer = () => {
 
         <div className="mt-10 pt-6 border-t border-border/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <span className="text-xs text-muted-foreground/70 font-body">
-            © 2025 Nucleus. All rights reserved.
+            © 2026 Nucleus. All rights reserved.
           </span>
           <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground/60 font-heading">
             White-Label Creative Studio · India

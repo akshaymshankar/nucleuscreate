@@ -240,7 +240,7 @@ const ApplyFormSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="relative mx-auto w-20 h-20">
+                <div className="relative mx-auto w-20 h-20 flex items-center justify-center">
                   {[0, 1, 2].map((i) => (
                     <motion.span
                       key={i}
@@ -250,7 +250,7 @@ const ApplyFormSection = () => {
                       transition={{ duration: 1.4, delay: i * 0.2, repeat: Infinity, ease: "easeOut" }}
                     />
                   ))}
-                  <div className="relative mx-auto w-14 h-14 rounded-full border border-primary/40 bg-primary/10 flex items-center justify-center">
+                  <div className="relative w-14 h-14 rounded-full border border-primary/40 bg-primary/10 flex items-center justify-center">
                     <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="hsl(var(--primary))" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 12.5l4.5 4.5L19 7.5" />
                     </svg>
