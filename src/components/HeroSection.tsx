@@ -1,9 +1,9 @@
+import React, { memo, useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { Volume2, VolumeX } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX } from "lucide-react";
 
 // Fast-paced text reveal — words snap in like a jump cut
-const SnapText = ({
+const SnapText = memo(({
   text,
   className,
   delay = 0,
@@ -40,25 +40,85 @@ const SnapText = ({
       ))}
     </MotionTag>
   );
+});
+SnapText.displayName = "SnapText";
+
+const VideoProgressControl = ({ videoRef }: { videoRef: React.RefObject<HTMLVideoElement> }) => {
+  const [progress, setProgress] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const update = () => {
+      setProgress((video.currentTime / video.duration) * 100);
+    };
+
+    video.addEventListener("timeupdate", update);
+    return () => video.removeEventListener("timeupdate", update);
+  }, [videoRef]);
+
+  const handleSeek = (e: React.MouseEvent) => {
+    const video = videoRef.current;
+    const bar = barRef.current;
+    if (!video || !bar) return;
+
+    const rect = bar.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const pct = Math.max(0, Math.min(1, x / rect.width));
+    video.currentTime = pct * video.duration;
+  };
+
+  return (
+    <div 
+      ref={barRef}
+      className="absolute bottom-0 left-0 w-full h-1.5 bg-white/10 z-20 cursor-pointer group hover:h-2 transition-all"
+      onClick={handleSeek}
+    >
+      <motion.div 
+        className="h-full bg-primary relative"
+        style={{ width: `${progress}%`, filter: "drop-shadow(0 0 4px hsl(134 68% 45%))" }}
+      >
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full scale-0 group-hover:scale-100 transition-transform shadow-[0_0_10px_hsl(134_68%_45%)]" />
+      </motion.div>
+    </div>
+  );
 };
 
 const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [loadProgress, setLoadProgress] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Simulated load progress for the creative loader
   useEffect(() => {
     if (videoLoaded) return;
     const interval = setInterval(() => {
-      setProgress((p) => {
+      setLoadProgress((p) => {
         if (p >= 92) return p;
         return p + Math.random() * 8;
       });
     }, 180);
     return () => clearInterval(interval);
   }, [videoLoaded]);
+
+  // Handle video playback
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isPlaying) {
+      video.play().catch(e => {
+        console.warn("Autoplay blocked", e);
+        setIsPlaying(false);
+      });
+    } else {
+      video.pause();
+    }
+  }, [isPlaying, videoLoaded]);
 
   // Handle video playback and autoplay policy
   useEffect(() => {
@@ -89,13 +149,13 @@ const HeroSection = () => {
   // Check if video already cached
   useEffect(() => {
     if (videoRef.current && videoRef.current.readyState >= 2) {
-      setProgress(100);
+      setLoadProgress(100);
       setTimeout(() => setVideoLoaded(true), 300);
     }
   }, []);
 
   const handleLoaded = () => {
-    setProgress(100);
+    setLoadProgress(100);
     setTimeout(() => setVideoLoaded(true), 350);
   };
 
@@ -209,13 +269,22 @@ const HeroSection = () => {
                 <div className="text-[9px] tracking-[0.3em] uppercase text-muted-foreground font-heading">
                   Nucleus / Core
                 </div>
-                <button 
-                  onClick={() => setIsMuted(!isMuted)}
-                  className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
-                  aria-label={isMuted ? "Unmute video" : "Mute video"}
-                >
-                  {isMuted ? <VolumeX className="w-3.5 h-3.5 text-muted-foreground" /> : <Volume2 className="w-3.5 h-3.5 text-foreground" />}
-                </button>
+                <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => setIsPlaying(!isPlaying)}
+                    className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
+                    aria-label={isPlaying ? "Pause video" : "Play video"}
+                  >
+                    {isPlaying ? <Pause className="w-3 h-3 text-foreground" /> : <Play className="w-3 h-3 text-foreground fill-foreground ml-0.5" />}
+                  </button>
+                  <button 
+                    onClick={() => setIsMuted(!isMuted)}
+                    className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
+                    aria-label={isMuted ? "Unmute video" : "Mute video"}
+                  >
+                    {isMuted ? <VolumeX className="w-3.5 h-3.5 text-muted-foreground" /> : <Volume2 className="w-3.5 h-3.5 text-foreground" />}
+                  </button>
+                </div>
               </div>
 
               {/* Video Area */}
@@ -277,16 +346,18 @@ const HeroSection = () => {
                       <div className="mt-4 w-1/2 h-0.5 bg-border/30 overflow-hidden rounded-full">
                         <motion.div
                           className="h-full bg-primary"
-                          animate={{ width: `${Math.min(progress, 100)}%` }}
+                          animate={{ width: `${Math.min(loadProgress, 100)}%` }}
                           transition={{ duration: 0.4, ease: "easeOut" }}
                         />
                       </div>
                       <div className="mt-3 text-[8px] tracking-[0.2em] uppercase text-primary font-heading font-semibold">
-                        {Math.floor(Math.min(progress, 100))}%
+                        {Math.floor(Math.min(loadProgress, 100))}%
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
+
+                <VideoProgressControl videoRef={videoRef} />
               </div>
 
               {/* Footer Bar */}

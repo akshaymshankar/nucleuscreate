@@ -16,15 +16,15 @@ const ProcessSection = () => {
     restDelta: 0.001
   });
 
-  // Laptop opening and positioning
-  const lidRotate = useTransform(smoothProgress, [0.15, 0.45], [-110, -10]);
-  const laptopScale = useTransform(smoothProgress, [0.1, 0.35, 0.6, 0.85], [0.8, 1, 1, 0.9]);
-  const laptopY = useTransform(smoothProgress, [0.1, 0.45, 0.7, 0.9], [100, 0, 0, -50]);
-  const laptopOpacity = useTransform(smoothProgress, [0.1, 0.2, 0.8, 0.9], [0, 1, 1, 0]);
+  // Laptop opening and positioning (Sticky window is roughly [0.25, 0.75])
+  const lidRotate = useTransform(smoothProgress, [0.25, 0.4], [-110, -10]);
+  const laptopScale = useTransform(smoothProgress, [0.2, 0.35, 0.7, 0.8], [0.8, 1, 1, 0.9]);
+  const laptopY = useTransform(smoothProgress, [0.2, 0.35, 0.7, 0.8], [100, 0, 0, -50]);
+  const laptopOpacity = useTransform(smoothProgress, [0.2, 0.3, 0.75, 0.85], [0, 1, 1, 0]);
   
   // Screen content reveal
-  const screenOpacity = useTransform(smoothProgress, [0.35, 0.5], [0, 1]);
-  const screenScale = useTransform(smoothProgress, [0.35, 0.55], [0.95, 1]);
+  const screenOpacity = useTransform(smoothProgress, [0.35, 0.45], [0, 1]);
+  const screenScale = useTransform(smoothProgress, [0.35, 0.45], [0.95, 1]);
   
   // Floating elements around the laptop
   const floatY1 = useTransform(smoothProgress, [0.2, 0.8], [0, -120]);
@@ -36,10 +36,10 @@ const ProcessSection = () => {
   
   useEffect(() => {
     const unsubscribe = smoothProgress.on("change", (v) => {
-      if (v < 0.35) setActiveStep(0);
-      else if (v < 0.55) setActiveStep(1);
-      else if (v < 0.75) setActiveStep(2);
-      else setActiveStep(3);
+      // 3-stage reveal: Laptop only, then 0&1, then 2&3
+      if (v < 0.45) setActiveStep(-1); // Laptop only (no steps highlighted)
+      else if (v < 0.6) setActiveStep(1); // Steps 1&2
+      else setActiveStep(3); // Steps 3&4
     });
     return () => unsubscribe();
   }, [smoothProgress]);
@@ -400,8 +400,20 @@ const ProcessSection = () => {
                   key={i}
                   className="relative group"
                   style={{ 
-                    opacity: useTransform(smoothProgress, [0.1 + i*0.15, 0.25 + i*0.15, 0.85, 0.95], [0, 1, 1, 0]),
-                    y: useTransform(smoothProgress, [0.1 + i*0.15, 0.25 + i*0.15], [20, 0])
+                    // 3-stage reveal: Laptop is already appearing/opening from 0.25.
+                    // Pair 1 (i=0,1) reveals at 0.45, Pair 2 (i=2,3) reveals at 0.65
+                    opacity: useTransform(smoothProgress, 
+                      i < 2 
+                        ? [0.45, 0.55, 0.85, 0.95] 
+                        : [0.65, 0.75, 0.85, 0.95], 
+                      [0, 1, 1, 0]
+                    ),
+                    y: useTransform(smoothProgress, 
+                      i < 2 
+                        ? [0.45, 0.55] 
+                        : [0.65, 0.75], 
+                      [20, 0]
+                    )
                   }}
                 >
                   <div className={`text-[10px] font-heading font-bold mb-2 transition-colors duration-500 ${activeStep >= i ? 'text-primary' : 'text-muted-foreground/40'}`}>
