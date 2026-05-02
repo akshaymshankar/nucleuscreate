@@ -72,8 +72,23 @@ const ApplyFormSection = () => {
     }
 
     setIsSubmitting(true);
+    
+    // Capture UTM parameters from URL
+    const searchParams = new URLSearchParams(window.location.search);
+    const utms = {
+      utm_source: searchParams.get("utm_source") || "",
+      utm_medium: searchParams.get("utm_medium") || "",
+      utm_campaign: searchParams.get("utm_campaign") || "",
+      utm_term: searchParams.get("utm_term") || "",
+      utm_content: searchParams.get("utm_content") || "",
+      utm_id: searchParams.get("utm_id") || "",
+      utm_source_platform: searchParams.get("utm_source_platform") || "",
+      utm_placement: searchParams.get("utm_placement") || "",
+    };
+
     const payload = {
       ...parsed.data,
+      ...utms,
       source: "Nucleus Landing Page",
       requestedAt: new Date().toISOString(),
     };
