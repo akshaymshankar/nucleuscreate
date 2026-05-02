@@ -365,14 +365,13 @@ const HeroSection = () => {
                   loop
                   playsInline
                   muted={isMuted}
+                  poster="/hero-poster.png"
                   onLoadedData={handleLoaded}
                   onError={(e) => {
                     console.error("Video failed to load", e);
                     handleLoaded(); // dismiss loader even on error
                   }}
-                  className={`w-full h-full object-cover transition-opacity duration-700 ${
-                    videoLoaded ? "opacity-100" : "opacity-0"
-                  }`}
+                  className="w-full h-full object-cover"
                 style={{ objectPosition: "center 30%" }}
                 >
                   <source src="/video.mp4" type="video/mp4" />

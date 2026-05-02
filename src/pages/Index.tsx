@@ -1,14 +1,16 @@
+import { Suspense, lazy } from "react";
 import ScrollProgress from "@/components/ScrollProgress";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import PhilosophySection from "@/components/PhilosophySection";
-import AssemblyVisuals from "@/components/AssemblyVisuals";
-import ProcessSection from "@/components/ProcessSection";
-import ServicesSection from "@/components/ServicesSection";
-import PortfolioSection from "@/components/PortfolioSection";
-import ApplyFormSection from "@/components/ApplyFormSection";
-import Footer from "@/components/Footer";
 import useSmoothScroll from "@/hooks/use-smooth-scroll";
+
+const PhilosophySection = lazy(() => import("@/components/PhilosophySection"));
+const AssemblyVisuals = lazy(() => import("@/components/AssemblyVisuals"));
+const ProcessSection = lazy(() => import("@/components/ProcessSection"));
+const ServicesSection = lazy(() => import("@/components/ServicesSection"));
+const PortfolioSection = lazy(() => import("@/components/PortfolioSection"));
+const ApplyFormSection = lazy(() => import("@/components/ApplyFormSection"));
+const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
   useSmoothScroll();
@@ -18,13 +20,15 @@ const Index = () => {
       <ScrollProgress />
       <Navbar />
       <HeroSection />
-      <PhilosophySection />
-      <ProcessSection />
-      <ServicesSection />
-      <PortfolioSection />
-      <ApplyFormSection />
-      <AssemblyVisuals />
-      <Footer />
+      <Suspense fallback={<div className="h-96 bg-background" />}>
+        <PhilosophySection />
+        <ProcessSection />
+        <ServicesSection />
+        <PortfolioSection />
+        <ApplyFormSection />
+        <AssemblyVisuals />
+        <Footer />
+      </Suspense>
     </div>
   );
 };
