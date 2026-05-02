@@ -126,16 +126,6 @@ const ApplyFormSection = () => {
     }
   };
 
-  const isFormComplete = 
-    data.name.trim() !== "" &&
-    data.email.trim() !== "" &&
-    data.phone.trim() !== "" &&
-    data.agency.trim() !== "" &&
-    data.clients !== "" &&
-    data.videos !== "" &&
-    data.budget !== "" &&
-    data.meeting !== "";
-
   return (
     <section id="apply" className="relative py-24 sm:py-32 md:py-40 overflow-hidden bg-background border-t border-border/40">
       <div ref={ref} className="container mx-auto px-4 sm:px-6">
@@ -254,13 +244,9 @@ const ApplyFormSection = () => {
 
                 <button
                   type="submit"
-                  disabled={isSubmitting || !isFormComplete}
-                  className={`magnetic-btn mt-8 sm:mt-10 w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full font-heading text-sm sm:text-base font-semibold tracking-wide transition-all duration-300 ${
-                    isFormComplete
-                      ? "bg-primary text-primary-foreground hover:opacity-90"
-                      : "bg-white/5 text-muted-foreground/50 cursor-not-allowed border border-white/10"
-                  }`}
-                  {...(isFormComplete ? { "data-cursor-hover": true } : {})}
+                  disabled={isSubmitting}
+                  className="magnetic-btn mt-8 sm:mt-10 w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-primary text-primary-foreground font-heading text-sm sm:text-base font-semibold tracking-wide hover:opacity-90 transition-all duration-300"
+                  data-cursor-hover
                 >
                   {isSubmitting ? "Sending..." : "Request My Pilot Video"}
                   <span className="text-lg leading-none">→</span>
