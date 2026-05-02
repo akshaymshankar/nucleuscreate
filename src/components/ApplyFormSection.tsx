@@ -2,6 +2,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(100),
@@ -53,6 +54,8 @@ const ApplyFormSection = () => {
     setErrors((e) => ({ ...e, [k]: undefined }));
   };
 
+  const navigate = useNavigate();
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const parsed = formSchema.safeParse(data);
@@ -100,13 +103,17 @@ const ApplyFormSection = () => {
           mode: "no-cors",
           body: JSON.stringify(payload),
         });
-      } else {
-        console.warn("VITE_LEAD_WEBHOOK_URL is not configured. Lead was not sent to Google Sheets.");
       }
 
       setSubmittedLead(parsed.data);
       setState("accepted");
-      toast({ title: "Application received", description: "We'll be in touch within 24 hours." });
+      toast({ title: "Application received", description: "Redirecting you now..." });
+      
+      // Delay slightly for toast visibility before redirect
+      setTimeout(() => {
+        navigate("/thank-you-page");
+      }, 800);
+      
     } catch (err) {
       console.error(err);
       toast({
