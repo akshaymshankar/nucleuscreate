@@ -335,7 +335,7 @@ const HeroSection = () => {
 
           {/* Right: Video card with creative loader */}
           <motion.div
-            className="relative flex items-center justify-center -mt-12 lg:-mt-24"
+            className="relative flex items-center justify-center mt-4 lg:-mt-24"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}

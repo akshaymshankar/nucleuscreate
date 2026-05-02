@@ -33,6 +33,23 @@ const ProcessSection = () => {
 
   // Status indicators on the screen
   const [activeStep, setActiveStep] = useState(0);
+
+  // Responsive screen UI scaling
+  const screenRef = useRef<HTMLDivElement>(null);
+  const [uiScale, setUiScale] = useState(1);
+
+  useEffect(() => {
+    const updateScale = () => {
+      if (screenRef.current) {
+        const width = screenRef.current.clientWidth;
+        // The inner UI is 600px wide. We scale it to match the actual screen width.
+        setUiScale(width / 600);
+      }
+    };
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
   
   useEffect(() => {
     const unsubscribe = smoothProgress.on("change", (v) => {
@@ -128,11 +145,15 @@ const ProcessSection = () => {
 
                   {/* Screen Content */}
                   <motion.div 
+                    ref={screenRef}
                     className="flex-1 m-1.5 rounded-lg bg-[#050505] relative overflow-hidden border border-white/5 shadow-[inset_0_0_40px_rgba(0,0,0,0.8)]"
                     style={{ opacity: screenOpacity, scale: screenScale }}
                   >
                     {/* Creative Video Editor UI */}
-                    <div className="absolute inset-0 flex flex-col bg-[#050505] font-sans">
+                    <div 
+                      className="absolute top-0 left-0 w-[600px] h-[375px] flex flex-col bg-[#050505] font-sans origin-top-left"
+                      style={{ transform: `scale(${uiScale})` }}
+                    >
                       {/* Top Bar */}
                       <div className="h-6 border-b border-white/5 flex items-center px-3 justify-between bg-[#0a0a0a]">
                         <div className="flex gap-1.5">
