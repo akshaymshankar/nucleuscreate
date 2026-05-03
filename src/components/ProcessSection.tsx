@@ -18,9 +18,8 @@ const ProcessSection = () => {
 
   // Laptop opening and positioning (Sticky window is roughly [0.25, 0.75])
   const lidRotate = useTransform(smoothProgress, [0.25, 0.4], [-110, -10]);
-  const laptopScale = useTransform(smoothProgress, [0, 0.25, 0.7, 0.8], [0.8, 1, 1, 0.9]);
-  const laptopY = useTransform(smoothProgress, [0, 0.25, 0.7, 0.8], [100, 0, 0, -50]);
-  const laptopOpacity = useTransform(smoothProgress, [0, 0.75, 0.85, 1], [1, 1, 0, 0]);
+  const laptopScale = useTransform(smoothProgress, [0, 0.25], [0.8, 1]);
+  const laptopY = useTransform(smoothProgress, [0, 0.25], [100, 0]);
   
   // Screen content reveal
   const screenOpacity = useTransform(smoothProgress, [0.35, 0.45], [0, 1]);
@@ -88,14 +87,12 @@ const ProcessSection = () => {
           <div className="text-center mb-4 sm:mb-8">
             <motion.span 
               className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-primary font-heading font-semibold"
-              style={{ opacity: useTransform(smoothProgress, [0, 0.75, 0.85, 1], [1, 1, 0, 0]) }}
             >
               The Assembly Pipeline
             </motion.span>
             <motion.h2 
               className="mt-4 text-3xl sm:text-5xl md:text-6xl font-heading font-black text-foreground tracking-tight"
               style={{ 
-                opacity: useTransform(smoothProgress, [0, 0.75, 0.85, 1], [1, 1, 0, 0]),
                 y: useTransform(smoothProgress, [0, 0.25], [20, 0])
               }}
             >
@@ -109,7 +106,6 @@ const ProcessSection = () => {
               style={{ 
                 scale: laptopScale, 
                 y: laptopY, 
-                opacity: laptopOpacity,
                 rotateX: useTransform(smoothProgress, [0.1, 0.5], [10, 5])
               }}
               className="relative w-full aspect-[16/10] flex items-end justify-center"
@@ -368,7 +364,7 @@ const ProcessSection = () => {
             {/* Floating Process Indicators */}
             <div className="absolute -left-12 top-1/4 z-0 hidden lg:block">
               <motion.div 
-                style={{ y: floatY1, rotate: floatRotate, opacity: laptopOpacity }}
+                style={{ y: floatY1, rotate: floatRotate }}
                 className="p-4 rounded-2xl bg-card/80 backdrop-blur-md border border-white/5 shadow-2xl max-w-[180px]"
               >
                 <div className="text-[10px] text-primary font-mono font-bold mb-2 tracking-widest uppercase">
@@ -385,7 +381,7 @@ const ProcessSection = () => {
 
             <div className="absolute -right-8 bottom-1/3 z-0 hidden lg:block">
               <motion.div 
-                style={{ y: floatY2, rotate: useTransform(smoothProgress, [0.2, 0.8], [0, -10]), opacity: laptopOpacity }}
+                style={{ y: floatY2, rotate: useTransform(smoothProgress, [0.2, 0.8], [0, -10]) }}
                 className="p-4 rounded-2xl bg-card/80 backdrop-blur-md border border-white/5 shadow-2xl max-w-[180px]"
               >
                 <div className="text-[10px] text-primary font-mono font-bold mb-2 tracking-widest uppercase">A/B ANGLE GENERATOR</div>
@@ -425,9 +421,9 @@ const ProcessSection = () => {
                     // Pair 1 (i=0,1) reveals at 0.45, Pair 2 (i=2,3) reveals at 0.65
                     opacity: useTransform(smoothProgress, 
                       i < 2 
-                        ? [0.45, 0.55, 0.85, 0.95] 
-                        : [0.65, 0.75, 0.85, 0.95], 
-                      [0, 1, 1, 0]
+                        ? [0.45, 0.55] 
+                        : [0.65, 0.75], 
+                      [0, 1]
                     ),
                     y: useTransform(smoothProgress, 
                       i < 2 
