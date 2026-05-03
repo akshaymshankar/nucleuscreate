@@ -25,7 +25,7 @@ const proofs = [
 
 const PhilosophySection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-20% 0px -20% 0px" });
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
 
   return (
     <section id="proof" className="relative py-24 sm:py-32 md:py-40 overflow-hidden bg-background">

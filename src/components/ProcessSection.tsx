@@ -71,7 +71,7 @@ const ProcessSection = () => {
   return (
     <section id="process" ref={ref} className="relative h-[300vh] border-t border-border/40 bg-background overflow-visible">
       {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-screen pointer-events-none overflow-hidden sticky">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-screen pointer-events-none overflow-hidden">
         <motion.div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full blur-[120px] opacity-20"
           style={{ 
@@ -81,7 +81,7 @@ const ProcessSection = () => {
         />
       </div>
 
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
+      <div className="sticky top-0 h-[100dvh] flex flex-col items-center justify-center">
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           
           {/* Header */}
