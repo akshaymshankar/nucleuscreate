@@ -21,14 +21,14 @@ const Index = () => {
       <Navbar />
       <HeroSection />
 
-      {/* Mobile Sticky CTA */}
-      <div className="md:hidden fixed bottom-4 left-4 right-4 z-[60] pointer-events-none">
+      {/* Mobile Sticky CTA - Floating Action Button */}
+      <div className="md:hidden fixed bottom-6 right-6 z-[60]">
         <a
           href="#apply"
-          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-primary text-primary-foreground font-heading text-sm font-semibold tracking-wide shadow-[0_4px_30px_rgba(34,197,94,0.35)] border border-primary/20 pointer-events-auto transition-transform active:scale-95"
+          className="relative flex items-center justify-center w-16 h-16 rounded-full bg-primary text-primary-foreground font-heading text-xs font-bold uppercase tracking-wider shadow-[0_4px_30px_rgba(34,197,94,0.5)] transition-transform active:scale-95"
         >
-          Apply for a FREE Pilot Video
-          <span className="text-lg leading-none">→</span>
+          <span className="absolute inset-0 rounded-full border-2 border-primary animate-ping opacity-30"></span>
+          Apply
         </a>
       </div>
 
