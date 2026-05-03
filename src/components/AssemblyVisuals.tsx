@@ -118,13 +118,13 @@ const AssemblyVisuals = () => {
             className="absolute inset-0 flex flex-col items-center justify-center px-4"
             style={{ opacity: nucleusOpacity, scale: nucleusScale }}
           >
-            <div className="relative w-48 h-48 flex items-center justify-center">
+            <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center mb-6">
               <motion.div 
-                className="absolute inset-0 rounded-full bg-primary/20 blur-3xl"
+                className="absolute inset-[-50%] rounded-full bg-primary/20 blur-3xl"
                 animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
                 transition={{ duration: 3, repeat: Infinity }}
               />
-              <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-primary/40 shadow-[0_0_20px_rgba(34,197,94,0.4)] z-10">
+              <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-primary/40 shadow-[0_0_20px_rgba(34,197,94,0.4)] z-10">
                 <img 
                   src="/logo.png" 
                   className="w-full h-full object-cover scale-110" 
@@ -133,17 +133,17 @@ const AssemblyVisuals = () => {
               </div>
             </div>
             <motion.span 
-              className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-primary font-heading font-semibold mb-4"
+              className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-primary font-heading font-semibold mb-2 text-center"
               style={{ opacity: useTransform(mergeProgress, [0.6, 0.8], [0, 1]) }}
             >
               The Assembly Structure
             </motion.span>
             <motion.h3 
-              className="text-4xl sm:text-5xl font-heading font-black text-foreground tracking-tight"
+              className="text-4xl sm:text-5xl font-heading font-black text-foreground tracking-tight text-center flex flex-col sm:block leading-[1.1]"
             >
-              NUCLEUS <span className="text-primary italic">SYNTHESIS</span>
+              <span>NUCLEUS</span> <span className="text-primary italic">SYNTHESIS</span>
             </motion.h3>
-            <p className="mt-4 text-muted-foreground font-body text-center max-w-md">
+            <p className="mt-4 text-muted-foreground font-body text-center max-w-md text-sm sm:text-base">
               Where volume meets surgical precision. Our engine merges quality, consistency, and bandwidth into a single, high-performance output.
             </p>
           </motion.div>

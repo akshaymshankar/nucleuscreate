@@ -16,19 +16,19 @@ const ProcessSection = () => {
     restDelta: 0.001
   });
 
-  // Laptop opening and positioning (Sticky window is roughly [0.25, 0.75])
-  const lidRotate = useTransform(smoothProgress, [0.25, 0.4], [-110, -10]);
-  const laptopScale = useTransform(smoothProgress, [0, 0.25], [0.8, 1]);
-  const laptopY = useTransform(smoothProgress, [0, 0.25], [100, 0]);
+  // Laptop opening and positioning
+  const lidRotate = useTransform(smoothProgress, [0.1, 0.25], [-110, -10]);
+  const laptopScale = useTransform(smoothProgress, [0, 0.1], [0.8, 1]);
+  const laptopY = useTransform(smoothProgress, [0, 0.1], [100, 0]);
   
   // Screen content reveal
-  const screenOpacity = useTransform(smoothProgress, [0.35, 0.45], [0, 1]);
-  const screenScale = useTransform(smoothProgress, [0.35, 0.45], [0.95, 1]);
+  const screenOpacity = useTransform(smoothProgress, [0.25, 0.35], [0, 1]);
+  const screenScale = useTransform(smoothProgress, [0.25, 0.35], [0.95, 1]);
   
   // Floating elements around the laptop
-  const floatY1 = useTransform(smoothProgress, [0.2, 0.8], [0, -120]);
-  const floatY2 = useTransform(smoothProgress, [0.2, 0.8], [0, -80]);
-  const floatRotate = useTransform(smoothProgress, [0.2, 0.8], [0, 15]);
+  const floatY1 = useTransform(smoothProgress, [0.1, 0.5], [0, -120]);
+  const floatY2 = useTransform(smoothProgress, [0.1, 0.5], [0, -80]);
+  const floatRotate = useTransform(smoothProgress, [0.1, 0.5], [0, 15]);
 
   // Status indicators on the screen
   const [activeStep, setActiveStep] = useState(0);
@@ -52,9 +52,9 @@ const ProcessSection = () => {
   
   useEffect(() => {
     const unsubscribe = smoothProgress.on("change", (v) => {
-      // 3-stage reveal: Laptop only, then 0&1, then 2&3
-      if (v < 0.45) setActiveStep(-1); // Laptop only (no steps highlighted)
-      else if (v < 0.6) setActiveStep(1); // Steps 1&2
+      // 3-stage reveal based on new early-finish timeline
+      if (v < 0.35) setActiveStep(-1); // Laptop only
+      else if (v < 0.45) setActiveStep(1); // Steps 1&2
       else setActiveStep(3); // Steps 3&4
     });
     return () => unsubscribe();
@@ -68,14 +68,14 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section id="process" ref={ref} className="relative h-[300vh] border-t border-border/40 bg-background overflow-visible">
+    <section id="process" ref={ref} className="relative h-[400vh] border-t border-border/40 bg-background overflow-visible">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-screen pointer-events-none overflow-hidden">
         <motion.div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full blur-[120px] opacity-20"
           style={{ 
             background: "radial-gradient(circle, hsl(134 68% 45%), transparent 70%)",
-            scale: useTransform(smoothProgress, [0.2, 0.5], [0.8, 1.2])
+            scale: useTransform(smoothProgress, [0.1, 0.5], [0.8, 1.2])
           }}
         />
       </div>
@@ -93,7 +93,7 @@ const ProcessSection = () => {
             <motion.h2 
               className="mt-2 sm:mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-foreground tracking-tight"
               style={{ 
-                y: useTransform(smoothProgress, [0, 0.25], [20, 0])
+                y: useTransform(smoothProgress, [0, 0.15], [20, 0])
               }}
             >
               Nucleus <span className="text-primary italic">Engine</span>
@@ -106,7 +106,7 @@ const ProcessSection = () => {
               style={{ 
                 scale: laptopScale, 
                 y: laptopY, 
-                rotateX: useTransform(smoothProgress, [0.1, 0.5], [10, 5])
+                rotateX: useTransform(smoothProgress, [0, 0.3], [10, 5])
               }}
               className="relative w-full aspect-[16/10] flex items-end justify-center"
             >
@@ -353,7 +353,7 @@ const ProcessSection = () => {
                 {/* Thin top edge reflecting screen */}
                 <motion.div 
                   className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%] h-[1px] bg-primary/20 blur-[1px]"
-                  style={{ opacity: useTransform(smoothProgress, [0.4, 0.5], [0, 1]) }}
+                  style={{ opacity: useTransform(smoothProgress, [0.35, 0.45], [0, 1]) }}
                 />
               </div>
 
@@ -381,7 +381,7 @@ const ProcessSection = () => {
 
             <div className="absolute -right-4 sm:-right-8 bottom-1/3 z-0 hidden md:block">
               <motion.div 
-                style={{ y: floatY2, rotate: useTransform(smoothProgress, [0.2, 0.8], [0, -10]) }}
+                style={{ y: floatY2, rotate: useTransform(smoothProgress, [0.1, 0.5], [0, -10]) }}
                 className="p-3 sm:p-4 rounded-2xl bg-card/80 backdrop-blur-md border border-white/5 shadow-2xl max-w-[140px] sm:max-w-[180px]"
               >
                 <div className="text-[8px] sm:text-[10px] text-primary font-mono font-bold mb-2 tracking-widest uppercase">A/B ANGLE GENERATOR</div>
@@ -417,18 +417,13 @@ const ProcessSection = () => {
                   key={i}
                   className="relative group"
                   style={{ 
-                    // 3-stage reveal: Laptop is already appearing/opening from 0.25.
-                    // Pair 1 (i=0,1) reveals at 0.45, Pair 2 (i=2,3) reveals at 0.65
+                    // Reveal Pair 1 at 0.35, Pair 2 at 0.45. Entire animation finishes by 0.55.
                     opacity: useTransform(smoothProgress, 
-                      i < 2 
-                        ? [0.45, 0.55] 
-                        : [0.65, 0.75], 
+                      i < 2 ? [0.35, 0.45] : [0.45, 0.55], 
                       [0, 1]
                     ),
                     y: useTransform(smoothProgress, 
-                      i < 2 
-                        ? [0.45, 0.55] 
-                        : [0.65, 0.75], 
+                      i < 2 ? [0.35, 0.45] : [0.45, 0.55], 
                       [20, 0]
                     )
                   }}
