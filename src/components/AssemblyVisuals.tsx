@@ -81,39 +81,41 @@ const AssemblyVisuals = () => {
           </svg>
 
           {/* Parts Merging */}
-          <motion.div 
-            className="absolute p-6 rounded-2xl bg-card/80 backdrop-blur-md border border-primary/20 shadow-2xl flex flex-col items-center gap-3"
-            style={{ x: x1, y: y1, rotate: rotate1, opacity: useTransform(mergeProgress, [0.8, 1], [1, 0]) }}
-          >
-            <div className="w-10 h-10 rounded bg-primary/10 border border-primary/30 flex items-center justify-center">
-              <span className="text-primary font-bold">Q</span>
-            </div>
-            <div className="text-[10px] tracking-widest uppercase font-heading text-primary/60 font-bold">Quality</div>
-          </motion.div>
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <motion.div 
+              className="absolute p-6 rounded-2xl bg-card/80 backdrop-blur-md border border-primary/20 shadow-2xl flex flex-col items-center gap-3"
+              style={{ x: x1, y: y1, rotate: rotate1, opacity: useTransform(mergeProgress, [0.8, 1], [1, 0]) }}
+            >
+              <div className="w-10 h-10 rounded bg-primary/10 border border-primary/30 flex items-center justify-center">
+                <span className="text-primary font-bold">Q</span>
+              </div>
+              <div className="text-[10px] tracking-widest uppercase font-heading text-primary/60 font-bold">Quality</div>
+            </motion.div>
 
-          <motion.div 
-            className="absolute p-6 rounded-2xl bg-card/80 backdrop-blur-md border border-primary/20 shadow-2xl flex flex-col items-center gap-3"
-            style={{ x: x2, y: y2, rotate: rotate2, opacity: useTransform(mergeProgress, [0.8, 1], [1, 0]) }}
-          >
-            <div className="w-10 h-10 rounded bg-primary/10 border border-primary/30 flex items-center justify-center">
-              <span className="text-primary font-bold">C</span>
-            </div>
-            <div className="text-[10px] tracking-widest uppercase font-heading text-primary/60 font-bold">Consistency</div>
-          </motion.div>
+            <motion.div 
+              className="absolute p-6 rounded-2xl bg-card/80 backdrop-blur-md border border-primary/20 shadow-2xl flex flex-col items-center gap-3"
+              style={{ x: x2, y: y2, rotate: rotate2, opacity: useTransform(mergeProgress, [0.8, 1], [1, 0]) }}
+            >
+              <div className="w-10 h-10 rounded bg-primary/10 border border-primary/30 flex items-center justify-center">
+                <span className="text-primary font-bold">C</span>
+              </div>
+              <div className="text-[10px] tracking-widest uppercase font-heading text-primary/60 font-bold">Consistency</div>
+            </motion.div>
 
-          <motion.div 
-            className="absolute p-6 rounded-2xl bg-card/80 backdrop-blur-md border border-primary/20 shadow-2xl flex flex-col items-center gap-3"
-            style={{ x: x3, y: y3, rotate: rotate1, opacity: useTransform(mergeProgress, [0.8, 1], [1, 0]) }}
-          >
-            <div className="w-10 h-10 rounded bg-primary/10 border border-primary/30 flex items-center justify-center">
-              <span className="text-primary font-bold">B</span>
-            </div>
-            <div className="text-[10px] tracking-widest uppercase font-heading text-primary/60 font-bold">Bandwidth</div>
-          </motion.div>
+            <motion.div 
+              className="absolute p-6 rounded-2xl bg-card/80 backdrop-blur-md border border-primary/20 shadow-2xl flex flex-col items-center gap-3"
+              style={{ x: x3, y: y3, rotate: rotate1, opacity: useTransform(mergeProgress, [0.8, 1], [1, 0]) }}
+            >
+              <div className="w-10 h-10 rounded bg-primary/10 border border-primary/30 flex items-center justify-center">
+                <span className="text-primary font-bold">B</span>
+              </div>
+              <div className="text-[10px] tracking-widest uppercase font-heading text-primary/60 font-bold">Bandwidth</div>
+            </motion.div>
+          </div>
 
           {/* Central Nucleus (Appears when merged) */}
           <motion.div 
-            className="absolute flex flex-col items-center justify-center"
+            className="absolute inset-0 flex flex-col items-center justify-center px-4"
             style={{ opacity: nucleusOpacity, scale: nucleusScale }}
           >
             <div className="relative w-48 h-48 flex items-center justify-center">
