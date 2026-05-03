@@ -18,9 +18,9 @@ const ProcessSection = () => {
 
   // Laptop opening and positioning (Sticky window is roughly [0.25, 0.75])
   const lidRotate = useTransform(smoothProgress, [0.25, 0.4], [-110, -10]);
-  const laptopScale = useTransform(smoothProgress, [0.2, 0.35, 0.7, 0.8], [0.8, 1, 1, 0.9]);
-  const laptopY = useTransform(smoothProgress, [0.2, 0.35, 0.7, 0.8], [100, 0, 0, -50]);
-  const laptopOpacity = useTransform(smoothProgress, [0.2, 0.3, 0.75, 0.85], [0, 1, 1, 0]);
+  const laptopScale = useTransform(smoothProgress, [0, 0.25, 0.7, 0.8], [0.8, 1, 1, 0.9]);
+  const laptopY = useTransform(smoothProgress, [0, 0.25, 0.7, 0.8], [100, 0, 0, -50]);
+  const laptopOpacity = useTransform(smoothProgress, [0, 0.75, 0.85, 1], [1, 1, 0, 0]);
   
   // Screen content reveal
   const screenOpacity = useTransform(smoothProgress, [0.35, 0.45], [0, 1]);
@@ -88,15 +88,15 @@ const ProcessSection = () => {
           <div className="text-center mb-4 sm:mb-8">
             <motion.span 
               className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-primary font-heading font-semibold"
-              style={{ opacity: useTransform(smoothProgress, [0.1, 0.25, 0.75, 0.85], [0, 1, 1, 0]) }}
+              style={{ opacity: useTransform(smoothProgress, [0, 0.75, 0.85, 1], [1, 1, 0, 0]) }}
             >
               The Assembly Pipeline
             </motion.span>
             <motion.h2 
               className="mt-4 text-3xl sm:text-5xl md:text-6xl font-heading font-black text-foreground tracking-tight"
               style={{ 
-                opacity: useTransform(smoothProgress, [0.15, 0.3, 0.75, 0.85], [0, 1, 1, 0]),
-                y: useTransform(smoothProgress, [0.15, 0.3], [20, 0])
+                opacity: useTransform(smoothProgress, [0, 0.75, 0.85, 1], [1, 1, 0, 0]),
+                y: useTransform(smoothProgress, [0, 0.25], [20, 0])
               }}
             >
               Nucleus <span className="text-primary italic">Engine</span>

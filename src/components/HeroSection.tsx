@@ -78,7 +78,7 @@ const VideoProgressControl = ({
     };
   }, [videoRef, isDragging]);
 
-  const handleSeek = (e: React.MouseEvent | MouseEvent) => {
+  const handleSeek = (e: React.PointerEvent | PointerEvent) => {
     const video = videoRef.current;
     const bar = barRef.current;
     if (!video || !bar || !video.duration) return;
@@ -91,27 +91,30 @@ const VideoProgressControl = ({
     setCurrentTime(pct * video.duration);
   };
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handlePointerDown = (e: React.PointerEvent) => {
     setIsDragging(true);
     handleSeek(e);
+    if (barRef.current) {
+      barRef.current.setPointerCapture(e.pointerId);
+    }
   };
 
   useEffect(() => {
     if (!isDragging) return;
 
-    const onMouseMove = (e: MouseEvent) => {
+    const onPointerMove = (e: PointerEvent) => {
       handleSeek(e);
     };
 
-    const onMouseUp = () => {
+    const onPointerUp = () => {
       setIsDragging(false);
     };
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup", onMouseUp);
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerup", onPointerUp);
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerup", onPointerUp);
     };
   }, [isDragging]);
 
@@ -126,8 +129,8 @@ const VideoProgressControl = ({
     <div className="absolute bottom-0 left-0 w-full p-4 flex flex-col gap-2.5 z-20 bg-gradient-to-t from-black/90 via-black/40 to-transparent translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
       <div 
         ref={barRef}
-        className="h-1 w-full bg-white/20 cursor-pointer relative rounded-full overflow-visible pointer-events-auto group/bar"
-        onMouseDown={handleMouseDown}
+        className="h-1 w-full bg-white/20 cursor-pointer relative rounded-full overflow-visible pointer-events-auto group/bar touch-none"
+        onPointerDown={handlePointerDown}
       >
         <motion.div 
           className="h-full bg-primary relative rounded-full"
