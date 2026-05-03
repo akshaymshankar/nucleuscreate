@@ -20,6 +20,18 @@ const Index = () => {
       <ScrollProgress />
       <Navbar />
       <HeroSection />
+
+      {/* Mobile Sticky CTA */}
+      <div className="md:hidden fixed bottom-4 left-4 right-4 z-[60] pointer-events-none">
+        <a
+          href="#apply"
+          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-primary text-primary-foreground font-heading text-sm font-semibold tracking-wide shadow-[0_4px_30px_rgba(34,197,94,0.35)] border border-primary/20 pointer-events-auto transition-transform active:scale-95"
+        >
+          Apply for a FREE Pilot Video
+          <span className="text-lg leading-none">→</span>
+        </a>
+      </div>
+
       <Suspense fallback={<div className="h-96 bg-background" />}>
         <PhilosophySection />
         <ProcessSection />
