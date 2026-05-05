@@ -45,14 +45,14 @@ const AssemblyVisuals = () => {
     <section 
       ref={containerRef} 
       id="synthesis"
-      className="relative h-[150vh] bg-background overflow-visible border-y border-white/5"
+      className="relative h-[150vh] bg-background overflow-hidden border-y border-white/5"
     >
-      <div className="sticky top-0 h-screen flex items-center justify-center pointer-events-none">
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center pointer-events-none overflow-hidden">
         {/* Background Grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(34,197,94,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+        <div className="absolute inset-0 w-full h-full bg-[linear-gradient(rgba(34,197,94,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.02)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
         
         <motion.div 
-          className="relative w-full max-w-4xl h-[600px] flex items-center justify-center"
+          className="relative w-full aspect-square max-w-4xl max-h-[600px] flex items-center justify-center"
           style={{ opacity, scale }}
         >
           {/* Connecting Lines (HUD style) */}

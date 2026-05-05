@@ -21,13 +21,10 @@ const Navbar = () => {
   }, []);
 
   return (
-    <motion.nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "glass-surface" : "bg-transparent"
+    <nav
+      className={`fixed top-0 left-0 right-0 z-[99999] transition-all duration-300 ${
+        scrolled ? "bg-background/95 backdrop-blur-md border-b border-white/10 shadow-lg" : "bg-gradient-to-b from-background/90 to-transparent md:bg-transparent"
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: [0.25, 0.4, 0, 1] }}
     >
       <div className="container mx-auto flex items-center justify-between py-4 sm:py-5 px-4 sm:px-6">
         <a
@@ -133,7 +130,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 };
 
