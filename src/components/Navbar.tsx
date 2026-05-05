@@ -22,8 +22,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-[99999] transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-md border-b border-white/10 shadow-lg" : "bg-gradient-to-b from-background/90 to-transparent md:bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-[99999] transition-all duration-300 ${isOpen ? 'h-screen bg-background' : ''} ${
+        scrolled && !isOpen ? "bg-background/95 backdrop-blur-md border-b border-white/10 shadow-lg" : (!isOpen ? "bg-gradient-to-b from-background/90 to-transparent md:bg-transparent" : "")
       }`}
     >
       <div className="container mx-auto flex items-center justify-between py-4 sm:py-5 px-4 sm:px-6">

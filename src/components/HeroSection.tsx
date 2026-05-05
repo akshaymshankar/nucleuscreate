@@ -92,6 +92,7 @@ const VideoProgressControl = ({
   };
 
   const handlePointerDown = (e: React.PointerEvent) => {
+    e.stopPropagation();
     setIsDragging(true);
     handleSeek(e);
     if (barRef.current) {
@@ -147,9 +148,9 @@ const VideoProgressControl = ({
               e.stopPropagation();
               setIsPlaying(!isPlaying);
             }}
-            className="text-white hover:text-primary transition-colors pointer-events-auto"
+            className="text-white hover:text-primary transition-colors pointer-events-auto p-2 -ml-2"
           >
-            {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
+            {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-current" />}
           </button>
           <span className="text-[9px] text-white/90 font-mono tracking-tight select-none">
             {formatTime(currentTime)} <span className="text-white/30 mx-0.5">/</span> {formatTime(duration)}
@@ -353,7 +354,10 @@ const HeroSection = () => {
               </div>
 
               {/* Video Area */}
-              <div className="relative aspect-video bg-black overflow-hidden group">
+              <div 
+                className="relative aspect-video bg-black overflow-hidden group cursor-pointer"
+                onClick={() => setIsPlaying(!isPlaying)}
+              >
                 <video
                   ref={videoRef}
                   loop
