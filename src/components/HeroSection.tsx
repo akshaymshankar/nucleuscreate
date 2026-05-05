@@ -126,7 +126,7 @@ const VideoProgressControl = ({
   };
 
   return (
-    <div className="absolute bottom-0 left-0 w-full p-4 flex flex-col gap-2.5 z-20 bg-gradient-to-t from-black/90 via-black/40 to-transparent translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+    <div className={`absolute bottom-0 left-0 w-full p-4 flex flex-col gap-2.5 z-20 bg-gradient-to-t from-black/90 via-black/40 to-transparent transition-all duration-300 ${!isPlaying ? 'opacity-100 translate-y-0' : 'translate-y-1 opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100'}`}>
       <div 
         ref={barRef}
         className="h-1 w-full bg-white/20 cursor-pointer relative rounded-full overflow-visible pointer-events-auto group/bar touch-none"
@@ -164,7 +164,7 @@ const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Simulated load progress for the creative loader
@@ -199,14 +199,6 @@ const HeroSection = () => {
     if (videoLoaded && videoRef.current) {
       // Apply current mute state
       videoRef.current.muted = isMuted;
-      
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((err) => {
-          console.warn("Autoplay unmuted blocked by browser. Muting and retrying.", err);
-          setIsMuted(true);
-        });
-      }
     }
   }, [videoLoaded]);
 
@@ -364,7 +356,6 @@ const HeroSection = () => {
               <div className="relative aspect-video bg-black overflow-hidden group">
                 <video
                   ref={videoRef}
-                  autoPlay
                   loop
                   playsInline
                   muted={isMuted}
