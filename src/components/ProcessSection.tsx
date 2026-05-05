@@ -9,12 +9,8 @@ const ProcessSection = () => {
     offset: ["start end", "end start"],
   });
 
-  // Use springs for smoother motion
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  // Remove useSpring because Lenis smooth scroll is already active. Two smoothers = lag on 120hz.
+  const smoothProgress = scrollYProgress;
 
   // Laptop opening and positioning
   const lidRotate = useTransform(smoothProgress, [0.1, 0.5], [-110, -10]);
@@ -62,9 +58,9 @@ const ProcessSection = () => {
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-screen pointer-events-none overflow-hidden">
         <motion.div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full blur-[120px] opacity-20"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] opacity-20 will-change-transform"
           style={{ 
-            background: "radial-gradient(circle, hsl(134 68% 45%), transparent 70%)",
+            background: "radial-gradient(circle, hsl(134 68% 45% / 0.8) 0%, transparent 70%)",
             scale: useTransform(smoothProgress, [0.1, 0.5], [0.8, 1.2])
           }}
         />
@@ -343,7 +339,7 @@ const ProcessSection = () => {
             <div className="absolute -left-4 sm:-left-12 top-1/4 z-0 hidden md:block">
               <motion.div 
                 style={{ y: floatY1, rotate: floatRotate }}
-                className="p-3 sm:p-4 rounded-xl bg-card/80 backdrop-blur-md border border-white/5 shadow-2xl flex items-center gap-3 sm:gap-4 max-w-[180px] sm:max-w-none"
+                className="p-3 sm:p-4 rounded-xl bg-card border border-white/5 shadow-2xl flex items-center gap-3 sm:gap-4 max-w-[180px] sm:max-w-none"
               >
                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0">
                   <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-sm border-2 border-primary" />
@@ -364,7 +360,7 @@ const ProcessSection = () => {
             <div className="absolute -right-4 sm:-right-8 bottom-1/3 z-0 hidden md:block">
               <motion.div 
                 style={{ y: floatY2, rotate: useTransform(smoothProgress, [0.1, 0.5], [0, -10]) }}
-                className="p-3 sm:p-4 rounded-2xl bg-card/80 backdrop-blur-md border border-white/5 shadow-2xl max-w-[140px] sm:max-w-[180px]"
+                className="p-3 sm:p-4 rounded-2xl bg-card border border-white/5 shadow-2xl max-w-[140px] sm:max-w-[180px]"
               >
                 <div className="text-[8px] sm:text-[10px] text-primary font-mono font-bold mb-2 tracking-widest uppercase">A/B ANGLE GENERATOR</div>
                 <div className="flex gap-1.5 sm:gap-2 flex-wrap mt-2">

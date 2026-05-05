@@ -9,11 +9,7 @@ const AssemblyVisuals = () => {
     offset: ["start end", "end start"],
   });
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 200,
-    damping: 50,
-    restDelta: 0.001
-  });
+  const smoothProgress = scrollYProgress;
 
   // Animation values
   // Animation values
@@ -83,7 +79,7 @@ const AssemblyVisuals = () => {
           {/* Parts Merging */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <motion.div 
-              className="absolute p-6 rounded-2xl bg-card/80 backdrop-blur-md border border-primary/20 shadow-2xl flex flex-col items-center gap-3"
+              className="absolute p-6 rounded-2xl bg-card border border-primary/20 shadow-2xl flex flex-col items-center gap-3 will-change-transform"
               style={{ x: x1, y: y1, rotate: rotate1, opacity: useTransform(mergeProgress, [0.8, 1], [1, 0]) }}
             >
               <div className="w-10 h-10 rounded bg-primary/10 border border-primary/30 flex items-center justify-center">
@@ -93,7 +89,7 @@ const AssemblyVisuals = () => {
             </motion.div>
 
             <motion.div 
-              className="absolute p-6 rounded-2xl bg-card/80 backdrop-blur-md border border-primary/20 shadow-2xl flex flex-col items-center gap-3"
+              className="absolute p-6 rounded-2xl bg-card border border-primary/20 shadow-2xl flex flex-col items-center gap-3 will-change-transform"
               style={{ x: x2, y: y2, rotate: rotate2, opacity: useTransform(mergeProgress, [0.8, 1], [1, 0]) }}
             >
               <div className="w-10 h-10 rounded bg-primary/10 border border-primary/30 flex items-center justify-center">
@@ -103,7 +99,7 @@ const AssemblyVisuals = () => {
             </motion.div>
 
             <motion.div 
-              className="absolute p-6 rounded-2xl bg-card/80 backdrop-blur-md border border-primary/20 shadow-2xl flex flex-col items-center gap-3"
+              className="absolute p-6 rounded-2xl bg-card border border-primary/20 shadow-2xl flex flex-col items-center gap-3 will-change-transform"
               style={{ x: x3, y: y3, rotate: rotate1, opacity: useTransform(mergeProgress, [0.8, 1], [1, 0]) }}
             >
               <div className="w-10 h-10 rounded bg-primary/10 border border-primary/30 flex items-center justify-center">
