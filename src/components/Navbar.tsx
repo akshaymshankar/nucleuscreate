@@ -7,7 +7,6 @@ const navLinks = [
   { label: "Compare", href: "#services" },
   { label: "Pricing", href: "#pricing" },
   { label: "Apply", href: "#apply" },
-  { label: "Structure", href: "#synthesis" },
 ];
 
 const Navbar = () => {
@@ -22,7 +21,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-[99999] transition-all duration-300 ${isOpen ? 'h-screen bg-background' : ''} ${
+      className={`fixed top-0 left-0 right-0 z-[99999] transition-[background-color,border-color,box-shadow] duration-300 ${isOpen ? 'h-screen bg-background' : ''} ${
         scrolled && !isOpen ? "bg-background/95 backdrop-blur-md border-b border-white/10 shadow-lg" : (!isOpen ? "bg-gradient-to-b from-background/90 to-transparent md:bg-transparent" : "")
       }`}
     >
@@ -36,8 +35,8 @@ const Navbar = () => {
             src={nucleusPremiumLogo}
             alt="Nucleus logo"
             className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border border-primary/25"
-            animate={{ rotate: [0, 2, -2, 0], scale: [1, 1.03, 1] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
           />
           <span className="hidden sm:inline">NUCLEUS</span>
         </a>
