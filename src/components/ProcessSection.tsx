@@ -1,30 +1,8 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 const ProcessSection = () => {
   const ref = useRef<HTMLElement | null>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-  // Remove useSpring because Lenis smooth scroll is already active. Two smoothers = lag on 120hz.
-  const smoothProgress = scrollYProgress;
-
-  // Laptop opening and positioning
-  const lidRotate = useTransform(smoothProgress, [0.1, 0.5], [-110, -10]);
-  const laptopScale = useTransform(smoothProgress, [0, 0.5], [0.8, 1]);
-  const laptopY = useTransform(smoothProgress, [0, 0.5], [100, 0]);
-  
-  // Screen content is static and visible immediately
-  const screenOpacity = 1;
-  const screenScale = 1;
-  
-  // Floating elements around the laptop are static
-  const floatY1 = 0;
-  const floatY2 = 0;
-  const floatRotate = 0;
 
   // Status indicators on the screen - fully static now
   const activeStep = 3;
@@ -54,53 +32,58 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section id="process" ref={ref} className="relative h-[150vh] border-t border-border/40 bg-background overflow-visible">
+    <section id="process" ref={ref} className="relative py-24 lg:py-32 border-t border-border/40 bg-background overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-screen pointer-events-none overflow-hidden">
-        <motion.div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] opacity-20 will-change-transform"
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden">
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] opacity-20"
           style={{ 
             background: "radial-gradient(circle, hsl(134 68% 45% / 0.8) 0%, transparent 70%)",
-            scale: useTransform(smoothProgress, [0.1, 0.5], [0.8, 1.2])
           }}
         />
       </div>
 
-      <div className="sticky top-0 h-[100dvh] flex flex-col items-center justify-center pt-16 sm:pt-20 pb-4 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full flex flex-col h-full max-h-[900px] justify-center">
-          
-          {/* Header */}
-          <div className="text-center mb-4 sm:mb-6 shrink-0">
-            <motion.span 
-              className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-primary font-heading font-semibold"
-            >
-              The Assembly Pipeline
-            </motion.span>
-            <motion.h2 
-              className="mt-2 sm:mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-foreground tracking-tight"
-              style={{ 
-                y: useTransform(smoothProgress, [0, 0.15], [20, 0])
-              }}
-            >
-              Nucleus <span className="text-primary italic">Engine</span>
-            </motion.h2>
-          </div>
+      <div className="container mx-auto px-4 sm:px-6 relative z-10 w-full flex flex-col justify-center">
+        
+        {/* Header */}
+        <div className="text-center mb-12 sm:mb-20 shrink-0">
+          <span 
+            className="text-[10px] sm:text-xs tracking-[0.4em] uppercase text-primary font-heading font-semibold"
+          >
+            The Assembly Pipeline
+          </span>
+          <h2 
+            className="mt-2 sm:mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-black text-foreground tracking-tight"
+          >
+            Nucleus <span className="text-primary italic">Engine</span>
+          </h2>
+        </div>
 
-          {/* 3D Laptop Container */}
-          <div className="relative mx-auto w-full max-w-[320px] sm:max-w-[450px] lg:max-w-[600px] [perspective:2000px] shrink-1 min-h-[200px]">
+        {/* 3D Laptop Container */}
+        <motion.div 
+          initial="closed"
+          whileInView="open"
+          viewport={{ once: true, margin: "-100px" }}
+          className="relative mx-auto w-full max-w-[320px] sm:max-w-[450px] lg:max-w-[600px] [perspective:2000px] shrink-1 min-h-[200px]"
+        >
+          <motion.div 
+            variants={{
+              closed: { scale: 0.8, y: 100, rotateX: 10 },
+              open: { scale: 1, y: 0, rotateX: 5 }
+            }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative w-full aspect-[16/10] flex items-end justify-center"
+          >
+            {/* Laptop Lid (Top) */}
             <motion.div 
-              style={{ 
-                scale: laptopScale, 
-                y: laptopY, 
-                rotateX: useTransform(smoothProgress, [0, 0.3], [10, 5])
+              className="absolute w-[92%] h-[92%] bottom-[4%] origin-bottom z-20"
+              variants={{
+                closed: { rotateX: -110 },
+                open: { rotateX: -10 }
               }}
-              className="relative w-full aspect-[16/10] flex items-end justify-center"
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+              style={{ transformStyle: "preserve-3d" }}
             >
-              {/* Laptop Lid (Top) */}
-              <motion.div 
-                className="absolute w-[92%] h-[92%] bottom-[4%] origin-bottom z-20"
-                style={{ rotateX: lidRotate, transformStyle: "preserve-3d" }}
-              >
                 {/* External Lid (Back) */}
                 <div 
                   className="absolute inset-0 bg-[#121212] rounded-t-2xl border border-white/5 shadow-2xl [backface-visibility:hidden]"
