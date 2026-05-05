@@ -17,21 +17,21 @@ const ProcessSection = () => {
   });
 
   // Laptop opening and positioning
-  const lidRotate = useTransform(smoothProgress, [0.1, 0.35], [-110, -10]);
-  const laptopScale = useTransform(smoothProgress, [0, 0.15], [0.8, 1]);
-  const laptopY = useTransform(smoothProgress, [0, 0.15], [100, 0]);
+  const lidRotate = useTransform(smoothProgress, [0.1, 0.5], [-110, -10]);
+  const laptopScale = useTransform(smoothProgress, [0, 0.5], [0.8, 1]);
+  const laptopY = useTransform(smoothProgress, [0, 0.5], [100, 0]);
   
-  // Screen content reveal
-  const screenOpacity = useTransform(smoothProgress, [0.35, 0.5], [0, 1]);
-  const screenScale = useTransform(smoothProgress, [0.35, 0.5], [0.95, 1]);
+  // Screen content is static and visible immediately
+  const screenOpacity = 1;
+  const screenScale = 1;
   
-  // Floating elements around the laptop
-  const floatY1 = useTransform(smoothProgress, [0.1, 0.9], [0, -120]);
-  const floatY2 = useTransform(smoothProgress, [0.1, 0.9], [0, -80]);
-  const floatRotate = useTransform(smoothProgress, [0.1, 0.9], [0, 15]);
+  // Floating elements around the laptop are static
+  const floatY1 = 0;
+  const floatY2 = 0;
+  const floatRotate = 0;
 
-  // Status indicators on the screen
-  const [activeStep, setActiveStep] = useState(0);
+  // Status indicators on the screen - fully static now
+  const activeStep = 3;
 
   // Responsive screen UI scaling
   const screenRef = useRef<HTMLDivElement>(null);
@@ -49,16 +49,6 @@ const ProcessSection = () => {
     window.addEventListener("resize", updateScale);
     return () => window.removeEventListener("resize", updateScale);
   }, []);
-  
-  useEffect(() => {
-    const unsubscribe = smoothProgress.on("change", (v) => {
-      // 3-stage reveal based on new slow-finish timeline
-      if (v < 0.5) setActiveStep(-1); // Laptop only
-      else if (v < 0.7) setActiveStep(1); // Steps 1&2
-      else setActiveStep(3); // Steps 3&4
-    });
-    return () => unsubscribe();
-  }, [smoothProgress]);
 
   const steps = [
     { title: "PROTOCOL BRIEFING", desc: "Setting up strategic creative parameters." },
@@ -68,7 +58,7 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section id="process" ref={ref} className="relative h-[600vh] lg:h-[400vh] border-t border-border/40 bg-background overflow-visible">
+    <section id="process" ref={ref} className="relative h-[150vh] border-t border-border/40 bg-background overflow-visible">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-screen pointer-events-none overflow-hidden">
         <motion.div 
@@ -151,189 +141,179 @@ const ProcessSection = () => {
                       style={{ transform: `scale(${uiScale})` }}
                     >
                       {/* Top Bar */}
-                      <div className="h-6 border-b border-white/5 flex items-center px-3 justify-between bg-[#0a0a0a]">
+                      <div className="h-8 border-b border-white/5 flex items-center justify-between px-4 bg-[#0a0a0a]">
                         <div className="flex gap-1.5">
-                          <div className="w-2 h-2 rounded-full bg-red-500/80" />
-                          <div className="w-2 h-2 rounded-full bg-yellow-500/80" />
-                          <div className="w-2 h-2 rounded-full bg-green-500/80" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-red-500/20 border border-red-500/50" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-green-500/20 border border-green-500/50" />
                         </div>
-                        <div className="text-[7px] uppercase tracking-widest text-white/40 font-mono font-bold">NUCLEUS // PERFORMANCE_ENGINE</div>
-                        <div className="flex gap-2">
-                          <div className="w-3 h-3 rounded-sm bg-white/10" />
-                        </div>
+                        <div className="text-[10px] font-mono tracking-widest text-white/20 uppercase">Nucleus // Performance_Engine</div>
+                        <div className="w-4 h-4" />
                       </div>
-                      
-                      {/* Workspace */}
-                      <div className="flex-1 flex gap-2 p-2">
+
+                      {/* Main Workspace */}
+                      <div className="flex-1 flex p-2 gap-2">
                         {/* Media Bin */}
-                        <div className="w-1/4 bg-[#0a0a0a] rounded border border-white/5 p-2 flex flex-col gap-2">
-                          <div className="text-[6px] text-white/30 uppercase tracking-wider mb-1">Project Media</div>
-                          <div className="grid grid-cols-2 gap-1.5">
+                        <div className="w-48 bg-[#0a0a0a] rounded border border-white/5 p-2 flex flex-col">
+                          <div className="text-[8px] tracking-widest uppercase text-white/40 mb-2">Project Media</div>
+                          <div className="grid grid-cols-2 gap-2 overflow-hidden">
                             {[
-                              "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150",
-                              "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=150",
-                              "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150",
+                              "https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&q=80&w=150",
+                              "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=150",
+                              "https://images.unsplash.com/photo-1511746315387-c4a76990fdce?auto=format&fit=crop&q=80&w=150",
                               "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=150",
-                              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150",
-                              "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80&w=150"
+                              "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=150",
+                              "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&q=80&w=150"
                             ].map((url, i) => (
-                              <div key={i} className="aspect-video bg-white/5 rounded-sm border border-white/10 overflow-hidden relative">
-                                <img src={url} className="w-full h-full object-cover opacity-70 grayscale" alt="" />
+                              <div key={i} className="aspect-video bg-white/5 rounded border border-white/10 overflow-hidden relative group">
+                                <img src={url} className="w-full h-full object-cover opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500" alt="" />
                                 <div className="absolute inset-0 bg-primary/20 mix-blend-overlay" />
-                                <motion.div 
-                                  className="absolute inset-0 border border-primary/20"
-                                  animate={{ opacity: [0.2, 0.5, 0.2] }}
-                                  transition={{ duration: 2 + i*0.5, repeat: Infinity }}
-                                />
                               </div>
                             ))}
                           </div>
                         </div>
 
-                        {/* Preview Player */}
-                         <div className="flex-1 bg-black rounded border border-white/10 relative overflow-hidden flex items-center justify-center">
-                          {/* Top Labels */}
-                          <div className="absolute top-2 left-2 px-1.5 py-0.5 bg-primary/20 border border-primary/50 text-primary text-[5px] font-mono font-bold rounded-sm uppercase tracking-wider flex items-center gap-1 z-10">
-                            <span className="w-1 h-1 rounded-full bg-primary animate-pulse" />
-                            SYNCING PROTOCOL (48H)
-                          </div>
-                          <div className="absolute top-2 right-2 px-1.5 py-0.5 text-white/40 text-[6px] font-mono tracking-widest z-10">
-                            47:59:58
-                          </div>
-
-                          <motion.div 
-                            className="w-4/5 aspect-video rounded-md border border-white/10 relative overflow-hidden shadow-2xl"
-                            style={{
-                              background: "linear-gradient(135deg, rgba(34,197,94,0.1), rgba(0,0,0,1))"
-                            }}
-                          >
-                            <motion.div 
-                              className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
-                              animate={{ x: ["-100%", "200%"] }}
-                              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                            />
-                            {/* Central Player Interface */}
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <div className="relative">
-                                {/* Progress Ring */}
-                                <svg className="w-16 h-16 -rotate-90">
-                                  <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" strokeWidth="1" className="text-white/5" />
-                                  <motion.circle 
-                                    cx="32" cy="32" r="30" fill="none" stroke="currentColor" strokeWidth="1.5" 
-                                    className="text-primary"
-                                    strokeDasharray="188.4"
-                                    animate={{ strokeDashoffset: [188.4, 40, 188.4] }}
-                                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                                    style={{ filter: "drop-shadow(0 0 4px hsl(134 68% 45%))" }}
-                                  />
-                                </svg>
-                                {/* Play Icon */}
-                                <div className="absolute inset-0 flex items-center justify-center">
+                        {/* Preview & Controls */}
+                        <div className="flex-1 flex flex-col gap-2">
+                          <div className="flex-1 bg-gradient-to-br from-[#0a0a0a] to-black rounded border border-white/5 relative overflow-hidden flex items-center justify-center">
+                            <div className="absolute top-2 left-2 px-1.5 py-0.5 bg-primary/20 border border-primary/50 text-primary text-[5px] font-mono font-bold rounded-sm uppercase tracking-wider flex items-center gap-1 z-10">
+                              <span className="w-1 h-1 rounded-full bg-primary animate-pulse" />
+                              Syncing Protocol [ON]
+                            </div>
+                            <div className="absolute top-2 right-2 px-1.5 py-0.5 text-white/40 text-[6px] font-mono tracking-widest z-10">
+                              47:59:59
+                            </div>
+                            
+                            {/* Render Preview */}
+                            <div className="w-[80%] aspect-video rounded shadow-2xl relative overflow-hidden border border-white/10">
+                              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,197,94,0.15)_0%,transparent_70%)]" />
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <motion.div 
+                                  animate={{ rotate: 360 }} 
+                                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                                  className="w-16 h-16 border border-primary/20 rounded-full flex items-center justify-center"
+                                >
                                   <motion.div 
-                                    className="w-8 h-8 rounded-full bg-primary/10 border border-primary/40 flex items-center justify-center"
-                                    animate={{ scale: [1, 1.1, 1] }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                  >
-                                    <div className="w-0 h-0 border-l-[8px] border-l-primary border-y-[5px] border-y-transparent ml-1" />
-                                  </motion.div>
+                                    animate={{ rotate: -360 }} 
+                                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                                    className="w-12 h-12 border-t-2 border-r-2 border-primary rounded-full"
+                                  />
+                                </motion.div>
+                              </div>
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="w-8 h-8 bg-primary/10 rounded-full border border-primary/30 flex items-center justify-center backdrop-blur-sm">
+                                  <div className="w-2 h-2 border-y-4 border-l-6 border-y-transparent border-l-primary ml-1" />
                                 </div>
                               </div>
                             </div>
-                          </motion.div>
+                          </div>
                         </div>
 
-                        {/* Settings / Inspector */}
-                        <div className="w-1/4 bg-[#0a0a0a] rounded border border-white/5 p-2 flex flex-col">
-                           <div className="text-[6px] text-white/30 uppercase tracking-wider mb-2 font-mono">Performance_Metrics</div>
-                           <div className="space-y-3">
-                             {[
-                               { label: "Retention Mapping", val: "94%" },
-                               { label: "A/B Angle Test", val: "88%" },
-                               { label: "Sync Protocol", val: "100%" }
-                             ].map((setting, i) => (
-                               <div key={i}>
-                                 <div className="flex justify-between text-[5px] text-white/50 mb-1 font-mono">
-                                   <span>{setting.label}</span>
-                                   <span className="text-primary font-bold">{setting.val}</span>
-                                 </div>
-                                 <div className="h-0.5 bg-white/5 rounded-full overflow-hidden">
-                                   <motion.div 
-                                     className="h-full bg-primary" 
-                                     initial={{ width: "0%" }}
-                                     animate={{ width: setting.val }}
-                                     transition={{ duration: 1.5, delay: i * 0.2 }}
-                                     style={{ boxShadow: "0 0 4px hsl(134 68% 45%)" }}
-                                   />
-                                 </div>
-                               </div>
-                             ))}
-                           </div>
-                           
-                           <div className="mt-auto">
-                             <div className="h-10 rounded bg-primary/5 border border-primary/20 flex flex-col items-center justify-center relative overflow-hidden">
-                               <motion.div 
-                                 className="absolute inset-0 bg-primary/5"
-                                 animate={{ opacity: [0, 0.2, 0] }}
-                                 transition={{ duration: 2, repeat: Infinity }}
-                                />
-                               <span className="text-[6px] text-primary font-mono font-bold tracking-widest uppercase">SYCNING_BATCH</span>
-                               <span className="text-[5px] text-white/40 font-mono mt-0.5">READY_TO_DEPLOY</span>
-                             </div>
-                           </div>
+                        {/* Inspector / Details */}
+                        <div className="w-40 bg-[#0a0a0a] rounded border border-white/5 p-2 flex flex-col gap-3">
+                          <div>
+                            <div className="text-[6px] text-white/40 uppercase tracking-widest mb-1">Performance_Data</div>
+                            <div className="space-y-1.5">
+                              <div>
+                                <div className="flex justify-between text-[5px] text-white/60 mb-0.5">
+                                  <span>Retention.Hook</span>
+                                  <span className="text-primary font-mono">94%</span>
+                                </div>
+                                <div className="h-[2px] bg-white/5 rounded-full overflow-hidden">
+                                  <motion.div 
+                                    className="h-full bg-primary"
+                                    initial={{ width: "0%" }}
+                                    animate={{ width: activeStep >= 1 ? "94%" : "0%" }}
+                                    transition={{ duration: 1 }}
+                                  />
+                                </div>
+                              </div>
+                              <div>
+                                <div className="flex justify-between text-[5px] text-white/60 mb-0.5">
+                                  <span>A/B.Angle_Match</span>
+                                  <span className="text-primary font-mono">88%</span>
+                                </div>
+                                <div className="h-[2px] bg-white/5 rounded-full overflow-hidden">
+                                  <motion.div 
+                                    className="h-full bg-primary"
+                                    initial={{ width: "0%" }}
+                                    animate={{ width: activeStep >= 2 ? "88%" : "0%" }}
+                                    transition={{ duration: 1 }}
+                                  />
+                                </div>
+                              </div>
+                              <div>
+                                <div className="flex justify-between text-[5px] text-white/60 mb-0.5">
+                                  <span>Sync.Protocol</span>
+                                  <span className="text-primary font-mono">100%</span>
+                                </div>
+                                <div className="h-[2px] bg-white/5 rounded-full overflow-hidden">
+                                  <motion.div 
+                                    className="h-full bg-primary"
+                                    initial={{ width: "0%" }}
+                                    animate={{ width: activeStep >= 3 ? "100%" : "0%" }}
+                                    transition={{ duration: 1 }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="mt-auto">
+                            <motion.div 
+                              className="w-full py-1.5 border border-primary/30 bg-primary/10 rounded flex flex-col items-center justify-center gap-0.5"
+                              animate={{ opacity: [0.5, 1, 0.5] }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                            >
+                              <div className="text-[5px] text-primary uppercase tracking-widest font-bold">Syncing_Batch</div>
+                              <div className="text-[4px] text-primary/60 uppercase tracking-widest">Ready_to_deploy</div>
+                            </motion.div>
+                          </div>
                         </div>
                       </div>
 
                       {/* Timeline */}
-                      <div className="h-[30%] bg-[#0a0a0a] border-t border-white/5 p-2 flex flex-col relative overflow-hidden">
-                        {/* Playhead */}
-                        <motion.div 
-                          className="absolute top-0 bottom-0 w-[1px] bg-red-500 z-10"
-                          animate={{ left: ["10%", "90%"] }}
-                          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                        >
-                          <div className="w-1.5 h-1.5 rounded-sm bg-red-500 -ml-[2px] top-0 absolute" />
-                        </motion.div>
-
-                        <div className="h-3 flex border-b border-white/5 text-[5px] text-white/30 px-2 gap-8 items-center font-mono">
-                           <span>00:00:00</span>
-                           <span>00:00:15</span>
-                           <span>00:00:30</span>
-                           <span>00:00:45</span>
-                         </div>
-                        
-                        <div className="flex-1 flex flex-col gap-1 py-1">
-                          {/* Video Track */}
-                          <div className="flex-1 bg-white/[0.02] rounded flex items-center px-1 gap-1">
-                            <span className="text-[4px] text-white/20 w-4">V1</span>
-                            <motion.div className="h-[70%] w-1/3 bg-blue-500/30 rounded-sm border border-blue-500/40 relative overflow-hidden">
-                              <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_2px,rgba(255,255,255,0.05)_2px,rgba(255,255,255,0.05)_4px)]" />
-                            </motion.div>
-                            <motion.div className="h-[70%] w-1/2 bg-blue-500/30 rounded-sm border border-blue-500/40" />
-                          </div>
-                          {/* Text Track */}
-                          <div className="flex-1 bg-white/[0.02] rounded flex items-center px-1 gap-1">
-                            <span className="text-[4px] text-white/20 w-4">T1</span>
-                            <motion.div className="h-[60%] w-1/4 bg-yellow-500/30 rounded-sm border border-yellow-500/40 ml-4 flex items-center px-1">
-                              <span className="text-[3px] text-yellow-500/80 font-bold">HOOK.TXT</span>
-                            </motion.div>
-                            <motion.div className="h-[60%] w-1/4 bg-yellow-500/30 rounded-sm border border-yellow-500/40 ml-2" />
-                          </div>
-                          {/* Audio Track */}
-                          <div className="flex-1 bg-white/[0.02] rounded flex items-center px-1 gap-1">
-                            <span className="text-[4px] text-white/20 w-4">A1</span>
-                            <motion.div className="h-[80%] flex-1 bg-green-500/20 rounded-sm border border-green-500/30 flex items-center justify-center overflow-hidden px-1">
-                               {/* Waveform abstraction */}
-                               <div className="w-full h-full flex items-center gap-[1px]">
-                                 {Array.from({ length: 50 }).map((_, i) => (
-                                   <motion.div 
-                                     key={i}
-                                     className="flex-1 bg-green-500/40 rounded-full"
-                                     animate={{ height: [Math.random() * 80 + 20 + "%", Math.random() * 80 + 20 + "%"] }}
-                                     transition={{ duration: 0.2 + Math.random() * 0.3, repeat: Infinity, repeatType: "mirror" }}
-                                   />
-                                 ))}
-                               </div>
-                            </motion.div>
+                      <div className="h-20 bg-[#0a0a0a] border-t border-white/5 p-2 flex flex-col">
+                        <div className="flex justify-between text-[5px] font-mono text-white/30 px-2">
+                          <span>00:00:00</span>
+                          <span>00:00:15</span>
+                          <span>00:00:30</span>
+                          <span>00:00:45</span>
+                        </div>
+                        <div className="flex-1 relative mt-1">
+                          {/* Playhead */}
+                          <motion.div 
+                            className="absolute top-0 bottom-0 w-[1px] bg-red-500 z-10"
+                            animate={{ x: [0, 500, 0] }}
+                            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                          >
+                            <div className="absolute -top-1 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-red-500" />
+                          </motion.div>
+                          
+                          {/* Tracks */}
+                          <div className="absolute inset-0 flex flex-col justify-center gap-1">
+                            <div className="flex gap-1 h-3 items-center">
+                              <span className="text-[4px] text-white/20 w-2">V1</span>
+                              <div className="h-2 w-[30%] bg-blue-500/20 border border-blue-500/40 rounded-sm overflow-hidden relative">
+                                <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_2px,rgba(59,130,246,0.1)_2px,rgba(59,130,246,0.1)_4px)]" />
+                              </div>
+                              <div className="h-2 w-[45%] bg-blue-500/20 border border-blue-500/40 rounded-sm overflow-hidden relative">
+                                <div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,transparent,transparent_2px,rgba(59,130,246,0.1)_2px,rgba(59,130,246,0.1)_4px)]" />
+                              </div>
+                            </div>
+                            <div className="flex gap-1 h-3 items-center">
+                              <span className="text-[4px] text-white/20 w-2">A1</span>
+                              <div className="h-2 w-[25%] bg-yellow-500/20 border border-yellow-500/40 rounded-sm ml-6 overflow-hidden flex items-center px-1">
+                                <svg preserveAspectRatio="none" viewBox="0 0 100 10" className="w-full h-full opacity-50">
+                                  <path d="M0,5 Q5,1 10,5 T20,5 T30,5 T40,5 T50,5 T60,5 T70,5 T80,5 T90,5 T100,5" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-yellow-500"/>
+                                </svg>
+                              </div>
+                              <div className="h-2 w-[25%] bg-yellow-500/20 border border-yellow-500/40 rounded-sm overflow-hidden flex items-center px-1">
+                                <svg preserveAspectRatio="none" viewBox="0 0 100 10" className="w-full h-full opacity-50">
+                                  <path d="M0,5 Q5,9 10,5 T20,5 T30,5 T40,5 T50,5 T60,5 T70,5 T80,5 T90,5 T100,5" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-yellow-500"/>
+                                </svg>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -347,34 +327,36 @@ const ProcessSection = () => {
 
               {/* Laptop Base (Bottom) */}
               <div className="relative w-full h-[6%] bg-[#1a1a1a] rounded-b-2xl border-x border-b border-white/10 shadow-2xl z-30 overflow-hidden">
-                {/* Keyboard Bed */}
-                <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-[#1a1a1a] shadow-[inset_0_4px_12px_rgba(0,0,0,0.6)]" />
+                <div className="absolute top-0 inset-x-0 h-[1px] bg-white/20" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/4 h-1/3 bg-black/40 rounded-full blur-[2px]" />
+                <div className="absolute bottom-0 inset-x-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent" />
                 
-                {/* Thin top edge reflecting screen */}
-                <motion.div 
-                  className="absolute top-0 left-1/2 -translate-x-1/2 w-[92%] h-[1px] bg-primary/20 blur-[1px]"
-                  style={{ opacity: useTransform(smoothProgress, [0.35, 0.45], [0, 1]) }}
-                />
+                {/* Trackpad indentation */}
+                <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 w-[20%] h-[40%] bg-[#121212] rounded-t-sm border-t border-x border-white/5 shadow-inner" />
               </div>
 
-              {/* Laptop Main Body (Hidden below for 3D effect) */}
+              {/* Base shadow */}
               <div className="absolute bottom-[-10%] w-[98%] h-[12%] bg-[#0f0f0f] rounded-2xl border border-white/5 shadow-2xl -z-10" />
             </motion.div>
 
-            {/* Floating Process Indicators */}
+            {/* Floating UI Elements */}
             <div className="absolute -left-4 sm:-left-12 top-1/4 z-0 hidden md:block">
               <motion.div 
                 style={{ y: floatY1, rotate: floatRotate }}
-                className="p-3 sm:p-4 rounded-2xl bg-card/80 backdrop-blur-md border border-white/5 shadow-2xl max-w-[140px] sm:max-w-[180px]"
+                className="p-3 sm:p-4 rounded-xl bg-card/80 backdrop-blur-md border border-white/5 shadow-2xl flex items-center gap-3 sm:gap-4 max-w-[180px] sm:max-w-none"
               >
-                <div className="text-[8px] sm:text-[10px] text-primary font-mono font-bold mb-2 tracking-widest uppercase">
-                  <motion.span animate={{ opacity: [1, 0.5, 1] }} transition={{ duration: 2, repeat: Infinity }}>RETENTION MAPPING</motion.span>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded bg-primary/10 border border-primary/30 flex items-center justify-center shrink-0">
+                  <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-sm border-2 border-primary" />
                 </div>
-                <div className="space-y-1.5">
-                  <div className="h-1 w-full bg-primary/20 rounded-full overflow-hidden">
-                    <motion.div className="h-full bg-primary" animate={{ width: ["20%", "95%", "60%"] }} transition={{ duration: 4, repeat: Infinity }} style={{ boxShadow: "0 0 8px hsl(134 68% 45%)" }} />
+                <div>
+                  <div className="text-[8px] sm:text-[10px] text-primary font-mono font-bold mb-1 tracking-widest uppercase">Retention Mapping</div>
+                  <div className="w-16 sm:w-20 h-1 bg-white/10 rounded-full overflow-hidden">
+                    <motion.div 
+                      className="h-full bg-primary"
+                      animate={{ width: ["0%", "100%", "0%"] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    />
                   </div>
-                  <div className="h-1 w-3/4 bg-primary/10 rounded-full" />
                 </div>
               </motion.div>
             </div>
@@ -415,18 +397,7 @@ const ProcessSection = () => {
               {steps.map((step, i) => (
                 <motion.div 
                   key={i}
-                  className="relative group"
-                  style={{ 
-                    // Reveal Pair 1 at 0.5, Pair 2 at 0.7. Entire animation finishes by 0.85.
-                    opacity: useTransform(smoothProgress, 
-                      i < 2 ? [0.5, 0.65] : [0.7, 0.85], 
-                      [0, 1]
-                    ),
-                    y: useTransform(smoothProgress, 
-                      i < 2 ? [0.5, 0.65] : [0.7, 0.85], 
-                      [20, 0]
-                    )
-                  }}
+                  className="relative group opacity-100"
                 >
                   <div className={`text-[10px] font-heading font-bold mb-2 transition-colors duration-500 ${activeStep >= i ? 'text-primary' : 'text-muted-foreground/40'}`}>
                     0{i + 1}
@@ -444,7 +415,7 @@ const ProcessSection = () => {
                       className="h-full bg-primary"
                       initial={{ width: "0%" }}
                       animate={{ width: activeStep >= i ? "100%" : "0%" }}
-                      transition={{ duration: 0.8, ease: "easeInOut" }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
                     />
                   </div>
                 </motion.div>
