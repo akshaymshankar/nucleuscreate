@@ -368,7 +368,7 @@ const ProcessSection = () => {
                 </div>
               </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Process Labels / Stepper */}
           <div className="mt-8 sm:mt-12 max-w-6xl mx-auto px-2 sm:px-4 shrink-0">
@@ -403,7 +403,6 @@ const ProcessSection = () => {
           </div>
 
         </div>
-      </div>
     </section>
   );
 };
