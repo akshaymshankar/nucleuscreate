@@ -207,11 +207,8 @@ const HeroSection = () => {
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = isMuted;
-      if (videoLoaded) {
-        videoRef.current.play().catch(e => console.log("Play failed", e));
-      }
     }
-  }, [isMuted, videoLoaded]);
+  }, [isMuted]);
 
   // Check if video already cached
   useEffect(() => {
