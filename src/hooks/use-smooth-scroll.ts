@@ -7,9 +7,8 @@ const useSmoothScroll = () => {
       lerp: 0.08,
       wheelMultiplier: 1,
       smoothWheel: true,
-      touchMultiplier: 1.5,
+      smoothTouch: false, // Ensure native buttery smooth scroll on mobile
       infinite: false,
-      syncTouch: true,
     });
 
     let rafId = 0;
