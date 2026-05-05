@@ -72,28 +72,36 @@ const Navbar = () => {
           </motion.a>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          data-cursor-hover
-        >
-          <motion.span
-            className="w-5 h-px bg-foreground block"
-            animate={isOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-          <motion.span
-            className="w-5 h-px bg-foreground block"
-            animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-            transition={{ duration: 0.2 }}
-          />
-          <motion.span
-            className="w-5 h-px bg-foreground block"
-            animate={isOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-        </button>
+        {/* Mobile toggle and Apply button */}
+        <div className="md:hidden flex items-center gap-3">
+          <a
+            href="#apply"
+            className="px-4 py-1.5 rounded-full bg-primary text-primary-foreground text-[10px] sm:text-xs font-heading font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(34,197,94,0.3)]"
+          >
+            Apply
+          </a>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex flex-col gap-1.5 p-1"
+            data-cursor-hover
+          >
+            <motion.span
+              className="w-5 h-px bg-foreground block"
+              animate={isOpen ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.span
+              className="w-5 h-px bg-foreground block"
+              animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            />
+            <motion.span
+              className="w-5 h-px bg-foreground block"
+              animate={isOpen ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu — full screen overlay */}

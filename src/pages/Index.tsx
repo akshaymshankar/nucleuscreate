@@ -21,16 +21,6 @@ const Index = () => {
       <Navbar />
       <HeroSection />
 
-      {/* Mobile Sticky CTA - Floating Action Button */}
-      <div className="md:hidden fixed bottom-6 right-6 z-[60]">
-        <a
-          href="#apply"
-          className="relative flex items-center justify-center w-16 h-16 rounded-full bg-primary text-primary-foreground font-heading text-xs font-bold uppercase tracking-wider shadow-[0_4px_30px_rgba(34,197,94,0.5)] transition-transform active:scale-95"
-        >
-          <span className="absolute inset-0 rounded-full border-2 border-primary animate-ping opacity-30"></span>
-          Apply
-        </a>
-      </div>
 
       <Suspense fallback={<div className="h-96 bg-background" />}>
         <PhilosophySection />

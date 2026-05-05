@@ -17,18 +17,18 @@ const ProcessSection = () => {
   });
 
   // Laptop opening and positioning
-  const lidRotate = useTransform(smoothProgress, [0.1, 0.25], [-110, -10]);
-  const laptopScale = useTransform(smoothProgress, [0, 0.1], [0.8, 1]);
-  const laptopY = useTransform(smoothProgress, [0, 0.1], [100, 0]);
+  const lidRotate = useTransform(smoothProgress, [0.1, 0.35], [-110, -10]);
+  const laptopScale = useTransform(smoothProgress, [0, 0.15], [0.8, 1]);
+  const laptopY = useTransform(smoothProgress, [0, 0.15], [100, 0]);
   
   // Screen content reveal
-  const screenOpacity = useTransform(smoothProgress, [0.25, 0.35], [0, 1]);
-  const screenScale = useTransform(smoothProgress, [0.25, 0.35], [0.95, 1]);
+  const screenOpacity = useTransform(smoothProgress, [0.35, 0.5], [0, 1]);
+  const screenScale = useTransform(smoothProgress, [0.35, 0.5], [0.95, 1]);
   
   // Floating elements around the laptop
-  const floatY1 = useTransform(smoothProgress, [0.1, 0.5], [0, -120]);
-  const floatY2 = useTransform(smoothProgress, [0.1, 0.5], [0, -80]);
-  const floatRotate = useTransform(smoothProgress, [0.1, 0.5], [0, 15]);
+  const floatY1 = useTransform(smoothProgress, [0.1, 0.9], [0, -120]);
+  const floatY2 = useTransform(smoothProgress, [0.1, 0.9], [0, -80]);
+  const floatRotate = useTransform(smoothProgress, [0.1, 0.9], [0, 15]);
 
   // Status indicators on the screen
   const [activeStep, setActiveStep] = useState(0);
@@ -52,9 +52,9 @@ const ProcessSection = () => {
   
   useEffect(() => {
     const unsubscribe = smoothProgress.on("change", (v) => {
-      // 3-stage reveal based on new early-finish timeline
-      if (v < 0.35) setActiveStep(-1); // Laptop only
-      else if (v < 0.45) setActiveStep(1); // Steps 1&2
+      // 3-stage reveal based on new slow-finish timeline
+      if (v < 0.5) setActiveStep(-1); // Laptop only
+      else if (v < 0.7) setActiveStep(1); // Steps 1&2
       else setActiveStep(3); // Steps 3&4
     });
     return () => unsubscribe();
@@ -68,7 +68,7 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section id="process" ref={ref} className="relative h-[400vh] border-t border-border/40 bg-background overflow-visible">
+    <section id="process" ref={ref} className="relative h-[600vh] lg:h-[400vh] border-t border-border/40 bg-background overflow-visible">
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-screen pointer-events-none overflow-hidden">
         <motion.div 
@@ -417,13 +417,13 @@ const ProcessSection = () => {
                   key={i}
                   className="relative group"
                   style={{ 
-                    // Reveal Pair 1 at 0.35, Pair 2 at 0.45. Entire animation finishes by 0.55.
+                    // Reveal Pair 1 at 0.5, Pair 2 at 0.7. Entire animation finishes by 0.85.
                     opacity: useTransform(smoothProgress, 
-                      i < 2 ? [0.35, 0.45] : [0.45, 0.55], 
+                      i < 2 ? [0.5, 0.65] : [0.7, 0.85], 
                       [0, 1]
                     ),
                     y: useTransform(smoothProgress, 
-                      i < 2 ? [0.35, 0.45] : [0.45, 0.55], 
+                      i < 2 ? [0.5, 0.65] : [0.7, 0.85], 
                       [20, 0]
                     )
                   }}
