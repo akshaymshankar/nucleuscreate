@@ -41,7 +41,7 @@ const AssemblyVisuals = () => {
         className="relative w-full aspect-square max-w-4xl max-h-[600px] flex items-center justify-center z-10"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: "0px" }}
         variants={containerVariants}
       >
         {/* Parts Merging */}
@@ -88,15 +88,22 @@ const AssemblyVisuals = () => {
             visible: { 
               opacity: 1, 
               scale: 1,
-              transition: { delay: 1, duration: 1, ease: "easeOut" }
+              transition: { delay: 0.3, duration: 0.8, ease: "easeOut" }
             }
           }}
         >
-          <div className="relative mb-6">
-            <div className="w-24 sm:w-32 h-24 sm:h-32 rounded-full border border-primary/30 flex items-center justify-center relative z-10 bg-black/50 backdrop-blur-sm">
-              <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-full border-2 border-primary border-t-transparent animate-spin" style={{ animationDuration: '3s' }} />
-              <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-full bg-primary/20 absolute blur-md animate-pulse" />
-              <div className="w-4 sm:w-6 h-4 sm:h-6 bg-primary rounded-full absolute" />
+          <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center mb-6">
+            <motion.div 
+              className="absolute inset-[-50%] rounded-full bg-primary/20 blur-3xl"
+              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
+            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-primary/40 shadow-[0_0_20px_rgba(34,197,94,0.4)] z-10">
+              <img 
+                src="/logo.png" 
+                className="w-full h-full object-cover scale-110" 
+                alt="Nucleus Logo" 
+              />
             </div>
           </div>
           
