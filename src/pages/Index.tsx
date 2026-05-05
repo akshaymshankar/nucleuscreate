@@ -24,11 +24,9 @@ const Index = () => {
 
       <Suspense fallback={<div className="h-96 bg-background" />}>
         <PhilosophySection />
-        <ProcessSection />
         <ServicesSection />
         <PortfolioSection />
         <ApplyFormSection />
-        <AssemblyVisuals />
         <Footer />
       </Suspense>
     </div>
