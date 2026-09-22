@@ -368,116 +368,195 @@ const HeroSection = () => {
             </motion.div>
           </div>
 
-          {/* Right: Video card with creative loader */}
+          {/* Right: Apple MacBook Pro Mockup */}
           <motion.div
-            className="relative flex items-center justify-center mt-4 lg:-mt-24"
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
+            className="relative flex flex-col items-center justify-center mt-6 lg:-mt-16 w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[540px] mx-auto"
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="relative w-full max-w-[380px] sm:max-w-[420px] lg:max-w-[480px] rounded-3xl border border-border bg-card overflow-hidden flex flex-col shadow-2xl">
-              {/* Header Bar */}
-              <div className="px-5 py-2.5 border-b border-border/50 flex justify-between items-center bg-white/[0.03]">
-                <div className="text-[9px] tracking-[0.3em] uppercase text-muted-foreground font-heading">
-                  Nucleus / Core
-                </div>
-                <div className="flex items-center gap-2">
-                  <button 
-                    onClick={() => setIsMuted(!isMuted)}
-                    className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
-                    aria-label={isMuted ? "Unmute video" : "Mute video"}
-                  >
-                    {isMuted ? <VolumeX className="w-3.5 h-3.5 text-muted-foreground" /> : <Volume2 className="w-3.5 h-3.5 text-foreground" />}
-                  </button>
-                </div>
-              </div>
+            {/* Ambient Backlight Glow */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 via-emerald-500/10 to-transparent blur-3xl opacity-50 pointer-events-none" />
 
-              {/* Video Area */}
-              <div 
-                className="relative aspect-video bg-black overflow-hidden group cursor-pointer"
-                onClick={() => setIsPlaying(!isPlaying)}
-              >
-                <video
-                  ref={videoRef}
-                  loop
-                  playsInline
-                  muted={isMuted}
-                  poster="/hero-poster.png"
-                  onLoadedData={handleLoaded}
-                  onError={(e) => {
-                    console.error("Video failed to load", e);
-                    handleLoaded(); // dismiss loader even on error
-                  }}
-                  className="w-full h-full object-cover"
-                style={{ objectPosition: "center 30%" }}
-                >
-                  <source src="/video.mp4" type="video/mp4" />
-                </video>
+            {/* MacBook Pro Display Enclosure (Lid) */}
+            <div className="relative w-full rounded-t-[18px] sm:rounded-t-[24px] bg-gradient-to-b from-[#2a2732] via-[#1a1820] to-[#111015] p-2 sm:p-2.5 pb-0 border-t border-x border-white/20 shadow-[0_25px_70px_rgba(0,0,0,0.85),0_0_30px_rgba(34,197,94,0.1)] ring-1 ring-white/10">
+              
+              {/* Inner Screen Display (Black Bezel + 16:10 Screen) */}
+              <div className="relative rounded-t-[12px] sm:rounded-t-[16px] bg-black overflow-hidden border border-white/10 aspect-[16/10] flex flex-col justify-between">
+                
+                {/* MacBook Camera Notch */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 z-40 w-20 sm:w-24 h-3 sm:h-3.5 bg-[#08080a] rounded-b-lg border-x border-b border-white/15 flex items-center justify-center gap-2 shadow-md">
+                  {/* Camera Lens */}
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#181820] border border-white/30 flex items-center justify-center">
+                    <span className="w-0.5 h-0.5 rounded-full bg-blue-400/80" />
+                  </span>
+                  {/* Green Webcam Indicator */}
+                  <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
+                </div>
 
-                {/* Creative loader overlay (restricted to video area) */}
-                <AnimatePresence>
-                  {!videoLoaded && (
-                    <motion.div
-                      className="absolute inset-0 flex flex-col items-center justify-center bg-card backdrop-blur-sm"
-                      initial={{ opacity: 1 }}
-                      exit={{ opacity: 0, scale: 1.04 }}
-                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                {/* macOS Translucent Top Menu Bar */}
+                <div className="relative z-30 px-3 py-1.5 bg-black/40 backdrop-blur-md border-b border-white/5 flex items-center justify-between text-[9px] sm:text-[10px] text-white/70 font-mono select-none">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <span className="font-bold text-white tracking-wider flex items-center gap-1">
+                      <span className="w-2 h-2 rounded-full bg-primary inline-block" />
+                      NUCLEUS OS
+                    </span>
+                    <span className="hidden sm:inline text-white/40">Sequence</span>
+                    <span className="hidden sm:inline text-white/40">Render</span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <span className="px-1.5 py-0.5 rounded bg-white/10 text-white/90 text-[8px] font-mono tracking-wider uppercase font-semibold">
+                      4K 60FPS
+                    </span>
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsMuted(!isMuted);
+                      }}
+                      className="p-1 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                      aria-label={isMuted ? "Unmute video" : "Mute video"}
                     >
-                      {/* Animated Nucleus Loading Core SVG */}
-                      <svg
-                        className="w-24 h-24 sm:w-28 sm:h-28"
-                        viewBox="0 0 120 120"
-                        xmlns="http://www.w3.org/2000/svg"
+                      {isMuted ? <VolumeX className="w-3 h-3 text-white/70" /> : <Volume2 className="w-3 h-3 text-emerald-400" />}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Video Playback Canvas */}
+                <div 
+                  className="relative flex-1 bg-black overflow-hidden group cursor-pointer"
+                  onClick={() => setIsPlaying(!isPlaying)}
+                >
+                  <video
+                    ref={videoRef}
+                    loop
+                    playsInline
+                    muted={isMuted}
+                    poster="/hero-poster.png"
+                    onLoadedData={handleLoaded}
+                    onError={(e) => {
+                      console.error("Video failed to load", e);
+                      handleLoaded();
+                    }}
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: "center 30%" }}
+                  >
+                    <source src="/video.mp4" type="video/mp4" />
+                  </video>
+
+                  {/* Photorealistic Screen Glare Sheen */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.08]" />
+
+                  {/* Creative loader overlay */}
+                  <AnimatePresence>
+                    {!videoLoaded && (
+                      <motion.div
+                        className="absolute inset-0 flex flex-col items-center justify-center bg-card/95 backdrop-blur-md"
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0, scale: 1.04 }}
+                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                       >
-                        <defs>
-                          <radialGradient id="loadingCoreGrad">
-                            <stop offset="0%" stopColor="hsl(134 68% 55%)" />
-                            <stop offset="100%" stopColor="hsl(134 68% 35%)" />
-                          </radialGradient>
-                          <filter id="loadingGlow">
-                            <feGaussianBlur stdDeviation="2" result="blur" />
-                            <feMerge>
-                              <feMergeNode in="blur" />
-                              <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                          </filter>
-                        </defs>
-                        <motion.circle cx="60" cy="60" r="35" fill="none" stroke="hsl(134 68% 45%)" strokeWidth="0.8" opacity="0.3" animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} transformOrigin="60px 60px" />
-                        <motion.circle cx="60" cy="60" r="25" fill="none" stroke="hsl(134 68% 45%)" strokeWidth="0.8" opacity="0.4" animate={{ rotate: -360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} transformOrigin="60px 60px" />
-                        <motion.circle cx="60" cy="20" r="2.5" fill="hsl(134 68% 45%)" animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} transformOrigin="60px 60px" filter="url(#loadingGlow)" />
-                        <motion.circle cx="60" cy="60" r="12" fill="url(#loadingCoreGrad)" filter="url(#loadingGlow)" animate={{ r: [12, 14, 12], opacity: [1, 0.8, 1] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} />
-                      </svg>
+                        {/* Animated Nucleus Loading Core SVG */}
+                        <svg
+                          className="w-20 h-20 sm:w-24 sm:h-24"
+                          viewBox="0 0 120 120"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <defs>
+                            <radialGradient id="loadingCoreGrad">
+                              <stop offset="0%" stopColor="hsl(134 68% 55%)" />
+                              <stop offset="100%" stopColor="hsl(134 68% 35%)" />
+                            </radialGradient>
+                            <filter id="loadingGlow">
+                              <feGaussianBlur stdDeviation="2" result="blur" />
+                              <feMerge>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
+                              </feMerge>
+                            </filter>
+                          </defs>
+                          <motion.circle cx="60" cy="60" r="35" fill="none" stroke="hsl(134 68% 45%)" strokeWidth="0.8" opacity="0.3" animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} transformOrigin="60px 60px" />
+                          <motion.circle cx="60" cy="60" r="25" fill="none" stroke="hsl(134 68% 45%)" strokeWidth="0.8" opacity="0.4" animate={{ rotate: -360 }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} transformOrigin="60px 60px" />
+                          <motion.circle cx="60" cy="20" r="2.5" fill="hsl(134 68% 45%)" animate={{ rotate: 360 }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} transformOrigin="60px 60px" filter="url(#loadingGlow)" />
+                          <motion.circle cx="60" cy="60" r="12" fill="url(#loadingCoreGrad)" filter="url(#loadingGlow)" animate={{ r: [12, 14, 12], opacity: [1, 0.8, 1] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }} />
+                        </svg>
 
-                      {/* Animated progress bar */}
-                      <div className="mt-4 w-1/2 h-0.5 bg-border/30 overflow-hidden rounded-full">
-                        <motion.div
-                          className="h-full bg-primary"
-                          animate={{ width: `${Math.min(loadProgress, 100)}%` }}
-                          transition={{ duration: 0.4, ease: "easeOut" }}
-                        />
+                        <div className="mt-3 w-1/3 h-0.5 bg-border/30 overflow-hidden rounded-full">
+                          <motion.div
+                            className="h-full bg-primary"
+                            animate={{ width: `${Math.min(loadProgress, 100)}%` }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
+                          />
+                        </div>
+                        <div className="mt-2 text-[8px] tracking-[0.2em] uppercase text-primary font-heading font-semibold">
+                          {Math.floor(Math.min(loadProgress, 100))}%
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Play Overlay if paused */}
+                  {!isPlaying && videoLoaded && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] transition-all">
+                      <div className="w-14 h-14 rounded-full bg-primary/90 text-black flex items-center justify-center pl-1 shadow-[0_0_30px_rgba(34,197,94,0.5)] group-hover:scale-110 transition-transform">
+                        <Play className="w-6 h-6 fill-black" />
                       </div>
-                      <div className="mt-3 text-[8px] tracking-[0.2em] uppercase text-primary font-heading font-semibold">
-                        {Math.floor(Math.min(loadProgress, 100))}%
-                      </div>
-                    </motion.div>
+                    </div>
                   )}
-                </AnimatePresence>
 
-                <VideoProgressControl 
-                  videoRef={videoRef} 
-                  isPlaying={isPlaying} 
-                  setIsPlaying={setIsPlaying} 
-                />
-              </div>
-
-              {/* Footer Bar */}
-              <div className="px-5 py-2.5 border-t border-border/50 flex justify-end items-center bg-white/[0.03]">
-                <div className="flex items-center gap-2 text-[9px] tracking-[0.3em] uppercase text-primary font-heading">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                  {videoLoaded ? "Live Feed" : "Connecting"}
+                  {/* Scrubber Controls */}
+                  <VideoProgressControl 
+                    videoRef={videoRef} 
+                    isPlaying={isPlaying} 
+                    setIsPlaying={setIsPlaying} 
+                  />
                 </div>
               </div>
             </div>
+
+            {/* MacBook Hinge */}
+            <div className="w-[98%] h-1 sm:h-1.5 bg-gradient-to-b from-[#09080c] via-[#16151a] to-[#25232c] border-t border-black/80" />
+
+            {/* MacBook Bottom Base / Keyboard Deck */}
+            <div className="relative w-[104%] h-3.5 sm:h-4.5 bg-gradient-to-b from-[#2e2a36] via-[#1d1b24] to-[#121117] rounded-b-[14px] sm:rounded-b-[18px] border-x border-b border-white/20 shadow-[0_15px_30px_rgba(0,0,0,0.95)] flex items-start justify-center">
+              {/* Display Opening Thumb Groove */}
+              <div className="w-16 sm:w-20 h-1 sm:h-1.5 bg-[#09080c] rounded-b-md border-t border-black/70 shadow-inner" />
+            </div>
+
+            {/* Laptop Base Table Reflection / Shadow */}
+            <div className="w-[85%] h-2 bg-black/70 blur-md rounded-full mt-0.5" />
+
+            {/* Apple Dock Widget Beneath MacBook */}
+            <motion.div
+              className="mt-4 w-full flex items-center justify-between gap-3 p-3.5 sm:p-4 rounded-2xl bg-[#141217]/90 backdrop-blur-xl border border-white/15 shadow-xl"
+              initial={{ y: 15, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary shrink-0">
+                  <Play className="w-4 h-4 fill-current" />
+                </div>
+                <div className="text-left">
+                  <div className="text-xs sm:text-sm font-heading font-extrabold text-white leading-tight">
+                    White-Label Video Engine
+                  </div>
+                  <div className="text-[10px] text-white/50 font-mono mt-0.5">
+                    40 to 100+ high-retention ad cuts / mo
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 text-white/80 border border-white/10 text-[10px] font-mono">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  48HR TURNAROUND
+                </span>
+                <span className="px-2.5 py-1 rounded-full bg-primary/15 text-primary border border-primary/30 text-[10px] font-mono font-bold uppercase tracking-wider">
+                  AGENCY SCALE
+                </span>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
 

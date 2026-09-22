@@ -1,26 +1,101 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, Cpu, Clapperboard, Sparkles, Check, ArrowRight, Layers } from "lucide-react";
+import { 
+  Camera, 
+  Cpu, 
+  Clapperboard, 
+  Layers, 
+  Sparkles, 
+  Play, 
+  Pause, 
+  Volume2, 
+  VolumeX, 
+  Clock, 
+  Zap, 
+  CheckCircle2, 
+  ArrowRight,
+  MessageCircle,
+  Sliders,
+  FileCheck2,
+  Maximize2
+} from "lucide-react";
 
-const formats = [
+interface FormatItem {
+  id: string;
+  number: string;
+  name: string;
+  tag: string;
+  tagColor: string;
+  accentColor: string;
+  icon: typeof Camera;
+  headline: string;
+  summary: string;
+  videoSrc: string;
+  hudBadge: string;
+  telemetry: {
+    engine: string;
+    specs: string;
+    color: string;
+    audio: string;
+  };
+  metrics: {
+    turnaround: string;
+    scale: string;
+    masterCodec: string;
+    creativeLine: string;
+  };
+  capabilities: {
+    title: string;
+    description: string;
+  }[];
+  idealFor: string;
+}
+
+const formats: FormatItem[] = [
   {
     id: "live",
     number: "01",
     name: "Live-Action Production",
     tag: "Full Crew & Sets",
     tagColor: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+    accentColor: "#F59E0B",
     icon: Camera,
     headline: "Real people, tactile product, real-world resonance.",
     summary:
       "Full pre-production to post — concept, scripting, talent casting, studio/location shoot, high-end cinema color grading, and commercial editing. For when your brand needs authentic emotional human connection that AI cannot replicate.",
-    deliverables: [
-      "Cinema-grade 4K/6K camera packages & lighting",
-      "Actor casting, location scouting & set styling",
-      "Multi-angle product cinematography & macro lenses",
-      "Bespoke sound design & licensed commercial score",
+    videoSrc: encodeURI("/video-assets/Concept_3_Edited_Final Version 4.mp4"),
+    hudBadge: "ARRI ALEXA 35 · CINEMA RIG",
+    telemetry: {
+      engine: "4.6K Super 35 · Dual Native ISO",
+      specs: "T1.3 Prime Lenses · 120 FPS High-Speed",
+      color: "ARRI LogC4 / ACES 2065-1 Wide Gamut",
+      audio: "32-Bit Float Field Sound Master",
+    },
+    metrics: {
+      turnaround: "10–20 Days",
+      scale: "Cinema Master + 15 Vertical Hooks",
+      masterCodec: "Apple ProRes 4444 XQ",
+      creativeLine: "Dedicated Film Director & DP",
+    },
+    capabilities: [
+      {
+        title: "Physical Lifestyle & Talent",
+        description: "Curated SAG-eligible actor casting, on-set styling, and bespoke production design.",
+      },
+      {
+        title: "Macro Optics & High-Speed Physics",
+        description: "120fps slow-motion capture for tactile liquid splash, cream texture, and product surfaces.",
+      },
+      {
+        title: "Multi-Angle Master Coverage",
+        description: "Simultaneous 16:9 hero commercial framing with dedicated 9:16 paid social vertical safe zones.",
+      },
+      {
+        title: "Hollywood Color Finishing",
+        description: "Node-based studio DaVinci Resolve grade calibrated for high dynamic range displays.",
+      },
     ],
-    idealFor: "Hero brand launches, luxury e-commerce, physical lifestyle showcases, and TVC/broadband placements.",
-    turnaround: "10–20 days depending on shoot schedule",
+    idealFor: "Hero brand launches, luxury lifestyle e-commerce, physical product showcases, and broadcast TVC.",
   },
   {
     id: "ai",
@@ -28,18 +103,44 @@ const formats = [
     name: "AI-Generated Video",
     tag: "Fast + Infinite Scale",
     tagColor: "text-[#f2542d] border-[#f2542d]/30 bg-[#f2542d]/10",
+    accentColor: "#f2542d",
     icon: Cpu,
     headline: "Maximum velocity, fractional cost, 20x variations for paid media.",
     summary:
       "Rapid turnaround, radically lower cost per asset, and infinite visual variations for high-velocity paid social testing. Ideal for DTC product ads, localized UGC-style hooks, seasonal creative refreshes, and rapid iteration at scale.",
-    deliverables: [
-      "Photorealistic AI product interaction models",
-      "Dynamic vertical hooks engineered for sub-3-second retention",
-      "Infinite aspect ratio reformatting (9:16, 1:1, 16:9)",
-      "Multi-lingual lip-sync and localized voice synthesis",
+    videoSrc: encodeURI("/video-assets/Lord Milano Video 02 [No VO].mp4"),
+    hudBadge: "NEURAL DIFFUSION · SORA / KLING HD",
+    telemetry: {
+      engine: "Proprietary Photoreal Checkpoint v4.2",
+      specs: "60 FPS Temporal Consistency Solver",
+      color: "Rec.709 DCI-P3 Color Calibrated",
+      audio: "Neural Multi-Language Lip Sync",
+    },
+    metrics: {
+      turnaround: "5–10 Business Days",
+      scale: "20x–50x Creative Testing Variations",
+      masterCodec: "ProRes 422 + MP4 H.265 Ultra",
+      creativeLine: "Direct WhatsApp Video Strategist",
+    },
+    capabilities: [
+      {
+        title: "Photoreal AI Interaction Models",
+        description: "Physics-accurate digital humans interacting naturally with real branded physical products.",
+      },
+      {
+        title: "Sub-3-Second Retention Hooks",
+        description: "Algorithmically engineered visual patterns designed to stop aggressive feed scrolling.",
+      },
+      {
+        title: "Multi-Lingual Voice & Lip-Sync",
+        description: "Automated lip-sync translation across 14 languages with native local cadence and accents.",
+      },
+      {
+        title: "Infinite Aspect Reformatting",
+        description: "Single-concept render outputs instantly across 9:16 vertical, 1:1 feed, and 16:9 widescreen.",
+      },
     ],
-    idealFor: "Meta/TikTok paid performance campaigns, product teasers, high-frequency UGC, and budget-conscious scale.",
-    turnaround: "5–10 business days",
+    idealFor: "Meta & TikTok high-velocity paid ads, rapid hook testing, localized UGC, and direct-response DTC.",
   },
   {
     id: "motion",
@@ -47,18 +148,44 @@ const formats = [
     name: "Motion Graphics & CGI",
     tag: "3D & Kinetic Animation",
     tagColor: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+    accentColor: "#10B981",
     icon: Clapperboard,
     headline: "Sleek 3D product renders and kinetic typography without cameras.",
     summary:
       "Animated technical explainers, photorealistic 3D CAD product exploded views, and kinetic typographic masterpieces. For brands that require precision engineering and high-gloss polish without logistical physical shoot constraints.",
-    deliverables: [
-      "3D product modeling, texturing, and realistic physics simulations",
-      "Exploded view component diagrams & feature highlights",
-      "Kinetic typography, UI micro-interactions, and logo animations",
-      "Vector & raster 2D/3D mixed-media motion systems",
+    videoSrc: encodeURI("/video-assets/Nemari (s1 v1).mp4"),
+    hudBadge: "OCTANE RTX · CINEMA 4D · UNREAL 5",
+    telemetry: {
+      engine: "1.4M Quad Polygons · PBR Materials",
+      specs: "Hardware Raytraced Caustics & Glass",
+      color: "32-Bit Linear OpenEXR Pipeline",
+      audio: "Bespoke Spatial Foley Sound Design",
+    },
+    metrics: {
+      turnaround: "7–14 Business Days",
+      scale: "Exploded Diagrams + 10 Motion Cuts",
+      masterCodec: "10-Bit 4K Master / Alpha Channel",
+      creativeLine: "Senior 3D Artist & Motion Lead",
+    },
+    capabilities: [
+      {
+        title: "CAD Exploded Visualizations",
+        description: "Deconstruct intricate internal mechanisms with continuous buttery orbital camera paths.",
+      },
+      {
+        title: "PBR Material & Surface Physics",
+        description: "Sub-micron surface imperfections, metallic anodization, and accurate glass light refractions.",
+      },
+      {
+        title: "Kinetic UI & Type Choreography",
+        description: "Punchy, music-quantized typography that guides audience eye tracking to value props.",
+      },
+      {
+        title: "Volumetric Smoke & Fluid Physics",
+        description: "High-density smoke, water droplets, and particle turbulence with zero physical mess.",
+      },
     ],
-    idealFor: "SaaS platforms, consumer electronics, complex mechanism demonstrations, and corporate showreels.",
-    turnaround: "7–14 business days",
+    idealFor: "Consumer electronics, SaaS interfaces, luxury accessories, and technical mechanism showcases.",
   },
   {
     id: "hybrid",
@@ -66,29 +193,68 @@ const formats = [
     name: "Hybrid Compositing",
     tag: "Best of Both Worlds",
     tagColor: "text-purple-400 border-purple-500/30 bg-purple-500/10",
+    accentColor: "#A855F7",
     icon: Layers,
     headline: "Live-action physical product embedded seamlessly in augmented AI realms.",
     summary:
       "Live-action hero footage composited with generative AI environments and 3D CGI visual effects in a single seamless workflow — real product tactile fidelity surrounded by surreal, captivating visual environments that no traditional set could ever afford.",
-    deliverables: [
-      "Live actor/product chroma keying & camera tracking",
-      "Generative AI background synthesis with matched perspective",
-      "3D CGI visual effects, fluid particles & lighting integration",
-      "Cinema-grade matte painting and composite finishing",
+    videoSrc: encodeURI("/video-assets/AutoHub_Video_1_V7 [Arabic Captions].mp4"),
+    hudBadge: "NUKE MULTI-PASS · NEURAL COMPOSITOR",
+    telemetry: {
+      engine: "3D Camera Point-Cloud Matchmove",
+      specs: "Multi-Channel OpenEXR Deep Compositing",
+      color: "ACEScc Unified Studio Color Space",
+      audio: "Dynamic Commercial Cinematic Score",
+    },
+    metrics: {
+      turnaround: "10–14 Business Days",
+      scale: "Hero Commercial + 8 Modular Hooks",
+      masterCodec: "DCI 4K ProRes 4444 Master",
+      creativeLine: "Lead VFX Supervisor & Creative Lead",
+    },
+    capabilities: [
+      {
+        title: "Sub-Pixel Camera Matchmove",
+        description: "Point-cloud camera tracking locks live footage and virtual environments into zero-drift alignment.",
+      },
+      {
+        title: "Generative Realm Synthesis",
+        description: "Impossible, breathtaking sci-fi and natural landscapes synthesized to match the physical lens perspective.",
+      },
+      {
+        title: "Physical Light Wrapping",
+        description: "Virtual CGI lighting cast across real actor and product edges for indistinguishable blending.",
+      },
+      {
+        title: "Anamorphic Lens Distortion",
+        description: "Curated vintage anamorphic lens streaks, chromatic aberration, and authentic 35mm optical grain.",
+      },
     ],
-    idealFor: "Luxury cosmetics, automotive, surreal storytelling, and show-stopping awareness campaigns.",
-    turnaround: "10–14 business days",
+    idealFor: "Automotive brands, high-concept fashion, beauty cosmetics, and show-stopping viral performance campaigns.",
   },
 ];
 
 export default function FormatsSection() {
   const [activeFormatId, setActiveFormatId] = useState("ai");
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   const activeFormat = formats.find((f) => f.id === activeFormatId) || formats[1];
 
+  // Sync video play state on format change
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play().catch(() => setIsPlaying(false));
+    }
+  }, [activeFormatId]);
+
   return (
-    <section id="formats" className="relative py-24 sm:py-32 bg-[#100E12] border-b border-white/10 overflow-hidden">
+    <section id="formats" className="relative py-24 sm:py-32 bg-[#0C0B0E] border-b border-white/10 overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-[#f2542d]/5 blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-500/5 blur-[160px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Section Header */}
@@ -98,7 +264,7 @@ export default function FormatsSection() {
             <span>Format Versatility</span>
           </div>
 
-          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.08]">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.08]">
             One team. Every format your brand actually needs.
           </h2>
 
@@ -110,8 +276,9 @@ export default function FormatsSection() {
 
         {/* Formats Grid / Selector */}
         <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
           {/* Left Column: Interactive Format List */}
-          <div className="lg:col-span-5 space-y-3">
+          <div className="lg:col-span-4 space-y-3">
             {formats.map((fmt) => {
               const isSelected = fmt.id === activeFormatId;
               const Icon = fmt.icon;
@@ -120,10 +287,10 @@ export default function FormatsSection() {
                 <div
                   key={fmt.id}
                   onClick={() => setActiveFormatId(fmt.id)}
-                  className={`p-5 rounded-2xl border transition-all duration-300 cursor-pointer text-left relative overflow-hidden group ${
+                  className={`p-4 sm:p-5 rounded-2xl border transition-all duration-300 cursor-pointer text-left relative overflow-hidden group select-none ${
                     isSelected
-                      ? "bg-[#17141A] border-[#f2542d]/50 shadow-[0_10px_30px_rgba(242,84,45,0.15)]"
-                      : "bg-[#121015]/60 border-white/5 hover:border-white/20 hover:bg-[#17141A]/60"
+                      ? "bg-[#18151D] border-[#f2542d]/60 shadow-[0_12px_32px_rgba(242,84,45,0.18)]"
+                      : "bg-[#121015]/60 border-white/5 hover:border-white/20 hover:bg-[#18151D]/60"
                   }`}
                 >
                   {/* Left accent bar if selected */}
@@ -134,12 +301,12 @@ export default function FormatsSection() {
                     />
                   )}
 
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-start gap-3.5">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-start gap-3">
                       <div
                         className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-colors ${
                           isSelected
-                            ? "bg-[#f2542d]/20 text-[#f2542d] border-[#f2542d]/40"
+                            ? "bg-[#f2542d]/20 text-[#f2542d] border-[#f2542d]/40 shadow-[0_0_15px_rgba(242,84,45,0.3)]"
                             : "bg-white/5 text-white/60 border-white/10 group-hover:text-white"
                         }`}
                       >
@@ -160,7 +327,7 @@ export default function FormatsSection() {
                     </div>
 
                     <span
-                      className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider border whitespace-nowrap hidden sm:inline-block ${fmt.tagColor}`}
+                      className={`px-2 py-0.5 rounded-full text-[9px] font-mono uppercase tracking-wider border whitespace-nowrap shrink-0 hidden sm:inline-block ${fmt.tagColor}`}
                     >
                       {fmt.tag}
                     </span>
@@ -168,29 +335,50 @@ export default function FormatsSection() {
                 </div>
               );
             })}
+
+            {/* Quick Consultation Badge */}
+            <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 flex items-center justify-between mt-4">
+              <div className="flex items-center gap-2.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                <span className="text-xs font-mono text-white/80">Need custom format mixing?</span>
+              </div>
+              <a
+                href="https://wa.me/919894443263"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-mono text-[#f2542d] hover:underline flex items-center gap-1 font-bold"
+              >
+                <span>Chat WhatsApp</span>
+                <span>→</span>
+              </a>
+            </div>
           </div>
 
-          {/* Right Column: Deep-Dive Inspector Card */}
-          <div className="lg:col-span-7">
+          {/* Right Column: Apple-Grade Studio Viewport & Deep-Dive Inspector */}
+          <div className="lg:col-span-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeFormat.id}
-                className="p-6 sm:p-8 rounded-3xl bg-[#17141A] border border-white/15 relative overflow-hidden shadow-2xl"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                className="rounded-3xl bg-[#141217] border border-white/15 overflow-hidden shadow-2xl relative"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
-                {/* Subtle Glow */}
-                <div className="absolute top-0 right-0 w-72 h-72 bg-[#f2542d]/10 blur-[100px] pointer-events-none" />
-
-                <div className="flex flex-wrap items-center justify-between gap-3 pb-6 border-b border-white/10">
+                {/* Header Bar */}
+                <div className="p-5 sm:p-6 border-b border-white/10 flex flex-wrap items-center justify-between gap-4 bg-white/[0.02]">
                   <div className="flex items-center gap-3">
                     <span className="text-2xl font-black font-mono text-[#f2542d]">{activeFormat.number}</span>
-                    <h4 className="font-heading text-xl sm:text-2xl font-bold text-white">
-                      {activeFormat.name}
-                    </h4>
+                    <div>
+                      <h4 className="font-heading text-xl sm:text-2xl font-extrabold text-white leading-tight">
+                        {activeFormat.name}
+                      </h4>
+                      <span className="text-[11px] font-mono text-white/50 tracking-wider uppercase">
+                        {activeFormat.hudBadge}
+                      </span>
+                    </div>
                   </div>
+
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wider border ${activeFormat.tagColor}`}
                   >
@@ -198,51 +386,192 @@ export default function FormatsSection() {
                   </span>
                 </div>
 
-                <div className="mt-6 space-y-6">
+                {/* Interactive Cinema Monitor & Telemetry HUD */}
+                <div className="relative aspect-video sm:aspect-[21/9] bg-black overflow-hidden group">
+                  <video
+                    ref={videoRef}
+                    key={activeFormat.videoSrc}
+                    loop
+                    playsInline
+                    muted={isMuted}
+                    autoPlay
+                    className="w-full h-full object-cover"
+                  >
+                    <source src={activeFormat.videoSrc} type="video/mp4" />
+                  </video>
+
+                  {/* Cinema Corner Brackets (HUD Reticle) */}
+                  <div className="pointer-events-none absolute inset-4 border border-white/15 rounded-xl flex flex-col justify-between p-3 select-none">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[9px] font-mono text-white tracking-widest uppercase">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span>LIVE REEL PREVIEW</span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <span className="px-2 py-0.5 rounded bg-black/60 border border-white/15 text-[8px] font-mono text-white/80">
+                          {activeFormat.telemetry.engine}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-end justify-between">
+                      <div className="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 text-[9px] font-mono text-white/70">
+                        {activeFormat.telemetry.specs}
+                      </div>
+
+                      <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">
+                        {activeFormat.telemetry.color}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Floating Play & Sound Controls */}
+                  <div className="absolute bottom-3 right-3 z-30 flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        if (videoRef.current) {
+                          if (isPlaying) videoRef.current.pause();
+                          else videoRef.current.play();
+                          setIsPlaying(!isPlaying);
+                        }
+                      }}
+                      className="w-8 h-8 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-black/90 transition-colors"
+                      aria-label={isPlaying ? "Pause video" : "Play video"}
+                    >
+                      {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-white" />}
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        if (videoRef.current) {
+                          videoRef.current.muted = !isMuted;
+                          setIsMuted(!isMuted);
+                        }
+                      }}
+                      className="w-8 h-8 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-black/90 transition-colors"
+                      aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+                    >
+                      {isMuted ? <VolumeX className="w-3.5 h-3.5 text-white/70" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Deep Technical Specs Grid (replaces plain emojis and text) */}
+                <div className="p-6 sm:p-8 space-y-8">
+                  {/* Summary Scope */}
                   <div>
-                    <h5 className="text-xs font-mono uppercase tracking-wider text-white/40 mb-2">Scope Overview</h5>
+                    <h5 className="text-[11px] font-mono uppercase tracking-[0.2em] text-white/40 mb-2 font-bold">
+                      Format Architecture & Intent
+                    </h5>
                     <p className="text-sm sm:text-base text-white/80 leading-relaxed font-body">
                       {activeFormat.summary}
                     </p>
                   </div>
 
+                  {/* 4-Column Apple Tech Specs Matrix */}
                   <div>
-                    <h5 className="text-xs font-mono uppercase tracking-wider text-white/40 mb-3">Core Deliverables</h5>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {activeFormat.deliverables.map((item, i) => (
-                        <div key={i} className="flex items-start gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/5">
-                          <Check className="w-4 h-4 text-[#f2542d] shrink-0 mt-0.5" />
-                          <span className="text-xs text-white/85 leading-snug">{item}</span>
+                    <h5 className="text-[11px] font-mono uppercase tracking-[0.2em] text-white/40 mb-3 font-bold">
+                      Production & Delivery Benchmarks
+                    </h5>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all">
+                        <div className="flex items-center gap-1.5 text-white/40 text-[10px] font-mono uppercase mb-1">
+                          <Clock className="w-3.5 h-3.5 text-[#f2542d]" />
+                          <span>Turnaround</span>
+                        </div>
+                        <div className="text-sm font-heading font-extrabold text-white">
+                          {activeFormat.metrics.turnaround}
+                        </div>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all">
+                        <div className="flex items-center gap-1.5 text-white/40 text-[10px] font-mono uppercase mb-1">
+                          <Sliders className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>Scale</span>
+                        </div>
+                        <div className="text-xs sm:text-sm font-heading font-extrabold text-white truncate">
+                          {activeFormat.metrics.scale}
+                        </div>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all">
+                        <div className="flex items-center gap-1.5 text-white/40 text-[10px] font-mono uppercase mb-1">
+                          <FileCheck2 className="w-3.5 h-3.5 text-blue-400" />
+                          <span>Master Codec</span>
+                        </div>
+                        <div className="text-xs sm:text-sm font-heading font-extrabold text-white truncate">
+                          {activeFormat.metrics.masterCodec}
+                        </div>
+                      </div>
+
+                      <div className="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all">
+                        <div className="flex items-center gap-1.5 text-white/40 text-[10px] font-mono uppercase mb-1">
+                          <Zap className="w-3.5 h-3.5 text-amber-400" />
+                          <span>Direct Lead</span>
+                        </div>
+                        <div className="text-xs sm:text-sm font-heading font-extrabold text-white truncate">
+                          {activeFormat.metrics.creativeLine}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Engineered Capabilities (2x2 Grid) */}
+                  <div>
+                    <h5 className="text-[11px] font-mono uppercase tracking-[0.2em] text-white/40 mb-3 font-bold">
+                      Core Engineered Deliverables
+                    </h5>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                      {activeFormat.capabilities.map((cap, i) => (
+                        <div
+                          key={i}
+                          className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#f2542d]/40 transition-colors group"
+                        >
+                          <div className="flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-[#f2542d] shrink-0" />
+                            <h6 className="font-heading font-bold text-white text-xs sm:text-sm group-hover:text-[#f2542d] transition-colors">
+                              {cap.title}
+                            </h6>
+                          </div>
+                          <p className="mt-1.5 text-xs text-white/60 leading-relaxed pl-6">
+                            {cap.description}
+                          </p>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <span className="text-[11px] font-mono text-white/40 uppercase tracking-wider block">Best Suited For</span>
-                      <span className="text-xs text-white/85 font-medium mt-1 block leading-relaxed">
+                  {/* Best Suited & Bottom Call to Action */}
+                  <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="max-w-md">
+                      <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">
+                        Best Suited For
+                      </span>
+                      <p className="text-xs text-white/80 font-medium mt-0.5 leading-relaxed">
                         {activeFormat.idealFor}
-                      </span>
+                      </p>
                     </div>
 
-                    <div>
-                      <span className="text-[11px] font-mono text-white/40 uppercase tracking-wider block">Turnaround Window</span>
-                      <span className="text-xs text-[#f2542d] font-mono font-bold mt-1 block">
-                        ⚡ {activeFormat.turnaround}
-                      </span>
-                    </div>
-                  </div>
+                    <div className="flex items-center gap-3 shrink-0">
+                      <a
+                        href="https://wa.me/919894443263"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#25D366] text-xs font-mono font-bold border border-[#25D366]/30 transition-all"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5 fill-current" />
+                        <span>Chat Strategist</span>
+                      </a>
 
-                  <div className="pt-4 flex items-center justify-between">
-                    <span className="text-xs text-white/50 font-mono">Unsure which fits your campaign?</span>
-                    <a
-                      href="#book"
-                      className="inline-flex items-center gap-1.5 text-xs font-heading font-bold text-[#f2542d] hover:text-white transition-colors uppercase tracking-wider"
-                    >
-                      <span>Ask our Strategist</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </a>
+                      <a
+                        href="#book"
+                        className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-[#f2542d] text-white text-xs font-heading font-bold uppercase tracking-wider hover:brightness-110 shadow-[0_0_20px_rgba(242,84,45,0.35)] transition-all"
+                      >
+                        <span>Book Format Call</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </motion.div>
