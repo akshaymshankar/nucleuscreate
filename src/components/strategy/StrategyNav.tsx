@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 
 const strategyNavLinks = [
   { label: "Overview", href: "#overview" },
-  { label: "4 Formats", href: "#formats" },
-  { label: "Work Reel", href: "#work" },
+  { label: "Formats", href: "#formats" },
+  { label: "Work", href: "#work" },
   { label: "Process", href: "#process" },
   { label: "Compare", href: "#compare" },
   { label: "Guarantees", href: "#guarantee" },
@@ -30,48 +30,42 @@ export default function StrategyNav() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 pt-3 sm:pt-4 px-3 sm:px-6 pointer-events-none transition-all duration-300">
         <nav
-          className={`mx-auto max-w-6xl flex items-center justify-between rounded-full px-4 sm:px-5 py-2.5 sm:py-3 transition-all duration-300 pointer-events-auto ${
+          className={`mx-auto max-w-6xl flex items-center justify-between rounded-full px-4 sm:px-6 py-2.5 sm:py-3 transition-all duration-300 pointer-events-auto ${
             scrolled
-              ? "bg-[#100E12]/85 backdrop-blur-xl border border-white/15 shadow-[0_15px_40px_rgba(0,0,0,0.6)]"
-              : "bg-[#17141A]/70 backdrop-blur-md border border-white/10"
+              ? "bg-[#100E12]/90 backdrop-blur-xl border border-white/15 shadow-[0_15px_40px_rgba(0,0,0,0.7)]"
+              : "bg-[#17141A]/80 backdrop-blur-md border border-white/10"
           }`}
         >
           {/* Left Brand & Back Link */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 shrink-0">
             <Link
               to="/"
-              className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group text-xs font-mono pr-2 border-r border-white/10"
+              className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors group text-xs font-mono pr-3 border-r border-white/15 whitespace-nowrap"
               title="Return to Main Agency Site"
             >
               <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
               <span className="hidden sm:inline">Agency</span>
             </Link>
 
-            <a href="#overview" className="flex items-center gap-2">
+            <a href="#overview" className="flex items-center gap-2.5 shrink-0 group">
               <img
                 src={nucleusPremiumLogo}
                 alt="Nucleus"
-                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-[#f2542d]/40"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-[#f2542d]/40 group-hover:border-[#f2542d] transition-colors"
               />
-              <div className="flex flex-col">
-                <span className="font-heading font-black tracking-tight text-white text-sm sm:text-base leading-none">
-                  NUCLEUS <span className="text-[#f2542d] font-normal text-xs uppercase tracking-wider">Productions</span>
-                </span>
-                <span className="text-[9px] font-mono uppercase tracking-widest text-[#f2542d] font-semibold flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#f2542d] animate-pulse" />
-                  AI Video Strategy
-                </span>
-              </div>
+              <span className="font-heading font-black tracking-wide text-white text-base sm:text-lg leading-none uppercase">
+                NUCLEUS
+              </span>
             </a>
           </div>
 
           {/* Desktop Nav Anchors */}
-          <div className="hidden lg:flex items-center gap-1 bg-white/[0.03] p-1 rounded-full border border-white/5">
+          <div className="hidden lg:flex items-center gap-1 bg-white/[0.04] p-1 rounded-full border border-white/10 shrink-0">
             {strategyNavLinks.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="px-3.5 py-1.5 rounded-full text-xs font-medium text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200"
+                className="px-3 py-1.5 rounded-full text-xs font-heading font-semibold text-white/70 hover:text-white hover:bg-white/10 transition-all duration-200 whitespace-nowrap leading-none"
               >
                 {item.label}
               </a>
@@ -79,22 +73,22 @@ export default function StrategyNav() {
           </div>
 
           {/* Right Action Buttons */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5 shrink-0">
             <a
               href="https://wa.me/910000000000"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-white/80 hover:text-white border border-white/10 hover:border-white/20 transition-all"
+              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-heading font-semibold text-white/80 hover:text-white border border-white/15 hover:border-white/30 bg-white/[0.02] transition-all whitespace-nowrap"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              WhatsApp
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>WhatsApp</span>
             </a>
 
             <a
               href="#book"
-              className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#f2542d] to-[#ff7347] text-black font-heading font-bold text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(242,84,45,0.4)] hover:brightness-110 active:scale-95 transition-all"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-gradient-to-r from-[#f2542d] to-[#ff7347] text-black font-heading font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(242,84,45,0.4)] hover:brightness-110 active:scale-95 transition-all whitespace-nowrap leading-none"
             >
-              <PhoneCall className="w-3.5 h-3.5" />
+              <PhoneCall className="w-3.5 h-3.5 stroke-[2.5]" />
               <span>Book Call</span>
             </a>
 

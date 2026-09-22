@@ -18,16 +18,22 @@ const heroVideoData: VideoItem = {
   tags: ["AI-Generated", "ProductAd", "UGC", "DirectResponse"],
 };
 
-const brandLogos = [
-  "BAGGAGE TAXI",
-  "THE OUT",
-  "ARKA LUXE",
-  "LORD MILANO",
-  "ORGA BOTANICALS",
-  "AUTOHUB MOTORS",
-  "NEMARI COUTURE",
-  "THETABODY LABS",
-  "SRM DYNAMICS",
+const newsFeedBrands = [
+  { name: "BAGGAGE TAXI", sector: "Airport Logistics", format: "Direct Response" },
+  { name: "THE OUT", sector: "Luxury Mobility", format: "Live Action" },
+  { name: "ARKA LUXE", sector: "Fine Jewelry", format: "Macro 3D" },
+  { name: "LORD MILANO", sector: "Haute Parfumerie", format: "AI Cinema" },
+  { name: "ORGA BOTANICALS", sector: "Clinical Haircare", format: "UGC Ad" },
+  { name: "AUTOHUB MOTORS", sector: "Performance Auto", format: "Hybrid CGI" },
+  { name: "NEMARI COUTURE", sector: "Bespoke Leather", format: "3D Product" },
+  { name: "THETABODY LABS", sector: "DTC Skincare", format: "Conversion Ad" },
+  { name: "SRM DYNAMICS", sector: "3D Hologram", format: "Volumetric VFX" },
+  { name: "WORLD OF OUD", sector: "Heritage Fragrance", format: "Storytelling" },
+  { name: "WOO FRAGRANCE", sector: "Tester Kit", format: "Viral Hook" },
+  { name: "AROMA COSMETICS", sector: "Botanical Beauty", format: "Macro Sim" },
+  { name: "PACKMAN", sector: "Custom Packaging", format: "Motion 3D" },
+  { name: "DREAM DRIVES", sector: "Supercar Fleet", format: "4K Cinema" },
+  { name: "ROSSO VIVO", sector: "Culinary Brand", format: "Brand Film" },
 ];
 
 export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
@@ -244,23 +250,48 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
           </motion.div>
         </div>
 
-        {/* Logos Marquee Row */}
-        <div className="mt-20 pt-8 border-t border-white/10">
-          <p className="text-center text-xs font-mono uppercase tracking-[0.25em] text-white/40 mb-6">
-            Trusted by brands running video across formats
-          </p>
+        {/* Continuous Newsfeed Ticker Tape */}
+        <div className="mt-20 pt-8 border-t border-white/10 overflow-hidden">
+          <div className="flex items-center justify-between pb-5 flex-wrap gap-3">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping shrink-0" />
+              <span className="text-xs font-mono uppercase tracking-[0.25em] text-white font-extrabold">
+                LIVE CLIENT NEWSFEED
+              </span>
+              <span className="hidden sm:inline-block text-[11px] font-mono text-white/50 uppercase tracking-widest pl-3 border-l border-white/15">
+                Multi-Format Brand Output
+              </span>
+            </div>
+            <span className="text-[10px] font-mono text-[#f2542d] uppercase tracking-wider bg-[#f2542d]/10 border border-[#f2542d]/30 px-3 py-1 rounded-full font-bold">
+              Realtime Production Roster
+            </span>
+          </div>
 
-          <div className="relative overflow-hidden w-full mask-gradient">
-            <div className="flex items-center gap-12 whitespace-nowrap animate-marquee">
-              {brandLogos.concat(brandLogos).map((logo, idx) => (
+          {/* Marquee ticker container with smooth continuous motion */}
+          <div className="relative w-full overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            <motion.div
+              className="flex items-center gap-4 whitespace-nowrap will-change-transform"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ ease: "linear", duration: 32, repeat: Infinity }}
+            >
+              {[...newsFeedBrands, ...newsFeedBrands].map((item, idx) => (
                 <div
-                  key={`${logo}-${idx}`}
-                  className="px-5 py-2.5 rounded-xl border border-white/5 bg-white/[0.02] text-xs font-heading font-bold tracking-widest text-white/50 hover:text-white hover:border-white/20 transition-all cursor-default"
+                  key={`${item.name}-${idx}`}
+                  className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-[#16131B] border border-white/20 hover:border-[#f2542d]/60 hover:bg-[#201A26] transition-all shadow-md group cursor-default shrink-0"
                 >
-                  {logo}
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#f2542d] shrink-0" />
+                  <span className="font-heading font-black text-xs sm:text-sm text-white tracking-wider uppercase group-hover:text-[#f2542d] transition-colors">
+                    {item.name}
+                  </span>
+                  <span className="text-[11px] font-mono text-white/60 border-l border-white/15 pl-2.5">
+                    {item.sector}
+                  </span>
+                  <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-[#f2542d] border border-white/10 uppercase font-semibold">
+                    {item.format}
+                  </span>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
