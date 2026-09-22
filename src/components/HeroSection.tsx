@@ -1,6 +1,6 @@
 import React, { memo, useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Pause, Volume2, VolumeX, Sparkles, MessageCircle } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Fast-paced text reveal — words snap in like a jump cut
@@ -322,17 +322,6 @@ const HeroSection = () => {
                     NEW
                   </span>
                 </Link>
-
-                <a
-                  href="https://wa.me/919894443263"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3.5 sm:py-4 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] font-heading font-bold text-xs sm:text-sm tracking-wide border border-[#25D366]/30 transition-all"
-                  data-cursor-hover
-                >
-                  <MessageCircle className="w-4 h-4 fill-current" />
-                  <span>WhatsApp</span>
-                </a>
               </div>
               <span className="text-[10px] sm:text-xs text-muted-foreground/70 px-1">
                 Only for brands & agencies testing 20+ creatives a month. Direct strategy support included.

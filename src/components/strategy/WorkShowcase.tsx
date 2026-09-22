@@ -68,7 +68,7 @@ const portfolioData: VideoItem[] = [
     title: "Aroma — Intensive Hairmask",
     category: "ai",
     categoryLabel: "AI-Generated",
-    src: "/video-assets/Aroma_Hairmask_V3.mov",
+    src: "/video-assets/Aroma_Hairmask_V3.mp4",
     client: "Aroma Cosmetics",
     description: "Lush botanical textures and silky hair strand simulations highlighting natural hydration, engineered for beauty consumers on Reels and TikTok.",
     tags: ["Beauty", "Haircare", "DTC Ad"],
