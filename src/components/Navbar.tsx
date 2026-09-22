@@ -2,7 +2,11 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import nucleusPremiumLogo from "@/assets/nucleus-premium-logo.png";
 
+import { Link } from "react-router-dom";
+import { Sparkles } from "lucide-react";
+
 const navLinks = [
+  { label: "AI Video Strategy", href: "/services/ai-video-strategy", isNew: true, isRouter: true },
   { label: "Proof", href: "#proof" },
   { label: "Compare", href: "#services" },
   { label: "Pricing", href: "#pricing" },
@@ -42,20 +46,41 @@ const Navbar = () => {
         </a>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-8">
-          {navLinks.map((link, i) => (
-            <motion.a
-              key={link.label}
-              href={link.href}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 font-body"
-              data-cursor-hover
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15 + i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {link.label}
-            </motion.a>
-          ))}
+        <div className="hidden md:flex items-center gap-5 lg:gap-7">
+          {navLinks.map((link, i) =>
+            link.isRouter ? (
+              <motion.div
+                key={link.label}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 + i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <Link
+                  to={link.href}
+                  className="text-xs sm:text-sm font-heading font-bold text-foreground hover:text-primary transition-all duration-300 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/30 hover:border-primary/60 shadow-[0_0_15px_rgba(34,197,94,0.15)] group"
+                  data-cursor-hover
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-primary group-hover:rotate-12 transition-transform" />
+                  <span>{link.label}</span>
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-primary text-black font-extrabold uppercase tracking-wider">
+                    NEW
+                  </span>
+                </Link>
+              </motion.div>
+            ) : (
+              <motion.a
+                key={link.label}
+                href={link.href}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 font-body"
+                data-cursor-hover
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 + i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {link.label}
+              </motion.a>
+            )
+          )}
           <motion.a
             href="#apply"
             className="magnetic-btn px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-heading font-semibold hover:opacity-90 transition-all duration-300"
@@ -111,20 +136,41 @@ const Navbar = () => {
             transition={{ duration: 0.4 }}
           >
             <div className="flex flex-col items-center gap-6">
-              {navLinks.map((link, i) => (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  className="text-3xl font-heading font-bold text-foreground hover:text-primary transition-colors"
-                  onClick={() => setIsOpen(false)}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ delay: i * 0.08, duration: 0.5 }}
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+              {navLinks.map((link, i) =>
+                link.isRouter ? (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ delay: i * 0.08, duration: 0.5 }}
+                  >
+                    <Link
+                      to={link.href}
+                      className="text-2xl sm:text-3xl font-heading font-extrabold text-foreground hover:text-primary transition-colors flex items-center gap-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <span>{link.label}</span>
+                      <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-primary text-black font-extrabold uppercase">
+                        NEW
+                      </span>
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    className="text-3xl font-heading font-bold text-foreground hover:text-primary transition-colors"
+                    onClick={() => setIsOpen(false)}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ delay: i * 0.08, duration: 0.5 }}
+                  >
+                    {link.label}
+                  </motion.a>
+                )
+              )}
             </div>
           </motion.div>
         )}
