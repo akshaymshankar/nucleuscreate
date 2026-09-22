@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Play, Volume2, VolumeX, Sparkles, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight, Play, Volume2, VolumeX, Sparkles, CheckCircle2, ShieldCheck } from "lucide-react";
 import { VideoItem } from "./VideoModal";
 
 interface StrategyHeroProps {
@@ -220,32 +220,6 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
                   </div>
                 </div>
               </div>
-
-              {/* Perfectly Aligned Dock Widget Beneath Device */}
-              <motion.div
-                className="mt-4 flex items-center justify-between gap-3 p-4 rounded-2xl bg-[#17141A]/95 backdrop-blur-xl border border-white/15 shadow-xl"
-                initial={{ y: 15, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-[#f2542d]/20 border border-[#f2542d]/40 flex items-center justify-center text-[#f2542d] shrink-0">
-                    <Zap className="w-4.5 h-4.5" />
-                  </div>
-                  <div className="text-left">
-                    <div className="text-xs sm:text-sm font-heading font-extrabold text-white leading-tight">
-                      4x Creative Testing Speed
-                    </div>
-                    <div className="text-[10px] text-white/50 font-mono mt-0.5">
-                      Endless hook variations deployed in 48 hours
-                    </div>
-                  </div>
-                </div>
-
-                <span className="shrink-0 px-2.5 py-1 rounded-full bg-[#f2542d]/10 text-[#f2542d] border border-[#f2542d]/30 text-[10px] font-mono font-bold uppercase tracking-wider">
-                  AI Velocity
-                </span>
-              </motion.div>
             </div>
           </motion.div>
         </div>
