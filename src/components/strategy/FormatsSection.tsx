@@ -386,8 +386,8 @@ export default function FormatsSection() {
                   </span>
                 </div>
 
-                {/* Interactive Cinema Monitor & Telemetry HUD */}
-                <div className="relative aspect-video sm:aspect-[21/9] bg-black overflow-hidden group">
+                {/* Interactive Cinema Monitor */}
+                <div className="relative aspect-video bg-black overflow-hidden group">
                   <video
                     ref={videoRef}
                     key={activeFormat.videoSrc}
@@ -395,39 +395,57 @@ export default function FormatsSection() {
                     playsInline
                     muted={isMuted}
                     autoPlay
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center"
                   >
                     <source src={activeFormat.videoSrc} type="video/mp4" />
                   </video>
 
-                  {/* Cinema Corner Brackets (HUD Reticle) */}
-                  <div className="pointer-events-none absolute inset-4 border border-white/15 rounded-xl flex flex-col justify-between p-3 select-none">
+                  {/* Cinema Corner Reticles */}
+                  <div className="pointer-events-none absolute inset-3 sm:inset-4 flex flex-col justify-between select-none">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[9px] font-mono text-white tracking-widest uppercase">
+                      <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[9px] font-mono text-white tracking-widest uppercase">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                         <span>LIVE REEL PREVIEW</span>
                       </div>
 
-                      <div className="flex items-center gap-2">
-                        <span className="px-2 py-0.5 rounded bg-black/60 border border-white/15 text-[8px] font-mono text-white/80">
-                          {activeFormat.telemetry.engine}
-                        </span>
+                      <div className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-[9px] font-mono text-white/90">
+                        {activeFormat.telemetry.engine}
                       </div>
-                    </div>
-
-                    <div className="flex items-end justify-between">
-                      <div className="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg border border-white/10 text-[9px] font-mono text-white/70">
-                        {activeFormat.telemetry.specs}
-                      </div>
-
-                      <span className="text-[9px] font-mono text-white/50 uppercase tracking-widest">
-                        {activeFormat.telemetry.color}
-                      </span>
                     </div>
                   </div>
 
-                  {/* Floating Play & Sound Controls */}
-                  <div className="absolute bottom-3 right-3 z-30 flex items-center gap-2">
+                  {/* Centered Play Button Overlay when Paused */}
+                  {!isPlaying && (
+                    <div 
+                      onClick={() => {
+                        if (videoRef.current) {
+                          videoRef.current.play();
+                          setIsPlaying(true);
+                        }
+                      }}
+                      className="absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-[2px] cursor-pointer"
+                    >
+                      <div className="w-14 h-14 rounded-full bg-[#f2542d] text-white flex items-center justify-center pl-1 shadow-[0_0_25px_rgba(242,84,45,0.5)] hover:scale-110 transition-transform">
+                        <Play className="w-6 h-6 fill-current" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Studio Monitor Telemetry & Control Dock (Rightly Positioned) */}
+                <div className="bg-[#0e0c12]/95 backdrop-blur-md border-t border-white/10 px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+                  {/* Left: Telemetry Details */}
+                  <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+                    <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-[10px] font-mono text-white/90 font-semibold">
+                      {activeFormat.telemetry.specs}
+                    </span>
+                    <span className="text-[10px] font-mono text-white/50 uppercase tracking-wider hidden md:inline">
+                      {activeFormat.telemetry.color}
+                    </span>
+                  </div>
+
+                  {/* Right: Playback Controls */}
+                  <div className="flex items-center gap-2 ml-auto shrink-0">
                     <button
                       onClick={() => {
                         if (videoRef.current) {
@@ -436,10 +454,11 @@ export default function FormatsSection() {
                           setIsPlaying(!isPlaying);
                         }
                       }}
-                      className="w-8 h-8 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-black/90 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-mono transition-colors"
                       aria-label={isPlaying ? "Pause video" : "Play video"}
                     >
-                      {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-white" />}
+                      {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 fill-current" />}
+                      <span>{isPlaying ? "Pause" : "Play"}</span>
                     </button>
 
                     <button
@@ -449,10 +468,10 @@ export default function FormatsSection() {
                           setIsMuted(!isMuted);
                         }
                       }}
-                      className="w-8 h-8 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white flex items-center justify-center hover:bg-black/90 transition-colors"
+                      className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white flex items-center justify-center transition-colors"
                       aria-label={isMuted ? "Unmute audio" : "Mute audio"}
                     >
-                      {isMuted ? <VolumeX className="w-3.5 h-3.5 text-white/70" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+                      {isMuted ? <VolumeX className="w-3.5 h-3.5 text-white/60" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
                     </button>
                   </div>
                 </div>
