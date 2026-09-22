@@ -75,7 +75,7 @@ export default function StrategyNav() {
           {/* Right Action Buttons */}
           <div className="flex items-center gap-2.5 shrink-0">
             <a
-              href="https://wa.me/910000000000"
+              href="https://wa.me/919894443263"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-heading font-semibold text-white/80 hover:text-white border border-white/15 hover:border-white/30 bg-white/[0.02] transition-all whitespace-nowrap"
@@ -141,7 +141,7 @@ export default function StrategyNav() {
                   Book Strategy Call
                 </a>
                 <a
-                  href="https://wa.me/910000000000"
+                  href="https://wa.me/919894443263"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3 rounded-full border border-white/20 text-white font-heading font-semibold text-sm"

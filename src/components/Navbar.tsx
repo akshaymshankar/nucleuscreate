@@ -32,7 +32,7 @@ const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between py-4 sm:py-5 px-4 sm:px-6">
         <a
           href="#"
-          className="flex items-center gap-2 sm:gap-3 font-heading text-base sm:text-lg font-bold tracking-wide text-foreground hover:text-primary transition-colors duration-300"
+          className="flex items-center gap-2.5 font-heading text-base sm:text-lg font-black tracking-wider text-foreground hover:text-primary transition-colors duration-300"
           data-cursor-hover
         >
           <motion.img
@@ -42,7 +42,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           />
-          <span className="hidden sm:inline">NUCLEUS</span>
+          <span className="font-heading font-black tracking-wider uppercase text-white">NUCLEUS</span>
         </a>
 
         {/* Desktop links */}
@@ -81,9 +81,20 @@ const Navbar = () => {
               </motion.a>
             )
           )}
+
+          <a
+            href="https://wa.me/919894443263"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden lg:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-heading font-semibold text-white/80 hover:text-white border border-white/15 hover:border-white/30 bg-white/[0.02] transition-all whitespace-nowrap"
+          >
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>WhatsApp</span>
+          </a>
+
           <motion.a
             href="#apply"
-            className="magnetic-btn px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-heading font-semibold hover:opacity-90 transition-all duration-300"
+            className="magnetic-btn px-5 py-2 rounded-full bg-primary text-primary-foreground text-xs uppercase font-heading font-bold tracking-wider hover:opacity-90 transition-all duration-300 shadow-[0_0_20px_rgba(34,197,94,0.3)] whitespace-nowrap"
             data-cursor-hover
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -171,6 +182,17 @@ const Navbar = () => {
                   </motion.a>
                 )
               )}
+              <div className="pt-4 flex flex-col gap-3 w-full max-w-xs">
+                <a
+                  href="https://wa.me/919894443263"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="py-3 px-6 rounded-full border border-[#25D366]/40 bg-[#25D366]/10 text-[#25D366] font-heading font-bold text-center text-sm flex items-center justify-center gap-2"
+                >
+                  <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
+                  <span>Chat on WhatsApp</span>
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

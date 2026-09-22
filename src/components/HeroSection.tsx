@@ -1,6 +1,7 @@
 import React, { memo, useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Pause, Volume2, VolumeX } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Sparkles, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Fast-paced text reveal — words snap in like a jump cut
 const SnapText = memo(({
@@ -161,6 +162,24 @@ const VideoProgressControl = ({
   );
 };
 
+const homepageNewsFeedBrands = [
+  { name: "BAGGAGE TAXI", sector: "Airport Logistics", format: "Direct Response" },
+  { name: "THE OUT", sector: "Luxury Mobility", format: "Live Action" },
+  { name: "ARKA LUXE", sector: "Fine Jewelry", format: "Macro 3D" },
+  { name: "LORD MILANO", sector: "Haute Parfumerie", format: "AI Cinema" },
+  { name: "ORGA BOTANICALS", sector: "Clinical Haircare", format: "UGC Ad" },
+  { name: "AUTOHUB MOTORS", sector: "Performance Auto", format: "Hybrid CGI" },
+  { name: "NEMARI COUTURE", sector: "Bespoke Leather", format: "3D Product" },
+  { name: "THETABODY LABS", sector: "DTC Skincare", format: "Conversion Ad" },
+  { name: "SRM DYNAMICS", sector: "3D Hologram", format: "Volumetric VFX" },
+  { name: "WORLD OF OUD", sector: "Heritage Fragrance", format: "Storytelling" },
+  { name: "WOO FRAGRANCE", sector: "Tester Kit", format: "Viral Hook" },
+  { name: "AROMA COSMETICS", sector: "Botanical Beauty", format: "Macro Sim" },
+  { name: "PACKMAN", sector: "Custom Packaging", format: "Motion 3D" },
+  { name: "DREAM DRIVES", sector: "Supercar Fleet", format: "4K Cinema" },
+  { name: "ROSSO VIVO", sector: "Culinary Brand", format: "Brand Film" },
+];
+
 const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
@@ -277,24 +296,47 @@ const HeroSection = () => {
             </motion.p>
 
             <motion.div
-              className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start"
+              className="mt-6 sm:mt-8 flex flex-col gap-3"
               initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.5, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap items-center gap-3">
                 <a
                   href="#apply"
-                  className="magnetic-btn inline-flex items-center justify-center gap-2 px-7 sm:px-8 py-4 rounded-full bg-primary text-primary-foreground font-heading text-sm sm:text-base font-semibold tracking-wide hover:opacity-90 transition-all duration-300"
+                  className="magnetic-btn inline-flex items-center justify-center gap-2 px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-primary text-black font-heading font-extrabold text-sm sm:text-base tracking-wide hover:brightness-110 shadow-[0_0_25px_rgba(34,197,94,0.35)] transition-all"
                   data-cursor-hover
                 >
-                  Apply for a FREE Pilot Video
+                  <span>Apply for FREE Pilot</span>
                   <span className="text-lg leading-none">→</span>
                 </a>
-                <span className="text-[10px] sm:text-xs text-muted-foreground/70 px-2">
-                  Only for agencies testing 20+ creatives a month.
-                </span>
+
+                <Link
+                  to="/services/ai-video-strategy"
+                  className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-full bg-white/[0.04] hover:bg-white/[0.08] text-white font-heading font-bold text-xs sm:text-sm tracking-wide border border-white/15 backdrop-blur-md transition-all group"
+                  data-cursor-hover
+                >
+                  <Sparkles className="w-4 h-4 text-[#f2542d] group-hover:rotate-12 transition-transform" />
+                  <span>AI Video Strategy</span>
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-[#f2542d]/20 text-[#f2542d] border border-[#f2542d]/30 font-bold uppercase">
+                    NEW
+                  </span>
+                </Link>
+
+                <a
+                  href="https://wa.me/919894443263"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3.5 sm:py-4 rounded-full bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] font-heading font-bold text-xs sm:text-sm tracking-wide border border-[#25D366]/30 transition-all"
+                  data-cursor-hover
+                >
+                  <MessageCircle className="w-4 h-4 fill-current" />
+                  <span>WhatsApp</span>
+                </a>
               </div>
+              <span className="text-[10px] sm:text-xs text-muted-foreground/70 px-1">
+                Only for brands & agencies testing 20+ creatives a month. Direct strategy support included.
+              </span>
             </motion.div>
 
             {/* Trust strip */}
@@ -437,6 +479,51 @@ const HeroSection = () => {
               </div>
             </div>
           </motion.div>
+        </div>
+
+        {/* Continuous Newsfeed Ticker Tape for Homepage */}
+        <div className="mt-16 sm:mt-20 pt-8 border-t border-border/40 overflow-hidden">
+          <div className="flex items-center justify-between pb-5 flex-wrap gap-3">
+            <div className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-primary animate-ping shrink-0" />
+              <span className="text-xs font-mono uppercase tracking-[0.25em] text-foreground font-extrabold">
+                LIVE CLIENT NEWSFEED
+              </span>
+              <span className="hidden sm:inline-block text-[11px] font-mono text-muted-foreground uppercase tracking-widest pl-3 border-l border-border/40">
+                Direct Performance Editing Roster
+              </span>
+            </div>
+            <span className="text-[10px] font-mono text-primary uppercase tracking-wider bg-primary/10 border border-primary/30 px-3 py-1 rounded-full font-bold">
+              Active Brand Network
+            </span>
+          </div>
+
+          {/* Marquee ticker container with smooth continuous motion */}
+          <div className="relative w-full overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            <motion.div
+              className="flex items-center gap-4 whitespace-nowrap will-change-transform"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{ ease: "linear", duration: 32, repeat: Infinity }}
+            >
+              {[...homepageNewsFeedBrands, ...homepageNewsFeedBrands].map((item, idx) => (
+                <div
+                  key={`${item.name}-${idx}`}
+                  className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-card/80 border border-border/80 hover:border-primary/60 hover:bg-card transition-all shadow-md group cursor-default shrink-0"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                  <span className="font-heading font-black text-xs sm:text-sm text-foreground tracking-wider uppercase group-hover:text-primary transition-colors">
+                    {item.name}
+                  </span>
+                  <span className="text-[11px] font-mono text-muted-foreground border-l border-border/60 pl-2.5">
+                    {item.sector}
+                  </span>
+                  <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20 uppercase font-semibold">
+                    {item.format}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

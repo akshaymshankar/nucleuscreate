@@ -287,16 +287,27 @@ const ApplyFormSection = () => {
                     <p className="text-sm text-foreground font-body">
                       Want to lock this faster? Book a quick strategy call now.
                     </p>
-                    <a
-                      href={calendlyUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="magnetic-btn mt-4 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground text-sm font-heading font-semibold tracking-wide hover:opacity-90 transition-opacity"
-                      data-cursor-hover
-                    >
-                      Schedule Meeting on Calendly
-                      <span aria-hidden="true">↗</span>
-                    </a>
+                    <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+                      <a
+                        href={calendlyUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="magnetic-btn inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground text-sm font-heading font-semibold tracking-wide hover:opacity-90 transition-opacity"
+                        data-cursor-hover
+                      >
+                        Schedule Meeting on Calendly
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                      <a
+                        href="https://wa.me/919894443263"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#25D366] text-sm font-heading font-semibold border border-[#25D366]/40 transition-colors"
+                      >
+                        <span>Direct WhatsApp</span>
+                        <span>💬</span>
+                      </a>
+                    </div>
                   </div>
                 )}
               </motion.div>

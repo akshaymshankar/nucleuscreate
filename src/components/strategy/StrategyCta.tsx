@@ -30,7 +30,7 @@ export default function StrategyCta() {
             {/* Action Buttons */}
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <a
-                href="https://wa.me/910000000000"
+                href="https://wa.me/919894443263"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-[#25D366] text-black font-heading font-black text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(37,211,102,0.4)] hover:shadow-[0_0_40px_rgba(37,211,102,0.6)] hover:scale-105 active:scale-95 transition-all"
@@ -134,7 +134,7 @@ export default function StrategyCta() {
 
       {/* Floating WhatsApp Action Trigger */}
       <a
-        href="https://wa.me/910000000000"
+        href="https://wa.me/919894443263"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat directly on WhatsApp"

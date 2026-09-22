@@ -12,21 +12,45 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <img src="/logo.png" alt="Nucleus logo" className="h-10 w-auto" />
-            <a
-              href="mailto:hello@nucleuscreate.in"
-              className="mt-2 inline-block text-sm text-muted-foreground hover:text-primary transition-colors font-body"
-              data-cursor-hover
-            >
-              hello@nucleuscreate.in
-            </a>
+            <div className="flex items-center gap-2.5">
+              <img src="/logo.png" alt="Nucleus logo" className="h-9 w-auto" />
+              <span className="font-heading font-black text-lg tracking-wider text-white">NUCLEUS</span>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 mt-3">
+              <a
+                href="mailto:hello@nucleuscreate.in"
+                className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-body flex items-center gap-1.5"
+                data-cursor-hover
+              >
+                <span>hello@nucleuscreate.in</span>
+              </a>
+              <span className="hidden sm:inline text-white/20">•</span>
+              <a
+                href="https://wa.me/919894443263"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs sm:text-sm text-[#25D366] hover:brightness-125 transition-colors font-body flex items-center gap-1.5 font-semibold"
+                data-cursor-hover
+              >
+                <span>WhatsApp: +91 98944 43263</span>
+              </a>
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-x-6 gap-y-3">
-            {["Privacy Policy", "Terms of Service"].map((s) => (
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            <a
+              href="/services/ai-video-strategy"
+              className="text-xs sm:text-sm text-[#f2542d] hover:brightness-125 font-heading font-bold transition-colors flex items-center gap-1"
+            >
+              <span>AI Video Strategy</span>
+              <span className="text-[9px] font-mono px-1.5 py-0.2 rounded-full bg-[#f2542d]/20 text-[#f2542d] border border-[#f2542d]/30 uppercase">
+                NEW
+              </span>
+            </a>
+            {["Proof", "Services", "Pricing", "Apply"].map((s) => (
               <a
                 key={s}
-                href="#"
+                href={`#${s.toLowerCase()}`}
                 className="text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors font-body"
                 data-cursor-hover
               >
@@ -38,10 +62,10 @@ const Footer = () => {
 
         <div className="mt-10 pt-6 border-t border-border/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <span className="text-xs text-muted-foreground/70 font-body">
-            © 2026 Nucleus. All rights reserved.
+            © {new Date().getFullYear()} Nucleus Productions. All rights reserved.
           </span>
           <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground/60 font-heading">
-            White-Label Creative Studio · India
+            White-Label Creative Studio · High-Volume Video Production
           </span>
         </div>
       </div>
