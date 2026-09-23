@@ -43,36 +43,35 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
     const el = videoRef.current;
     if (!el) return;
 
-    el.muted = true;
     el.defaultMuted = true;
+    el.muted = true;
 
-    const attemptPlay = () => {
+    const playVideo = () => {
       if (!el) return;
       el.muted = true;
-      const promise = el.play();
-      if (promise !== undefined) {
-        promise.catch(() => {
-          // Autoplay fallback on first interaction
-          const retry = () => {
+      const playPromise = el.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          const resume = () => {
             el.play().catch(() => {});
           };
-          window.addEventListener("click", retry, { once: true, passive: true });
-          window.addEventListener("touchstart", retry, { once: true, passive: true });
-          window.addEventListener("scroll", retry, { once: true, passive: true });
+          window.addEventListener("click", resume, { once: true, passive: true });
+          window.addEventListener("touchstart", resume, { once: true, passive: true });
+          window.addEventListener("scroll", resume, { once: true, passive: true });
         });
       }
     };
 
-    attemptPlay();
+    playVideo();
 
-    el.addEventListener("loadeddata", attemptPlay);
-    el.addEventListener("canplay", attemptPlay);
-    el.addEventListener("canplaythrough", attemptPlay);
+    el.addEventListener("loadedmetadata", playVideo);
+    el.addEventListener("loadeddata", playVideo);
+    el.addEventListener("canplay", playVideo);
 
     return () => {
-      el.removeEventListener("loadeddata", attemptPlay);
-      el.removeEventListener("canplay", attemptPlay);
-      el.removeEventListener("canplaythrough", attemptPlay);
+      el.removeEventListener("loadedmetadata", playVideo);
+      el.removeEventListener("loadeddata", playVideo);
+      el.removeEventListener("canplay", playVideo);
     };
   }, [video.src]);
 
@@ -105,14 +104,16 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
 
             <video
               ref={videoRef}
-              src={video.src}
+              key={video.id + video.src}
               autoPlay
               loop
-              muted={isMuted}
+              muted
               playsInline
               preload="auto"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
+            >
+              <source src={video.src} type="video/mp4" />
+            </video>
 
             {/* Gradient Overlay for controls */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/35 pointer-events-none" />
@@ -178,7 +179,7 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           {/* Left Phone Mockup */}
           <motion.div
-            className="hidden lg:flex lg:col-span-3 justify-center lg:justify-end"
+            className="order-2 lg:order-1 col-span-1 lg:col-span-3 flex justify-center lg:justify-end"
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
@@ -192,7 +193,7 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
 
           {/* Center Column: Typography & CTAs */}
           <motion.div
-            className="lg:col-span-6 flex flex-col items-center text-center px-2 sm:px-4"
+            className="order-1 lg:order-2 col-span-1 lg:col-span-6 flex flex-col items-center text-center px-2 sm:px-4"
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -228,25 +229,11 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
                 <span>See The Work</span>
               </a>
             </div>
-
-            {/* Mobile / Tablet Dual Phone Mockups Display */}
-            <div className="flex lg:hidden items-center justify-center gap-4 sm:gap-6 mt-12 w-full">
-              <HeroPhoneMockup
-                video={leftHeroVideo}
-                onOpen={() => onOpenVideo(leftHeroVideo)}
-                badgeLabel="Direct Response"
-              />
-              <HeroPhoneMockup
-                video={rightHeroVideo}
-                onOpen={() => onOpenVideo(rightHeroVideo)}
-                badgeLabel="Brand Showcase"
-              />
-            </div>
           </motion.div>
 
           {/* Right Phone Mockup */}
           <motion.div
-            className="hidden lg:flex lg:col-span-3 justify-center lg:justify-start"
+            className="order-3 lg:order-3 col-span-1 lg:col-span-3 flex justify-center lg:justify-start"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
