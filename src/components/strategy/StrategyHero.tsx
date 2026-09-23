@@ -19,14 +19,14 @@ const leftHeroVideo: VideoItem = {
 };
 
 const rightHeroVideo: VideoItem = {
-  id: "hero-thetabody",
-  title: "Thetabody — Charcoal Detox Mask",
+  id: "hero-arka",
+  title: "Arka — The Solitaire Collection",
   category: "ai",
   categoryLabel: "AI Generated with Editing",
-  src: "/video-assets/THETABODY_Video_10_V7.mp4",
-  client: "Thetabody Labs",
-  description: "Skincare product direct response creative illustrating pore-deep cleansing with seamless AI macro close-ups and clinical proof points.",
-  tags: ["Skincare", "AI Generated with Editing", "DirectResponse"],
+  src: "/video-assets/ARKA_Video_4_V3.mp4",
+  client: "Arka Fine Jewels",
+  description: "Micro-facet diamond caustics, gold luster, and refractive dispersion rendered with photoreal precision.",
+  tags: ["Jewelry", "Luxury", "Macro 3D", "AI Generated with Editing"],
 };
 
 interface HeroPhoneMockupProps {
@@ -40,11 +40,40 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
   const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.defaultMuted = true;
-      videoRef.current.muted = true;
-      videoRef.current.play().catch(() => {});
-    }
+    const el = videoRef.current;
+    if (!el) return;
+
+    el.muted = true;
+    el.defaultMuted = true;
+
+    const attemptPlay = () => {
+      if (!el) return;
+      el.muted = true;
+      const promise = el.play();
+      if (promise !== undefined) {
+        promise.catch(() => {
+          // Autoplay fallback on first interaction
+          const retry = () => {
+            el.play().catch(() => {});
+          };
+          window.addEventListener("click", retry, { once: true, passive: true });
+          window.addEventListener("touchstart", retry, { once: true, passive: true });
+          window.addEventListener("scroll", retry, { once: true, passive: true });
+        });
+      }
+    };
+
+    attemptPlay();
+
+    el.addEventListener("loadeddata", attemptPlay);
+    el.addEventListener("canplay", attemptPlay);
+    el.addEventListener("canplaythrough", attemptPlay);
+
+    return () => {
+      el.removeEventListener("loadeddata", attemptPlay);
+      el.removeEventListener("canplay", attemptPlay);
+      el.removeEventListener("canplaythrough", attemptPlay);
+    };
   }, [video.src]);
 
   const toggleSound = (e: React.MouseEvent) => {
@@ -76,11 +105,12 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
 
             <video
               ref={videoRef}
-              src={encodeURI(video.src || "")}
+              src={video.src}
               autoPlay
               loop
               muted={isMuted}
               playsInline
+              preload="auto"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
 
