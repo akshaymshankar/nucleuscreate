@@ -267,18 +267,10 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
       {/* Card Info Meta */}
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between bg-[#141217]">
         <div>
-          <div className="flex items-center justify-between text-xs mb-1">
-            <span className="text-[#f2542d] font-mono font-semibold tracking-wider uppercase text-[11px]">
-              {item.client || "Client Campaign"}
-            </span>
-            <span className="text-white/40 text-[10px] font-mono">
-              Watch 4K HD
-            </span>
-          </div>
-          <h4 className="font-heading font-bold text-white text-base tracking-tight group-hover:text-[#f2542d] transition-colors line-clamp-1">
+          <h4 className="font-heading font-bold text-white text-base sm:text-lg tracking-tight group-hover:text-[#f2542d] transition-colors line-clamp-1">
             {item.title}
           </h4>
-          <p className="text-xs text-white/60 font-body mt-1.5 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-white/60 font-body mt-2 line-clamp-2 leading-relaxed">
             {item.description}
           </p>
         </div>
