@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import StrategyNav from "@/components/strategy/StrategyNav";
 import StrategyHero from "@/components/strategy/StrategyHero";
-import FormatsSection from "@/components/strategy/FormatsSection";
 import WorkShowcase from "@/components/strategy/WorkShowcase";
 import ProcessTimeline from "@/components/strategy/ProcessTimeline";
 import ComparisonMatrix from "@/components/strategy/ComparisonMatrix";
@@ -19,14 +18,14 @@ export default function AiVideoStrategy() {
 
   // SEO Optimization & Title Management
   useEffect(() => {
-    document.title = "AI Video Strategy & Multi-Format Production — Nucleus Productions";
+    document.title = "AI Video Strategy & Video Production — Nucleus Productions";
 
     // Set meta description
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         "content",
-        "We don't just make AI videos. We make the video that's right for your brand across Live-Action, AI-Generated, and Motion Graphics video. One team, one process."
+        "We don't just make AI videos. We make the video that's right for your brand across video production, AI generation with editing, and motion graphics. One team, one process."
       );
     }
 
@@ -45,7 +44,7 @@ export default function AiVideoStrategy() {
         {
           "@type": "Service",
           "@id": "https://nucleuscreate.in/services/ai-video-strategy#service",
-          "name": "AI Video Strategy & Hybrid Commercial Production",
+          "name": "AI Video Strategy & Commercial Production",
           "serviceType": "Video Production & Direct-Response Advertising",
           "provider": {
             "@type": "Organization",
@@ -53,42 +52,8 @@ export default function AiVideoStrategy() {
             "url": "https://nucleuscreate.in",
           },
           "description":
-            "Pre-production, production, and post across live-action, AI-generated, and motion graphics video. Fast turnaround, high-retention direct response advertising.",
+            "Pre-production, production, and post across live-action, AI-generated with editing, and motion graphics video.",
           "areaServed": "Worldwide",
-          "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Production Formats",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "AI-Generated Video Ads",
-                },
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Live-Action Production",
-                },
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "3D Motion Graphics & CGI",
-                },
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Hybrid Generative Compositing",
-                },
-              },
-            ],
-          },
         },
       ],
     });
@@ -111,9 +76,6 @@ export default function AiVideoStrategy() {
         {/* Hero Section */}
         <StrategyHero onOpenVideo={(video) => setSelectedVideo(video)} />
 
-        {/* 4 Formats Interactive Grid */}
-        <FormatsSection />
-
         {/* Work Showcase / Portfolio Reel */}
         <WorkShowcase onOpenVideo={(video) => setSelectedVideo(video)} />
 
@@ -126,7 +88,7 @@ export default function AiVideoStrategy() {
         {/* Triple Guarantee & Onboarding Requirements */}
         <GuaranteeSection />
 
-        {/* Social Proof Testimonials & FAQ Accordion */}
+        {/* FAQ Accordion */}
         <TestimonialsAndFaq />
 
         {/* Final High-Conversion CTA & Luxury Footer */}

@@ -91,9 +91,6 @@ export default function StrategyCta() {
               <Link to="/" className="text-white/70 hover:text-white transition-colors">
                 Agency Home
               </Link>
-              <a href="#formats" className="text-white/70 hover:text-white transition-colors">
-                Formats
-              </a>
               <a href="#work" className="text-white/70 hover:text-white transition-colors">
                 Work Reel
               </a>

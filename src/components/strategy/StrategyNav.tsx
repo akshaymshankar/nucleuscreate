@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const strategyNavLinks = [
   { label: "Overview", href: "#overview" },
-  { label: "Formats", href: "#formats" },
   { label: "Work", href: "#work" },
   { label: "Process", href: "#process" },
   { label: "Compare", href: "#compare" },

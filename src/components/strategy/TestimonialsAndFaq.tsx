@@ -1,41 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus, HelpCircle, MessageSquareQuote } from "lucide-react";
-
-const testimonials = [
-  {
-    quote:
-      "Nucleus replaced our fragmented video stack entirely. We used to bounce between an AI tool for quick UGC and a sluggish production studio for hero launches. Nucleus produces both, matching our exact brand tone with zero friction.",
-    author: "Rami K.",
-    role: "Head of Growth",
-    brand: "Glow & Mist Fragrance",
-    tag: "AI + Live Action Hybrid",
-    rating: 5,
-  },
-  {
-    quote:
-      "Our paid media CPA on TikTok dropped by 38% in the first 14 days of deploying the AI hook variations Nucleus delivered. The visual fidelity of our jewelry pieces is indistinguishable from physical macro studio shoots.",
-    author: "Elena Rostova",
-    role: "Creative Director",
-    brand: "Arka Fine Jewels",
-    tag: "AI Performance Ads",
-    rating: 5,
-  },
-  {
-    quote:
-      "Speed without the typical AI slop. Their team understands direct response retention hooks, color grading, and actual brand prestige. 10 business days from brief to 6 polished multi-format assets.",
-    author: "Tariq Al-Mansoor",
-    role: "Founder & CMO",
-    brand: "AutoHub Motors",
-    tag: "Automotive 3D & AI",
-    rating: 5,
-  },
-];
+import { Plus, HelpCircle } from "lucide-react";
 
 const faqs = [
   {
     q: "What kind of videos can you create?",
-    a: "Product showcases, brand stories, direct response social ads, promotional campaign reels, technical explainers, and lifestyle content — across live-action, AI-generated, 3D motion graphics, or a hybrid of formats. We recommend the optimal mix based on your direct acquisition goal and budget.",
+    a: "Product showcases, brand stories, direct response social ads, promotional campaign reels, technical explainers, and lifestyle content — across live-action, AI-generated with editing, 3D motion graphics, or a hybrid of formats. We recommend the optimal mix based on your direct acquisition goal and budget.",
   },
   {
     q: "How do you decide between live-action, AI, or motion graphics?",
@@ -75,66 +45,13 @@ export default function TestimonialsAndFaq() {
   };
 
   return (
-    <section id="testimonials" className="relative py-24 sm:py-32 bg-[#0B0A0D] border-b border-white/10 overflow-hidden">
+    <section id="faq" className="relative py-24 sm:py-32 bg-[#0B0A0D] border-b border-white/10 overflow-hidden">
       {/* Ambience */}
       <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-[#f2542d]/5 blur-[150px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
-        {/* Testimonials Block */}
-        <div className="max-w-3xl">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-[#f2542d] bg-[#f2542d]/10 border border-[#f2542d]/25 mb-4">
-            <MessageSquareQuote className="w-3.5 h-3.5" />
-            Social Validation
-          </span>
-
-          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.08]">
-            What brand founders & growth teams say.
-          </h2>
-          <p className="mt-4 text-base sm:text-lg text-white/60 font-body">
-            Direct feedback from brands actively running Nucleus-produced creative across global paid channels.
-          </p>
-        </div>
-
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, idx) => (
-            <motion.div
-              key={t.author}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="p-7 rounded-3xl bg-[#141217] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between shadow-xl"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-4">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-[#f2542d]/15 text-[#f2542d] border border-[#f2542d]/30 font-semibold">
-                    {t.tag}
-                  </span>
-                  <div className="flex text-[#f2542d] text-xs">★★★★★</div>
-                </div>
-
-                <p className="text-sm text-white/80 font-body italic leading-relaxed">
-                  "{t.quote}"
-                </p>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#f2542d] to-amber-500 text-black font-heading font-black flex items-center justify-center text-sm shadow-md">
-                  {t.author.charAt(0)}
-                </div>
-                <div>
-                  <h4 className="font-heading font-bold text-white text-sm leading-snug">{t.author}</h4>
-                  <p className="text-[11px] text-white/50 font-body">
-                    {t.role}, <span className="text-white/80">{t.brand}</span>
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
         {/* FAQ Accordion Block */}
-        <div id="faq" className="mt-28 pt-20 border-t border-white/10">
+        <div>
           <div className="max-w-3xl mb-12">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-[#f2542d] bg-[#f2542d]/10 border border-[#f2542d]/25 mb-4">
               <HelpCircle className="w-3.5 h-3.5" />
