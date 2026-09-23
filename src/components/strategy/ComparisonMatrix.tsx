@@ -17,15 +17,8 @@ const matrixRows = [
     traditional: "None (Outdated aversion)",
   },
   {
-    capability: "3D Motion Graphics & CGI",
-    description: "Photorealistic CAD models, exploded mechanical views, kinetic typography",
-    nucleus: "Yes (In-house 3D team)",
-    aiOnly: "Very Limited / Basic templates",
-    traditional: "Requires expensive 3rd-party subcontractor",
-  },
-  {
     capability: "Hybrid Compositing",
-    description: "Live-action physical product composited into generative AI & 3D worlds",
+    description: "Live-action physical product composited seamlessly into generative AI environments",
     nucleus: "Yes (Rare cross-disciplinary capability)",
     aiOnly: "Impossible without physical camera crews",
     traditional: "Massive VFX budget required ($30k+)",

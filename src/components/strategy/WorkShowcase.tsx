@@ -31,12 +31,12 @@ const portfolioData: VideoItem[] = [
   {
     id: "srm-hologram",
     title: "SRM — 3D Hologram Projection Van",
-    category: "motion",
-    categoryLabel: "Motion Graphics / CGI",
+    category: "ai",
+    categoryLabel: "AI Generated with Editing",
     src: "/video-assets/SRM video 1 V3.mp4",
     client: "SRM Dynamics",
-    description: "High-fidelity 3D CGI projection mapping on a moving mobile installation, showcasing hyper-realistic volumetric lighting and urban night reflections.",
-    tags: ["3D CGI", "VFX", "Automotive", "Motion"],
+    description: "High-fidelity 3D projection visual on a mobile installation, synthesized with generative AI pipelines and urban night color grading.",
+    tags: ["ProductAd", "VFX", "Automotive", "Editing"],
   },
   {
     id: "lord-milano-riyadh",
@@ -91,19 +91,18 @@ const portfolioData: VideoItem[] = [
   {
     id: "nemari-vanity",
     title: "Nemari — Bespoke Leather Vanity Case",
-    category: "motion",
-    categoryLabel: "Motion & CGI",
+    category: "ai",
+    categoryLabel: "AI Generated with Editing",
     src: "/video-assets/Nemari (s1 v1).mp4",
     client: "Nemari",
-    description: "Detailed craftsmanship render emphasizing hand-stitched grain, golden clasps, and modular interior trays in a sophisticated 3D product showcase.",
-    tags: ["Product 3D", "Fashion", "CGI"],
+    description: "Detailed craftsmanship render emphasizing hand-stitched grain, golden clasps, and modular interior trays in a sophisticated product showcase.",
+    tags: ["ProductAd", "Fashion", "AI Generated with Editing"],
   },
 ];
 
 const filterCategories = [
   { id: "all", label: "All Work" },
   { id: "ai", label: "AI Generated with Editing" },
-  { id: "motion", label: "Motion Graphics / CGI" },
   { id: "hybrid", label: "Hybrid" },
 ];
 

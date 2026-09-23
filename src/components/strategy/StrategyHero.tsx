@@ -73,12 +73,12 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
 
   return (
     <div className="relative mx-auto w-[250px] sm:w-[280px] md:w-[310px] lg:w-[330px] group">
-      {/* Dynamic Background Glow Aura */}
-      <div className="absolute -inset-2 rounded-[3.2rem] bg-gradient-to-b from-[#f2542d]/30 via-[#f2542d]/10 to-transparent blur-xl opacity-80 group-hover:opacity-100 transition-opacity" />
+      {/* Subtle Ambient Halo */}
+      <div className="absolute -inset-2 rounded-[3.2rem] bg-gradient-to-b from-white/10 to-transparent blur-xl opacity-60 group-hover:opacity-80 transition-opacity" />
 
       {/* Hardware Frame */}
       <div
-        className="relative rounded-[3rem] p-[3px] bg-gradient-to-b from-white/35 via-white/15 to-white/25 shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden cursor-pointer"
+        className="relative rounded-[3rem] p-[3px] bg-gradient-to-b from-white/30 via-white/10 to-white/20 shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden cursor-pointer"
         onClick={onOpen}
       >
         <div className="rounded-[2.85rem] bg-[#141217] p-2 overflow-hidden">
@@ -87,7 +87,7 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
             {/* Top Dynamic Island */}
             <div className="absolute top-2.5 inset-x-0 z-20 flex justify-center pointer-events-none">
               <div className="w-24 h-4 bg-black/95 backdrop-blur-md rounded-full border border-white/15 flex items-center justify-end px-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
               </div>
             </div>
 
@@ -109,15 +109,15 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
 
             {/* Top Floating Bar */}
             <div className="absolute top-8 inset-x-3.5 flex items-center justify-between pointer-events-none z-10">
-              <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-[#f2542d] border border-white/20 flex items-center gap-1.5 shadow-md">
-                <Sparkles className="w-3 h-3" />
+              <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-white/90 border border-white/15 flex items-center gap-1.5 shadow-md">
+                <Sparkles className="w-3 h-3 text-[#f2542d]" />
                 {badgeLabel}
               </span>
 
               <button
                 type="button"
                 onClick={toggleSound}
-                className="pointer-events-auto p-2 rounded-full bg-black/70 backdrop-blur-md border border-white/25 text-white hover:text-[#f2542d] hover:border-[#f2542d]/40 transition-colors shadow-md"
+                className="pointer-events-auto p-2 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white hover:text-[#f2542d] transition-colors shadow-md"
                 aria-label={isMuted ? "Unmute video" : "Mute video"}
               >
                 {isMuted ? <VolumeX className="w-3.5 h-3.5 text-[#f2542d]" /> : <Volume2 className="w-3.5 h-3.5" />}
@@ -125,10 +125,10 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
             </div>
 
             {/* Bottom Meta */}
-            <div className="absolute bottom-3.5 inset-x-3.5 p-3.5 rounded-2xl bg-black/80 backdrop-blur-md border border-white/20 pointer-events-none z-10 shadow-lg">
+            <div className="absolute bottom-3.5 inset-x-3.5 p-3.5 rounded-2xl bg-black/80 backdrop-blur-md border border-white/15 pointer-events-none z-10 shadow-lg">
               <div className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
-                  <span className="text-[10px] font-mono text-[#f2542d] uppercase tracking-wider font-semibold block truncate">
+                  <span className="text-[10px] font-mono text-white/50 uppercase tracking-wider font-semibold block truncate">
                     {video.client}
                   </span>
                   <h4 className="font-heading font-bold text-white text-xs sm:text-sm truncate">
@@ -151,11 +151,7 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
 export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
   return (
     <section id="overview" className="relative pt-28 sm:pt-36 pb-20 sm:pb-28 overflow-hidden border-b border-white/10 bg-[#0B0A0D]">
-      {/* Background Ambient Glows */}
-      <div className="absolute top-0 left-1/3 -translate-x-1/2 w-[700px] h-[500px] bg-[#f2542d]/15 blur-[160px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/4 right-10 w-[500px] h-[500px] bg-[#f2542d]/10 blur-[180px] rounded-full pointer-events-none" />
-
-      {/* Grid Pattern Overlay */}
+      {/* Clean Grid Pattern Overlay */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
@@ -166,30 +162,24 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Typography & High Visibility Pitch */}
+          {/* Left Column: Typography & High Clarity Message */}
           <motion.div
             className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left"
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Studio Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-widest text-[#f2542d] bg-[#f2542d]/10 border border-[#f2542d]/30 mb-6">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Full-Spectrum Video Studio</span>
-            </div>
-
-            {/* Apple-Scale Display Headline with Highlighting */}
+            {/* Apple-Scale Display Headline without blurry glow */}
             <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[62px] font-black tracking-[-0.035em] text-white leading-[1.08] text-balance">
               We don't just make AI videos.{" "}
-              <span className="block mt-2 sm:mt-3 bg-gradient-to-r from-[#f2542d] via-[#ff7a59] to-[#ffaa40] bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(242,84,45,0.45)]">
+              <span className="block mt-2 sm:mt-3 text-[#f2542d]">
                 We make the video that's right for your brand.
               </span>
             </h1>
 
             {/* High-Clarity Subhead */}
             <p className="mt-6 text-base sm:text-lg md:text-xl text-white/75 max-w-2xl font-body leading-relaxed">
-              Pre-production, production, and post — across live-action, AI-generated, and motion graphics video.
+              Pre-production, production, and post — across live-action, AI-generated, and hybrid video.
               One team, one process, no juggling three vendors.
             </p>
 
@@ -213,7 +203,7 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
             <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
               <a
                 href="#book"
-                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#f2542d] text-black font-heading font-extrabold text-sm uppercase tracking-wider overflow-hidden shadow-[0_0_30px_rgba(242,84,45,0.45)] hover:shadow-[0_0_45px_rgba(242,84,45,0.7)] hover:scale-[1.02] active:scale-95 transition-all duration-300"
+                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#f2542d] text-black font-heading font-extrabold text-sm uppercase tracking-wider overflow-hidden shadow-[0_0_30px_rgba(242,84,45,0.4)] hover:shadow-[0_0_40px_rgba(242,84,45,0.6)] hover:scale-[1.02] active:scale-95 transition-all duration-300"
               >
                 <span>Book a Free Strategy Call</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
