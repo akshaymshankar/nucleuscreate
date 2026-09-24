@@ -57,12 +57,12 @@ export default function ComparisonMatrix() {
   return (
     <section id="compare" className="relative py-24 sm:py-32 bg-[#0B0A0D] border-b border-white/10 overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#f2542d]/5 blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/5 blur-[160px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-[#f2542d] bg-[#f2542d]/10 border border-[#f2542d]/25 mb-4">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-primary bg-primary/10 border border-primary/25 mb-4">
             <Award className="w-3.5 h-3.5" />
             Competitive Breakdown
           </span>
@@ -78,17 +78,62 @@ export default function ComparisonMatrix() {
           </p>
         </div>
 
-        {/* Comparison Table Wrap */}
-        <div className="mt-14 overflow-x-auto rounded-3xl border border-white/10 bg-[#121015]/90 backdrop-blur-xl shadow-2xl">
+        {/* Mobile View: Apple-grade Stacked Cards (Hidden on desktop) */}
+        <div className="mt-12 space-y-4 lg:hidden">
+          {matrixRows.map((row, idx) => (
+            <div
+              key={idx}
+              className="p-5 sm:p-6 rounded-2xl bg-[#141217] border border-white/10 shadow-lg space-y-4"
+            >
+              <div>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-primary font-bold">
+                  Capability {idx + 1}
+                </span>
+                <h3 className="font-heading font-bold text-white text-lg mt-0.5">{row.capability}</h3>
+                <p className="text-xs text-white/50 mt-1">{row.description}</p>
+              </div>
+
+              {/* Nucleus Featured Pill */}
+              <div className="p-3.5 rounded-xl bg-primary/10 border border-primary/30 flex items-start gap-2.5">
+                <div className="w-5 h-5 rounded-full bg-primary text-black flex items-center justify-center shrink-0 mt-0.5">
+                  <Check className="w-3.5 h-3.5 stroke-[3]" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-mono text-primary font-bold uppercase tracking-wider block">
+                    NUCLEUS PRODUCTIONS
+                  </span>
+                  <span className="text-sm font-heading font-bold text-white leading-snug">
+                    {row.nucleus}
+                  </span>
+                </div>
+              </div>
+
+              {/* Competitors Mini Comparison */}
+              <div className="grid grid-cols-2 gap-2 text-xs pt-1 border-t border-white/5">
+                <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+                  <span className="text-[9px] font-mono uppercase text-white/40 block mb-1">AI-Only Studios</span>
+                  <span className="text-white/60 font-body text-xs">{row.aiOnly}</span>
+                </div>
+                <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+                  <span className="text-[9px] font-mono uppercase text-white/40 block mb-1">Traditional Houses</span>
+                  <span className="text-white/60 font-body text-xs">{row.traditional}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop View: Wide Apple Comparison Table (Hidden on mobile) */}
+        <div className="mt-14 hidden lg:block overflow-x-auto rounded-3xl border border-white/10 bg-[#121015]/90 backdrop-blur-xl shadow-2xl">
           <table className="w-full text-left border-collapse min-w-[760px]">
             <thead>
               <tr className="border-b border-white/10 text-xs font-mono uppercase tracking-wider">
                 <th className="p-5 sm:p-6 text-white/40 font-semibold w-1/4">Key Capability</th>
-                <th className="p-5 sm:p-6 bg-[#f2542d]/10 text-[#f2542d] font-bold border-x border-[#f2542d]/20 w-1/3 relative">
+                <th className="p-5 sm:p-6 bg-primary/10 text-primary font-bold border-x border-primary/20 w-1/3 relative">
                   <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#f2542d]" />
+                    <Sparkles className="w-4 h-4 text-primary" />
                     <span className="text-sm font-heading font-black text-white">Nucleus Productions</span>
-                    <span className="ml-auto text-[9px] px-2 py-0.5 rounded-full bg-[#f2542d] text-black font-extrabold uppercase">
+                    <span className="ml-auto text-[9px] px-2 py-0.5 rounded-full bg-primary text-black font-extrabold uppercase shadow-[0_0_12px_rgba(34,197,94,0.4)]">
                       Recommended
                     </span>
                   </div>
@@ -107,9 +152,9 @@ export default function ComparisonMatrix() {
                   </td>
 
                   {/* Nucleus Productions (Hero Column) */}
-                  <td className="p-5 sm:p-6 bg-[#f2542d]/[0.06] border-x border-[#f2542d]/20">
+                  <td className="p-5 sm:p-6 bg-primary/[0.06] border-x border-primary/20">
                     <div className="flex items-center gap-2.5 text-white font-semibold text-sm">
-                      <div className="w-5 h-5 rounded-full bg-[#f2542d] text-black flex items-center justify-center shrink-0">
+                      <div className="w-5 h-5 rounded-full bg-primary text-black flex items-center justify-center shrink-0">
                         <Check className="w-3.5 h-3.5 stroke-[3]" />
                       </div>
                       <span>{row.nucleus}</span>

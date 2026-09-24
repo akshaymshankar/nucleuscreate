@@ -158,16 +158,16 @@ const ServicesSection = () => {
 
         {/* Apple-grade AI Video Strategy Feature Card */}
         <motion.div
-          className="mt-8 sm:mt-12 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-card via-[#16131B] to-card border border-white/15 relative overflow-hidden shadow-2xl"
+          className="mt-8 sm:mt-12 p-6 sm:p-8 md:p-10 rounded-3xl bg-gradient-to-r from-card via-[#121614] to-card border border-primary/30 relative overflow-hidden shadow-2xl"
           initial={{ opacity: 0, y: 25 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#f2542d]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="max-w-2xl">
               <div className="flex items-center gap-2 mb-3">
-                <span className="px-2.5 py-0.5 rounded-full bg-[#f2542d]/20 text-[#f2542d] border border-[#f2542d]/40 text-[10px] font-mono font-bold uppercase tracking-wider">
+                <span className="px-2.5 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/40 text-[10px] font-mono font-bold uppercase tracking-wider">
                   New Flagship Suite
                 </span>
                 <span className="text-[11px] font-mono text-muted-foreground uppercase tracking-widest">
@@ -182,10 +182,10 @@ const ServicesSection = () => {
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 shrink-0">
               <Link
                 to="/services/ai-video-strategy"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#f2542d] text-white font-heading font-bold text-xs sm:text-sm hover:brightness-110 shadow-[0_0_25px_rgba(242,84,45,0.35)] transition-all group"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-black font-heading font-extrabold text-xs sm:text-sm hover:brightness-110 shadow-[0_0_25px_rgba(34,197,94,0.35)] transition-all group"
               >
                 <span>Explore AI Video Strategy</span>
                 <span className="text-base group-hover:translate-x-0.5 transition-transform">→</span>
@@ -194,7 +194,7 @@ const ServicesSection = () => {
                 href="https://wa.me/919894443263"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-white font-heading font-semibold text-xs sm:text-sm border border-white/15 transition-all"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-white font-heading font-semibold text-xs sm:text-sm border border-white/15 transition-all"
               >
                 <span>Chat on WhatsApp</span>
               </a>

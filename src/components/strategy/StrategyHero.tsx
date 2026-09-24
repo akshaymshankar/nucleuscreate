@@ -110,17 +110,17 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
             {/* Top Floating Bar */}
             <div className="absolute top-8 inset-x-3.5 flex items-center justify-between pointer-events-none z-10">
               <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-white/90 border border-white/15 flex items-center gap-1.5 shadow-md">
-                <Sparkles className="w-3 h-3 text-[#f2542d]" />
+                <Sparkles className="w-3 h-3 text-primary" />
                 {badgeLabel}
               </span>
 
               <button
                 type="button"
                 onClick={toggleSound}
-                className="pointer-events-auto p-2 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white hover:text-[#f2542d] transition-colors shadow-md"
+                className="pointer-events-auto p-2 rounded-full bg-black/70 backdrop-blur-md border border-white/20 text-white hover:text-primary transition-colors shadow-md"
                 aria-label={isMuted ? "Unmute video" : "Mute video"}
               >
-                {isMuted ? <VolumeX className="w-3.5 h-3.5 text-[#f2542d]" /> : <Volume2 className="w-3.5 h-3.5" />}
+                {isMuted ? <VolumeX className="w-3.5 h-3.5 text-primary" /> : <Volume2 className="w-3.5 h-3.5" />}
               </button>
             </div>
 
@@ -136,7 +136,7 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
                   </h4>
                 </div>
 
-                <div className="w-9 h-9 rounded-full bg-[#f2542d] text-black flex items-center justify-center pl-0.5 shadow-lg group-hover:scale-110 transition-transform shrink-0">
+                <div className="w-9 h-9 rounded-full bg-primary text-black flex items-center justify-center pl-0.5 shadow-[0_0_20px_rgba(34,197,94,0.4)] group-hover:scale-110 transition-transform shrink-0">
                   <Play className="w-4 h-4 fill-black" />
                 </div>
               </div>
@@ -161,7 +161,7 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
       />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
           {/* Left Column: Typography & High Clarity Message */}
           <motion.div
             className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left"
@@ -169,41 +169,43 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Apple-Scale Display Headline without blurry glow */}
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[62px] font-black tracking-[-0.035em] text-white leading-[1.08] text-balance">
+            {/* Apple-Scale Display Headline */}
+            <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-[62px] font-black tracking-[-0.035em] text-white leading-[1.1] text-balance">
               We don't just make AI videos.{" "}
-              <span className="block mt-2 sm:mt-3 text-[#f2542d]">
+              <span className="block mt-2 sm:mt-3 text-primary">
                 We make the video that's right for your brand.
               </span>
             </h1>
 
             {/* High-Clarity Subhead */}
-            <p className="mt-6 text-base sm:text-lg md:text-xl text-white/75 max-w-2xl font-body leading-relaxed">
+            <p className="mt-5 sm:mt-6 text-sm sm:text-lg md:text-xl text-white/75 max-w-2xl font-body leading-relaxed">
               Pre-production, production, and post — across live-action, AI-generated, and hybrid video.
               One team, one process, no juggling three vendors.
             </p>
 
             {/* Key Value Checks */}
-            <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-xs sm:text-sm text-white/65 font-mono">
+            <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 sm:gap-x-6 gap-y-2 text-xs sm:text-sm text-white/70 font-mono">
               <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#f2542d]" />
+                <CheckCircle2 className="w-4 h-4 text-primary" />
                 <span>48–72hr Delivery</span>
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#f2542d]" />
+                <CheckCircle2 className="w-4 h-4 text-primary" />
                 <span>Live-Action & AI Mixed</span>
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#f2542d]" />
+                <CheckCircle2 className="w-4 h-4 text-primary" />
                 <span>White-Label Ready</span>
               </span>
             </div>
 
             {/* CTAs */}
-            <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
+            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full sm:w-auto">
               <a
-                href="#book"
-                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#f2542d] text-black font-heading font-extrabold text-sm uppercase tracking-wider overflow-hidden shadow-[0_0_30px_rgba(242,84,45,0.4)] hover:shadow-[0_0_40px_rgba(242,84,45,0.6)] hover:scale-[1.02] active:scale-95 transition-all duration-300"
+                href="https://calendly.com/nucleuscreates/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-primary text-black font-heading font-extrabold text-sm uppercase tracking-wider overflow-hidden shadow-[0_0_30px_rgba(34,197,94,0.4)] hover:shadow-[0_0_40px_rgba(34,197,94,0.6)] hover:brightness-110 active:scale-95 transition-all duration-300"
               >
                 <span>Book a Free Strategy Call</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

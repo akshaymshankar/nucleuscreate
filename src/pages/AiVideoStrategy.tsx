@@ -67,7 +67,7 @@ export default function AiVideoStrategy() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0B0A0D] text-[#F5F3EF] selection:bg-[#f2542d]/30 selection:text-white font-body antialiased">
+    <div className="min-h-screen bg-[#0B0A0D] text-[#F5F3EF] selection:bg-primary/30 selection:text-white font-body antialiased">
       {/* Top Floating Glass Navigation */}
       <StrategyNav />
 

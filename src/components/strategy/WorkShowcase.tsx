@@ -117,13 +117,13 @@ export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
   return (
     <section id="work" className="relative py-24 sm:py-32 bg-[#0B0A0D] border-b border-white/10">
       {/* Background radial glow */}
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-[#f2542d]/5 blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-primary/5 blur-[160px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Section Header & Filter Pills */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b border-white/10">
           <div className="max-w-2xl">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-[#f2542d] bg-[#f2542d]/10 border border-[#f2542d]/25 mb-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-primary bg-primary/10 border border-primary/25 mb-4">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Proven Output</span>
             </span>
@@ -136,8 +136,8 @@ export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
             </p>
           </div>
 
-          {/* Filter Pills */}
-          <div className="flex items-center gap-2 flex-wrap">
+          {/* Filter Pills with touch-friendly mobile horizontal scroll */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:pb-0 sm:flex-wrap">
             {filterCategories.map((cat) => {
               const isActive = activeFilter === cat.id;
               const count =
@@ -149,16 +149,16 @@ export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
                 <button
                   key={cat.id}
                   onClick={() => setActiveFilter(cat.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-heading font-semibold transition-all duration-200 flex items-center gap-2 ${
+                  className={`px-4 py-2 rounded-full text-xs font-heading font-semibold transition-all duration-200 flex items-center gap-2 shrink-0 ${
                     isActive
-                      ? "bg-[#f2542d] text-black shadow-[0_0_20px_rgba(242,84,45,0.4)]"
+                      ? "bg-primary text-black font-extrabold shadow-[0_0_20px_rgba(34,197,94,0.4)]"
                       : "bg-white/[0.04] text-white/70 hover:text-white hover:bg-white/[0.08] border border-white/10"
                   }`}
                 >
                   <span>{cat.label}</span>
                   <span
                     className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
-                      isActive ? "bg-black/20 text-black font-bold" : "bg-white/10 text-white/50"
+                      isActive ? "bg-black/25 text-black font-extrabold" : "bg-white/10 text-white/50"
                     }`}
                   >
                     {count}
@@ -216,7 +216,7 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4 }}
-      className="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#141217] hover:border-[#f2542d]/50 transition-all duration-300 shadow-lg flex flex-col cursor-pointer"
+      className="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#141217] hover:border-primary/50 transition-all duration-300 shadow-lg flex flex-col cursor-pointer"
       onClick={onOpen}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -238,7 +238,7 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
 
         {/* Top Bar Badges */}
         <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none">
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-[#f2542d] border border-white/15">
+          <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-primary border border-white/15">
             {item.categoryLabel}
           </span>
         </div>
@@ -248,16 +248,16 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
           <button
             type="button"
             onClick={toggleSound}
-            className="absolute top-3 right-3 p-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white hover:text-[#f2542d] transition-colors"
+            className="absolute top-3 right-3 p-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white hover:text-primary transition-colors"
             aria-label="Toggle mute"
           >
-            {isMuted ? <VolumeX className="w-3.5 h-3.5 text-[#f2542d]" /> : <Volume2 className="w-3.5 h-3.5" />}
+            {isMuted ? <VolumeX className="w-3.5 h-3.5 text-primary" /> : <Volume2 className="w-3.5 h-3.5" />}
           </button>
         )}
 
         {/* Center Play Icon Glow */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white flex items-center justify-center pl-1 group-hover:bg-[#f2542d] group-hover:text-black group-hover:scale-115 transition-all duration-300 shadow-xl">
+          <div className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white flex items-center justify-center pl-1 group-hover:bg-primary group-hover:text-black group-hover:scale-115 transition-all duration-300 shadow-xl">
             <Play className="w-5 h-5 fill-current" />
           </div>
         </div>
@@ -266,7 +266,7 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
       {/* Card Info Meta */}
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between bg-[#141217]">
         <div>
-          <h4 className="font-heading font-bold text-white text-base sm:text-lg tracking-tight group-hover:text-[#f2542d] transition-colors line-clamp-1">
+          <h4 className="font-heading font-bold text-white text-base sm:text-lg tracking-tight group-hover:text-primary transition-colors line-clamp-1">
             {item.title}
           </h4>
           <p className="text-xs text-white/60 font-body mt-2 line-clamp-2 leading-relaxed">

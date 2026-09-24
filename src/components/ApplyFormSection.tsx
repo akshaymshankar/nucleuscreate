@@ -34,10 +34,10 @@ const Field = ({ label, children, error }: { label: string; children: React.Reac
 );
 
 const inputCls =
-  "w-full px-4 py-3.5 rounded-xl bg-background border border-border text-sm text-foreground placeholder:text-muted-foreground/50 font-body focus:outline-none focus:border-primary/60 transition-colors";
+  "w-full px-4 py-3.5 rounded-xl bg-background border border-border text-base sm:text-sm text-foreground placeholder:text-muted-foreground/50 font-body focus:outline-none focus:border-primary/60 transition-colors";
 
 const leadWebhookUrl = "https://script.google.com/macros/s/AKfycbzLsjoZsyU4uFJ_92d14NckreYVdpWOCv7Y1tpObr4uXIGsw3fs2DvoNWMZ5sMZaXYO5g/exec";
-const calendlyUrl = "https://calendly.com/anushkarthik666/consultation";
+const calendlyUrl = "https://calendly.com/nucleuscreates/30min";
 
 const ApplyFormSection = () => {
   const ref = useRef(null);
@@ -245,7 +245,7 @@ const ApplyFormSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="magnetic-btn mt-8 sm:mt-10 w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-primary text-primary-foreground font-heading text-sm sm:text-base font-semibold tracking-wide hover:opacity-90 transition-all duration-300"
+                  className="magnetic-btn mt-8 sm:mt-10 w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-primary text-black font-heading text-sm sm:text-base font-extrabold tracking-wide hover:brightness-110 shadow-[0_0_25px_rgba(34,197,94,0.35)] transition-all duration-300"
                   data-cursor-hover
                 >
                   {isSubmitting ? "Sending..." : "Request My Pilot Video"}

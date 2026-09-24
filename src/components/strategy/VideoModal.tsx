@@ -111,7 +111,7 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
         >
           {/* Ambient Glow */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#f2542d]/15 blur-[140px] rounded-full" />
+            <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/15 blur-[140px] rounded-full" />
           </div>
 
           <motion.div
@@ -125,7 +125,7 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
             {/* Top Bar */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 bg-white/[0.02]">
               <div className="flex items-center gap-3">
-                <span className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wider uppercase bg-[#f2542d]/20 text-[#f2542d] border border-[#f2542d]/40 flex items-center gap-1.5">
+                <span className="px-3 py-1 rounded-full text-[11px] font-semibold tracking-wider uppercase bg-primary/20 text-primary border border-primary/40 flex items-center gap-1.5">
                   <Sparkles className="w-3 h-3" />
                   {video.categoryLabel}
                 </span>
@@ -140,7 +140,7 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
                   className="p-2 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-colors"
                   aria-label={isMuted ? "Unmute" : "Mute"}
                 >
-                  {isMuted ? <VolumeX className="w-5 h-5 text-[#f2542d]" /> : <Volume2 className="w-5 h-5" />}
+                  {isMuted ? <VolumeX className="w-5 h-5 text-primary" /> : <Volume2 className="w-5 h-5" />}
                 </button>
                 <button
                   onClick={onClose}
@@ -168,7 +168,7 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
                 />
               ) : (
                 <div className="flex flex-col items-center justify-center p-8 text-center">
-                  <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[#f2542d] mb-4">
+                  <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-primary mb-4">
                     <Sparkles className="w-8 h-8" />
                   </div>
                   <h4 className="font-heading text-lg text-white font-bold">Showcase Case Study</h4>
@@ -184,8 +184,8 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
                   onClick={togglePlay}
                   className="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer backdrop-blur-[2px]"
                 >
-                  <div className="w-16 h-16 rounded-full bg-[#f2542d] text-white flex items-center justify-center pl-1 shadow-2xl transition-transform hover:scale-110">
-                    <Play className="w-7 h-7 fill-white" />
+                  <div className="w-16 h-16 rounded-full bg-primary text-black flex items-center justify-center pl-1 shadow-[0_0_30px_rgba(34,197,94,0.5)] transition-transform hover:scale-110">
+                    <Play className="w-7 h-7 fill-black" />
                   </div>
                 </div>
               )}
@@ -198,7 +198,7 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
                     onClick={handleSeek}
                   >
                     <div
-                      className="h-full bg-gradient-to-r from-[#f2542d] to-[#ff7e5f] rounded-full relative"
+                      className="h-full bg-gradient-to-r from-primary to-emerald-400 rounded-full relative"
                       style={{ width: `${progress}%` }}
                     />
                   </div>
@@ -209,7 +209,7 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
                         {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-white" />}
                       </button>
                       <button onClick={toggleMute} className="hover:text-white">
-                        {isMuted ? <VolumeX className="w-4 h-4 text-[#f2542d]" /> : <Volume2 className="w-4 h-4" />}
+                        {isMuted ? <VolumeX className="w-4 h-4 text-primary" /> : <Volume2 className="w-4 h-4" />}
                       </button>
                       <span>
                         {formatTime(currentTime)} / {formatTime(duration)}
@@ -233,7 +233,7 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
             {/* Bottom Meta & Breakdown */}
             <div className="p-5 sm:p-6 bg-[#141117] border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="space-y-1">
-                <p className="text-xs text-[#f2542d] font-semibold tracking-wider uppercase font-mono">
+                <p className="text-xs text-primary font-semibold tracking-wider uppercase font-mono">
                   Direct Response Case File · {video.client || "Client Campaign"}
                 </p>
                 <p className="text-sm text-white/70 max-w-2xl leading-relaxed">
@@ -255,9 +255,11 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
 
               <div className="shrink-0 flex items-center gap-3">
                 <a
-                  href="#book"
+                  href="https://calendly.com/nucleuscreates/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={onClose}
-                  className="px-5 py-2.5 rounded-full bg-[#f2542d] text-black font-heading font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity shadow-[0_0_20px_rgba(242,84,45,0.4)]"
+                  className="px-5 py-2.5 rounded-full bg-primary text-black font-heading font-extrabold text-xs uppercase tracking-wider hover:brightness-110 transition-all shadow-[0_0_20px_rgba(34,197,94,0.4)]"
                 >
                   Deploy Similar Ad
                 </a>

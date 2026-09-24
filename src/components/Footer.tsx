@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -38,15 +39,15 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            <a
-              href="/services/ai-video-strategy"
-              className="text-xs sm:text-sm text-[#f2542d] hover:brightness-125 font-heading font-bold transition-colors flex items-center gap-1"
+            <Link
+              to="/services/ai-video-strategy"
+              className="text-xs sm:text-sm text-primary hover:brightness-125 font-heading font-bold transition-colors flex items-center gap-1.5"
             >
               <span>AI Video Strategy</span>
-              <span className="text-[9px] font-mono px-1.5 py-0.2 rounded-full bg-[#f2542d]/20 text-[#f2542d] border border-[#f2542d]/30 uppercase">
+              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/30 uppercase font-extrabold">
                 NEW
               </span>
-            </a>
+            </Link>
             {["Proof", "Services", "Pricing", "Apply"].map((s) => (
               <a
                 key={s}

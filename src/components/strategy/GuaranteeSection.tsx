@@ -62,12 +62,12 @@ export default function GuaranteeSection() {
   return (
     <section id="guarantee" className="relative py-24 sm:py-32 bg-[#100E12] border-b border-white/10 overflow-hidden">
       {/* Background Ambience */}
-      <div className="absolute top-1/4 left-1/3 w-[600px] h-[400px] bg-[#f2542d]/5 blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/3 w-[600px] h-[400px] bg-primary/5 blur-[160px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Part 1: Guarantees Header */}
         <div className="max-w-3xl">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-[#f2542d] bg-[#f2542d]/10 border border-[#f2542d]/25 mb-4">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-primary bg-primary/10 border border-primary/25 mb-4">
             <ShieldCheck className="w-3.5 h-3.5" />
             Our Standard
           </span>
@@ -93,11 +93,11 @@ export default function GuaranteeSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="p-7 sm:p-8 rounded-3xl bg-[#17141A] border border-white/10 hover:border-[#f2542d]/40 transition-all duration-300 relative overflow-hidden group shadow-xl flex flex-col justify-between"
+                className="p-7 sm:p-8 rounded-3xl bg-[#17141A] border border-white/10 hover:border-primary/40 transition-all duration-300 relative overflow-hidden group shadow-xl flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-[#f2542d]/10 border border-[#f2542d]/30 text-[#f2542d] flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 text-primary flex items-center justify-center group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(34,197,94,0.15)]">
                       <Icon className="w-6 h-6" />
                     </div>
                     <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/60">
@@ -114,8 +114,8 @@ export default function GuaranteeSection() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-2 text-xs font-mono text-[#f2542d]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#f2542d]" />
+                <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-2 text-xs font-mono text-primary font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                   <span>Contractually Enforced</span>
                 </div>
               </motion.div>
@@ -126,7 +126,7 @@ export default function GuaranteeSection() {
         {/* Part 2: Onboarding Requirements */}
         <div id="onboarding" className="mt-24 pt-20 border-t border-white/10">
           <div className="max-w-3xl mb-12">
-            <span className="text-xs font-mono uppercase tracking-widest text-[#f2542d] font-semibold block mb-2">
+            <span className="text-xs font-mono uppercase tracking-widest text-primary font-semibold block mb-2">
               Smooth Kickoff
             </span>
             <h3 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
@@ -144,10 +144,10 @@ export default function GuaranteeSection() {
               return (
                 <div
                   key={item.title}
-                  className="p-6 rounded-2xl bg-[#141217] border border-white/5 hover:border-white/15 transition-all flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-[#141217] border border-white/5 hover:border-primary/20 transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 text-[#f2542d] flex items-center justify-center mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 text-primary flex items-center justify-center mb-4">
                       <Icon className="w-5 h-5" />
                     </div>
                     <h4 className="font-heading font-bold text-white text-base">

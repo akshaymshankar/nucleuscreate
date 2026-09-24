@@ -50,7 +50,7 @@ export default function StrategyNav() {
               <img
                 src={nucleusPremiumLogo}
                 alt="Nucleus"
-                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-[#f2542d]/40 group-hover:border-[#f2542d] transition-colors"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-primary/40 group-hover:border-primary transition-colors"
               />
               <span className="font-heading font-black tracking-wide text-white text-base sm:text-lg leading-none uppercase">
                 NUCLEUS
@@ -72,7 +72,7 @@ export default function StrategyNav() {
           </div>
 
           {/* Right Action Buttons */}
-          <div className="flex items-center gap-2.5 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             <a
               href="https://wa.me/919894443263"
               target="_blank"
@@ -84,8 +84,10 @@ export default function StrategyNav() {
             </a>
 
             <a
-              href="#book"
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-gradient-to-r from-[#f2542d] to-[#ff7347] text-black font-heading font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(242,84,45,0.4)] hover:brightness-110 active:scale-95 transition-all whitespace-nowrap leading-none"
+              href="https://calendly.com/nucleuscreates/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 rounded-full bg-primary text-black font-heading font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(34,197,94,0.35)] hover:brightness-110 active:scale-95 transition-all whitespace-nowrap leading-none"
             >
               <PhoneCall className="w-3.5 h-3.5 stroke-[2.5]" />
               <span>Book Call</span>
@@ -117,7 +119,7 @@ export default function StrategyNav() {
               <Link
                 to="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-xs uppercase tracking-widest text-[#f2542d] font-mono font-semibold pb-4 border-b border-white/10 flex items-center justify-center gap-2"
+                className="text-xs uppercase tracking-widest text-primary font-mono font-semibold pb-4 border-b border-white/10 flex items-center justify-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" /> Back to Main Agency Site
               </Link>
@@ -126,16 +128,18 @@ export default function StrategyNav() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="font-heading text-2xl font-bold text-white hover:text-[#f2542d] transition-colors"
+                  className="font-heading text-2xl font-bold text-white hover:text-primary transition-colors"
                 >
                   {item.label}
                 </a>
               ))}
               <div className="pt-6 flex flex-col gap-3">
                 <a
-                  href="#book"
+                  href="https://calendly.com/nucleuscreates/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full py-3.5 rounded-full bg-[#f2542d] text-black font-heading font-bold text-sm uppercase tracking-wider shadow-lg"
+                  className="w-full py-3.5 rounded-full bg-primary text-black font-heading font-extrabold text-sm uppercase tracking-wider shadow-[0_0_20px_rgba(34,197,94,0.35)]"
                 >
                   Book Strategy Call
                 </a>

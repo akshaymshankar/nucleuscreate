@@ -247,7 +247,7 @@ const HeroSection = () => {
               For Performance Marketing Agencies
             </motion.span>
 
-            <h1 className="mt-4 sm:mt-5 font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.12]">
+            <h1 className="mt-4 sm:mt-5 font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground leading-[1.12]">
               <SnapText
                 text="Scale your client ad accounts"
                 className="block"
@@ -262,7 +262,7 @@ const HeroSection = () => {
               />
               <SnapText
                 text="more video editors."
-                className="block text-primary whitespace-nowrap"
+                className="block text-primary"
                 delay={0.6}
                 stagger={0.045}
               />
@@ -285,7 +285,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.5, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                 <a
                   href="#apply"
                   className="magnetic-btn inline-flex items-center justify-center gap-2 px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-primary text-black font-heading font-extrabold text-sm sm:text-base tracking-wide hover:brightness-110 shadow-[0_0_25px_rgba(34,197,94,0.35)] transition-all"
@@ -297,12 +297,12 @@ const HeroSection = () => {
 
                 <Link
                   to="/services/ai-video-strategy"
-                  className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-full bg-white/[0.04] hover:bg-white/[0.08] text-white font-heading font-bold text-xs sm:text-sm tracking-wide border border-white/15 backdrop-blur-md transition-all group"
+                  className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-full bg-white/[0.04] hover:bg-white/[0.08] text-white font-heading font-bold text-xs sm:text-sm tracking-wide border border-white/15 hover:border-primary/40 backdrop-blur-md transition-all group"
                   data-cursor-hover
                 >
-                  <Sparkles className="w-4 h-4 text-[#f2542d] group-hover:rotate-12 transition-transform" />
+                  <Sparkles className="w-4 h-4 text-primary group-hover:rotate-12 transition-transform" />
                   <span>AI Video Strategy</span>
-                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-[#f2542d]/20 text-[#f2542d] border border-[#f2542d]/30 font-bold uppercase">
+                  <span className="text-[9px] font-mono px-1.5 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/30 font-bold uppercase">
                     NEW
                   </span>
                 </Link>
@@ -314,7 +314,7 @@ const HeroSection = () => {
 
             {/* Trust strip */}
             <motion.div
-              className="mt-8 sm:mt-10 flex flex-wrap gap-x-8 gap-y-3 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground/60 font-heading"
+              className="mt-8 sm:mt-10 flex flex-wrap items-center gap-x-4 sm:gap-x-8 gap-y-2 text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground/70 font-heading"
               initial="hidden"
               animate="visible"
               variants={{
@@ -325,7 +325,7 @@ const HeroSection = () => {
               {["48hr Delivery", "White-Label", "2,000+ Tier-1 Agencies"].map((t, i, arr) => (
                 <motion.span
                   key={t}
-                  className="flex items-center gap-x-8"
+                  className="inline-flex items-center gap-x-4 sm:gap-x-8"
                   variants={{
                     hidden: { opacity: 0, x: -8 },
                     visible: { opacity: 1, x: 0 },
@@ -334,7 +334,7 @@ const HeroSection = () => {
                 >
                   <span>{t}</span>
                   {i < arr.length - 1 && (
-                    <span className="w-1 h-1 rounded-full bg-primary/40" />
+                    <span className="w-1 h-1 rounded-full bg-primary/50 shrink-0" />
                   )}
                 </motion.span>
               ))}
@@ -491,7 +491,7 @@ const HeroSection = () => {
             <div className="w-[98%] h-1 sm:h-1.5 bg-gradient-to-b from-[#09080c] via-[#16151a] to-[#25232c] border-t border-black/80" />
 
             {/* MacBook Bottom Base / Keyboard Deck */}
-            <div className="relative w-[104%] h-3.5 sm:h-4.5 bg-gradient-to-b from-[#2e2a36] via-[#1d1b24] to-[#121117] rounded-b-[14px] sm:rounded-b-[18px] border-x border-b border-white/20 shadow-[0_15px_30px_rgba(0,0,0,0.95)] flex items-start justify-center">
+            <div className="relative w-full sm:w-[104%] h-3.5 sm:h-4.5 bg-gradient-to-b from-[#2e2a36] via-[#1d1b24] to-[#121117] rounded-b-[14px] sm:rounded-b-[18px] border-x border-b border-white/20 shadow-[0_15px_30px_rgba(0,0,0,0.95)] flex items-start justify-center">
               {/* Display Opening Thumb Groove */}
               <div className="w-16 sm:w-20 h-1 sm:h-1.5 bg-[#09080c] rounded-b-md border-t border-black/70 shadow-inner" />
             </div>
@@ -501,31 +501,31 @@ const HeroSection = () => {
 
             {/* Apple Dock Widget Beneath MacBook */}
             <motion.div
-              className="mt-4 w-full flex items-center justify-between gap-3 p-3.5 sm:p-4 rounded-2xl bg-[#141217]/90 backdrop-blur-xl border border-white/15 shadow-xl"
+              className="mt-4 w-full flex items-center justify-between gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-2xl bg-[#141217]/95 backdrop-blur-xl border border-white/15 shadow-xl"
               initial={{ y: 15, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.5 }}
             >
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary shrink-0">
-                  <Play className="w-4 h-4 fill-current" />
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary shrink-0">
+                  <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" />
                 </div>
-                <div className="text-left">
-                  <div className="text-xs sm:text-sm font-heading font-extrabold text-white leading-tight">
+                <div className="text-left min-w-0">
+                  <div className="text-xs sm:text-sm font-heading font-extrabold text-white leading-tight truncate">
                     White-Label Video Engine
                   </div>
-                  <div className="text-[10px] text-white/50 font-mono mt-0.5">
+                  <div className="text-[10px] text-white/50 font-mono mt-0.5 truncate">
                     40 to 100+ high-retention ad cuts / mo
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                 <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 text-white/80 border border-white/10 text-[10px] font-mono">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   48HR TURNAROUND
                 </span>
-                <span className="px-2.5 py-1 rounded-full bg-primary/15 text-primary border border-primary/30 text-[10px] font-mono font-bold uppercase tracking-wider">
+                <span className="px-2 sm:px-2.5 py-1 rounded-full bg-primary/15 text-primary border border-primary/30 text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider whitespace-nowrap">
                   AGENCY SCALE
                 </span>
               </div>

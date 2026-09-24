@@ -105,8 +105,8 @@ const formats: FormatItem[] = [
     number: "02",
     name: "AI-Generated Video",
     tag: "Fast + Infinite Scale",
-    tagColor: "text-[#f2542d] border-[#f2542d]/30 bg-[#f2542d]/10",
-    accentColor: "#f2542d",
+    tagColor: "text-primary border-primary/30 bg-primary/10",
+    accentColor: "#22c55e",
     icon: Cpu,
     headline: "Maximum velocity, fractional cost, 20x variations for paid media.",
     summary:
@@ -264,13 +264,13 @@ export default function FormatsSection() {
   return (
     <section id="formats" className="relative py-24 sm:py-32 bg-[#0C0B0E] border-b border-white/10 overflow-hidden">
       {/* Background Ambience */}
-      <div className="absolute top-1/3 left-0 -translate-y-1/2 w-96 h-96 bg-[#f2542d]/5 blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 left-0 -translate-y-1/2 w-96 h-96 bg-primary/10 blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-[500px] h-[500px] bg-emerald-500/5 blur-[160px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Section Header */}
         <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-[#f2542d] bg-[#f2542d]/10 border border-[#f2542d]/25 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-primary bg-primary/10 border border-primary/30 mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Format Versatility</span>
           </div>
@@ -302,14 +302,14 @@ export default function FormatsSection() {
                     onClick={() => handleSelectFormat(fmt.id, idx)}
                     className={`p-4 rounded-2xl border transition-all duration-300 cursor-pointer text-left relative overflow-hidden group select-none ${
                       isSelected
-                        ? "bg-[#18151D] border-[#f2542d]/70 shadow-[0_10px_25px_rgba(242,84,45,0.2)]"
+                        ? "bg-[#141815] border-primary/60 shadow-[0_10px_25px_rgba(34,197,94,0.15)]"
                         : "bg-[#121015]/60 border-white/5 hover:border-white/20 hover:bg-[#18151D]/60"
                     }`}
                   >
                     {isSelected && (
                       <motion.div
                         layoutId="activeFormatIndicator"
-                        className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#f2542d]"
+                        className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary shadow-[0_0_12px_rgba(34,197,94,0.6)]"
                       />
                     )}
 
@@ -317,7 +317,7 @@ export default function FormatsSection() {
                       <div
                         className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-colors ${
                           isSelected
-                            ? "bg-[#f2542d]/20 text-[#f2542d] border-[#f2542d]/40 shadow-[0_0_12px_rgba(242,84,45,0.3)]"
+                            ? "bg-primary/20 text-primary border-primary/40 shadow-[0_0_12px_rgba(34,197,94,0.3)]"
                             : "bg-white/5 text-white/60 border-white/10 group-hover:text-white"
                         }`}
                       >
@@ -354,7 +354,7 @@ export default function FormatsSection() {
                 {/* Header Summary */}
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
-                    <span className="text-xs font-mono uppercase tracking-widest text-[#f2542d] font-bold">
+                    <span className="text-xs font-mono uppercase tracking-widest text-primary font-bold">
                       Format Architecture · {activeFormat.tag}
                     </span>
                     <span className="text-[11px] font-mono text-white/40">
@@ -374,7 +374,7 @@ export default function FormatsSection() {
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                     <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10">
                       <div className="flex items-center gap-1.5 text-white/40 text-[9px] font-mono uppercase mb-1">
-                        <Clock className="w-3 h-3 text-[#f2542d]" />
+                        <Clock className="w-3 h-3 text-primary" />
                         <span>Turnaround</span>
                       </div>
                       <div className="text-xs sm:text-sm font-heading font-extrabold text-white">
@@ -423,10 +423,10 @@ export default function FormatsSection() {
                     {activeFormat.capabilities.map((cap, i) => (
                       <div
                         key={i}
-                        className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-[#f2542d]/40 transition-colors"
+                        className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/10 hover:border-primary/40 transition-colors"
                       >
                         <div className="flex items-center gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#f2542d] shrink-0" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-primary shrink-0" />
                           <h6 className="font-heading font-bold text-white text-xs">
                             {cap.title}
                           </h6>
@@ -462,8 +462,10 @@ export default function FormatsSection() {
                     </a>
 
                     <a
-                      href="#book"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#f2542d] text-white text-xs font-heading font-bold uppercase tracking-wider hover:brightness-110 shadow-[0_0_20px_rgba(242,84,45,0.35)] transition-all"
+                      href="https://calendly.com/nucleuscreates/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-black text-xs font-heading font-extrabold uppercase tracking-wider hover:brightness-110 shadow-[0_0_20px_rgba(34,197,94,0.35)] transition-all"
                     >
                       <span>Book Call</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -477,7 +479,7 @@ export default function FormatsSection() {
           {/* Right Column: Apple iPhone Reels Mobile Feed Viewport */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
             {/* Phone Enclosure Outer Frame */}
-            <div className="relative w-full max-w-[310px] sm:max-w-[330px] rounded-[48px] bg-gradient-to-b from-[#383340] via-[#211e27] to-[#121016] p-3 border border-white/25 shadow-[0_30px_90px_rgba(0,0,0,0.9),0_0_50px_rgba(242,84,45,0.15)] ring-1 ring-white/10 select-none">
+            <div className="relative w-full max-w-[310px] sm:max-w-[330px] rounded-[48px] bg-gradient-to-b from-[#383340] via-[#211e27] to-[#121016] p-3 border border-white/25 shadow-[0_30px_90px_rgba(0,0,0,0.9),0_0_50px_rgba(34,197,94,0.15)] ring-1 ring-white/10 select-none">
               
               {/* Dynamic Island Notch */}
               <div className="absolute top-5 left-1/2 -translate-x-1/2 z-40 w-24 h-5 rounded-full bg-black/95 border border-white/10 flex items-center justify-between px-2.5 shadow-md">
@@ -521,7 +523,7 @@ export default function FormatsSection() {
                       {/* Top Header Controls (Reels bar) */}
                       <div className="absolute top-10 left-0 right-0 px-4 flex items-center justify-between z-30 pointer-events-auto">
                         <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[9px] font-mono text-white uppercase tracking-wider font-semibold">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#f2542d] animate-pulse" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                           <span>{activeFormat.name}</span>
                         </div>
 
@@ -574,7 +576,7 @@ export default function FormatsSection() {
                           transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                           className="w-9 h-9 rounded-full bg-gradient-to-tr from-neutral-900 via-neutral-700 to-neutral-900 border-2 border-white/30 flex items-center justify-center shadow-lg mt-1"
                         >
-                          <span className="w-2.5 h-2.5 rounded-full bg-[#f2542d]" />
+                          <span className="w-2.5 h-2.5 rounded-full bg-primary" />
                         </motion.div>
                       </div>
 
@@ -584,7 +586,7 @@ export default function FormatsSection() {
                           <span className="font-heading font-extrabold text-xs tracking-wide text-white drop-shadow">
                             {activeFormat.reelMeta.handle}
                           </span>
-                          <span className="px-1.5 py-0.2 rounded-full bg-[#f2542d] text-white text-[8px] font-mono font-bold uppercase">
+                          <span className="px-1.5 py-0.2 rounded-full bg-primary text-black text-[8px] font-mono font-bold uppercase">
                             FORMAT {activeFormat.number}
                           </span>
                         </div>
@@ -594,7 +596,7 @@ export default function FormatsSection() {
                         </p>
 
                         <div className="flex items-center gap-1.5 mt-2 text-[9px] font-mono text-white/70">
-                          <Music className="w-3 h-3 text-[#f2542d] animate-pulse shrink-0" />
+                          <Music className="w-3 h-3 text-primary animate-pulse shrink-0" />
                           <span className="truncate">{activeFormat.reelMeta.audioTrack}</span>
                         </div>
                       </div>

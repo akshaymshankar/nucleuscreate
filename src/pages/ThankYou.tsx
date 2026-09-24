@@ -69,7 +69,7 @@ const ThankYou = () => {
               Back to Home
             </Link>
             <a
-              href="https://calendly.com/anushkarthik666/consultation"
+              href="https://calendly.com/nucleuscreates/30min"
               target="_blank"
               rel="noreferrer"
               className="magnetic-btn inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-heading font-semibold tracking-wide hover:opacity-90 transition-all"

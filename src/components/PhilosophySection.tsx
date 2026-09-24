@@ -63,7 +63,7 @@ const PhilosophySection = () => {
             return (
               <motion.div
                 key={p.num}
-                className="group relative p-7 sm:p-8 md:p-10 rounded-2xl border border-border bg-card hover:border-primary/40 transition-all duration-500 smooth-hover"
+                className="group relative p-6 sm:p-8 md:p-10 rounded-2xl border border-border bg-card hover:border-primary/40 transition-all duration-500 smooth-hover"
                 initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
                 animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 28, filter: "blur(12px)" }}
                 transition={{ duration: 0.6, delay: 0.2 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -73,7 +73,7 @@ const PhilosophySection = () => {
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl border border-border bg-background flex items-center justify-center group-hover:border-primary/40 group-hover:text-primary transition-all duration-400">
                     <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-foreground group-hover:text-primary transition-colors" strokeWidth={1.5} />
                   </div>
-                  <span className="text-xs text-primary/40 font-heading">{p.num}</span>
+                  <span className="text-xs font-mono font-bold text-primary/80 group-hover:text-primary transition-colors">{p.num}</span>
                 </div>
                 <h3 className="mt-6 sm:mt-8 text-xl sm:text-2xl md:text-3xl font-heading font-bold text-foreground tracking-tight">
                   {p.title}

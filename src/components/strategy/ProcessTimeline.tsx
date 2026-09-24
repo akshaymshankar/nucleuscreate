@@ -72,13 +72,13 @@ export default function ProcessTimeline() {
   return (
     <section id="process" className="relative py-24 sm:py-32 bg-[#100E12] border-b border-white/10 overflow-hidden">
       {/* Background radial highlight */}
-      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#f2542d]/5 blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[500px] h-[500px] bg-primary/5 blur-[150px] pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Section Header */}
         <div className="max-w-3xl">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-[#f2542d] bg-[#f2542d]/10 border border-[#f2542d]/25 mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#f2542d]" />
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-primary bg-primary/10 border border-primary/25 mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             5-Stage Execution Framework
           </span>
 
@@ -104,20 +104,20 @@ export default function ProcessTimeline() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
                 transition={{ duration: 0.6, delay: idx * 0.08 }}
-                className="relative p-6 sm:p-8 rounded-3xl bg-[#17141A] border border-white/10 hover:border-[#f2542d]/40 transition-all duration-300 shadow-xl overflow-hidden group"
+                className="relative p-6 sm:p-8 rounded-3xl bg-[#17141A] border border-white/10 hover:border-primary/40 transition-all duration-300 shadow-xl overflow-hidden group"
               >
                 {/* Glow on hover */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#f2542d]/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
                   {/* Step Index & Icon */}
                   <div className="lg:col-span-4 flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-[#f2542d]/10 border border-[#f2542d]/30 text-[#f2542d] flex items-center justify-center font-mono font-black text-xl shrink-0 group-hover:bg-[#f2542d] group-hover:text-black transition-colors duration-300">
+                    <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 text-primary flex items-center justify-center font-mono font-black text-xl shrink-0 group-hover:bg-primary group-hover:text-black transition-colors duration-300 shadow-[0_0_15px_rgba(34,197,94,0.15)]">
                       {step.number}
                     </div>
 
                     <div>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-[#f2542d] font-semibold flex items-center gap-1.5 mb-1">
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-primary font-semibold flex items-center gap-1.5 mb-1">
                         <Icon className="w-3.5 h-3.5" />
                         {step.timelineTag}
                       </span>
@@ -134,7 +134,7 @@ export default function ProcessTimeline() {
                   <div className="lg:col-span-8 space-y-3 pt-2 lg:pt-0 lg:border-l lg:border-white/10 lg:pl-8">
                     {step.details.map((detail, dIdx) => (
                       <div key={dIdx} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-4 h-4 text-[#f2542d] shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                         <span className="text-sm text-white/80 font-body leading-relaxed">
                           {detail}
                         </span>
