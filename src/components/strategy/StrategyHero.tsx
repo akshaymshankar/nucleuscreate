@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Play, Volume2, VolumeX, Sparkles, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Play, Volume2, VolumeX, Sparkles } from "lucide-react";
 import { VideoItem } from "./VideoModal";
 
 interface StrategyHeroProps {
@@ -180,21 +180,6 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
               One team, one process, no juggling three vendors.
             </p>
 
-            {/* Key Value Checks */}
-            <div className="mt-6 flex flex-wrap items-center justify-center lg:justify-start gap-x-5 sm:gap-x-6 gap-y-2 text-xs sm:text-sm text-white/70 font-mono">
-              <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-primary" />
-                <span>48–72hr Delivery</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-primary" />
-                <span>Live-Action & AI Mixed</span>
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-primary" />
-                <span>White-Label Ready</span>
-              </span>
-            </div>
 
             {/* CTAs */}
             <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 w-full sm:w-auto max-w-sm sm:max-w-none mx-auto lg:mx-0">
