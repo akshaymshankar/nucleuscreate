@@ -109,11 +109,6 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
           transition={{ duration: 0.3 }}
           onClick={onClose}
         >
-          {/* Ambient Glow */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/15 blur-[140px] rounded-full" />
-          </div>
-
           <motion.div
             className="relative w-full max-w-5xl rounded-2xl md:rounded-3xl overflow-hidden border border-white/15 bg-[#100E12] shadow-[0_25px_80px_rgba(0,0,0,0.9)] flex flex-col max-h-[92vh]"
             initial={{ scale: 0.94, opacity: 0, y: 20 }}
@@ -184,7 +179,7 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
                   onClick={togglePlay}
                   className="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer backdrop-blur-[2px]"
                 >
-                  <div className="w-16 h-16 rounded-full bg-primary text-black flex items-center justify-center pl-1 shadow-[0_0_30px_rgba(34,197,94,0.5)] transition-transform hover:scale-110">
+                  <div className="w-16 h-16 rounded-full bg-primary text-black flex items-center justify-center pl-1 shadow-xl transition-transform hover:scale-110">
                     <Play className="w-7 h-7 fill-black" />
                   </div>
                 </div>
@@ -259,7 +254,7 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={onClose}
-                  className="px-5 py-2.5 rounded-full bg-primary text-black font-heading font-extrabold text-xs uppercase tracking-wider hover:brightness-110 transition-all shadow-[0_0_20px_rgba(34,197,94,0.4)]"
+                  className="px-5 py-2.5 rounded-full bg-primary text-black font-heading font-extrabold text-xs uppercase tracking-wider hover:brightness-105 active:scale-95 transition-all shadow-sm"
                 >
                   Deploy Similar Ad
                 </a>

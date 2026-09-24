@@ -46,9 +46,6 @@ export default function TestimonialsAndFaq() {
 
   return (
     <section id="faq" className="relative py-24 sm:py-32 bg-[#0B0A0D] border-b border-white/10 overflow-hidden">
-      {/* Ambience */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[150px] pointer-events-none" />
-
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* FAQ Accordion Block */}
         <div>
@@ -81,7 +78,7 @@ export default function TestimonialsAndFaq() {
                     </span>
                     <span
                       className={`w-8 h-8 rounded-full border border-white/15 flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                        isOpen ? "bg-primary text-black border-primary rotate-45 shadow-[0_0_12px_rgba(34,197,94,0.4)]" : "text-white/70 group-hover:text-white"
+                        isOpen ? "bg-primary text-black border-primary rotate-45 shadow-sm" : "text-white/70 group-hover:text-white"
                       }`}
                     >
                       <Plus className="w-4 h-4" />

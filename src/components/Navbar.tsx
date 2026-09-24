@@ -57,7 +57,7 @@ const Navbar = () => {
               >
                 <Link
                   to={link.href}
-                  className="text-xs sm:text-sm font-heading font-bold text-foreground hover:text-primary transition-all duration-300 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/30 hover:border-primary/60 shadow-[0_0_15px_rgba(34,197,94,0.15)] group"
+                  className="text-xs sm:text-sm font-heading font-bold text-foreground hover:text-primary transition-all duration-300 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/30 hover:border-primary/60 group"
                   data-cursor-hover
                 >
                   <Sparkles className="w-3.5 h-3.5 text-primary group-hover:rotate-12 transition-transform" />
@@ -94,7 +94,7 @@ const Navbar = () => {
 
           <motion.a
             href="#apply"
-            className="magnetic-btn px-5 py-2 rounded-full bg-primary text-primary-foreground text-xs uppercase font-heading font-bold tracking-wider hover:opacity-90 transition-all duration-300 shadow-[0_0_20px_rgba(34,197,94,0.3)] whitespace-nowrap"
+            className="magnetic-btn px-5 py-2 rounded-full bg-primary text-primary-foreground text-xs uppercase font-heading font-bold tracking-wider hover:opacity-90 transition-all duration-300 whitespace-nowrap shadow-sm"
             data-cursor-hover
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ const Navbar = () => {
         <div className="md:hidden flex items-center gap-3">
           <a
             href="#apply"
-            className="px-4 py-1.5 rounded-full bg-primary text-primary-foreground text-[10px] sm:text-xs font-heading font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(34,197,94,0.3)]"
+            className="px-4 py-1.5 rounded-full bg-primary text-primary-foreground text-[10px] sm:text-xs font-heading font-bold uppercase tracking-wider shadow-sm"
           >
             Apply
           </a>

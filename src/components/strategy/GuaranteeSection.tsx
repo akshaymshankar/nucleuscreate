@@ -61,9 +61,6 @@ const onboardingInputs = [
 export default function GuaranteeSection() {
   return (
     <section id="guarantee" className="relative py-24 sm:py-32 bg-[#100E12] border-b border-white/10 overflow-hidden">
-      {/* Background Ambience */}
-      <div className="absolute top-1/4 left-1/3 w-[600px] h-[400px] bg-primary/5 blur-[160px] pointer-events-none" />
-
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Part 1: Guarantees Header */}
         <div className="max-w-3xl">
@@ -97,7 +94,7 @@ export default function GuaranteeSection() {
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 text-primary flex items-center justify-center group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(34,197,94,0.15)]">
+                    <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 text-primary flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
                       <Icon className="w-6 h-6" />
                     </div>
                     <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/60">

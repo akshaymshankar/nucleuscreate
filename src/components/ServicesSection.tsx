@@ -163,7 +163,6 @@ const ServicesSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="max-w-2xl">
               <div className="flex items-center gap-2 mb-3">
@@ -185,7 +184,7 @@ const ServicesSection = () => {
             <div className="flex flex-col sm:flex-row sm:items-center gap-3 shrink-0">
               <Link
                 to="/services/ai-video-strategy"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-black font-heading font-extrabold text-xs sm:text-sm hover:brightness-110 shadow-[0_0_25px_rgba(34,197,94,0.35)] transition-all group"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-black font-heading font-extrabold text-xs sm:text-sm hover:brightness-105 active:scale-95 transition-all shadow-md group"
               >
                 <span>Explore AI Video Strategy</span>
                 <span className="text-base group-hover:translate-x-0.5 transition-transform">→</span>

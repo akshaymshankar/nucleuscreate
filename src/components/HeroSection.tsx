@@ -288,7 +288,7 @@ const HeroSection = () => {
               <div className="flex flex-col sm:flex-row sm:items-center gap-3">
                 <a
                   href="#apply"
-                  className="magnetic-btn inline-flex items-center justify-center gap-2 px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-primary text-black font-heading font-extrabold text-sm sm:text-base tracking-wide hover:brightness-110 shadow-[0_0_25px_rgba(34,197,94,0.35)] transition-all"
+                  className="magnetic-btn inline-flex items-center justify-center gap-2 px-7 sm:px-8 py-3.5 sm:py-4 rounded-full bg-primary text-black font-heading font-extrabold text-sm sm:text-base tracking-wide hover:brightness-105 active:scale-95 transition-all shadow-md"
                   data-cursor-hover
                 >
                   <span>Apply for FREE Pilot</span>
@@ -471,7 +471,7 @@ const HeroSection = () => {
                   {/* Play Overlay if paused */}
                   {!isPlaying && videoLoaded && (
                     <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] transition-all">
-                      <div className="w-14 h-14 rounded-full bg-primary/90 text-black flex items-center justify-center pl-1 shadow-[0_0_30px_rgba(34,197,94,0.5)] group-hover:scale-110 transition-transform">
+                      <div className="w-14 h-14 rounded-full bg-primary/90 text-black flex items-center justify-center pl-1 shadow-xl group-hover:scale-110 transition-transform">
                         <Play className="w-6 h-6 fill-black" />
                       </div>
                     </div>

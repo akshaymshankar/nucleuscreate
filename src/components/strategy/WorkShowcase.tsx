@@ -116,9 +116,6 @@ export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
 
   return (
     <section id="work" className="relative py-24 sm:py-32 bg-[#0B0A0D] border-b border-white/10">
-      {/* Background radial glow */}
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-primary/5 blur-[160px] pointer-events-none" />
-
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Section Header & Filter Pills */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b border-white/10">
@@ -151,7 +148,7 @@ export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
                   onClick={() => setActiveFilter(cat.id)}
                   className={`px-4 py-2 rounded-full text-xs font-heading font-semibold transition-all duration-200 flex items-center gap-2 shrink-0 ${
                     isActive
-                      ? "bg-primary text-black font-extrabold shadow-[0_0_20px_rgba(34,197,94,0.4)]"
+                      ? "bg-primary text-black font-extrabold shadow-sm"
                       : "bg-white/[0.04] text-white/70 hover:text-white hover:bg-white/[0.08] border border-white/10"
                   }`}
                 >

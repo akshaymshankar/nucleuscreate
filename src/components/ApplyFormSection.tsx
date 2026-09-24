@@ -245,7 +245,7 @@ const ApplyFormSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="magnetic-btn mt-8 sm:mt-10 w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-primary text-black font-heading text-sm sm:text-base font-extrabold tracking-wide hover:brightness-110 shadow-[0_0_25px_rgba(34,197,94,0.35)] transition-all duration-300"
+                  className="magnetic-btn mt-8 sm:mt-10 w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full bg-primary text-black font-heading text-sm sm:text-base font-extrabold tracking-wide hover:brightness-105 active:scale-95 shadow-md transition-all duration-200"
                   data-cursor-hover
                 >
                   {isSubmitting ? "Sending..." : "Request My Pilot Video"}

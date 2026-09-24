@@ -263,10 +263,6 @@ export default function FormatsSection() {
 
   return (
     <section id="formats" className="relative py-24 sm:py-32 bg-[#0C0B0E] border-b border-white/10 overflow-hidden">
-      {/* Background Ambience */}
-      <div className="absolute top-1/3 left-0 -translate-y-1/2 w-96 h-96 bg-primary/10 blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 right-0 w-[500px] h-[500px] bg-emerald-500/5 blur-[160px] pointer-events-none" />
-
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Section Header */}
         <div className="max-w-3xl">
@@ -302,14 +298,14 @@ export default function FormatsSection() {
                     onClick={() => handleSelectFormat(fmt.id, idx)}
                     className={`p-4 rounded-2xl border transition-all duration-300 cursor-pointer text-left relative overflow-hidden group select-none ${
                       isSelected
-                        ? "bg-[#141815] border-primary/60 shadow-[0_10px_25px_rgba(34,197,94,0.15)]"
+                        ? "bg-[#141815] border-primary/60 shadow-sm"
                         : "bg-[#121015]/60 border-white/5 hover:border-white/20 hover:bg-[#18151D]/60"
                     }`}
                   >
                     {isSelected && (
                       <motion.div
                         layoutId="activeFormatIndicator"
-                        className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary shadow-[0_0_12px_rgba(34,197,94,0.6)]"
+                        className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"
                       />
                     )}
 
@@ -317,7 +313,7 @@ export default function FormatsSection() {
                       <div
                         className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-colors ${
                           isSelected
-                            ? "bg-primary/20 text-primary border-primary/40 shadow-[0_0_12px_rgba(34,197,94,0.3)]"
+                            ? "bg-primary/20 text-primary border-primary/40"
                             : "bg-white/5 text-white/60 border-white/10 group-hover:text-white"
                         }`}
                       >
@@ -465,7 +461,7 @@ export default function FormatsSection() {
                       href="https://calendly.com/nucleuscreates/30min"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-black text-xs font-heading font-extrabold uppercase tracking-wider hover:brightness-110 shadow-[0_0_20px_rgba(34,197,94,0.35)] transition-all"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-black text-xs font-heading font-extrabold uppercase tracking-wider hover:brightness-105 active:scale-95 transition-all shadow-sm"
                     >
                       <span>Book Call</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -479,7 +475,7 @@ export default function FormatsSection() {
           {/* Right Column: Apple iPhone Reels Mobile Feed Viewport */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
             {/* Phone Enclosure Outer Frame */}
-            <div className="relative w-full max-w-[310px] sm:max-w-[330px] rounded-[48px] bg-gradient-to-b from-[#383340] via-[#211e27] to-[#121016] p-3 border border-white/25 shadow-[0_30px_90px_rgba(0,0,0,0.9),0_0_50px_rgba(34,197,94,0.15)] ring-1 ring-white/10 select-none">
+            <div className="relative w-full max-w-[310px] sm:max-w-[330px] rounded-[48px] bg-gradient-to-b from-[#383340] via-[#211e27] to-[#121016] p-3 border border-white/25 shadow-[0_30px_90px_rgba(0,0,0,0.9)] ring-1 ring-white/10 select-none">
               
               {/* Dynamic Island Notch */}
               <div className="absolute top-5 left-1/2 -translate-x-1/2 z-40 w-24 h-5 rounded-full bg-black/95 border border-white/10 flex items-center justify-between px-2.5 shadow-md">

@@ -6,9 +6,6 @@ export default function StrategyCta() {
   return (
     <>
       <section id="book" className="relative py-24 sm:py-36 bg-[#0B0A0D] border-b border-white/10 overflow-hidden">
-        {/* Ambient Halo */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-primary/15 blur-[170px] rounded-full pointer-events-none" />
-
         <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-5xl">
           <div className="p-8 sm:p-14 md:p-20 rounded-[2.5rem] bg-gradient-to-b from-[#161d18] via-[#121614] to-[#0E100F] border border-primary/30 shadow-[0_25px_80px_rgba(0,0,0,0.8)] text-center relative overflow-hidden">
             {/* Top Badge */}
@@ -33,7 +30,7 @@ export default function StrategyCta() {
                 href="https://wa.me/919894443263"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-[#25D366] text-black font-heading font-black text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(37,211,102,0.4)] hover:shadow-[0_0_40px_rgba(37,211,102,0.6)] hover:scale-105 active:scale-95 transition-all"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-[#25D366] text-black font-heading font-black text-sm uppercase tracking-wider hover:brightness-105 active:scale-95 transition-all shadow-md"
               >
                 <MessageCircle className="w-5 h-5 fill-black" />
                 <span>Chat on WhatsApp</span>
@@ -43,7 +40,7 @@ export default function StrategyCta() {
                 href="https://calendly.com/nucleuscreates/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-primary text-black font-heading font-black text-sm uppercase tracking-wider shadow-[0_0_30px_rgba(34,197,94,0.4)] hover:shadow-[0_0_40px_rgba(34,197,94,0.6)] hover:brightness-110 hover:scale-105 active:scale-95 transition-all"
+                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-primary text-black font-heading font-black text-sm uppercase tracking-wider hover:brightness-105 active:scale-95 transition-all shadow-md"
               >
                 <PhoneCall className="w-4 h-4" />
                 <span>Schedule Strategy Call</span>

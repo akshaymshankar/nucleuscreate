@@ -93,12 +93,7 @@ const AssemblyVisuals = () => {
           }}
         >
           <div className="relative w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center mb-6">
-            <motion.div 
-              className="absolute inset-[-50%] rounded-full bg-primary/20 blur-3xl"
-              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
-              transition={{ duration: 3, repeat: Infinity }}
-            />
-            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-primary/40 shadow-[0_0_20px_rgba(34,197,94,0.4)] z-10">
+            <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-primary/40 shadow-xl z-10">
               <img 
                 src="/logo.png" 
                 className="w-full h-full object-cover scale-110" 

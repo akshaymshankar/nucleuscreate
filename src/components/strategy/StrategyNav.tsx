@@ -87,7 +87,7 @@ export default function StrategyNav() {
               href="https://calendly.com/nucleuscreates/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 rounded-full bg-primary text-black font-heading font-black text-xs uppercase tracking-wider shadow-[0_0_20px_rgba(34,197,94,0.35)] hover:brightness-110 active:scale-95 transition-all whitespace-nowrap leading-none"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 rounded-full bg-primary text-black font-heading font-black text-xs uppercase tracking-wider hover:brightness-105 active:scale-95 transition-all whitespace-nowrap leading-none shadow-sm"
             >
               <PhoneCall className="w-3.5 h-3.5 stroke-[2.5]" />
               <span>Book Call</span>
@@ -139,7 +139,7 @@ export default function StrategyNav() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full py-3.5 rounded-full bg-primary text-black font-heading font-extrabold text-sm uppercase tracking-wider shadow-[0_0_20px_rgba(34,197,94,0.35)]"
+                  className="w-full py-3.5 rounded-full bg-primary text-black font-heading font-extrabold text-sm uppercase tracking-wider hover:brightness-105 active:scale-[0.99] transition-all shadow-sm"
                 >
                   Book Strategy Call
                 </a>
