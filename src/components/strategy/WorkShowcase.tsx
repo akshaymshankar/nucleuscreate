@@ -9,16 +9,6 @@ interface WorkShowcaseProps {
 
 const portfolioData: VideoItem[] = [
   {
-    id: "woo-tester",
-    title: "WOO — Fragrance Tester Kit",
-    category: "ai",
-    categoryLabel: "AI Generated with Editing",
-    src: "/video-assets/WOO_CONCEPT_7_V5.mp4",
-    client: "WOO",
-    description: "High-energy direct response ad featuring tactile bottle textures, mist physics, and conversion-optimized vertical framing for TikTok & Meta ads.",
-    tags: ["ProductAd", "Fragrance", "DirectResponse", "Editing"],
-  },
-  {
     id: "thetabody-detox",
     title: "Thetabody — Charcoal Detox Mask",
     category: "ai",
@@ -97,6 +87,16 @@ const portfolioData: VideoItem[] = [
     client: "Nemari",
     description: "Detailed craftsmanship render emphasizing hand-stitched grain, golden clasps, and modular interior trays in a sophisticated product showcase.",
     tags: ["ProductAd", "Fashion", "AI Generated with Editing"],
+  },
+  {
+    id: "woo-tester",
+    title: "WOO — Fragrance Tester Kit",
+    category: "ai",
+    categoryLabel: "AI Generated with Editing",
+    src: "/video-assets/WOO_CONCEPT_7_V5.mp4",
+    client: "WOO",
+    description: "High-energy direct response ad featuring tactile bottle textures, mist physics, and conversion-optimized vertical framing for TikTok & Meta ads.",
+    tags: ["ProductAd", "Fragrance", "DirectResponse", "Editing"],
   },
 ];
 

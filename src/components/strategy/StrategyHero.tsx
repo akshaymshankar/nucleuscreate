@@ -8,14 +8,14 @@ interface StrategyHeroProps {
 }
 
 const heroVideo: VideoItem = {
-  id: "hero-woo",
-  title: "WOO — Premium Fragrance Tester Kit",
+  id: "thetabody-detox",
+  title: "Thetabody — Charcoal Detox Mask",
   category: "ai",
   categoryLabel: "AI Generated with Editing",
-  src: "/video-assets/WOO_CONCEPT_7_V5.mp4",
-  client: "WOO Fragrance",
-  description: "High-velocity product showcase with photorealistic lighting, tactile liquid dynamics, and retention-focused vertical composition.",
-  tags: ["ProductAd", "DirectResponse", "Editing"],
+  src: "/video-assets/THETABODY_Video_10_V7.mp4",
+  client: "Thetabody Labs",
+  description: "Skincare product direct response creative illustrating pore-deep cleansing with seamless AI macro close-ups and clinical proof points.",
+  tags: ["Skincare", "AI Generated with Editing", "DirectResponse"],
 };
 
 interface HeroPhoneMockupProps {
