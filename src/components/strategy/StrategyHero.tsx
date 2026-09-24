@@ -8,14 +8,14 @@ interface StrategyHeroProps {
 }
 
 const heroVideo: VideoItem = {
-  id: "thetabody-detox",
-  title: "Thetabody — Charcoal Detox Mask",
+  id: "lord-milano-riyadh",
+  title: "Lord Milano — Riyadh Vibes",
   category: "ai",
   categoryLabel: "AI Generated with Editing",
-  src: "/video-assets/THETABODY_Video_10_V7.mp4",
-  client: "Thetabody Labs",
-  description: "Skincare product direct response creative illustrating pore-deep cleansing with seamless AI macro close-ups and clinical proof points.",
-  tags: ["Skincare", "AI Generated with Editing", "DirectResponse"],
+  src: "/video-assets/Lord Milano Video 02 [No VO].mp4",
+  client: "Lord Milano",
+  description: "Cinematic Gulf elegance and luxury ambiance synthesized entirely through fine-tuned generative AI pipelines with ultra-rich color grading.",
+  tags: ["Luxury", "Perfume", "Cinematic", "AI Generated with Editing"],
 };
 
 interface HeroPhoneMockupProps {
