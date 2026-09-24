@@ -197,22 +197,22 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
             </div>
 
             {/* CTAs */}
-            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 sm:gap-4 w-full sm:w-auto">
+            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 w-full sm:w-auto max-w-sm sm:max-w-none mx-auto lg:mx-0">
               <a
                 href="https://calendly.com/nucleuscreates/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-primary text-black font-heading font-extrabold text-sm uppercase tracking-wider overflow-hidden hover:brightness-105 active:scale-95 transition-all duration-200 shadow-md"
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 sm:py-4 rounded-full bg-primary text-black font-heading font-bold text-sm tracking-normal hover:brightness-105 active:scale-[0.98] transition-all duration-200 shadow-sm"
               >
-                <span>Book a Free Strategy Call</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <span>Book a Strategy Call</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
 
               <a
                 href="#work"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-full border border-white/20 bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/35 text-white font-heading font-semibold text-sm tracking-wide transition-all backdrop-blur-md"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-full border border-white/15 bg-white/[0.04] hover:bg-white/[0.08] hover:border-white/30 text-white font-heading font-semibold text-sm tracking-normal transition-all"
               >
-                <span>See The Work</span>
+                <span>View Client Work</span>
               </a>
             </div>
           </motion.div>

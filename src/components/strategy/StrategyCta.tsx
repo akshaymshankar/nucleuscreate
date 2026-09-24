@@ -25,14 +25,14 @@ export default function StrategyCta() {
             </p>
 
             {/* Action Buttons */}
-            <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
+            <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-md mx-auto">
               <a
                 href="https://wa.me/919894443263"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-[#25D366] text-black font-heading font-black text-sm uppercase tracking-wider hover:brightness-105 active:scale-95 transition-all shadow-md"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 sm:py-4 rounded-full bg-[#25D366] text-black font-heading font-bold text-sm tracking-normal hover:brightness-105 active:scale-[0.98] transition-all shadow-sm"
               >
-                <MessageCircle className="w-5 h-5 fill-black" />
+                <MessageCircle className="w-4 h-4 fill-black" />
                 <span>Chat on WhatsApp</span>
               </a>
 
@@ -40,10 +40,10 @@ export default function StrategyCta() {
                 href="https://calendly.com/nucleuscreates/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-primary text-black font-heading font-black text-sm uppercase tracking-wider hover:brightness-105 active:scale-95 transition-all shadow-md"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 sm:py-4 rounded-full bg-primary text-black font-heading font-bold text-sm tracking-normal hover:brightness-105 active:scale-[0.98] transition-all shadow-sm"
               >
                 <PhoneCall className="w-4 h-4" />
-                <span>Schedule Strategy Call</span>
+                <span>Book a Strategy Call</span>
               </a>
             </div>
           </div>
@@ -115,10 +115,9 @@ export default function StrategyCta() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat directly on WhatsApp"
-        className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-black flex items-center justify-center shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-all group"
+        className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-black flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all group"
       >
         <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 fill-black" />
-        <span className="absolute -top-1 -right-1 w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-red-500 border-2 border-black" />
         <span className="hidden sm:inline-block absolute right-16 px-3 py-1.5 rounded-xl bg-black/90 backdrop-blur-md text-white text-xs font-heading font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 shadow-xl">
           Direct Line with Strategist
         </span>

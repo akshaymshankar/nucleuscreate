@@ -436,22 +436,22 @@ export default function FormatsSection() {
                 </div>
 
                 {/* Bottom Actions */}
-                <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-white/50 uppercase tracking-wider">
+                <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex items-start sm:items-center gap-2 min-w-0">
+                    <span className="text-[10px] font-mono text-white/50 uppercase tracking-wider shrink-0 mt-0.5 sm:mt-0">
                       Best For:
                     </span>
-                    <span className="text-xs text-white/80 font-medium truncate max-w-[260px] sm:max-w-xs">
+                    <span className="text-xs text-white/80 font-medium line-clamp-2 sm:truncate">
                       {activeFormat.idealFor}
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2.5 ml-auto">
+                  <div className="flex items-center gap-2.5 w-full sm:w-auto shrink-0">
                     <a
                       href="https://wa.me/919894443263"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#25D366] text-xs font-mono font-bold border border-[#25D366]/30 transition-all"
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#25D366] text-xs font-mono font-bold border border-[#25D366]/30 transition-all"
                     >
                       <MessageCircle className="w-3.5 h-3.5 fill-current" />
                       <span>WhatsApp</span>
@@ -461,7 +461,7 @@ export default function FormatsSection() {
                       href="https://calendly.com/nucleuscreates/30min"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-primary text-black text-xs font-heading font-extrabold uppercase tracking-wider hover:brightness-105 active:scale-95 transition-all shadow-sm"
+                      className="flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-primary text-black text-xs font-heading font-bold tracking-normal hover:brightness-105 active:scale-95 transition-all shadow-sm"
                     >
                       <span>Book Call</span>
                       <ArrowRight className="w-3.5 h-3.5" />
