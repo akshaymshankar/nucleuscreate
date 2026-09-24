@@ -101,14 +101,11 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
 
             {/* Information Section Brought Down Below the Video */}
             <div className="p-4 sm:p-6 bg-[#121015] border-t border-white/10 flex flex-col gap-3 overflow-y-auto overscroll-contain">
-              {/* Category Badge & Client Tag */}
+              {/* Category Badge */}
               <div className="flex flex-wrap items-center gap-2">
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase bg-primary/20 text-primary border border-primary/40 flex items-center gap-1">
                   <Sparkles className="w-3 h-3" />
                   {video.categoryLabel}
-                </span>
-                <span className="text-[11px] sm:text-xs text-primary/80 font-mono uppercase tracking-wider font-semibold">
-                  {video.client || "Client Campaign"}
                 </span>
               </div>
 
