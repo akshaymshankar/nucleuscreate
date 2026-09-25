@@ -10,7 +10,7 @@ interface WorkShowcaseProps {
 const portfolioData: VideoItem[] = [
   {
     id: "thetabody-detox",
-    title: "Thetabody - Charcoal Detox Mask",
+    title: "Thetabody: Charcoal Detox Mask",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/THETABODY_Video_10_V7.mp4",
@@ -20,7 +20,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "sapphire-events",
-    title: "Sapphire Events - Luxury Destination Wedding",
+    title: "Sapphire Events: Luxury Destination Wedding",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/Sapphire_Events.mp4",
@@ -29,8 +29,18 @@ const portfolioData: VideoItem[] = [
     tags: ["Events", "Luxury", "AI Generated with Editing"],
   },
   {
+    id: "scalpcare-narrative",
+    title: "ScalpCare: Direct Response Haircare Narrative",
+    category: "ai",
+    categoryLabel: "AI Generated with Editing",
+    src: "/video-assets/AI_1.mp4",
+    client: "ScalpCare Pro",
+    description: "High-retention direct response video ad illustrating hair and scalp nourishment with photorealistic human talent synthesis and conversion-focused framing.",
+    tags: ["Haircare", "DirectResponse", "AI Generated with Editing"],
+  },
+  {
     id: "srm-hologram",
-    title: "SRM - 3D Hologram Projection Van",
+    title: "SRM: 3D Hologram Projection Van",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/SRM video 1 V3.mp4",
@@ -40,7 +50,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "lord-milano-riyadh",
-    title: "Lord Milano - Riyadh Vibes",
+    title: "Lord Milano: Riyadh Vibes",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/Lord Milano Video 02 [No VO].mp4",
@@ -50,7 +60,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "world-of-oud",
-    title: "World of Oud - The Oud Explainer",
+    title: "World of Oud: The Oud Explainer",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/Concept_3_Edited_Final Version 4.mp4",
@@ -60,7 +70,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "aroma-hairmask",
-    title: "Aroma - Intensive Hairmask",
+    title: "Aroma: Intensive Hairmask",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/Aroma_Hairmask_V3.mp4",
@@ -70,7 +80,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "arka-jewellery",
-    title: "Arka - The Solitaire Collection",
+    title: "Arka: The Solitaire Collection",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/ARKA_Video_4_V3.mp4",
@@ -80,7 +90,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "autohub-corvette",
-    title: "AutoHub - Corvette Stingray vs. Camry",
+    title: "AutoHub: Corvette Stingray vs. Camry",
     category: "hybrid",
     categoryLabel: "Hybrid & AI",
     src: "/video-assets/AutoHub_Video_1_V7 [Arabic Captions].mp4",
@@ -90,7 +100,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "nemari-vanity",
-    title: "Nemari - Bespoke Leather Vanity Case",
+    title: "Nemari: Bespoke Leather Vanity Case",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/Nemari (s1 v1).mp4",
@@ -100,7 +110,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "woo-tester",
-    title: "WOO - Fragrance Tester Kit",
+    title: "WOO: Fragrance Tester Kit",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/WOO_CONCEPT_7_V5.mp4",
@@ -145,7 +155,7 @@ export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
               Ship creative that proves the range.
             </h2>
             <p className="mt-3 text-sm sm:text-base text-white/60 font-body">
-              Filter by format - every showcase here is a tangible campaign asset executed by our team,
+              Filter by format: every showcase here is a tangible campaign asset executed by our team,
               reflecting our standard in video production and editing.
             </p>
           </div>

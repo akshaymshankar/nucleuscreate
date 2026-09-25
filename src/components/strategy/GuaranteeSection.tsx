@@ -17,10 +17,17 @@ const guarantees = [
     badge: "Risk-Free Alignment",
   },
   {
+    icon: Target,
+    title: "Performance-Driven Strategy",
+    description:
+      "Every video is built with performance marketing in mind, not just visuals. Hooks, retention, and conversion are baked into the edit from day one, not bolted on after.",
+    badge: "Engineered For Growth",
+  },
+  {
     icon: Users,
     title: "Dedicated Strategic Squad",
     description:
-      "Direct Slack/WhatsApp line and dedicated creative director from initial kickoff call to final delivery. A senior creative partner in your corner, never a faceless ticket queue.",
+      "Direct communication channel and dedicated creative lead from initial kickoff call to final delivery. A senior creative partner in your corner, never a faceless ticket queue.",
     badge: "Executive Attention",
   },
 ];
@@ -79,7 +86,7 @@ export default function GuaranteeSection() {
         </div>
 
         {/* Part 1: Guarantees Grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {guarantees.map((g, idx) => {
             const Icon = g.icon;
 

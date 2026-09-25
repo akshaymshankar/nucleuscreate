@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Play, Volume2, VolumeX, Sparkles } from "lucide-react";
+import { ArrowRight, Play, Volume2, VolumeX, Sparkles, Target } from "lucide-react";
 import { VideoItem } from "./VideoModal";
 
 interface StrategyHeroProps {
@@ -8,14 +8,14 @@ interface StrategyHeroProps {
 }
 
 const heroVideo: VideoItem = {
-  id: "hero-ai-1",
-  title: "ScalpCare - Direct Response Haircare Narrative",
-  category: "ai",
-  categoryLabel: "AI Generated with Editing",
-  src: "/video-assets/AI_1.mp4",
-  client: "ScalpCare Pro",
-  description: "Next-generation generative creative featuring photorealistic character anatomy, physical proportions, and direct response conversion framing.",
-  tags: ["Haircare", "DirectResponse", "AI Generated with Editing"],
+  id: "hero-autohub",
+  title: "AutoHub: Corvette Stingray vs. Camry",
+  category: "hybrid",
+  categoryLabel: "Hybrid & AI",
+  src: "/video-assets/AutoHub_Video_1_V7 [Arabic Captions].mp4",
+  client: "AutoHub Motors",
+  description: "Adrenaline-fueled automotive battle featuring live-action vehicular staging augmented with high-speed AI track compositing and native Arabic subtitles.",
+  tags: ["Automotive", "Hybrid", "Localization"],
 };
 
 interface HeroPhoneMockupProps {
@@ -129,7 +129,7 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
                     {video.client}
                   </span>
                   <h4 className="font-heading font-bold text-white text-xs sm:text-sm truncate">
-                    {video.title.split("-")[1]?.trim() || video.title}
+                    {video.title.includes(":") ? video.title.split(":")[1]?.trim() : video.title.split("-")[1]?.trim() || video.title}
                   </h4>
                 </div>
 
@@ -168,18 +168,17 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
           >
             {/* Apple-Scale Display Headline */}
             <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-[62px] font-black tracking-[-0.035em] text-white leading-[1.1] text-balance">
-              We don't just make AI videos.{" "}
+              We don't <em className="italic font-serif font-normal">just</em> make AI videos.{" "}
               <span className="block mt-2 sm:mt-3 text-primary">
-                We make the video that's right for your brand.
+                We make the videos that are <em className="italic font-serif font-normal">right</em> for your brand.
               </span>
             </h1>
 
             {/* High-Clarity Subhead */}
             <p className="mt-5 sm:mt-6 text-sm sm:text-lg md:text-xl text-white/75 max-w-2xl font-body leading-relaxed">
-              Pre-production, production, and post - across live-action, AI-generated, and hybrid video.
+              Pre-production, production, and post: across live-action, AI-generated, and hybrid video.
               One team, one process, no juggling three vendors.
             </p>
-
 
             {/* CTAs */}
             <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3 w-full sm:w-auto max-w-sm sm:max-w-none mx-auto lg:mx-0">
@@ -200,6 +199,21 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
                 <span>View Client Work</span>
               </a>
             </div>
+
+            {/* New Performance Marketing Emphasis Card */}
+            <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-[#141217] border border-white/10 flex items-start gap-4 max-w-lg text-left shadow-lg">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                <Target className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="font-heading font-bold text-white text-sm sm:text-base">
+                  Performance-Driven Strategy
+                </h4>
+                <p className="text-xs sm:text-sm text-white/65 mt-1 leading-relaxed">
+                  Every video is built with performance marketing in mind, not just visuals. Hooks, retention, and conversion are baked into the edit from day one, not bolted on after.
+                </p>
+              </div>
+            </div>
           </motion.div>
 
           {/* Right Column: Single Phone Mockup */}
@@ -212,7 +226,7 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
             <HeroPhoneMockup
               video={heroVideo}
               onOpen={() => onOpenVideo(heroVideo)}
-              badgeLabel="Featured Campaign"
+              badgeLabel="Featured Hybrid & AI"
             />
           </motion.div>
         </div>

@@ -12,7 +12,7 @@ const processSteps = [
       "Comprehensive audit of your top-performing creative, historical winners, and immediate competitor landscape",
       "Honest format blueprint: deciding whether Live-Action, Generative AI, 3D Motion, or Hybrid maximizes ROI",
     ],
-    timelineTag: "Day 1 – 2",
+    timelineTag: "Day 1 - 2",
   },
   {
     number: "02",
@@ -25,7 +25,7 @@ const processSteps = [
       "Talent casting, studio booking (if Live-Action) or 3D CAD modeling (if Motion/CGI)",
       "Omnichannel asset map across 9:16 vertical, 1:1 square, and 16:9 widescreen formats",
     ],
-    timelineTag: "Day 2 – 4",
+    timelineTag: "Day 2 - 4",
   },
   {
     number: "03",
@@ -34,11 +34,11 @@ const processSteps = [
     icon: Clapperboard,
     details: [
       "Physical shoots executed with dedicated cinema crews, precision lighting, and macro rigs",
-      "Generative AI runs through our proprietary multi-model pipeline for photorealistic liquid, texture, and character fidelity",
+      "Generative AI paired with hands-on artist direction for photorealistic texture, physics, and character fidelity",
       "3D CGI modeling, volumetric lighting passes, and particle dynamics rendered in-house",
       "Zero handoff friction - the strategists who wrote the brief direct the production",
     ],
-    timelineTag: "Day 4 – 8",
+    timelineTag: "Day 4 - 8",
   },
   {
     number: "04",
@@ -47,11 +47,11 @@ const processSteps = [
     icon: Wand2,
     details: [
       "Rhythm-driven edit cuts optimized for sub-second audience retention and hook drop-off elimination",
-      "Hollywood-grade DaVinci Resolve color grading & HDR mastering",
+      "DaVinci Resolve color grading & master finishing",
       "Custom sound design, foley work, commercial music licensing, and resonant voiceover tracks",
       "VFX cleanup, graphic callouts, subtitles, and kinetic typography overlays",
     ],
-    timelineTag: "Day 8 – 11",
+    timelineTag: "Day 8 - 11",
   },
   {
     number: "05",
@@ -59,12 +59,12 @@ const processSteps = [
     subtitle: "Revision rounds until it's perfect, then omnichannel deployment.",
     icon: Rocket,
     details: [
-      "Private Frame.io collaborative review portal with timestamped comments",
+      "Collaborative review links with timestamped frame comments",
       "Comprehensive revision cycles included to ensure 100% brand adherence",
       "Full export suites: TikTok 9:16, Meta 4:5 / 1:1, YouTube 16:9, and lossless archive masters",
       "Ongoing partnership retainers for continuous monthly asset testing and refresh cycles",
     ],
-    timelineTag: "Day 12 – 14",
+    timelineTag: "Day 12 - 14",
   },
 ];
 

@@ -6,15 +6,15 @@ const matrixRows = [
     capability: "Live-Action Shoots",
     description: "Physical studio sets, real human talent, real-world product lighting",
     nucleus: "Yes (Full in-house crew)",
-    aiOnly: "None (AI hallucinations only)",
+    aiOnly: "None (Digital/AI only)",
     traditional: "Yes (Core focus)",
   },
   {
     capability: "Generative AI Video",
     description: "Rapid iteration, infinite variations, photorealistic synthetic ads",
-    nucleus: "Yes (Proprietary multi-model pipeline)",
+    nucleus: "Yes (Generative AI with custom art direction)",
     aiOnly: "Yes (Core focus)",
-    traditional: "None (Outdated aversion)",
+    traditional: "Rarely offered (Traditional production only)",
   },
   {
     capability: "Hybrid Compositing",
@@ -26,16 +26,16 @@ const matrixRows = [
   {
     capability: "Delivery Speed",
     description: "Average turnaround from approved script to multi-format delivery",
-    nucleus: "⚡ Fast (7–14 days guaranteed)",
+    nucleus: "⚡ Fast (7-14 days guaranteed)",
     aiOnly: "Fastest (often low fidelity)",
-    traditional: "Slow (4–8 weeks typical)",
+    traditional: "Slow (4-8 weeks typical)",
   },
   {
     capability: "Cost Flexibility",
     description: "Ability to blend formats to match acquisition goals and test budgets",
     nucleus: "Flexible (Mix formats to budget)",
     aiOnly: "Low cost, but rigid single style",
-    traditional: "Very high minimums ($15k – $50k+)",
+    traditional: "Very high minimums ($15k - $50k+)",
   },
   {
     capability: "Single Point of Contact",
