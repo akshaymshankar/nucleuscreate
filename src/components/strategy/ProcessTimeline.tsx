@@ -36,7 +36,7 @@ const processSteps = [
       "Physical shoots executed with dedicated cinema crews, precision lighting, and macro rigs",
       "Generative AI runs through our proprietary multi-model pipeline for photorealistic liquid, texture, and character fidelity",
       "3D CGI modeling, volumetric lighting passes, and particle dynamics rendered in-house",
-      "Zero handoff friction — the strategists who wrote the brief direct the production",
+      "Zero handoff friction - the strategists who wrote the brief direct the production",
     ],
     timelineTag: "Day 4 – 8",
   },
@@ -84,7 +84,7 @@ export default function ProcessTimeline() {
           </h2>
 
           <p className="mt-4 text-base sm:text-lg text-white/60 font-body leading-relaxed">
-            Not just a vendor queue — we operate as your integrated video engineering department.
+            Not just a vendor queue - we operate as your integrated video engineering department.
             A live-action shoot and an AI ad don't operate on identical clocks, so we plan in transparent phases with a definitive delivery calendar.
           </p>
         </div>

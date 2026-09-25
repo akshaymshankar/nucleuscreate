@@ -8,14 +8,14 @@ interface StrategyHeroProps {
 }
 
 const heroVideo: VideoItem = {
-  id: "lord-milano-riyadh",
-  title: "Lord Milano — Riyadh Vibes",
+  id: "hero-ai-1",
+  title: "ScalpCare - Direct Response Haircare Narrative",
   category: "ai",
   categoryLabel: "AI Generated with Editing",
-  src: "/video-assets/Lord Milano Video 02 [No VO].mp4",
-  client: "Lord Milano",
-  description: "Cinematic Gulf elegance and luxury ambiance synthesized entirely through fine-tuned generative AI pipelines with ultra-rich color grading.",
-  tags: ["Luxury", "Perfume", "Cinematic", "AI Generated with Editing"],
+  src: "/video-assets/AI_1.mp4",
+  client: "ScalpCare Pro",
+  description: "Next-generation generative creative featuring photorealistic character anatomy, physical proportions, and direct response conversion framing.",
+  tags: ["Haircare", "DirectResponse", "AI Generated with Editing"],
 };
 
 interface HeroPhoneMockupProps {
@@ -129,7 +129,7 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
                     {video.client}
                   </span>
                   <h4 className="font-heading font-bold text-white text-xs sm:text-sm truncate">
-                    {video.title.split("—")[1]?.trim() || video.title}
+                    {video.title.split("-")[1]?.trim() || video.title}
                   </h4>
                 </div>
 
@@ -176,7 +176,7 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
 
             {/* High-Clarity Subhead */}
             <p className="mt-5 sm:mt-6 text-sm sm:text-lg md:text-xl text-white/75 max-w-2xl font-body leading-relaxed">
-              Pre-production, production, and post — across live-action, AI-generated, and hybrid video.
+              Pre-production, production, and post - across live-action, AI-generated, and hybrid video.
               One team, one process, no juggling three vendors.
             </p>
 

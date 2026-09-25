@@ -6,7 +6,7 @@ const guarantees = [
     icon: Clock,
     title: "Guaranteed On-Time Delivery",
     description:
-      "Whatever format you choose — live-action, generative AI, or 3D motion graphics — your project ships strictly on the agreed date. No vendor delays, no moving goalposts.",
+      "Whatever format you choose - live-action, generative AI, or 3D motion graphics - your project ships strictly on the agreed date. No vendor delays, no moving goalposts.",
     badge: "100% SLA Guarantee",
   },
   {

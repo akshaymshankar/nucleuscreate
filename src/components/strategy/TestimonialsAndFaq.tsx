@@ -5,11 +5,11 @@ import { Plus, HelpCircle } from "lucide-react";
 const faqs = [
   {
     q: "What kind of videos can you create?",
-    a: "Product showcases, brand stories, direct response social ads, promotional campaign reels, technical explainers, and lifestyle content — across live-action, AI-generated with editing, 3D motion graphics, or a hybrid of formats. We recommend the optimal mix based on your direct acquisition goal and budget.",
+    a: "Product showcases, brand stories, direct response social ads, promotional campaign reels, technical explainers, and lifestyle content - across live-action, AI-generated with editing, 3D motion graphics, or a hybrid of formats. We recommend the optimal mix based on your direct acquisition goal and budget.",
   },
   {
     q: "How do you decide between live-action, AI, or motion graphics?",
-    a: "On the initial strategy call, we analyze your unit economics, timeline, and what the creative must prove to the viewer. Some briefs need real human hands and tactile physical locations; others achieve 5x faster testing velocity with generative AI or 3D CAD animation. We give you transparent advice — even if that means recommending a more economical format.",
+    a: "On the initial strategy call, we analyze your unit economics, timeline, and what the creative must prove to the viewer. Some briefs need real human hands and tactile physical locations; others achieve 5x faster testing velocity with generative AI or 3D CAD animation. We give you transparent advice - even if that means recommending a more economical format.",
   },
   {
     q: "How long does delivery take?",
@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "Can I request revisions?",
-    a: "Yes — every single project includes structured revision rounds. You review drafts on a collaborative timestamped portal where you can leave visual notes directly on the video frames until every second satisfies your brand standards.",
+    a: "Yes - every single project includes structured revision rounds. You review drafts on a collaborative timestamped portal where you can leave visual notes directly on the video frames until every second satisfies your brand standards.",
   },
   {
     q: "What formats do I receive upon final sign-off?",
@@ -29,11 +29,11 @@ const faqs = [
   },
   {
     q: "What makes your AI video quality look so realistic compared to generic AI tools?",
-    a: "We do not rely on simple one-click consumer apps. We ingest your real physical CAD/product photography, run proprietary multi-pass neural rendering, apply optical lens simulation, and polish in DaVinci Resolve with Hollywood color science to eliminate the tell-tale 'AI gloss' or uncanny distortions.",
+    a: "We don't rely on one-click AI generators. Every project starts with our team - experienced video professionals - structuring the character's anatomy and physical proportions, and the product itself, before any generation happens. That structure is confirmed with you first, so the final output holds up rather than drifting off-model like typical AI tools. Once approved, we generate the video and take it into Adobe's professional editing suite for color grading, sound, and finishing - the same tools used in real production work - so what you get looks handled by professionals, not spat out by an app.",
   },
   {
     q: "How do I get started?",
-    a: "Book a free strategy call. We'll examine your product, determine your most lucrative format strategy, and give you a comprehensive timeline and budget framework — zero commitment required.",
+    a: "Book a free strategy call. We'll examine your product, determine your most lucrative format strategy, and give you a comprehensive timeline and budget framework - zero commitment required.",
   },
 ];
 

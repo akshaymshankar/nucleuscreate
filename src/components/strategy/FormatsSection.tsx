@@ -65,7 +65,7 @@ const formats: FormatItem[] = [
     icon: Camera,
     headline: "Real people, tactile product, real-world resonance.",
     summary:
-      "Full pre-production to post — concept, scripting, talent casting, studio/location shoot, high-end cinema color grading, and commercial editing. For when your brand needs authentic emotional human connection that AI cannot replicate.",
+      "Full pre-production to post - concept, scripting, talent casting, studio/location shoot, high-end cinema color grading, and commercial editing. For when your brand needs authentic emotional human connection that AI cannot replicate.",
     videoSrc: encodeURI("/video-assets/Concept_3_Edited_Final Version 4.mp4"),
     reelMeta: {
       handle: "@nucleus.liveaction",
@@ -200,7 +200,7 @@ const formats: FormatItem[] = [
     icon: Layers,
     headline: "Live-action physical product embedded seamlessly in augmented AI realms.",
     summary:
-      "Live-action hero footage composited with generative AI environments and 3D CGI visual effects in a single seamless workflow — real product tactile fidelity surrounded by surreal, captivating visual environments that no traditional set could ever afford.",
+      "Live-action hero footage composited with generative AI environments and 3D CGI visual effects in a single seamless workflow - real product tactile fidelity surrounded by surreal, captivating visual environments that no traditional set could ever afford.",
     videoSrc: encodeURI("/video-assets/AutoHub_Video_1_V7 [Arabic Captions].mp4"),
     reelMeta: {
       handle: "@nucleus.hybridvfx",
@@ -276,7 +276,7 @@ export default function FormatsSection() {
           </h2>
 
           <p className="mt-4 text-base sm:text-lg text-white/60 font-body leading-relaxed">
-            Most shops force you to pick a lane — AI-only, or an expensive traditional production house.
+            Most shops force you to pick a lane: AI-only, or an expensive traditional production house.
             We run all four under one roof in native 9:16 paid performance dimensions.
           </p>
         </div>

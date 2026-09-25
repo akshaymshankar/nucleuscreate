@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Sparkles, Volume2, VolumeX } from "lucide-react";
+import { Play, Sparkles, Volume2, VolumeX, ChevronLeft, ChevronRight } from "lucide-react";
 import { VideoItem } from "./VideoModal";
 
 interface WorkShowcaseProps {
@@ -10,7 +10,7 @@ interface WorkShowcaseProps {
 const portfolioData: VideoItem[] = [
   {
     id: "thetabody-detox",
-    title: "Thetabody — Charcoal Detox Mask",
+    title: "Thetabody - Charcoal Detox Mask",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/THETABODY_Video_10_V7.mp4",
@@ -19,8 +19,18 @@ const portfolioData: VideoItem[] = [
     tags: ["Skincare", "AI Generated with Editing", "DirectResponse"],
   },
   {
+    id: "sapphire-events",
+    title: "Sapphire Events - Luxury Destination Wedding",
+    category: "ai",
+    categoryLabel: "AI Generated with Editing",
+    src: "/video-assets/Sapphire_Events.mp4",
+    client: "Sapphire Events",
+    description: "Opulent destination wedding showcase featuring photorealistic talent synthesis, bespoke coastal decor, and cinematic ambient color science.",
+    tags: ["Events", "Luxury", "AI Generated with Editing"],
+  },
+  {
     id: "srm-hologram",
-    title: "SRM — 3D Hologram Projection Van",
+    title: "SRM - 3D Hologram Projection Van",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/SRM video 1 V3.mp4",
@@ -30,7 +40,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "lord-milano-riyadh",
-    title: "Lord Milano — Riyadh Vibes",
+    title: "Lord Milano - Riyadh Vibes",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/Lord Milano Video 02 [No VO].mp4",
@@ -40,7 +50,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "world-of-oud",
-    title: "World of Oud — The Oud Explainer",
+    title: "World of Oud - The Oud Explainer",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/Concept_3_Edited_Final Version 4.mp4",
@@ -50,7 +60,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "aroma-hairmask",
-    title: "Aroma — Intensive Hairmask",
+    title: "Aroma - Intensive Hairmask",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/Aroma_Hairmask_V3.mp4",
@@ -60,7 +70,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "arka-jewellery",
-    title: "Arka — The Solitaire Collection",
+    title: "Arka - The Solitaire Collection",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/ARKA_Video_4_V3.mp4",
@@ -70,7 +80,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "autohub-corvette",
-    title: "AutoHub — Corvette Stingray vs. Camry",
+    title: "AutoHub - Corvette Stingray vs. Camry",
     category: "hybrid",
     categoryLabel: "Hybrid & AI",
     src: "/video-assets/AutoHub_Video_1_V7 [Arabic Captions].mp4",
@@ -80,7 +90,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "nemari-vanity",
-    title: "Nemari — Bespoke Leather Vanity Case",
+    title: "Nemari - Bespoke Leather Vanity Case",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/Nemari (s1 v1).mp4",
@@ -90,7 +100,7 @@ const portfolioData: VideoItem[] = [
   },
   {
     id: "woo-tester",
-    title: "WOO — Fragrance Tester Kit",
+    title: "WOO - Fragrance Tester Kit",
     category: "ai",
     categoryLabel: "AI Generated with Editing",
     src: "/video-assets/WOO_CONCEPT_7_V5.mp4",
@@ -108,17 +118,24 @@ const filterCategories = [
 
 export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
   const [activeFilter, setActiveFilter] = useState("all");
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const filteredVideos = portfolioData.filter((item) => {
     if (activeFilter === "all") return true;
     return item.category === activeFilter;
   });
 
+  const scroll = (direction: "left" | "right") => {
+    if (!scrollRef.current) return;
+    const scrollAmount = direction === "left" ? -350 : 350;
+    scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  };
+
   return (
-    <section id="work" className="relative py-24 sm:py-32 bg-[#0B0A0D] border-b border-white/10">
+    <section id="work" className="relative py-20 sm:py-28 bg-[#0B0A0D] border-b border-white/10 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Section Header & Filter Pills */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/10">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono uppercase tracking-widest text-primary bg-primary/10 border border-primary/25 mb-4">
               <Sparkles className="w-3.5 h-3.5" />
@@ -128,52 +145,90 @@ export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
               Ship creative that proves the range.
             </h2>
             <p className="mt-3 text-sm sm:text-base text-white/60 font-body">
-              Filter by format — every showcase here is a tangible campaign asset executed by our team,
+              Filter by format - every showcase here is a tangible campaign asset executed by our team,
               reflecting our standard in video production and editing.
             </p>
           </div>
 
-          {/* Filter Pills with touch-friendly mobile horizontal scroll */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:pb-0 sm:flex-wrap">
-            {filterCategories.map((cat) => {
-              const isActive = activeFilter === cat.id;
-              const count =
-                cat.id === "all"
-                  ? portfolioData.length
-                  : portfolioData.filter((v) => v.category === cat.id).length;
+          {/* Right Action: Filters + Carousel Arrows */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            {/* Filter Pills */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:pb-0">
+              {filterCategories.map((cat) => {
+                const isActive = activeFilter === cat.id;
+                const count =
+                  cat.id === "all"
+                    ? portfolioData.length
+                    : portfolioData.filter((v) => v.category === cat.id).length;
 
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveFilter(cat.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-heading font-semibold transition-all duration-200 flex items-center gap-2 shrink-0 ${
-                    isActive
-                      ? "bg-primary text-black font-extrabold shadow-sm"
-                      : "bg-white/[0.04] text-white/70 hover:text-white hover:bg-white/[0.08] border border-white/10"
-                  }`}
-                >
-                  <span>{cat.label}</span>
-                  <span
-                    className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
-                      isActive ? "bg-black/25 text-black font-extrabold" : "bg-white/10 text-white/50"
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveFilter(cat.id)}
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-heading font-semibold transition-all duration-200 flex items-center gap-2 shrink-0 ${
+                      isActive
+                        ? "bg-primary text-black font-extrabold shadow-sm"
+                        : "bg-white/[0.04] text-white/70 hover:text-white hover:bg-white/[0.08] border border-white/10"
                     }`}
                   >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
+                    <span>{cat.label}</span>
+                    <span
+                      className={`text-[10px] font-mono px-1.5 py-0.2 rounded-full ${
+                        isActive ? "bg-black/25 text-black font-extrabold" : "bg-white/10 text-white/50"
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Desktop Left/Right Carousel Controls */}
+            <div className="hidden sm:flex items-center gap-2 shrink-0 pl-2">
+              <button
+                type="button"
+                onClick={() => scroll("left")}
+                aria-label="Scroll work left"
+                className="w-9 h-9 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-white/70 hover:text-white flex items-center justify-center transition-colors active:scale-95"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scroll("right")}
+                aria-label="Scroll work right"
+                className="w-9 h-9 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-white/70 hover:text-white flex items-center justify-center transition-colors active:scale-95"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Video Cards Grid */}
-        <motion.div layout className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence>
+        {/* Horizontal Scroll Track */}
+        <div
+          ref={scrollRef}
+          className="mt-8 flex gap-5 sm:gap-6 overflow-x-auto pb-6 pt-2 scrollbar-none snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          <AnimatePresence mode="popLayout">
             {filteredVideos.map((item) => (
-              <VideoCard key={item.id} item={item} onOpen={() => onOpenVideo(item)} />
+              <div
+                key={item.id}
+                className="w-[280px] sm:w-[320px] md:w-[340px] shrink-0 snap-start"
+              >
+                <VideoCard item={item} onOpen={() => onOpenVideo(item)} />
+              </div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
+
+        {/* Subtle Horizontal Navigation Indicator */}
+        <div className="flex items-center justify-between text-xs text-white/40 font-mono pt-1 px-1">
+          <span>Swipe horizontally to explore portfolio</span>
+          <span className="hidden sm:inline">Use arrows or scroll track</span>
+        </div>
       </div>
     </section>
   );
@@ -209,16 +264,16 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.4 }}
-      className="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#141217] hover:border-primary/50 transition-all duration-300 shadow-lg flex flex-col cursor-pointer"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.3 }}
+      className="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#141217] hover:border-primary/50 transition-all duration-300 shadow-lg flex flex-col cursor-pointer h-full"
       onClick={onOpen}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* 4:5 / 9:16 Video Canvas Area */}
+      {/* 4:5 Video Canvas Area */}
       <div className="relative aspect-[4/5] bg-black overflow-hidden flex items-center justify-center">
         <video
           ref={videoRef}
@@ -252,7 +307,7 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
           </button>
         )}
 
-        {/* Center Play Icon Glow */}
+        {/* Center Play Icon */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white flex items-center justify-center pl-1 group-hover:bg-primary group-hover:text-black group-hover:scale-115 transition-all duration-300 shadow-xl">
             <Play className="w-5 h-5 fill-current" />
