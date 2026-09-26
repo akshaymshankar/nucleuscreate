@@ -8,14 +8,14 @@ interface StrategyHeroProps {
 }
 
 const heroVideo: VideoItem = {
-  id: "hero-autohub",
-  title: "AutoHub: Corvette Stingray vs. Camry",
-  category: "hybrid",
-  categoryLabel: "Hybrid & AI",
-  src: "/video-assets/AutoHub_Video_1_V7 [Arabic Captions].mp4",
-  client: "AutoHub Motors",
-  description: "Adrenaline-fueled automotive battle featuring live-action vehicular staging augmented with high-speed AI track compositing and native Arabic subtitles.",
-  tags: ["Automotive", "Hybrid", "Localization"],
+  id: "hero-sapphire",
+  title: "Sapphire Events: Luxury Destination Wedding",
+  category: "ai",
+  categoryLabel: "AI Generated with Editing",
+  src: "/video-assets/Sapphire_Events.mp4",
+  client: "Sapphire Events",
+  description: "Opulent destination wedding showcase featuring photorealistic talent synthesis, bespoke coastal decor, and cinematic ambient color science.",
+  tags: ["Events", "Luxury", "AI Generated with Editing"],
 };
 
 interface HeroPhoneMockupProps {
@@ -211,7 +211,7 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
             <HeroPhoneMockup
               video={heroVideo}
               onOpen={() => onOpenVideo(heroVideo)}
-              badgeLabel="Featured Hybrid & AI"
+              badgeLabel="Featured AI Video"
             />
           </motion.div>
         </div>

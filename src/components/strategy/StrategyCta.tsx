@@ -40,7 +40,7 @@ export default function StrategyCta() {
                 href="https://calendly.com/nucleuscreates/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 sm:py-4 rounded-full bg-primary text-black font-heading font-bold text-sm tracking-normal hover:brightness-105 active:scale-[0.98] transition-all shadow-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 sm:py-4 rounded-full bg-white text-black font-heading font-bold text-sm tracking-normal hover:bg-white/90 active:scale-[0.98] transition-all shadow-sm"
               >
                 <PhoneCall className="w-4 h-4" />
                 <span>Book a Strategy Call</span>
