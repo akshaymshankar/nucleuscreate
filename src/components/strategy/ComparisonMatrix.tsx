@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { Check, Minus, Sparkles, Zap, ShieldAlert, Award } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, Minus, Sparkles, Zap, ShieldAlert, Award, ChevronDown } from "lucide-react";
 
 const matrixRows = [
   {
@@ -54,8 +55,10 @@ const matrixRows = [
 ];
 
 export default function ComparisonMatrix() {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
   return (
-    <section id="compare" className="relative py-24 sm:py-32 bg-[#0B0A0D] border-b border-white/10 overflow-hidden">
+    <section id="compare" className="relative py-20 sm:py-32 bg-[#0B0A0D] border-b border-white/10 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
@@ -75,49 +78,126 @@ export default function ComparisonMatrix() {
           </p>
         </div>
 
-        {/* Mobile View: Apple-grade Stacked Cards (Hidden on desktop) */}
-        <div className="mt-12 space-y-4 lg:hidden">
-          {matrixRows.map((row, idx) => (
-            <div
-              key={idx}
-              className="p-5 sm:p-6 rounded-2xl bg-[#141217] border border-white/10 shadow-lg space-y-4"
-            >
-              <div>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-primary font-bold">
-                  Capability {idx + 1}
-                </span>
-                <h3 className="font-heading font-bold text-white text-lg mt-0.5">{row.capability}</h3>
-                <p className="text-xs text-white/50 mt-1">{row.description}</p>
-              </div>
+        {/* Mobile View: Minimized Tap-to-Reveal Accordion (Hidden on desktop) */}
+        <div className="mt-8 space-y-2.5 lg:hidden">
+          <div className="text-center pb-1">
+            <span className="text-[10px] sm:text-[11px] font-mono text-primary uppercase tracking-wider font-semibold">
+              Tap any capability to reveal comparison breakdown ↓
+            </span>
+          </div>
 
-              {/* Nucleus Featured Pill */}
-              <div className="p-3.5 rounded-xl bg-primary/10 border border-primary/30 flex items-start gap-2.5">
-                <div className="w-5 h-5 rounded-full bg-primary text-black flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-3.5 h-3.5 stroke-[3]" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-mono text-primary font-bold uppercase tracking-wider block">
-                    NUCLEUS PRODUCTIONS
-                  </span>
-                  <span className="text-sm font-heading font-bold text-white leading-snug">
-                    {row.nucleus}
-                  </span>
-                </div>
-              </div>
+          {matrixRows.map((row, idx) => {
+            const isExpanded = expandedIndex === idx;
 
-              {/* Competitors Mini Comparison */}
-              <div className="grid grid-cols-2 gap-2 text-xs pt-1 border-t border-white/5">
-                <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
-                  <span className="text-[9px] font-mono uppercase text-white/40 block mb-1">AI-Only Studios</span>
-                  <span className="text-white/60 font-body text-xs">{row.aiOnly}</span>
-                </div>
-                <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
-                  <span className="text-[9px] font-mono uppercase text-white/40 block mb-1">Traditional Houses</span>
-                  <span className="text-white/60 font-body text-xs">{row.traditional}</span>
-                </div>
+            return (
+              <div
+                key={idx}
+                className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                  isExpanded
+                    ? "bg-[#18151D] border-primary/45 shadow-[0_8px_25px_rgba(37,211,102,0.1)]"
+                    : "bg-[#141217] border-white/10 hover:border-white/20"
+                }`}
+              >
+                {/* Header Row (Always visible, clean & compact) */}
+                <button
+                  type="button"
+                  onClick={() => setExpandedIndex(isExpanded ? null : idx)}
+                  className="w-full text-left p-3.5 sm:p-4 flex items-center justify-between gap-3 cursor-pointer focus:outline-none"
+                  aria-expanded={isExpanded}
+                >
+                  <div className="flex items-center gap-3 min-w-0 flex-1">
+                    <div
+                      className={`w-7 h-7 rounded-lg flex items-center justify-center font-mono text-xs font-bold shrink-0 transition-colors ${
+                        isExpanded
+                          ? "bg-primary text-black"
+                          : "bg-white/[0.06] text-primary border border-white/10"
+                      }`}
+                    >
+                      {idx + 1}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-heading font-bold text-white text-sm sm:text-base leading-snug truncate">
+                        {row.capability}
+                      </h3>
+                      <span className="text-[10px] font-mono text-primary/80 font-semibold block truncate">
+                        Nucleus: {row.nucleus.split("(")[0].trim()}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 shrink-0 pl-1">
+                    <div
+                      className={`w-6 h-6 rounded-full flex items-center justify-center border transition-all ${
+                        isExpanded
+                          ? "bg-primary/20 border-primary/40 text-primary"
+                          : "bg-white/[0.04] border-white/10 text-white/40"
+                      }`}
+                    >
+                      <ChevronDown
+                        className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                          isExpanded ? "rotate-180 text-primary" : ""
+                        }`}
+                      />
+                    </div>
+                  </div>
+                </button>
+
+                {/* Reveal Content (Smooth expansion on tap) */}
+                <AnimatePresence initial={false}>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden border-t border-white/10"
+                    >
+                      <div className="p-4 pt-3 bg-black/25 space-y-3">
+                        <p className="text-xs text-white/60 font-body leading-relaxed">
+                          {row.description}
+                        </p>
+
+                        {/* Nucleus Box */}
+                        <div className="p-3 rounded-xl bg-primary/10 border border-primary/30 flex items-start gap-2.5">
+                          <div className="w-5 h-5 rounded-full bg-primary text-black flex items-center justify-center shrink-0 mt-0.5">
+                            <Check className="w-3.5 h-3.5 stroke-[3]" />
+                          </div>
+                          <div>
+                            <span className="text-[9px] font-mono text-primary font-bold uppercase tracking-wider block">
+                              NUCLEUS PRODUCTIONS
+                            </span>
+                            <span className="text-xs font-heading font-bold text-white leading-snug">
+                              {row.nucleus}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Competitor Boxes Side-by-side */}
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+                            <span className="text-[9px] font-mono uppercase text-white/40 block mb-0.5">
+                              AI-Only Studios
+                            </span>
+                            <span className="text-white/60 font-body text-[11px] leading-tight block">
+                              {row.aiOnly}
+                            </span>
+                          </div>
+                          <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5">
+                            <span className="text-[9px] font-mono uppercase text-white/40 block mb-0.5">
+                              Traditional Houses
+                            </span>
+                            <span className="text-white/60 font-body text-[11px] leading-tight block">
+                              {row.traditional}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Desktop View: Wide Apple Comparison Table (Hidden on mobile) */}
