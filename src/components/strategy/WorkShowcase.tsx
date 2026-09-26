@@ -1,6 +1,6 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, Sparkles, Volume2, VolumeX, ChevronLeft, ChevronRight } from "lucide-react";
+import { Sparkles, Volume2, VolumeX, ChevronLeft, ChevronRight } from "lucide-react";
 import { VideoItem } from "./VideoModal";
 
 interface WorkShowcaseProps {
@@ -256,23 +256,42 @@ export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
 
 function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    if (videoRef.current && item.src) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play().catch(() => {});
-    }
-  };
+  // Auto-play videos simultaneously / in parallel
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    if (videoRef.current && item.src) {
-      videoRef.current.pause();
-    }
-  };
+    el.defaultMuted = true;
+    el.muted = true;
+
+    const playVideo = () => {
+      if (!el) return;
+      el.muted = true;
+      const playPromise = el.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          const resume = () => {
+            el.play().catch(() => {});
+          };
+          window.addEventListener("click", resume, { once: true, passive: true });
+          window.addEventListener("touchstart", resume, { once: true, passive: true });
+          window.addEventListener("scroll", resume, { once: true, passive: true });
+        });
+      }
+    };
+
+    playVideo();
+
+    el.addEventListener("loadedmetadata", playVideo);
+    el.addEventListener("canplay", playVideo);
+
+    return () => {
+      el.removeEventListener("loadedmetadata", playVideo);
+      el.removeEventListener("canplay", playVideo);
+    };
+  }, [item.src]);
 
   const toggleSound = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -290,74 +309,48 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
       transition={{ duration: 0.3 }}
       className="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#141217] hover:border-primary/50 transition-all duration-300 shadow-lg flex flex-col cursor-pointer h-full"
       onClick={onOpen}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
-      {/* Video Canvas Area - responsive aspect ratio for optimal mobile framing */}
-      <div className="relative aspect-[16/11] sm:aspect-[4/5] bg-black overflow-hidden flex items-center justify-center">
+      {/* Video Canvas Area - 4:5 rich portrait preview */}
+      <div className="relative aspect-[4/5] bg-black overflow-hidden flex items-center justify-center">
         <video
           ref={videoRef}
           src={encodeURI(item.src || "")}
+          autoPlay
           loop
           muted={isMuted}
           playsInline
-          preload="metadata"
+          preload="auto"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
 
         {/* Gradient Scrim */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#100E12] via-transparent to-black/40 opacity-80 group-hover:opacity-60 transition-opacity" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#100E12] via-transparent to-black/35 opacity-75 group-hover:opacity-40 transition-opacity" />
 
-        {/* Top Bar Badges */}
-        <div className="absolute top-2.5 sm:top-3 inset-x-2.5 sm:inset-x-3 flex items-center justify-between pointer-events-none">
-          <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-primary border border-white/15">
+        {/* Top Bar: Category Pill & Audio Toggle */}
+        <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between pointer-events-none z-10">
+          <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/75 backdrop-blur-md text-primary border border-white/15">
             {item.categoryLabel}
           </span>
-        </div>
 
-        {/* Floating Audio Toggle (on card hover) */}
-        {isHovered && (
           <button
             type="button"
             onClick={toggleSound}
-            className="absolute top-2.5 sm:top-3 right-2.5 sm:right-3 p-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white hover:text-primary transition-colors"
-            aria-label="Toggle mute"
+            className="pointer-events-auto p-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white hover:text-primary transition-colors shadow-md"
+            aria-label={isMuted ? "Unmute video" : "Mute video"}
           >
             {isMuted ? <VolumeX className="w-3.5 h-3.5 text-primary" /> : <Volume2 className="w-3.5 h-3.5" />}
           </button>
-        )}
-
-        {/* Center Play Icon */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white flex items-center justify-center pl-0.5 group-hover:bg-primary group-hover:text-black group-hover:scale-110 transition-all duration-300 shadow-xl">
-            <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
-          </div>
         </div>
       </div>
 
-      {/* Card Info Meta */}
-      <div className="p-3.5 sm:p-5 flex-1 flex flex-col justify-between bg-[#141217]">
-        <div>
-          <h4 className="font-heading font-bold text-white text-sm sm:text-lg tracking-tight group-hover:text-primary transition-colors line-clamp-1">
-            {item.title}
-          </h4>
-          <p className="text-xs text-white/60 font-body mt-1.5 sm:mt-2 line-clamp-2 leading-relaxed">
-            {item.description}
-          </p>
-        </div>
-
-        {item.tags && item.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-2.5 sm:mt-3 pt-2.5 sm:pt-3 border-t border-white/5">
-            {item.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-[8px] sm:text-[9px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full bg-white/[0.03] text-white/50 border border-white/5"
-              >
-                #{tag}
-              </span>
-            ))}
-          </div>
-        )}
+      {/* Card Info Meta: Title Only (Descriptions & other details appear on click) */}
+      <div className="p-3.5 sm:p-4 bg-[#141217] flex items-center justify-between gap-2 border-t border-white/5">
+        <h4 className="font-heading font-bold text-white text-sm sm:text-base tracking-tight group-hover:text-primary transition-colors line-clamp-1">
+          {item.title}
+        </h4>
+        <span className="text-[10px] font-mono text-white/30 group-hover:text-primary transition-colors shrink-0">
+          View Details →
+        </span>
       </div>
     </motion.div>
   );
