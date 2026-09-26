@@ -10,6 +10,24 @@ export default function AiChallengePopup() {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
   const isArmedRef = useRef(true);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const revealRef = useRef<HTMLDivElement>(null);
+
+  const handleSelectOption = (option: "A" | "B") => {
+    setSelectedOption(option);
+    // Smoothly scroll down so the right/wrong verdict and Book a Call CTA are directly in view
+    setTimeout(() => {
+      if (revealRef.current) {
+        revealRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+      if (modalRef.current) {
+        modalRef.current.scrollTo({
+          top: modalRef.current.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    }, 120);
+  };
 
   // Scroll listener: Re-arms whenever user scrolls back up into/above #guarantee,
   // and triggers the popup whenever user scrolls down past #guarantee
@@ -112,6 +130,7 @@ export default function AiChallengePopup() {
 
             {/* Modal Dialog Card */}
             <motion.div
+              ref={modalRef}
               initial={{ opacity: 0, scale: 0.9, y: 25 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.92, y: 20 }}
@@ -212,7 +231,7 @@ export default function AiChallengePopup() {
                     {/* Option A: Corvette */}
                     <button
                       type="button"
-                      onClick={() => setSelectedOption("A")}
+                      onClick={() => handleSelectOption("A")}
                       className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between ${
                         selectedOption === "A"
                           ? "bg-amber-500/10 border-amber-500 text-white shadow-lg"
@@ -239,7 +258,7 @@ export default function AiChallengePopup() {
                     {/* Option B: Camry */}
                     <button
                       type="button"
-                      onClick={() => setSelectedOption("B")}
+                      onClick={() => handleSelectOption("B")}
                       className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between ${
                         selectedOption === "B"
                           ? "bg-primary/15 border-primary text-white shadow-[0_0_25px_rgba(37,211,102,0.25)]"
@@ -268,6 +287,7 @@ export default function AiChallengePopup() {
                   <AnimatePresence>
                     {selectedOption && (
                       <motion.div
+                        ref={revealRef}
                         initial={{ opacity: 0, height: 0, y: 8 }}
                         animate={{ opacity: 1, height: "auto", y: 0 }}
                         exit={{ opacity: 0, height: 0 }}
