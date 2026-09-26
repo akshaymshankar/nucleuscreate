@@ -11,22 +11,37 @@ export default function AiChallengePopup() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isArmedRef = useRef(true);
   const modalRef = useRef<HTMLDivElement>(null);
-  const revealRef = useRef<HTMLDivElement>(null);
+  const verdictRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  const scrollToVerdictAndCta = () => {
+    if (modalRef.current) {
+      modalRef.current.scrollTo({
+        top: modalRef.current.scrollHeight + 1500,
+        behavior: "smooth",
+      });
+    }
+    if (ctaRef.current) {
+      try {
+        ctaRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "end",
+          inline: "nearest",
+        });
+      } catch {
+        // Fallback handled by modalRef.scrollTo
+      }
+    }
+  };
 
   const handleSelectOption = (option: "A" | "B") => {
     setSelectedOption(option);
-    // Smoothly scroll down so the right/wrong verdict and Book a Call CTA are directly in view
-    setTimeout(() => {
-      if (revealRef.current) {
-        revealRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }
-      if (modalRef.current) {
-        modalRef.current.scrollTo({
-          top: modalRef.current.scrollHeight,
-          behavior: "smooth",
-        });
-      }
-    }, 120);
+
+    // Multi-stage auto-scroll guarantees mobile browsers glide right down to description and CTA
+    requestAnimationFrame(scrollToVerdictAndCta);
+    setTimeout(scrollToVerdictAndCta, 60);
+    setTimeout(scrollToVerdictAndCta, 180);
+    setTimeout(scrollToVerdictAndCta, 350);
   };
 
   // Scroll listener: Re-arms whenever user scrolls back up into/above #guarantee,
@@ -118,7 +133,7 @@ export default function AiChallengePopup() {
       {/* Pop-up Modal Overlay */}
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-5 overflow-hidden">
             {/* Backdrop Blur */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -131,17 +146,18 @@ export default function AiChallengePopup() {
             {/* Modal Dialog Card */}
             <motion.div
               ref={modalRef}
-              initial={{ opacity: 0, scale: 0.9, y: 25 }}
+              initial={{ opacity: 0, scale: 0.92, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 20 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-[#131116] border border-white/15 p-5 sm:p-7 shadow-[0_25px_80px_rgba(0,0,0,0.95)] z-10 text-white scrollbar-none"
+              exit={{ opacity: 0, scale: 0.94, y: 15 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-2xl max-h-[90vh] sm:max-h-[92vh] overflow-y-auto overscroll-contain rounded-3xl bg-[#131116] border border-white/15 p-4 sm:p-7 shadow-[0_25px_80px_rgba(0,0,0,0.95)] z-10 text-white scroll-smooth scrollbar-none"
+              style={{ WebkitOverflowScrolling: "touch" }}
             >
               {/* Close Button */}
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-full bg-white/[0.06] hover:bg-white/15 text-white/70 hover:text-white border border-white/10 transition-colors z-20 cursor-pointer"
+                className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 p-2 rounded-full bg-white/[0.06] hover:bg-white/15 text-white/70 hover:text-white border border-white/10 transition-colors z-20 cursor-pointer"
                 aria-label="Close challenge popup"
               >
                 <X className="w-4 h-4" />
@@ -156,7 +172,7 @@ export default function AiChallengePopup() {
               </div>
 
               {/* Main Question */}
-              <h3 className="font-heading font-black text-xl sm:text-2xl text-white tracking-tight leading-snug pr-8">
+              <h3 className="font-heading font-black text-lg sm:text-2xl text-white tracking-tight leading-snug pr-8">
                 Here's a challenge for you: Find which car is real and which one is AI?
               </h3>
               <p className="text-xs sm:text-sm text-white/60 font-body mt-1 leading-relaxed">
@@ -164,10 +180,10 @@ export default function AiChallengePopup() {
               </p>
 
               {/* Responsive Layout: Portrait Video + Challenge Options */}
-              <div className="mt-5 grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
-                {/* Left: 9:16 Portrait Video Player (No frame cut!) */}
+              <div className="mt-4 sm:mt-5 grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 items-center">
+                {/* Left: 9:16 Portrait Video Player (Compact on mobile, crisp & no frame cut) */}
                 <div className="md:col-span-5 flex justify-center">
-                  <div className="relative w-full max-w-[200px] xs:max-w-[220px] md:max-w-[230px] aspect-[9/16] rounded-2xl overflow-hidden bg-black border border-white/15 shadow-2xl group">
+                  <div className="relative w-full max-w-[170px] xs:max-w-[190px] sm:max-w-[210px] md:max-w-[230px] aspect-[9/16] rounded-2xl overflow-hidden bg-black border border-white/15 shadow-2xl group">
                     <video
                       ref={videoRef}
                       src={encodeURI("/video-assets/AutoHub_Video_1_V7 [Arabic Captions].mp4")}
@@ -232,9 +248,9 @@ export default function AiChallengePopup() {
                     <button
                       type="button"
                       onClick={() => handleSelectOption("A")}
-                      className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between ${
+                      className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between active:scale-95 ${
                         selectedOption === "A"
-                          ? "bg-amber-500/10 border-amber-500 text-white shadow-lg"
+                          ? "bg-amber-500/15 border-amber-500 text-white shadow-lg"
                           : selectedOption === "B"
                           ? "bg-white/[0.02] border-white/10 opacity-70 text-white/70"
                           : "bg-[#18151D] border-white/10 hover:border-primary/40 hover:bg-white/[0.04] text-white"
@@ -259,16 +275,16 @@ export default function AiChallengePopup() {
                     <button
                       type="button"
                       onClick={() => handleSelectOption("B")}
-                      className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between ${
+                      className={`p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between active:scale-95 ${
                         selectedOption === "B"
-                          ? "bg-primary/15 border-primary text-white shadow-[0_0_25px_rgba(37,211,102,0.25)]"
+                          ? "bg-primary/20 border-primary text-white shadow-[0_0_25px_rgba(37,211,102,0.3)]"
                           : selectedOption === "A"
                           ? "bg-primary/10 border-primary/50 text-white"
                           : "bg-[#18151D] border-white/10 hover:border-primary/40 hover:bg-white/[0.04] text-white"
                       }`}
                     >
                       <div className="flex items-center justify-between w-full mb-1">
-                        <div className="w-6 h-6 rounded-lg bg-primary/10 border border-primary/30 text-primary flex items-center justify-center font-mono font-bold text-xs">
+                        <div className="w-6 h-6 rounded-lg bg-primary/15 border border-primary/40 text-primary flex items-center justify-center font-mono font-bold text-xs">
                           B
                         </div>
                         {selectedOption && (
@@ -287,63 +303,80 @@ export default function AiChallengePopup() {
                   <AnimatePresence>
                     {selectedOption && (
                       <motion.div
-                        ref={revealRef}
-                        initial={{ opacity: 0, height: 0, y: 8 }}
-                        animate={{ opacity: 1, height: "auto", y: 0 }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.25 }}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.22 }}
                         className="space-y-3 pt-2"
                       >
-                        {/* Explanation Box */}
-                        <div className="p-3.5 rounded-2xl bg-[#1a1720] border border-white/10 text-xs sm:text-sm">
-                          <div className="flex items-start gap-2">
+                        {/* Explanation / Verdict Box */}
+                        <div
+                          ref={verdictRef}
+                          className={`p-3.5 sm:p-4 rounded-2xl border text-xs sm:text-sm transition-all duration-300 ${
+                            selectedOption === "B"
+                              ? "bg-primary/[0.08] border-primary/35 shadow-[0_0_20px_rgba(37,211,102,0.12)]"
+                              : "bg-amber-500/[0.08] border-amber-500/35"
+                          }`}
+                        >
+                          <div className="flex items-start gap-2.5">
                             {selectedOption === "B" ? (
-                              <Trophy className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                              <div className="w-6 h-6 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                                <Trophy className="w-3.5 h-3.5" />
+                              </div>
                             ) : (
-                              <HelpCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                              <div className="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
+                                <HelpCircle className="w-3.5 h-3.5" />
+                              </div>
                             )}
                             <div>
-                              <div className="font-heading font-bold text-white text-xs sm:text-sm">
+                              <div className="font-heading font-black text-sm sm:text-base text-white">
                                 {selectedOption === "B"
-                                  ? "Correct! 🎉 You nailed it!"
-                                  : "Almost! The Corvette is 100% REAL footage."}
+                                  ? "🎉 Correct! You nailed it — Camry is AI!"
+                                  : "👀 Almost! The Corvette is REAL — Camry is AI!"}
                               </div>
-                              <p className="text-[11px] sm:text-xs text-white/75 font-body mt-1 leading-relaxed">
-                                <strong className="text-primary font-semibold">B is AI, A is real.</strong> The Corvette was filmed live-action on a runway with cinema camera setups. The Toyota Camry was generated 100% synthetically using our generative AI engine!
+                              <p className="text-xs sm:text-sm text-white/80 font-body mt-1 leading-relaxed">
+                                <strong className="text-primary font-bold">B (Camry) is AI, A (Corvette) is real.</strong>{" "}
+                                The Corvette was filmed live-action on a track with cinema cameras. The Toyota Camry was generated 100% synthetically using our generative AI engine!
                               </p>
                             </div>
                           </div>
                         </div>
 
-                        {/* Conversion CTA */}
-                        <div className="p-3.5 rounded-2xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/25 flex items-center justify-between gap-2.5">
-                          <div className="min-w-0">
-                            <div className="font-heading font-bold text-xs sm:text-sm text-white truncate">
-                              Did you find this interesting?
+                        {/* Conversion CTA Box with Book a Call */}
+                        <div
+                          ref={ctaRef}
+                          className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-primary/20 via-primary/10 to-primary/5 border border-primary/40 shadow-xl space-y-3"
+                        >
+                          <div className="flex items-start sm:items-center justify-between gap-3">
+                            <div>
+                              <div className="font-heading font-extrabold text-sm sm:text-base text-white">
+                                Did you find this interesting?
+                              </div>
+                              <p className="text-xs text-white/70 font-body mt-0.5 leading-relaxed">
+                                Book a strategy call to explore how we engineer live-action and AI video for your brand.
+                              </p>
                             </div>
-                            <p className="text-[10px] sm:text-xs text-white/60 font-body truncate">
-                              Book a call with our creative team.
-                            </p>
                           </div>
 
-                          <div className="flex items-center gap-2 shrink-0">
+                          <div className="flex items-center gap-2.5 pt-1">
                             <a
                               href="https://calendly.com/nucleuscreates/30min"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-4 py-2 rounded-full bg-primary text-black font-heading font-bold text-xs hover:brightness-105 active:scale-95 transition-all flex items-center gap-1.5 shadow-md whitespace-nowrap"
+                              className="flex-1 py-3 px-5 rounded-full bg-primary text-black font-heading font-black text-xs sm:text-sm hover:brightness-105 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg tracking-wide uppercase whitespace-nowrap"
                             >
-                              <span>Book a Call</span>
-                              <ArrowRight className="w-3 h-3" />
+                              <span>Book a Strategy Call</span>
+                              <ArrowRight className="w-4 h-4" />
                             </a>
 
                             <button
                               type="button"
                               onClick={resetChallenge}
-                              className="p-2 rounded-full bg-white/[0.05] hover:bg-white/10 border border-white/10 text-white/70 hover:text-white text-xs font-mono transition-colors"
+                              className="px-3.5 py-3 rounded-full bg-white/[0.08] hover:bg-white/15 border border-white/15 text-white text-xs font-mono transition-colors shrink-0 flex items-center gap-1.5"
                               title="Try again"
                             >
-                              ↻
+                              <span>Try Again</span>
+                              <span className="text-sm">↻</span>
                             </button>
                           </div>
                         </div>
