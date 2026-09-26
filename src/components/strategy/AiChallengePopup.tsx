@@ -13,36 +13,65 @@ export default function AiChallengePopup() {
   const modalRef = useRef<HTMLDivElement>(null);
   const verdictRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const scrollAnimRef = useRef<number | null>(null);
 
-  const scrollToVerdictAndCta = () => {
-    if (modalRef.current) {
-      modalRef.current.scrollTo({
-        top: modalRef.current.scrollHeight + 1500,
-        behavior: "smooth",
-      });
+  // Buttery-smooth easing scroll interpolation using requestAnimationFrame
+  const smoothScrollToBottom = (duration: number = 750) => {
+    const container = modalRef.current;
+    if (!container) return;
+
+    if (scrollAnimRef.current !== null) {
+      cancelAnimationFrame(scrollAnimRef.current);
+      scrollAnimRef.current = null;
     }
-    if (ctaRef.current) {
-      try {
-        ctaRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "end",
-          inline: "nearest",
-        });
-      } catch {
-        // Fallback handled by modalRef.scrollTo
+
+    const startPosition = container.scrollTop;
+    const targetPosition = container.scrollHeight - container.clientHeight;
+    const distance = targetPosition - startPosition;
+
+    if (distance <= 0) return;
+
+    let startTime: number | null = null;
+
+    // Luxurious easeInOutCubic: gentle launch, fluid glide, soft cushioned deceleration
+    const easeInOutCubic = (t: number): number => {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    };
+
+    const step = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeInOutCubic(progress);
+
+      container.scrollTop = startPosition + distance * easedProgress;
+
+      if (progress < 1) {
+        scrollAnimRef.current = requestAnimationFrame(step);
+      } else {
+        scrollAnimRef.current = null;
       }
-    }
+    };
+
+    scrollAnimRef.current = requestAnimationFrame(step);
   };
 
   const handleSelectOption = (option: "A" | "B") => {
     setSelectedOption(option);
 
-    // Multi-stage auto-scroll guarantees mobile browsers glide right down to description and CTA
-    requestAnimationFrame(scrollToVerdictAndCta);
-    setTimeout(scrollToVerdictAndCta, 60);
-    setTimeout(scrollToVerdictAndCta, 180);
-    setTimeout(scrollToVerdictAndCta, 350);
+    // Allow DOM 40ms to mount verdict and CTA, then glide down with buttery smooth cubic curve
+    setTimeout(() => {
+      smoothScrollToBottom(750);
+    }, 40);
   };
+
+  useEffect(() => {
+    return () => {
+      if (scrollAnimRef.current !== null) {
+        cancelAnimationFrame(scrollAnimRef.current);
+      }
+    };
+  }, []);
 
   // Scroll listener: Re-arms whenever user scrolls back up into/above #guarantee,
   // and triggers the popup whenever user scrolls down past #guarantee
@@ -104,14 +133,6 @@ export default function AiChallengePopup() {
     setIsMuted(videoRef.current.muted);
   };
 
-  const resetChallenge = () => {
-    setSelectedOption(null);
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      videoRef.current.play().catch(() => {});
-      setIsPlaying(true);
-    }
-  };
 
   return (
     <>
@@ -150,7 +171,7 @@ export default function AiChallengePopup() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 15 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-2xl max-h-[90vh] sm:max-h-[92vh] overflow-y-auto overscroll-contain rounded-3xl bg-[#131116] border border-white/15 p-4 sm:p-7 shadow-[0_25px_80px_rgba(0,0,0,0.95)] z-10 text-white scroll-smooth scrollbar-none"
+              className="relative w-full max-w-2xl max-h-[90vh] sm:max-h-[92vh] overflow-y-auto overscroll-contain rounded-3xl bg-[#131116] border border-white/15 p-4 sm:p-7 shadow-[0_25px_80px_rgba(0,0,0,0.95)] z-10 text-white scrollbar-none"
               style={{ WebkitOverflowScrolling: "touch" }}
             >
               {/* Close Button */}
@@ -342,42 +363,30 @@ export default function AiChallengePopup() {
                           </div>
                         </div>
 
-                        {/* Conversion CTA Box with Book a Call */}
+                        {/* Conversion CTA Box with Book a Call (Clean, prominent full-width) */}
                         <div
                           ref={ctaRef}
-                          className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-primary/20 via-primary/10 to-primary/5 border border-primary/40 shadow-xl space-y-3"
+                          className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-primary/20 via-primary/10 to-primary/5 border border-primary/40 shadow-xl space-y-3.5"
                         >
-                          <div className="flex items-start sm:items-center justify-between gap-3">
-                            <div>
-                              <div className="font-heading font-extrabold text-sm sm:text-base text-white">
-                                Did you find this interesting?
-                              </div>
-                              <p className="text-xs text-white/70 font-body mt-0.5 leading-relaxed">
-                                Book a strategy call to explore how we engineer live-action and AI video for your brand.
-                              </p>
+                          <div>
+                            <div className="font-heading font-extrabold text-sm sm:text-base text-white">
+                              Did you find this interesting?
                             </div>
+                            <p className="text-xs text-white/70 font-body mt-0.5 leading-relaxed">
+                              Book a strategy call to explore how we engineer live-action and AI video for your brand.
+                            </p>
                           </div>
 
-                          <div className="flex items-center gap-2.5 pt-1">
+                          <div className="pt-0.5">
                             <a
                               href="https://calendly.com/nucleuscreates/30min"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex-1 py-3 px-5 rounded-full bg-primary text-black font-heading font-black text-xs sm:text-sm hover:brightness-105 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg tracking-wide uppercase whitespace-nowrap"
+                              className="w-full py-3.5 px-6 rounded-full bg-primary text-black font-heading font-black text-xs sm:text-sm hover:brightness-105 active:scale-95 transition-all flex items-center justify-center gap-2 shadow-lg tracking-wide uppercase whitespace-nowrap"
                             >
                               <span>Book a Strategy Call</span>
                               <ArrowRight className="w-4 h-4" />
                             </a>
-
-                            <button
-                              type="button"
-                              onClick={resetChallenge}
-                              className="px-3.5 py-3 rounded-full bg-white/[0.08] hover:bg-white/15 border border-white/15 text-white text-xs font-mono transition-colors shrink-0 flex items-center gap-1.5"
-                              title="Try again"
-                            >
-                              <span>Try Again</span>
-                              <span className="text-sm">↻</span>
-                            </button>
                           </div>
                         </div>
                       </motion.div>
