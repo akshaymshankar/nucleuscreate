@@ -8,6 +8,7 @@ import GuaranteeSection from "@/components/strategy/GuaranteeSection";
 import TestimonialsAndFaq from "@/components/strategy/TestimonialsAndFaq";
 import StrategyCta from "@/components/strategy/StrategyCta";
 import VideoModal, { VideoItem } from "@/components/strategy/VideoModal";
+import AiChallengePopup from "@/components/strategy/AiChallengePopup";
 import useSmoothScroll from "@/hooks/use-smooth-scroll";
 
 export default function AiVideoStrategy() {
@@ -94,6 +95,9 @@ export default function AiVideoStrategy() {
         {/* Final High-Conversion CTA & Luxury Footer */}
         <StrategyCta />
       </main>
+
+      {/* Scroll-Triggered AI Challenge Pop-up */}
+      <AiChallengePopup />
 
       {/* Cinema Fullscreen Lightbox Modal */}
       <VideoModal video={selectedVideo} onClose={() => setSelectedVideo(null)} />

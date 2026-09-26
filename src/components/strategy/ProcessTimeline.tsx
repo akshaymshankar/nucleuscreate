@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { Compass, Lightbulb, Clapperboard, Wand2, Rocket, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Compass, Lightbulb, Clapperboard, Wand2, Rocket, CheckCircle2, ChevronDown } from "lucide-react";
 
 const processSteps = [
   {
@@ -69,8 +70,14 @@ const processSteps = [
 ];
 
 export default function ProcessTimeline() {
+  const [expandedStep, setExpandedStep] = useState<string | null>(null);
+
+  const toggleStep = (stepNumber: string) => {
+    setExpandedStep((prev) => (prev === stepNumber ? null : stepNumber));
+  };
+
   return (
-    <section id="process" className="relative py-24 sm:py-32 bg-[#100E12] border-b border-white/10 overflow-hidden">
+    <section id="process" className="relative py-20 sm:py-32 bg-[#100E12] border-b border-white/10 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Section Header */}
         <div className="max-w-3xl">
@@ -83,59 +90,114 @@ export default function ProcessTimeline() {
             From initial brief to fully produced campaign.
           </h2>
 
-          <p className="mt-4 text-base sm:text-lg text-white/60 font-body leading-relaxed">
-            Not just a vendor queue - we operate as your integrated video engineering department.
-            A live-action shoot and an AI ad don't operate on identical clocks, so we plan in transparent phases with a definitive delivery calendar.
+          <p className="mt-4 text-sm sm:text-lg text-white/60 font-body leading-relaxed">
+            Not just a vendor queue — we operate as your integrated video engineering department.
+            Tap any stage below to inspect our deliverable architecture and timeline.
           </p>
         </div>
 
-        {/* Timeline Steps */}
-        <div className="mt-16 space-y-6">
+        {/* Timeline Steps Accordion */}
+        <div className="mt-10 sm:mt-16 space-y-3.5 sm:space-y-4">
           {processSteps.map((step, idx) => {
             const Icon = step.icon;
+            const isExpanded = expandedStep === step.number;
 
             return (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
-                transition={{ duration: 0.6, delay: idx * 0.08 }}
-                className="relative p-6 sm:p-8 rounded-3xl bg-[#17141A] border border-white/10 hover:border-primary/40 transition-all duration-300 shadow-xl overflow-hidden group"
+                transition={{ duration: 0.5, delay: idx * 0.06 }}
+                className={`relative rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden shadow-xl ${
+                  isExpanded
+                    ? "bg-[#18151D] border-primary/45 shadow-[0_10px_35px_rgba(37,211,102,0.08)]"
+                    : "bg-[#141217] border-white/10 hover:border-white/20"
+                }`}
               >
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-                  {/* Step Index & Icon */}
-                  <div className="lg:col-span-4 flex items-start gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/30 text-primary flex items-center justify-center font-mono font-black text-xl shrink-0 group-hover:bg-primary group-hover:text-black transition-colors duration-300 shadow-sm">
+                {/* Clickable Header Box */}
+                <button
+                  type="button"
+                  onClick={() => toggleStep(step.number)}
+                  aria-expanded={isExpanded}
+                  className="w-full text-left p-4 sm:p-6 sm:px-8 flex items-center justify-between gap-3 sm:gap-6 group cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                >
+                  <div className="flex items-center gap-3 sm:gap-5 min-w-0 flex-1">
+                    {/* Step Index Badge */}
+                    <div
+                      className={`w-11 h-11 sm:w-13 sm:h-13 rounded-xl sm:rounded-2xl border flex items-center justify-center font-mono font-black text-base sm:text-xl shrink-0 transition-all duration-300 ${
+                        isExpanded
+                          ? "bg-primary text-black border-primary shadow-sm"
+                          : "bg-primary/10 border-primary/30 text-primary group-hover:bg-primary/20"
+                      }`}
+                    >
                       {step.number}
                     </div>
 
-                    <div>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-primary font-semibold flex items-center gap-1.5 mb-1">
-                        <Icon className="w-3.5 h-3.5" />
-                        {step.timelineTag}
-                      </span>
-                      <h3 className="font-heading font-bold text-white text-xl sm:text-2xl leading-tight">
+                    {/* Title & Timeline Meta */}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 flex-wrap mb-1">
+                        <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-wider text-primary font-semibold flex items-center gap-1">
+                          <Icon className="w-3 h-3" />
+                          {step.timelineTag}
+                        </span>
+                      </div>
+                      <h3 className="font-heading font-bold text-white text-base sm:text-xl md:text-2xl leading-snug group-hover:text-primary transition-colors truncate sm:whitespace-normal">
                         {step.title}
                       </h3>
-                      <p className="text-xs text-white/50 font-body mt-1">
+                      <p className="text-xs text-white/50 font-body mt-0.5 line-clamp-1 sm:line-clamp-2">
                         {step.subtitle}
                       </p>
                     </div>
                   </div>
 
-                  {/* Step Deliverable Details */}
-                  <div className="lg:col-span-8 space-y-3 pt-2 lg:pt-0 lg:border-l lg:border-white/10 lg:pl-8">
-                    {step.details.map((detail, dIdx) => (
-                      <div key={dIdx} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                        <span className="text-sm text-white/80 font-body leading-relaxed">
-                          {detail}
-                        </span>
-                      </div>
-                    ))}
+                  {/* Expand / Collapse Indicator */}
+                  <div className="flex items-center gap-2 shrink-0 pl-1">
+                    <span className="hidden md:inline text-[11px] font-mono text-white/40 group-hover:text-primary transition-colors">
+                      {isExpanded ? "Collapse" : "Tap to view"}
+                    </span>
+                    <div
+                      className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center border transition-all duration-300 ${
+                        isExpanded
+                          ? "bg-primary/20 border-primary/50 text-primary"
+                          : "bg-white/[0.04] border-white/10 text-white/60 group-hover:text-white group-hover:bg-white/[0.08]"
+                      }`}
+                    >
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-300 ${
+                          isExpanded ? "rotate-180" : ""
+                        }`}
+                      />
+                    </div>
                   </div>
-                </div>
+                </button>
+
+                {/* Smooth Expandable Content */}
+                <AnimatePresence initial={false}>
+                  {isExpanded && (
+                    <motion.div
+                      key={`content-${step.number}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden border-t border-white/10"
+                    >
+                      <div className="p-4 sm:p-6 sm:px-8 bg-black/20">
+                        <div className="space-y-2.5 sm:space-y-3">
+                          {step.details.map((detail, dIdx) => (
+                            <div key={dIdx} className="flex items-start gap-3">
+                              <CheckCircle2 className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                              <span className="text-xs sm:text-sm text-white/85 font-body leading-relaxed">
+                                {detail}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             );
           })}

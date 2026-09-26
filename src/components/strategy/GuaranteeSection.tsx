@@ -1,5 +1,6 @@
-import { ShieldCheck, Clock, RefreshCw, Users, FileCheck, Palette, Camera, FileText, Target, TrendingUp } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { ShieldCheck, Clock, RefreshCw, Users, FileCheck, Palette, Camera, FileText, Target, TrendingUp, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const guarantees = [
   {
@@ -66,8 +67,14 @@ const onboardingInputs = [
 ];
 
 export default function GuaranteeSection() {
+  const [expandedGuarantee, setExpandedGuarantee] = useState<number | null>(null);
+
+  const toggleGuarantee = (idx: number) => {
+    setExpandedGuarantee((prev) => (prev === idx ? null : idx));
+  };
+
   return (
-    <section id="guarantee" className="relative py-24 sm:py-32 bg-[#100E12] border-b border-white/10 overflow-hidden">
+    <section id="guarantee" className="relative py-20 sm:py-32 bg-[#100E12] border-b border-white/10 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 relative z-10 max-w-7xl">
         {/* Part 1: Guarantees Header */}
         <div className="max-w-3xl">
@@ -80,15 +87,17 @@ export default function GuaranteeSection() {
             The Nucleus Triple Guarantee.
           </h2>
 
-          <p className="mt-4 text-base sm:text-lg text-white/60 font-body leading-relaxed">
+          <p className="mt-4 text-sm sm:text-lg text-white/60 font-body leading-relaxed">
             Eliminating agency risk with concrete commitments. We back our creative execution with clear guarantees that traditional production houses refuse to make.
+            Tap any guarantee below to inspect the terms.
           </p>
         </div>
 
-        {/* Part 1: Guarantees Grid */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Part 1: Guarantees Grid - Expandable on tap */}
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-start">
           {guarantees.map((g, idx) => {
             const Icon = g.icon;
+            const isExpanded = expandedGuarantee === idx;
 
             return (
               <motion.div
@@ -96,32 +105,85 @@ export default function GuaranteeSection() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="p-7 sm:p-8 rounded-3xl bg-[#17141A] border border-white/10 hover:border-primary/40 transition-all duration-300 relative overflow-hidden group shadow-xl flex flex-col justify-between"
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
+                className={`rounded-2xl sm:rounded-3xl border transition-all duration-300 relative overflow-hidden group shadow-xl ${
+                  isExpanded
+                    ? "bg-[#18151D] border-primary/45 shadow-[0_10px_30px_rgba(37,211,102,0.08)]"
+                    : "bg-[#141217] border-white/10 hover:border-white/20"
+                }`}
               >
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 text-primary flex items-center justify-center group-hover:scale-110 transition-transform shadow-sm">
-                      <Icon className="w-6 h-6" />
+                {/* Clickable Title Box Header */}
+                <button
+                  type="button"
+                  onClick={() => toggleGuarantee(idx)}
+                  aria-expanded={isExpanded}
+                  className="w-full text-left p-5 sm:p-6 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 flex flex-col justify-between"
+                >
+                  <div className="flex items-center justify-between mb-4 w-full">
+                    <div
+                      className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border flex items-center justify-center transition-all duration-300 ${
+                        isExpanded
+                          ? "bg-primary text-black border-primary shadow-sm"
+                          : "bg-primary/10 border-primary/30 text-primary group-hover:scale-105"
+                      }`}
+                    >
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                     </div>
-                    <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/60">
-                      {g.badge}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/60">
+                        {g.badge}
+                      </span>
+                      <div
+                        className={`w-7 h-7 rounded-full flex items-center justify-center border transition-all ${
+                          isExpanded
+                            ? "bg-primary/20 border-primary/50 text-primary"
+                            : "bg-white/[0.04] border-white/10 text-white/50 group-hover:text-white"
+                        }`}
+                      >
+                        <ChevronDown
+                          className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                            isExpanded ? "rotate-180" : ""
+                          }`}
+                        />
+                      </div>
+                    </div>
                   </div>
 
-                  <h3 className="font-heading font-bold text-white text-xl leading-snug">
+                  <h3 className="font-heading font-bold text-white text-base sm:text-lg leading-snug group-hover:text-primary transition-colors">
                     {g.title}
                   </h3>
 
-                  <p className="text-sm text-white/60 mt-3 font-body leading-relaxed">
-                    {g.description}
-                  </p>
-                </div>
+                  {!isExpanded && (
+                    <span className="text-[11px] font-mono text-white/40 mt-2 flex items-center gap-1 group-hover:text-primary transition-colors">
+                      Tap to view commitment details →
+                    </span>
+                  )}
+                </button>
 
-                <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-2 text-xs font-mono text-primary font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span>Contractually Enforced</span>
-                </div>
+                {/* Smooth Expandable Body */}
+                <AnimatePresence initial={false}>
+                  {isExpanded && (
+                    <motion.div
+                      key={`guarantee-body-${idx}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      className="overflow-hidden border-t border-white/10"
+                    >
+                      <div className="p-5 sm:p-6 pt-3 bg-black/20">
+                        <p className="text-xs sm:text-sm text-white/75 font-body leading-relaxed">
+                          {g.description}
+                        </p>
+
+                        <div className="mt-4 pt-3 border-t border-white/10 flex items-center gap-2 text-xs font-mono text-primary font-semibold">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                          <span>Contractually Enforced</span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             );
           })}

@@ -99,6 +99,16 @@ const portfolioData: VideoItem[] = [
     tags: ["Automotive", "Hybrid", "Localization"],
   },
   {
+    id: "autohub-video-2",
+    title: "AutoHub: High-Speed Cinematic Spec",
+    category: "hybrid",
+    categoryLabel: "Hybrid & AI",
+    src: "/video-assets/Autohub Video 2 V6 [Arabic Captions].mp4",
+    client: "AutoHub Motors",
+    description: "High-octane automotive commercial pairing live-action vehicular tracking with generative AI dynamic speed compositing and native Arabic typography.",
+    tags: ["Automotive", "Hybrid", "Localization", "AI Video"],
+  },
+  {
     id: "nemari-vanity",
     title: "Nemari: Bespoke Leather Vanity Case",
     category: "ai",
@@ -219,14 +229,14 @@ export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
         {/* Horizontal Scroll Track */}
         <div
           ref={scrollRef}
-          className="mt-8 flex gap-5 sm:gap-6 overflow-x-auto pb-6 pt-2 scrollbar-none snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
+          className="mt-6 sm:mt-8 flex gap-4 sm:gap-6 overflow-x-auto pb-6 pt-2 scrollbar-none snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0 scroll-pl-4 sm:scroll-pl-0 scroll-pr-4 sm:scroll-pr-0"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           <AnimatePresence mode="popLayout">
             {filteredVideos.map((item) => (
               <div
                 key={item.id}
-                className="w-[280px] sm:w-[320px] md:w-[340px] shrink-0 snap-start"
+                className="w-[82vw] xs:w-[300px] sm:w-[320px] md:w-[340px] max-w-[340px] shrink-0 snap-center sm:snap-start"
               >
                 <VideoCard item={item} onOpen={() => onOpenVideo(item)} />
               </div>
@@ -283,8 +293,8 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* 4:5 Video Canvas Area */}
-      <div className="relative aspect-[4/5] bg-black overflow-hidden flex items-center justify-center">
+      {/* Video Canvas Area - responsive aspect ratio for optimal mobile framing */}
+      <div className="relative aspect-[16/11] sm:aspect-[4/5] bg-black overflow-hidden flex items-center justify-center">
         <video
           ref={videoRef}
           src={encodeURI(item.src || "")}
@@ -299,8 +309,8 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
         <div className="absolute inset-0 bg-gradient-to-t from-[#100E12] via-transparent to-black/40 opacity-80 group-hover:opacity-60 transition-opacity" />
 
         {/* Top Bar Badges */}
-        <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none">
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-primary border border-white/15">
+        <div className="absolute top-2.5 sm:top-3 inset-x-2.5 sm:inset-x-3 flex items-center justify-between pointer-events-none">
+          <span className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider bg-black/70 backdrop-blur-md text-primary border border-white/15">
             {item.categoryLabel}
           </span>
         </div>
@@ -310,7 +320,7 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
           <button
             type="button"
             onClick={toggleSound}
-            className="absolute top-3 right-3 p-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white hover:text-primary transition-colors"
+            className="absolute top-2.5 sm:top-3 right-2.5 sm:right-3 p-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-white hover:text-primary transition-colors"
             aria-label="Toggle mute"
           >
             {isMuted ? <VolumeX className="w-3.5 h-3.5 text-primary" /> : <Volume2 className="w-3.5 h-3.5" />}
@@ -319,29 +329,29 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
 
         {/* Center Play Icon */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white flex items-center justify-center pl-1 group-hover:bg-primary group-hover:text-black group-hover:scale-115 transition-all duration-300 shadow-xl">
-            <Play className="w-5 h-5 fill-current" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white flex items-center justify-center pl-0.5 group-hover:bg-primary group-hover:text-black group-hover:scale-110 transition-all duration-300 shadow-xl">
+            <Play className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
           </div>
         </div>
       </div>
 
       {/* Card Info Meta */}
-      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between bg-[#141217]">
+      <div className="p-3.5 sm:p-5 flex-1 flex flex-col justify-between bg-[#141217]">
         <div>
-          <h4 className="font-heading font-bold text-white text-base sm:text-lg tracking-tight group-hover:text-primary transition-colors line-clamp-1">
+          <h4 className="font-heading font-bold text-white text-sm sm:text-lg tracking-tight group-hover:text-primary transition-colors line-clamp-1">
             {item.title}
           </h4>
-          <p className="text-xs text-white/60 font-body mt-2 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-white/60 font-body mt-1.5 sm:mt-2 line-clamp-2 leading-relaxed">
             {item.description}
           </p>
         </div>
 
         {item.tags && item.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-white/5">
+          <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-2.5 sm:mt-3 pt-2.5 sm:pt-3 border-t border-white/5">
             {item.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-white/[0.03] text-white/50 border border-white/5"
+                className="text-[8px] sm:text-[9px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full bg-white/[0.03] text-white/50 border border-white/5"
               >
                 #{tag}
               </span>
