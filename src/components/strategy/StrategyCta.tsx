@@ -2,7 +2,11 @@ import { MessageCircle, PhoneCall, ArrowRight, Mail, Sparkles } from "lucide-rea
 import nucleusPremiumLogo from "@/assets/nucleus-premium-logo.png";
 import { Link } from "react-router-dom";
 
-export default function StrategyCta() {
+interface StrategyCtaProps {
+  hideFloating?: boolean;
+}
+
+export default function StrategyCta({ hideFloating }: StrategyCtaProps = {}) {
   return (
     <>
       <section id="book" className="relative py-24 sm:py-36 bg-[#0B0A0D] border-b border-white/10 overflow-hidden">
@@ -115,7 +119,9 @@ export default function StrategyCta() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat directly on WhatsApp"
-        className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-black flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all group"
+        className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-black flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-all group ${
+          hideFloating ? "opacity-0 pointer-events-none scale-90" : "opacity-100"
+        }`}
       >
         <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 fill-black" />
         <span className="hidden sm:inline-block absolute right-16 px-3 py-1.5 rounded-xl bg-black/90 backdrop-blur-md text-white text-xs font-heading font-bold whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-white/10 shadow-xl">

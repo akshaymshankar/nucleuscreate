@@ -16,6 +16,9 @@ export default function AiVideoStrategy() {
   useSmoothScroll();
 
   const [selectedVideo, setSelectedVideo] = useState<VideoItem | null>(null);
+  const [isChallengeOpen, setIsChallengeOpen] = useState(false);
+
+  const isAnyModalActive = selectedVideo !== null || isChallengeOpen;
 
   // SEO Optimization & Title Management
   useEffect(() => {
@@ -75,10 +78,16 @@ export default function AiVideoStrategy() {
       {/* Main Content Area */}
       <main id="main-content">
         {/* Hero Section */}
-        <StrategyHero onOpenVideo={(video) => setSelectedVideo(video)} />
+        <StrategyHero
+          onOpenVideo={(video) => setSelectedVideo(video)}
+          isModalOpen={isAnyModalActive}
+        />
 
         {/* Work Showcase / Portfolio Reel */}
-        <WorkShowcase onOpenVideo={(video) => setSelectedVideo(video)} />
+        <WorkShowcase
+          onOpenVideo={(video) => setSelectedVideo(video)}
+          isModalOpen={isAnyModalActive}
+        />
 
         {/* 5-Step Process Timeline */}
         <ProcessTimeline />
@@ -86,18 +95,21 @@ export default function AiVideoStrategy() {
         {/* Comparison Matrix: Nucleus vs AI-Only vs Traditional */}
         <ComparisonMatrix />
 
-        {/* Triple Guarantee & Onboarding Requirements */}
+        {/* 4-Part Guarantee & Onboarding Requirements */}
         <GuaranteeSection />
 
         {/* FAQ Accordion */}
         <TestimonialsAndFaq />
 
         {/* Final High-Conversion CTA & Luxury Footer */}
-        <StrategyCta />
+        <StrategyCta hideFloating={isAnyModalActive} />
       </main>
 
       {/* Scroll-Triggered AI Challenge Pop-up */}
-      <AiChallengePopup />
+      <AiChallengePopup
+        onOpenChange={setIsChallengeOpen}
+        isVideoModalOpen={selectedVideo !== null}
+      />
 
       {/* Cinema Fullscreen Lightbox Modal */}
       <VideoModal video={selectedVideo} onClose={() => setSelectedVideo(null)} />

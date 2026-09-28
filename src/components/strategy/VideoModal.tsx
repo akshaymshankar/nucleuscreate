@@ -35,6 +35,16 @@ export default function VideoModal({ video, onClose }: VideoModalProps) {
   useEffect(() => {
     if (video) {
       document.body.style.overflow = "hidden";
+      // Pause and mute all background videos on the page so sound never overlaps
+      try {
+        const allVideos = document.querySelectorAll("video");
+        allVideos.forEach((v) => {
+          if (v !== videoRef.current) {
+            v.pause();
+            v.muted = true;
+          }
+        });
+      } catch {}
     } else {
       document.body.style.overflow = "unset";
     }

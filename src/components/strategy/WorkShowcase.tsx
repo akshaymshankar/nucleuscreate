@@ -5,6 +5,7 @@ import { VideoItem } from "./VideoModal";
 
 interface WorkShowcaseProps {
   onOpenVideo: (video: VideoItem) => void;
+  isModalOpen?: boolean;
 }
 
 const portfolioData: VideoItem[] = [
@@ -136,7 +137,7 @@ const filterCategories = [
   { id: "hybrid", label: "Hybrid" },
 ];
 
-export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
+export default function WorkShowcase({ onOpenVideo, isModalOpen }: WorkShowcaseProps) {
   const [activeFilter, setActiveFilter] = useState("all");
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -238,7 +239,7 @@ export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
                 key={item.id}
                 className="w-[82vw] xs:w-[300px] sm:w-[320px] md:w-[340px] max-w-[340px] shrink-0 snap-center sm:snap-start"
               >
-                <VideoCard item={item} onOpen={() => onOpenVideo(item)} />
+                <VideoCard item={item} onOpen={() => onOpenVideo(item)} isModalOpen={isModalOpen} />
               </div>
             ))}
           </AnimatePresence>
@@ -254,9 +255,21 @@ export default function WorkShowcase({ onOpenVideo }: WorkShowcaseProps) {
   );
 }
 
-function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
+function VideoCard({ item, onOpen, isModalOpen }: { item: VideoItem; onOpen: () => void; isModalOpen?: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Pause and mute immediately when modal is opened anywhere
+  useEffect(() => {
+    if (isModalOpen && videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.muted = true;
+      setIsMuted(true);
+    } else if (!isModalOpen && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, [isModalOpen]);
 
   // Auto-play videos simultaneously / in parallel
   useEffect(() => {
@@ -285,10 +298,18 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
     playVideo();
 
     el.addEventListener("loadedmetadata", playVideo);
-    el.addEventListener("canplay", playVideo);
+    el.addEventListener("loadeddata", () => {
+      setIsLoaded(true);
+      playVideo();
+    });
+    el.addEventListener("canplay", () => {
+      setIsLoaded(true);
+      playVideo();
+    });
 
     return () => {
       el.removeEventListener("loadedmetadata", playVideo);
+      el.removeEventListener("loadeddata", playVideo);
       el.removeEventListener("canplay", playVideo);
     };
   }, [item.src]);
@@ -300,6 +321,16 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
     setIsMuted(videoRef.current.muted);
   };
 
+  const handleCardClick = () => {
+    // Instantly mute and pause this card video before opening modal
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.muted = true;
+      setIsMuted(true);
+    }
+    onOpen();
+  };
+
   return (
     <motion.div
       layout
@@ -308,10 +339,20 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.3 }}
       className="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#141217] hover:border-primary/50 transition-all duration-300 shadow-lg flex flex-col cursor-pointer h-full"
-      onClick={onOpen}
+      onClick={handleCardClick}
     >
       {/* Video Canvas Area - 4:5 rich portrait preview */}
       <div className="relative aspect-[4/5] bg-black overflow-hidden flex items-center justify-center">
+        {/* Loading Shimmer Skeleton */}
+        {!isLoaded && (
+          <div className="absolute inset-0 bg-[#16141a] flex flex-col items-center justify-center z-10 animate-pulse">
+            <div className="w-8 h-8 rounded-full border-2 border-primary/30 border-t-primary animate-spin mb-2" />
+            <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
+              Loading...
+            </span>
+          </div>
+        )}
+
         <video
           ref={videoRef}
           src={encodeURI(item.src || "")}
@@ -319,8 +360,12 @@ function VideoCard({ item, onOpen }: { item: VideoItem; onOpen: () => void }) {
           loop
           muted={isMuted}
           playsInline
-          preload="auto"
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          preload="metadata"
+          onLoadedData={() => setIsLoaded(true)}
+          onCanPlay={() => setIsLoaded(true)}
+          className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          }`}
         />
 
         {/* Gradient Scrim */}

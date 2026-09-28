@@ -2,18 +2,50 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Play, Pause, Volume2, VolumeX, Sparkles, CheckCircle2, XCircle, ArrowRight, Trophy, HelpCircle } from "lucide-react";
 
-export default function AiChallengePopup() {
+interface AiChallengePopupProps {
+  onOpenChange?: (open: boolean) => void;
+  isVideoModalOpen?: boolean;
+}
+
+export default function AiChallengePopup({ onOpenChange, isVideoModalOpen }: AiChallengePopupProps = {}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasTriggered, setHasTriggered] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<"A" | "B" | null>(null);
+  const [hasTriggered, setHasTriggered] = useState(() => {
+    try {
+      return (
+        sessionStorage.getItem("nucleus_ai_challenge_triggered") === "true" ||
+        sessionStorage.getItem("nucleus_ai_challenge_completed") === "true"
+      );
+    } catch {
+      return false;
+    }
+  });
+  const [selectedOption, setSelectedOption] = useState<"A" | "B" | null>(() => {
+    try {
+      const saved = sessionStorage.getItem("nucleus_ai_challenge_choice");
+      return saved === "A" || saved === "B" ? saved : null;
+    } catch {
+      return null;
+    }
+  });
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isArmedRef = useRef(true);
   const modalRef = useRef<HTMLDivElement>(null);
   const verdictRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const scrollAnimRef = useRef<number | null>(null);
+
+  // Notify parent of modal open/close status
+  useEffect(() => {
+    onOpenChange?.(isOpen);
+  }, [isOpen, onOpenChange]);
+
+  const closePopup = () => {
+    setIsOpen(false);
+    try {
+      sessionStorage.setItem("nucleus_ai_challenge_triggered", "true");
+    } catch {}
+  };
 
   // Buttery-smooth easing scroll interpolation using requestAnimationFrame
   const smoothScrollToBottom = (duration: number = 750) => {
@@ -58,6 +90,11 @@ export default function AiChallengePopup() {
 
   const handleSelectOption = (option: "A" | "B") => {
     setSelectedOption(option);
+    try {
+      sessionStorage.setItem("nucleus_ai_challenge_choice", option);
+      sessionStorage.setItem("nucleus_ai_challenge_completed", "true");
+      sessionStorage.setItem("nucleus_ai_challenge_triggered", "true");
+    } catch {}
 
     // Allow DOM 40ms to mount verdict and CTA, then glide down with buttery smooth cubic curve
     setTimeout(() => {
@@ -73,33 +110,40 @@ export default function AiChallengePopup() {
     };
   }, []);
 
-  // Scroll listener: Re-arms whenever user scrolls back up into/above #guarantee,
-  // and triggers the popup whenever user scrolls down past #guarantee
+  // Scroll listener: Triggers ONCE per session and NEVER re-arms on scrolling up/down
   useEffect(() => {
+    try {
+      if (
+        sessionStorage.getItem("nucleus_ai_challenge_triggered") === "true" ||
+        sessionStorage.getItem("nucleus_ai_challenge_completed") === "true"
+      ) {
+        return;
+      }
+    } catch {}
+
+    if (hasTriggered) return;
+
     const handleScroll = () => {
+      if (isOpen || isVideoModalOpen) return;
+
       const guaranteeSection = document.getElementById("guarantee");
       if (!guaranteeSection) return;
 
       const rect = guaranteeSection.getBoundingClientRect();
 
-      // If user scrolls back up into or above the guarantee section, re-arm the trigger!
-      if (rect.top > 0 || rect.bottom > window.innerHeight) {
-        isArmedRef.current = true;
-      }
-
-      // When the bottom of the guarantee section has scrolled past the viewport threshold
+      // Trigger strictly once when guarantee section passes 75% threshold
       if (rect.bottom < window.innerHeight * 0.75) {
-        if (isArmedRef.current && !isOpen) {
-          setIsOpen(true);
-          setHasTriggered(true);
-          isArmedRef.current = false; // Disarm until they scroll back up
-        }
+        setIsOpen(true);
+        setHasTriggered(true);
+        try {
+          sessionStorage.setItem("nucleus_ai_challenge_triggered", "true");
+        } catch {}
       }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isOpen]);
+  }, [isOpen, hasTriggered, isVideoModalOpen]);
 
   // Manage video playback when popup opens/closes
   useEffect(() => {
@@ -133,11 +177,12 @@ export default function AiChallengePopup() {
     setIsMuted(videoRef.current.muted);
   };
 
+  const isChallengeCompleted = selectedOption !== null;
 
   return (
     <>
-      {/* Floating Re-open Badge Trigger */}
-      {hasTriggered && !isOpen && (
+      {/* Floating Re-open Badge Trigger - Only shown if not completed, closed, and video modal not open */}
+      {hasTriggered && !isOpen && !isChallengeCompleted && !isVideoModalOpen && (
         <motion.button
           initial={{ opacity: 0, scale: 0.8, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -160,7 +205,7 @@ export default function AiChallengePopup() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
+              onClick={closePopup}
               className="fixed inset-0 bg-black/85 backdrop-blur-md"
             />
 
@@ -177,7 +222,7 @@ export default function AiChallengePopup() {
               {/* Close Button */}
               <button
                 type="button"
-                onClick={() => setIsOpen(false)}
+                onClick={closePopup}
                 className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 p-2 rounded-full bg-white/[0.06] hover:bg-white/15 text-white/70 hover:text-white border border-white/10 transition-colors z-20 cursor-pointer"
                 aria-label="Close challenge popup"
               >
@@ -300,12 +345,18 @@ export default function AiChallengePopup() {
                         selectedOption === "B"
                           ? "bg-primary/20 border-primary text-white shadow-[0_0_25px_rgba(37,211,102,0.3)]"
                           : selectedOption === "A"
-                          ? "bg-primary/10 border-primary/50 text-white"
+                          ? "bg-white/[0.02] border-white/10 opacity-70 text-white/70"
                           : "bg-[#18151D] border-white/10 hover:border-primary/40 hover:bg-white/[0.04] text-white"
                       }`}
                     >
                       <div className="flex items-center justify-between w-full mb-1">
-                        <div className="w-6 h-6 rounded-lg bg-primary/15 border border-primary/40 text-primary flex items-center justify-center font-mono font-bold text-xs">
+                        <div
+                          className={`w-6 h-6 rounded-lg flex items-center justify-center font-mono font-bold text-xs ${
+                            selectedOption === "B"
+                              ? "bg-primary/20 border border-primary/40 text-primary"
+                              : "bg-white/[0.06] border border-white/10 text-white/80"
+                          }`}
+                        >
                           B
                         </div>
                         {selectedOption && (

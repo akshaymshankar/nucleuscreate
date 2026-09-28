@@ -84,7 +84,7 @@ export default function GuaranteeSection() {
           </span>
 
           <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.08]">
-            The Nucleus Triple Guarantee.
+            The Nucleus 4-Part Guarantee.
           </h2>
 
           <p className="mt-4 text-sm sm:text-lg text-white/60 font-body leading-relaxed">

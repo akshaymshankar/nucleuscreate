@@ -5,28 +5,42 @@ import { VideoItem } from "./VideoModal";
 
 interface StrategyHeroProps {
   onOpenVideo: (video: VideoItem) => void;
+  isModalOpen?: boolean;
 }
 
 const heroVideo: VideoItem = {
-  id: "hero-sapphire",
-  title: "Sapphire Events: Luxury Destination Wedding",
+  id: "hero-scalpcare",
+  title: "ScalpCare: Direct Response Haircare Narrative",
   category: "ai",
   categoryLabel: "AI Generated with Editing",
-  src: "/video-assets/Sapphire_Events.mp4",
-  client: "Sapphire Events",
-  description: "Opulent destination wedding showcase featuring photorealistic talent synthesis, bespoke coastal decor, and cinematic ambient color science.",
-  tags: ["Events", "Luxury", "AI Generated with Editing"],
+  src: "/video-assets/AI_1.mp4",
+  client: "ScalpCare Pro",
+  description: "High-retention direct response video ad illustrating hair and scalp nourishment with photorealistic human talent synthesis and conversion-focused framing.",
+  tags: ["Haircare", "DirectResponse", "AI Generated with Editing"],
 };
 
 interface HeroPhoneMockupProps {
   video: VideoItem;
   onOpen: () => void;
   badgeLabel: string;
+  isModalOpen?: boolean;
 }
 
-function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
+function HeroPhoneMockup({ video, onOpen, badgeLabel, isModalOpen }: HeroPhoneMockupProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Pause and mute when modal is opened
+  useEffect(() => {
+    if (isModalOpen && videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.muted = true;
+      setIsMuted(true);
+    } else if (!isModalOpen && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, [isModalOpen]);
 
   useEffect(() => {
     const el = videoRef.current;
@@ -54,8 +68,14 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
     playVideo();
 
     el.addEventListener("loadedmetadata", playVideo);
-    el.addEventListener("loadeddata", playVideo);
-    el.addEventListener("canplay", playVideo);
+    el.addEventListener("loadeddata", () => {
+      setIsLoaded(true);
+      playVideo();
+    });
+    el.addEventListener("canplay", () => {
+      setIsLoaded(true);
+      playVideo();
+    });
 
     return () => {
       el.removeEventListener("loadedmetadata", playVideo);
@@ -80,13 +100,23 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
       >
         <div className="rounded-[2.85rem] bg-[#141217] p-2 overflow-hidden">
           {/* 9:16 Aspect Video Container */}
-          <div className="relative aspect-[9/16] rounded-[2.4rem] overflow-hidden bg-black">
+          <div className="relative aspect-[9/16] rounded-[2.4rem] overflow-hidden bg-black flex items-center justify-center">
             {/* Top Dynamic Island */}
             <div className="absolute top-2.5 inset-x-0 z-20 flex justify-center pointer-events-none">
               <div className="w-24 h-4 bg-black/95 backdrop-blur-md rounded-full border border-white/15 flex items-center justify-end px-2.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
               </div>
             </div>
+
+            {/* Loading Shimmer Skeleton */}
+            {!isLoaded && (
+              <div className="absolute inset-0 bg-[#16141a] flex flex-col items-center justify-center z-10 animate-pulse">
+                <div className="w-8 h-8 rounded-full border-2 border-primary/30 border-t-primary animate-spin mb-2" />
+                <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
+                  Loading...
+                </span>
+              </div>
+            )}
 
             <video
               ref={videoRef}
@@ -96,7 +126,11 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
               muted
               playsInline
               preload="auto"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              onLoadedData={() => setIsLoaded(true)}
+              onCanPlay={() => setIsLoaded(true)}
+              className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${
+                isLoaded ? "opacity-100" : "opacity-0"
+              }`}
             >
               <source src={video.src} type="video/mp4" />
             </video>
@@ -145,7 +179,7 @@ function HeroPhoneMockup({ video, onOpen, badgeLabel }: HeroPhoneMockupProps) {
   );
 }
 
-export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
+export default function StrategyHero({ onOpenVideo, isModalOpen }: StrategyHeroProps) {
   return (
     <section id="overview" className="relative pt-28 sm:pt-36 pb-20 sm:pb-28 overflow-hidden border-b border-white/10 bg-[#0B0A0D]">
       {/* Clean Grid Pattern Overlay */}
@@ -168,9 +202,9 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
           >
             {/* Apple-Scale Display Headline */}
             <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-[62px] font-black tracking-[-0.035em] text-white leading-[1.1] text-balance">
-              We don't just make AI videos.{" "}
+              We don't <span className="italic">just</span> make AI videos.{" "}
               <span className="block mt-2 sm:mt-3 text-primary">
-                We make the videos that are right for your brand.
+                We make the videos that are <span className="italic">right</span> for your brand.
               </span>
             </h1>
 
@@ -212,6 +246,7 @@ export default function StrategyHero({ onOpenVideo }: StrategyHeroProps) {
               video={heroVideo}
               onOpen={() => onOpenVideo(heroVideo)}
               badgeLabel="Featured AI Video"
+              isModalOpen={isModalOpen}
             />
           </motion.div>
         </div>
