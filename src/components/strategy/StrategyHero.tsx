@@ -202,9 +202,9 @@ export default function StrategyHero({ onOpenVideo, isModalOpen }: StrategyHeroP
           >
             {/* Apple-Scale Display Headline */}
             <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-[62px] font-black tracking-[-0.035em] text-white leading-[1.1] text-balance">
-              We don't <span className="italic">just</span> make AI videos.{" "}
+              We don't <span className="italic inline-block mr-1.5 sm:mr-2">just</span> make AI videos.{" "}
               <span className="block mt-2 sm:mt-3 text-primary">
-                We make the videos that are <span className="italic">right</span> for your brand.
+                We make the videos that are <span className="italic inline-block mr-2 sm:mr-3">right</span> for your brand.
               </span>
             </h1>
 
