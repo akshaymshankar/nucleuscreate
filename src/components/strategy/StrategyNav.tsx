@@ -38,9 +38,11 @@ export default function StrategyNav() {
           {/* Left Brand */}
           <div className="flex items-center gap-3 shrink-0">
             <a href="#overview" className="flex items-center gap-2.5 shrink-0 group">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-[#bef264] flex items-center justify-center p-0.5 group-hover:shadow-[0_0_15px_rgba(190,242,100,0.5)] transition-shadow">
-                <span className="w-2 h-2 rounded-full bg-[#bef264]" />
-              </div>
+              <img
+                src={nucleusPremiumLogo}
+                alt="Nucleus"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-primary/40 group-hover:border-primary transition-colors"
+              />
               <span className="font-heading font-black tracking-wider text-white text-base sm:text-lg leading-none uppercase">
                 NUCLEUS
               </span>
@@ -87,7 +89,7 @@ export default function StrategyNav() {
               href="https://calendly.com/nucleuscreates/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#bef264] hover:bg-[#a3e635] text-black font-heading font-bold text-xs tracking-normal shadow-sm hover:brightness-105 active:scale-95 transition-all whitespace-nowrap leading-none"
+              className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-primary hover:brightness-110 text-black font-heading font-bold text-xs tracking-normal shadow-sm active:scale-95 transition-all whitespace-nowrap leading-none"
             >
               <span>Book a Call</span>
               <span className="text-xs font-bold leading-none">→</span>

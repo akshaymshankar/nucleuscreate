@@ -143,7 +143,7 @@ function HeroPhoneMockup({ video, onOpen, isModalOpen }: HeroPhoneMockupProps) {
             {/* Top Header Bar */}
             <div className="absolute top-8 inset-x-3.5 flex items-center justify-between pointer-events-none z-10">
               <span className="px-2.5 py-1 rounded-full text-[11px] font-heading font-medium bg-black/60 backdrop-blur-md text-white/90 border border-white/15 flex items-center gap-1.5 shadow-md">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#bef264] animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 Featured Project
               </span>
 
@@ -154,7 +154,7 @@ function HeroPhoneMockup({ video, onOpen, isModalOpen }: HeroPhoneMockupProps) {
                   className="p-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white hover:text-primary transition-colors shadow-md"
                   aria-label={isMuted ? "Unmute video" : "Mute video"}
                 >
-                  {isMuted ? <VolumeX className="w-3.5 h-3.5 text-[#bef264]" /> : <Volume2 className="w-3.5 h-3.5" />}
+                  {isMuted ? <VolumeX className="w-3.5 h-3.5 text-primary" /> : <Volume2 className="w-3.5 h-3.5" />}
                 </button>
                 <div className="p-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white/70">
                   <MoreHorizontal className="w-3.5 h-3.5" />
@@ -258,7 +258,7 @@ export default function StrategyHero({ onOpenVideo, isModalOpen }: StrategyHeroP
             {/* High-Clarity Sub-headline with Highlighted Badge */}
             <h2 className="mt-5 sm:mt-7 font-heading text-2xl sm:text-3xl md:text-4xl lg:text-[38px] font-medium tracking-tight text-white leading-[1.2] text-balance">
               We make videos that feel{" "}
-              <span className="inline-block bg-[#bef264] text-black font-extrabold px-2.5 sm:px-3 py-0.5 rounded-lg sm:rounded-xl shadow-sm">
+              <span className="inline-block bg-primary text-black font-extrabold px-2.5 sm:px-3 py-0.5 rounded-lg sm:rounded-xl shadow-sm">
                 right
               </span>{" "}
               for your brand.
@@ -275,7 +275,7 @@ export default function StrategyHero({ onOpenVideo, isModalOpen }: StrategyHeroP
                 href="https://calendly.com/nucleuscreates/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:py-4 rounded-full bg-[#bef264] hover:bg-[#a3e635] text-black font-heading font-bold text-sm tracking-normal shadow-md hover:brightness-105 active:scale-[0.98] transition-all"
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:py-4 rounded-full bg-primary hover:brightness-110 text-black font-heading font-bold text-sm tracking-normal shadow-md active:scale-[0.98] transition-all"
               >
                 <span>Book a Strategy Call</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
