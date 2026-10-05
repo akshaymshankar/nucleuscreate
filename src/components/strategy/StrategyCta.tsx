@@ -103,6 +103,10 @@ export default function StrategyCta({ hideFloating }: StrategyCtaProps = {}) {
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/40">
             <div>© {new Date().getFullYear()} Nucleus Productions. Engineered for high performance brands worldwide.</div>
             <div className="flex items-center gap-4">
+              <Link to="/privacy-policy" className="hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <span>•</span>
               <span>Apple-Grade UX Precision</span>
               <span>•</span>
               <a href="#overview" className="hover:text-white transition-colors">

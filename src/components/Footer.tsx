@@ -62,9 +62,13 @@ const Footer = () => {
         </div>
 
         <div className="mt-10 pt-6 border-t border-border/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <span className="text-xs text-muted-foreground/70 font-body">
-            © {new Date().getFullYear()} Nucleus Productions. All rights reserved.
-          </span>
+          <div className="flex flex-wrap items-center gap-4 text-xs text-muted-foreground/70 font-body">
+            <span>© {new Date().getFullYear()} Nucleus Productions. All rights reserved.</span>
+            <span>•</span>
+            <Link to="/privacy-policy" className="hover:text-primary transition-colors underline decoration-white/20 underline-offset-4">
+              Privacy Policy
+            </Link>
+          </div>
           <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground/60 font-heading">
             White-Label Creative Studio · High-Volume Video Production
           </span>

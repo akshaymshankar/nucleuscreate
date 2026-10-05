@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound.tsx";
 
 const AiVideoStrategy = lazy(() => import("./pages/AiVideoStrategy.tsx"));
 const ThankYou = lazy(() => import("./pages/ThankYou.tsx"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,8 @@ const App = () => (
             <Route path="/services" element={<AiVideoStrategy />} />
             <Route path="/ai-video-strategy" element={<AiVideoStrategy />} />
             <Route path="/thank-you-page" element={<ThankYou />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
