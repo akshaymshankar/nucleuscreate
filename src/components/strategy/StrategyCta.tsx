@@ -107,8 +107,6 @@ export default function StrategyCta({ hideFloating }: StrategyCtaProps = {}) {
                 Privacy Policy
               </Link>
               <span>•</span>
-              <span>Apple-Grade UX Precision</span>
-              <span>•</span>
               <a href="#overview" className="hover:text-white transition-colors">
                 Back to Top ↑
               </a>
