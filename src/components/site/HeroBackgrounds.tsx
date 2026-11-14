@@ -1,35 +1,11 @@
 // Backgrounds for the dark page headers, one per service, in the same quiet style:
-// thin white lines with a few green accents, moving slowly. Canvas ones pause
-// off-screen and draw one still frame for reduced motion.
-import { useEffect, useRef } from "react";
+// thin white lines with a few green accents, moving slowly. The shared canvas loop
+// (use-animated-canvas) keeps them light while scrolling.
+import useAnimatedCanvas, { type CanvasDraw as Draw } from "@/hooks/use-animated-canvas";
 
-type Draw = (ctx: CanvasRenderingContext2D, w: number, h: number, t: number) => void;
-
-function CanvasBg({ draw, seed = 0, className = "" }: { draw: Draw; seed?: number; className?: string }) {
-  const ref = useRef<HTMLCanvasElement>(null);
-  useEffect(() => {
-    const canvas = ref.current;
-    const ctx = canvas?.getContext("2d");
-    if (!canvas || !ctx) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let w = 0, h = 0, t = 3 + seed, frame = 0, visible = true;
-    const paint = () => { ctx.clearRect(0, 0, w, h); draw(ctx, w, h, t); };
-    const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      w = canvas.clientWidth; h = canvas.clientHeight;
-      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-    const loop = () => { t += 0.016; paint(); frame = requestAnimationFrame(loop); };
-    const start = () => { cancelAnimationFrame(frame); if (reduce || !visible) paint(); else frame = requestAnimationFrame(loop); };
-    resize(); start();
-    const ro = new ResizeObserver(() => { resize(); paint(); });
-    ro.observe(canvas);
-    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else cancelAnimationFrame(frame); });
-    io.observe(canvas);
-    return () => { cancelAnimationFrame(frame); ro.disconnect(); io.disconnect(); };
-  }, [draw, seed]);
-  return <canvas ref={ref} aria-hidden="true" className={`absolute inset-0 h-full w-full ${className}`} />;
+function CanvasBg({ draw, seed = 0 }: { draw: Draw; seed?: number }) {
+  const ref = useAnimatedCanvas(draw, { start: 3 + seed });
+  return <canvas ref={ref} aria-hidden="true" className="absolute inset-0 h-full w-full" />;
 }
 
 const white = (a: number) => `rgba(255,255,255,${a})`;
@@ -106,7 +82,10 @@ const drawDots: Draw = (ctx, w, h, t) => {
       const u = x / w, v = y / h;
       const wave = Math.max(0, Math.sin(u * 7 - t * 0.9 + Math.sin(v * 3 + t * 0.3) * 1.5));
       const band = Math.exp(-Math.pow((v - 0.62 - 0.12 * Math.sin(u * 4 + t * 0.4)) * 4, 2));
-      const a = 0.07 + wave * band * 0.55;
+      const r = Math.hypot((u - 0.7) / 0.75, (v - 0.6) / 0.75);
+      const fade = Math.min(1, Math.max(0, (0.8 - r) / 0.5));
+      if (fade <= 0) continue;
+      const a = (0.07 + wave * band * 0.55) * fade;
       ctx.fillStyle = band * wave > 0.6 ? green(a) : white(a);
       ctx.beginPath();
       ctx.arc(x, y, 1.1 + band * wave * 0.9, 0, Math.PI * 2);
@@ -129,8 +108,11 @@ const drawFeed: Draw = (ctx, w, h, t) => {
     for (let i = -1; i * span < h + span; i++) {
       const y = i * span - off + (c % 2) * span * 0.45;
       const hot = (i + c * 2 + 20) % 5 === 0;
+      const yc = (y + ch / 2) / h;
+      const fade = Math.min(1, Math.max(0, Math.min(yc / 0.2, (1 - yc) / 0.2)));
+      if (fade <= 0) continue;
       ctx.lineWidth = 1;
-      const k = mobile ? 0.5 : 1;
+      const k = (mobile ? 0.5 : 1) * fade;
       ctx.strokeStyle = hot ? green(0.4 * k) : white(0.1 * k);
       ctx.fillStyle = hot ? green(0.05 * k) : white(0.015 * k);
       ctx.beginPath(); ctx.roundRect(x, y, cw, ch, 10); ctx.fill(); ctx.stroke();
@@ -149,10 +131,10 @@ export function ShapesBg() {
   return <CanvasBg draw={drawShapes} />;
 }
 export function DotsBg() {
-  return <CanvasBg draw={drawDots} className="[mask-image:radial-gradient(ellipse_at_70%_60%,black_30%,transparent_80%)]" />;
+  return <CanvasBg draw={drawDots} />;
 }
 export function FeedBg() {
-  return <CanvasBg draw={drawFeed} className="[mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]" />;
+  return <CanvasBg draw={drawFeed} />;
 }
 
 // Agencies: light beams travelling along a faint grid, like work moving through a pipeline.

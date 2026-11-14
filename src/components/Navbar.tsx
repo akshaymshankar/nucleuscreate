@@ -79,7 +79,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        light ? "border-b border-black/[0.06] bg-[#FAFAFA]/85 text-neutral-950 backdrop-blur-md" : "text-white"
+        light ? "border-b border-black/[0.06] bg-[#FAFAFA]/[0.97] text-neutral-950" : "text-white"
       }`}
     >
       <nav aria-label="Main" className={`${container} flex h-16 items-center justify-between gap-4`}>

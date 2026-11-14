@@ -35,7 +35,7 @@ export default function LocalVideo({ src, poster, title, vertical = false, class
       />
       {!active && (
         <button type="button" onClick={start} aria-label={`Play ${title}`} className="group absolute inset-0 h-full w-full">
-          <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-black shadow-lg backdrop-blur transition-transform duration-300 group-hover:scale-105">
+          <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-lg transition-transform duration-300 group-hover:scale-105">
             <Play className="ml-0.5 h-4 w-4 fill-current" />
           </span>
         </button>
