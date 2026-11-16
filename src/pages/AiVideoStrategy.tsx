@@ -2,13 +2,14 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { CtaLink } from "@/components/site/Buttons";
 import { DotsBg } from "@/components/site/HeroBackgrounds";
+import BrandForm from "@/components/site/BrandForm";
 import FinalCta from "@/components/site/FinalCta";
 import { HeroLoop, lightPage, PageHero, Section, SectionHeading } from "@/components/site/Section";
 import { CardGrid, Checklist, CompareTable, FaqSection, Pills, PricingStrip, StepList } from "@/components/site/ServiceBlocks";
 import WorkTabs from "@/components/site/WorkTabs";
 import { aiWorkTabs } from "@/data/work";
 import usePageMeta from "@/hooks/use-page-meta";
-import { CALENDLY_URL } from "@/lib/site";
+import { BRAND_ENQUIRY_EMAIL, CALENDLY_URL } from "@/lib/site";
 
 // Copy source: "09-landing-page-upgrade-brief.md" (12 Nov 2026).
 
@@ -205,8 +206,7 @@ export default function AiVideoStrategy() {
 
         <Section id="about">
           <div className="grid items-center gap-10 lg:grid-cols-[280px_1fr] lg:gap-16">
-            {/* TODO(photo): replace with Anush's cropped photo (IMG_9546.jpg, 4:5, Anush only). */}
-            <div className="flex aspect-[4/5] w-full max-w-[280px] items-center justify-center rounded-3xl bg-neutral-950 font-heading text-6xl font-semibold text-white">A</div>
+            <img src="/team/anush.jpg" alt="Anush, founder of Nucleus Productions" width={316} height={395} loading="lazy" decoding="async" className="aspect-[4/5] w-full max-w-[280px] rounded-3xl object-cover" />
             <div className="max-w-2xl">
               <p className="text-sm text-neutral-500">Who we are</p>
               <h2 className="mt-1.5 font-heading text-3xl font-semibold leading-[1.1] tracking-[-0.02em] text-neutral-950 sm:text-[2.6rem]">
@@ -215,7 +215,7 @@ export default function AiVideoStrategy() {
               <div className="mt-6 space-y-4 text-lg leading-relaxed text-neutral-600">
                 <p>We're a small team of editors and AI artists. Over the last two years we've made videos for beauty, fragrance, jewellery, fashion, auto and events brands.</p>
                 <p>
-                  You talk to me directly, from the first call to the final file. And if you want the videos run as ads, my brother, a performance marketer with five years of
+                  You talk to me directly, from the first call to the final file. And if you want the videos run as ads, our performance marketer, who has five years of
                   experience, can take that on.
                 </p>
               </div>
@@ -228,9 +228,13 @@ export default function AiVideoStrategy() {
 
         <PricingStrip title="Pricing depends on the format and the number of videos." />
 
-        <FinalCta title="Want to see what we'd make for you?" />
+        <FinalCta
+          title="Want to see what we'd make for you?"
+          text="Book a call, or tell us what you're making and we'll send a quote."
+          form={<BrandForm />}
+        />
       </main>
-      <Footer />
+      <Footer line="Working with brands in India, the UAE, the UK and the US." email={BRAND_ENQUIRY_EMAIL} showAgencies={false} />
     </div>
   );
 }

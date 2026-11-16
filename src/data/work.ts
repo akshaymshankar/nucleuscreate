@@ -184,7 +184,7 @@ export const aiVideo: WorkVideo[] = [
     id: "arka-collection",
     show: "Arka Fine Jewels",
     format: "Product ad",
-    work: "Jewellery collection launch",
+    work: "Solitaire rings catching the light in close-up, the kind of shot that usually needs a macro studio day",
     src: "/work/ai/arka-collection.mp4",
     poster: "/work/ai/arka-collection.jpg",
     vertical: true,

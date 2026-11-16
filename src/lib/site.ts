@@ -6,6 +6,9 @@ export const SITE_NAME = "Nucleus";
 export const CALENDLY_URL = "https://calendly.com/nucleuscreates/30min";
 export const EMAIL = "hello@nucleuscreate.in";
 
+// Brand enquiries from the AI video page are emailed here.
+export const BRAND_ENQUIRY_EMAIL = "anush@nucleuscreate.in";
+
 // TODO(linkedin): paste the LinkedIn company page URL. The footer link stays hidden until this is set.
 export const LINKEDIN_URL = "";
 

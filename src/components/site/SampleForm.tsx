@@ -22,10 +22,10 @@ const schema = z.object({
 type Values = { name: string; email: string; show: string; link: string; need: string };
 type Errors = Partial<Record<keyof Values, string>>;
 
-const inputCls =
+export const inputCls =
   "w-full rounded-xl border border-white/15 bg-white/[0.03] px-4 py-3 text-base text-white placeholder:text-white/35 transition-colors focus:border-primary focus:outline-none sm:text-sm";
 
-function Field({ id, label, error, children }: { id: string; label: string; error?: string; children: ReactNode }) {
+export function Field({ id, label, error, children }: { id: string; label: string; error?: string; children: ReactNode }) {
   return (
     <div>
       <label htmlFor={id} className="mb-2 block text-sm font-medium text-white/80">

@@ -6,7 +6,14 @@ import { CALENDLY_URL, EMAIL, LINKEDIN_URL, STUDIO_LINE } from "@/lib/site";
 const linkCls = "text-sm text-white/55 transition-colors hover:text-white";
 const head = "mb-4 text-sm font-medium text-white";
 
-export default function Footer() {
+type Props = {
+  // Per-page overrides, e.g. the AI video page speaks to brands rather than podcasts and agencies.
+  line?: string;
+  email?: string;
+  showAgencies?: boolean;
+};
+
+export default function Footer({ line = STUDIO_LINE, email = EMAIL, showAgencies = true }: Props = {}) {
   return (
     <footer className="border-t border-white/10 bg-[#050505] py-16 text-white">
       <div className={container}>
@@ -16,8 +23,8 @@ export default function Footer() {
               <img src="/logo-mark.png" alt="" width={28} height={28} loading="lazy" className="h-7 w-7" />
               <span className="font-heading text-lg font-semibold tracking-tight">Nucleus</span>
             </div>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">{STUDIO_LINE}</p>
-            <a href={`mailto:${EMAIL}`} className={`${linkCls} mt-2 inline-block`}>{EMAIL}</a>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">{line}</p>
+            <a href={`mailto:${email}`} className={`${linkCls} mt-2 inline-block`}>{email}</a>
           </div>
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 sm:gap-16">
             <div className="flex flex-col gap-3">
@@ -25,7 +32,7 @@ export default function Footer() {
               {services.map((s) => (
                 <Link key={s.to} to={s.to} className={linkCls}>{s.title}</Link>
               ))}
-              <Link to="/agencies" className={linkCls}>For agencies</Link>
+              {showAgencies && <Link to="/agencies" className={linkCls}>For agencies</Link>}
             </div>
             <div className="flex flex-col gap-3">
               <p className={head}>Company</p>
@@ -38,7 +45,7 @@ export default function Footer() {
               {LINKEDIN_URL && (
                 <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className={linkCls}>LinkedIn</a>
               )}
-              <a href={`mailto:${EMAIL}`} className={linkCls}>Email</a>
+              <a href={`mailto:${email}`} className={linkCls}>Email</a>
             </div>
           </div>
         </div>
