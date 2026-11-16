@@ -206,7 +206,7 @@ export default function AiVideoStrategy() {
 
         <Section id="about">
           <div className="grid items-center gap-10 lg:grid-cols-[280px_1fr] lg:gap-16">
-            <img src="/team/anush.jpg" alt="Anush, founder of Nucleus Productions" width={316} height={395} loading="lazy" decoding="async" className="aspect-[4/5] w-full max-w-[280px] rounded-3xl object-cover" />
+            <img src="/team/anush.jpg" alt="Anush, founder of Nucleus Productions" width={800} height={1000} loading="lazy" decoding="async" className="aspect-[4/5] w-full max-w-[280px] rounded-3xl object-cover" />
             <div className="max-w-2xl">
               <p className="text-sm text-neutral-500">Who we are</p>
               <h2 className="mt-1.5 font-heading text-3xl font-semibold leading-[1.1] tracking-[-0.02em] text-neutral-950 sm:text-[2.6rem]">
