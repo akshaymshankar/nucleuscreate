@@ -13,6 +13,7 @@ const Agencies = lazy(() => import("./pages/Agencies.tsx"));
 const Clipping = lazy(() => import("./pages/Clipping.tsx"));
 const MotionGraphics = lazy(() => import("./pages/MotionGraphics.tsx"));
 const AiVideoStrategy = lazy(() => import("./pages/AiVideoStrategy.tsx"));
+const BreakingMoney = lazy(() => import("./pages/BreakingMoney.tsx"));
 const ThankYou = lazy(() => import("./pages/ThankYou.tsx"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.tsx"));
 
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/services/ai-video-strategy" element={<AiVideoStrategy />} />
             <Route path="/services" element={<AiVideoStrategy />} />
             <Route path="/ai-video-strategy" element={<AiVideoStrategy />} />
+            <Route path="/case-studies/breaking-money" element={<BreakingMoney />} />
             <Route path="/thank-you-page" element={<ThankYou />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />

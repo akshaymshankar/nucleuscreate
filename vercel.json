@@ -17,6 +17,10 @@
       "destination": "/services/ai-video-strategy/index.html"
     },
     {
+      "source": "/case-studies/breaking-money",
+      "destination": "/case-studies/breaking-money/index.html"
+    },
+    {
       "source": "/agencies",
       "destination": "/agencies/index.html"
     },

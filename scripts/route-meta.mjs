@@ -29,6 +29,11 @@ const routes = {
     description: "We plan, script and make AI and hybrid videos for brands. See the work and book a 30 minute call.",
     image: "/og/ai-video.jpg",
   },
+  "/case-studies/breaking-money": {
+    title: "Breaking Money case study: 0 to 100K followers in under 6 months | Nucleus",
+    description: "13.7M Instagram views in the last 90 days, on daily short-form video shot and edited by the Nucleus team.",
+    image: "/og/breaking-money.jpg",
+  },
   "/agencies": {
     title: "White-Label Video Editing for Agencies | Nucleus",
     description: "White-label edits, hooks and variations for your clients. 48-hour turnaround, the same editors every time, never client-facing.",

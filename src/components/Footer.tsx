@@ -11,9 +11,11 @@ type Props = {
   line?: string;
   email?: string;
   showAgencies?: boolean;
+  // Service links to leave out on this page, by route (e.g. the case study never mentions AI).
+  hideServices?: string[];
 };
 
-export default function Footer({ line = STUDIO_LINE, email = EMAIL, showAgencies = true }: Props = {}) {
+export default function Footer({ line = STUDIO_LINE, email = EMAIL, showAgencies = true, hideServices = [] }: Props = {}) {
   return (
     <footer className="border-t border-white/10 bg-[#050505] py-16 text-white">
       <div className={container}>
@@ -29,7 +31,7 @@ export default function Footer({ line = STUDIO_LINE, email = EMAIL, showAgencies
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 sm:gap-16">
             <div className="flex flex-col gap-3">
               <p className={head}>Services</p>
-              {services.map((s) => (
+              {services.filter((s) => !hideServices.includes(s.to)).map((s) => (
                 <Link key={s.to} to={s.to} className={linkCls}>{s.title}</Link>
               ))}
               {showAgencies && <Link to="/agencies" className={linkCls}>For agencies</Link>}

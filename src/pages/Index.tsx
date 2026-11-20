@@ -142,7 +142,7 @@ export default function Index() {
           <WorkTabs tabs={homeWorkTabs} />
         </Section>
 
-        <CaseStudies />
+        <CaseStudies showBreakingMoney />
 
         <Section id="how">
           <SectionHeading eyebrow="How it works" title="Three steps. No back and forth." />
