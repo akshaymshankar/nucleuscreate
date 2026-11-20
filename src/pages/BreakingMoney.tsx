@@ -4,7 +4,11 @@ import { CtaLink } from "@/components/site/Buttons";
 import { container, lightPage, PageHero, Section, SectionHeading } from "@/components/site/Section";
 import { CardGrid } from "@/components/site/ServiceBlocks";
 import usePageMeta from "@/hooks/use-page-meta";
+import { ArrowUpRight, Instagram, Youtube } from "lucide-react";
 import { CALENDLY_URL } from "@/lib/site";
+
+const INSTAGRAM_URL = "https://www.instagram.com/its.breaking.money/";
+const YOUTUBE_URL = "https://www.youtube.com/@itsbreakingmoney";
 
 // Breaking Money case study. Source: "case-study-breaking-money-prompt.md" (20 Nov 2026).
 // Every number on this page comes from that brief, and each one carries its time window.
@@ -54,11 +58,12 @@ const lessons = [
   },
 ];
 
-type Piece = { kind: "Reel" | "Post"; image: string; title: string; stats: string[]; point: string };
+type Piece = { kind: "Reel" | "Post"; url: string; image: string; title: string; stats: string[]; point: string };
 
 const pieces: Piece[] = [
   {
     kind: "Reel",
+    url: "https://www.instagram.com/reel/Daz43ZNyg3A/",
     image: "/work/breaking-money/bitcoin-ep1.jpg",
     title: "“We mined 62 crore worth of BTC”, Bitcoin series, episode 1",
     stats: ["1.1M views", "44K likes", "13,000 new followers"],
@@ -66,6 +71,7 @@ const pieces: Piece[] = [
   },
   {
     kind: "Reel",
+    url: "https://www.instagram.com/reel/DfWpa2rh_b9/",
     image: "/work/breaking-money/trading-day6.jpg",
     title: "“₹1 lakh to ₹10 lakh”, a daily challenge series (day 6 shown)",
     stats: ["Day 1: 2,900 new followers", "Day 1: 2,400 comments", "New episode every day"],
@@ -73,6 +79,7 @@ const pieces: Piece[] = [
   },
   {
     kind: "Post",
+    url: "https://www.instagram.com/p/DY3ZrrRkqqa/",
     image: "/work/breaking-money/irctc-tatkal.jpg",
     title: "“IRCTC Tatkal is a scam” carousel",
     stats: ["9M views", "1.9 lakh likes (190,000)", "4.6 lakh shares (460,000)", "29,000 new followers"],
@@ -80,6 +87,7 @@ const pieces: Piece[] = [
   },
   {
     kind: "Post",
+    url: "https://www.instagram.com/p/DZzQ9wZEcJQ/",
     image: "/work/breaking-money/tneb-bill.jpg",
     title: "“Don't pay your next TNEB bill without understanding this” carousel",
     stats: ["9.9 lakh views (990,000)", "79,000 shares", "4,900 new followers"],
@@ -87,11 +95,18 @@ const pieces: Piece[] = [
   },
 ];
 
-function StatList({ title, window, items }: { title: string; window: string; items: { value: string; label: string }[] }) {
+function StatList({ title, window, items, href }: { title: string; window: string; items: { value: string; label: string }[]; href: string }) {
   return (
     <div className="rounded-2xl border border-black/[0.08] bg-white p-6 sm:p-8">
-      <h3 className="font-heading text-xl font-semibold tracking-tight text-neutral-950">{title}</h3>
-      <p className="mt-1 text-sm text-neutral-500">{window}</p>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h3 className="font-heading text-xl font-semibold tracking-tight text-neutral-950">{title}</h3>
+          <p className="mt-1 text-sm text-neutral-500">{window}</p>
+        </div>
+        <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center gap-1 text-sm font-medium text-neutral-950 hover:text-[#178a3c]">
+          Visit <ArrowUpRight className="h-4 w-4" />
+        </a>
+      </div>
       <dl className="mt-6 divide-y divide-black/[0.06]">
         {items.map((s) => (
           <div key={s.label} className="flex items-baseline justify-between gap-6 py-3">
@@ -122,6 +137,14 @@ export default function BreakingMoney() {
         >
           <CtaLink href={CALENDLY_URL} variant="light">Book a call</CtaLink>
           <CtaLink href="#top-pieces" variant="ghostDark">See the top pieces</CtaLink>
+          <div className="flex w-full items-center gap-2 pt-1 text-sm text-white/70 sm:w-auto sm:pt-0">
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-2 hover:bg-white/10 hover:text-white">
+              <Instagram className="h-4 w-4" /> Instagram
+            </a>
+            <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/15 px-3.5 py-2 hover:bg-white/10 hover:text-white">
+              <Youtube className="h-4 w-4" /> YouTube
+            </a>
+          </div>
         </PageHero>
 
         <Section id="numbers">
@@ -135,7 +158,7 @@ export default function BreakingMoney() {
             ))}
           </ul>
           <p className="mt-8 max-w-3xl text-lg leading-relaxed text-neutral-600">
-            Breaking Money (@its.breaking.money) is a finance and money explainer channel on Instagram, YouTube and Facebook, run by two creators. Our team handles
+            Breaking Money (<a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="text-neutral-950 underline underline-offset-4 hover:text-[#178a3c]">@its.breaking.money</a>) is a finance and money explainer channel on Instagram, YouTube and Facebook, run by two creators. Our team handles
             scripting support, shooting and editing, and Anush oversees every piece. It passed 100,000 Instagram followers on 5 Nov 2026, under 6 months after launch,
             and is now at 110K+ (20 Nov 2026).
           </p>
@@ -164,10 +187,13 @@ export default function BreakingMoney() {
           <ul className="-mx-5 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:px-8 lg:mx-0 lg:grid lg:grid-cols-4 lg:overflow-visible lg:px-0">
             {pieces.map((p) => (
               <li key={p.image} className="w-[78%] shrink-0 snap-start sm:w-[45%] lg:w-auto">
-                <div className="relative overflow-hidden rounded-2xl bg-neutral-900">
-                  <img src={p.image} alt={p.title} width={720} height={900} loading="lazy" decoding="async" className="aspect-[4/5] w-full object-cover" />
+                <a href={p.url} target="_blank" rel="noopener noreferrer" aria-label={`Watch on Instagram: ${p.title}`} className="group relative block overflow-hidden rounded-2xl bg-neutral-900">
+                  <img src={p.image} alt={p.title} width={720} height={900} loading="lazy" decoding="async" className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
                   <span className="absolute left-3 top-3 rounded-full bg-white px-2.5 py-1 text-xs font-medium text-neutral-950">{p.kind}</span>
-                </div>
+                  <span className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white text-neutral-950 shadow-lg">
+                    <Instagram className="h-4 w-4" />
+                  </span>
+                </a>
                 <h3 className="mt-4 font-heading text-base font-semibold leading-snug text-neutral-950">{p.title}</h3>
                 <ul className="mt-3 flex flex-wrap gap-1.5">
                   {p.stats.map((s) => (
@@ -175,6 +201,9 @@ export default function BreakingMoney() {
                   ))}
                 </ul>
                 <p className="mt-3 text-sm leading-relaxed text-neutral-600">{p.point}</p>
+                <a href={p.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-neutral-950 hover:text-[#178a3c]">
+                  {p.kind === "Reel" ? "Watch the reel" : "See the post"} on Instagram <ArrowUpRight className="h-4 w-4" />
+                </a>
               </li>
             ))}
           </ul>
@@ -183,8 +212,8 @@ export default function BreakingMoney() {
         <Section id="channels">
           <SectionHeading eyebrow="By channel" title="Instagram and YouTube, side by side." />
           <div className="mt-10 grid gap-3 lg:grid-cols-2">
-            <StatList title="Instagram" window="Last 90 days, 21 Aug to 18 Nov 2026" items={instagram} />
-            <StatList title="YouTube" window="Last 28 days, to 18 Nov 2026" items={youtube} />
+            <StatList href={INSTAGRAM_URL} title="Instagram" window="Last 90 days, 21 Aug to 18 Nov 2026" items={instagram} />
+            <StatList href={YOUTUBE_URL} title="YouTube" window="Last 28 days, to 18 Nov 2026" items={youtube} />
           </div>
         </Section>
 
